@@ -48,8 +48,6 @@ const services = [
 
       <div class="svc-grid">
         <article v-for="(s, i) in services" :key="s.slug" class="svc-item reveal" :class="`svc-item--${s.theme}`" :style="{ transitionDelay: `${i * 110}ms` }">
-          <p class="svc-outside svc-outside--top">{{ s.eyebrow }}</p>
-
           <div class="svc-card">
             <div class="svc-bg-shape" aria-hidden="true"></div>
 
@@ -72,7 +70,6 @@ const services = [
 
             <div class="svc-metric-wrap">
               <p class="svc-metric">{{ s.metric }}</p>
-              <p class="svc-metric-label">{{ s.metricLabel }}</p>
             </div>
           </div>
 

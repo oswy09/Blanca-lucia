@@ -61,6 +61,14 @@ onMounted(async () => {
       gsap.set(stageRef.value,     { autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 1 })
       gsap.set(heroTitleRef.value, { autoAlpha: 0, y: 24 })
 
+      // ── Steps ocultos individualmente hasta que el copy es visible ──
+      const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
+      const ctaBtn    = copyRef.value.querySelector('.how-cta')
+      if (!prefersReducedMotion) {
+        gsap.set(flowItems, { autoAlpha: 0, y: 26, scale: 0.96 })
+        gsap.set(ctaBtn,    { autoAlpha: 0 })
+      }
+
       if (!prefersReducedMotion) {
         /* FASE 1: el portal se expande cuando la sección Services está terminando.
            Trigger en #servicios (referencia directa, sin pin) — el original falló
@@ -87,6 +95,8 @@ onMounted(async () => {
       }
 
       /* ── FASE 2 + 3: pin interno de How ── */
+      let stepsStarted = false
+
       const pinTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.value,
@@ -94,6 +104,17 @@ onMounted(async () => {
           end: '+=2000',
           scrub: true,
           pin: true,
+          onUpdate(self) {
+            if (!prefersReducedMotion && self.progress >= 0.75 && !stepsStarted) {
+              stepsStarted = true
+              gsap.timeline()
+                .to(flowItems[0], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' })
+                .to(flowItems[1], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
+                .to(flowItems[2], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
+                .to(flowItems[3], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
+                .to(ctaBtn,       { autoAlpha: 1, duration: 0.35, ease: 'none' }, '+=0.35')
+            }
+          }
         },
       })
 
@@ -139,6 +160,12 @@ onMounted(async () => {
       gsap.set(copyRef.value,      { autoAlpha: 1, x: 0 })
       gsap.set(stageRef.value,     { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1 })
       gsap.set(heroTitleRef.value, { display: 'flex', autoAlpha: 1, y: 0 })
+
+      // Pasos visibles desde el inicio en mobile
+      const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
+      const ctaBtn    = copyRef.value.querySelector('.how-cta')
+      gsap.set(flowItems, { autoAlpha: 1, y: 0, scale: 1 })
+      gsap.set(ctaBtn,    { autoAlpha: 1 })
 
       gsap.from(windowRef.value, {
         opacity: 0, y: 26, duration: 0.75, ease: 'power3.out',
@@ -194,8 +221,8 @@ onUnmounted(() => {
 
         <ol class="how-flow" role="list">
           <li v-for="s in steps" :key="s.n" class="how-flow-item">
-            <p class="how-flow-num">{{ s.n }}</p>
-            <div>
+            <div class="how-flow-node">{{ s.n }}</div>
+            <div class="how-flow-content">
               <p class="how-flow-title">{{ s.title }}</p>
               <p class="how-flow-desc">{{ s.desc }}</p>
             </div>
@@ -478,22 +505,33 @@ onUnmounted(() => {
 
 .how-flow {
   list-style: none;
+  position: relative;
+  margin-top: 28px;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 30px;
+}
+.how-flow::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,.55);
+  z-index: 0;
 }
 .how-flow-item {
   display: grid;
   grid-template-columns: 40px 1fr;
   gap: 14px;
-  padding: 14px;
-  border: 1px solid rgba(46,138,147,.18);
-  border-radius: 14px;
-  background: rgba(255,255,255,.72);
-  box-shadow: 0 5px 16px rgba(51,46,42,.06);
+  align-items: flex-start;
+  padding-bottom: 18px;
+  position: relative;
+  z-index: 1;
 }
-.how-flow-num {
+.how-flow-item:last-child { padding-bottom: 0; }
+.how-flow-node {
   width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--teal);
@@ -502,10 +540,19 @@ onUnmounted(() => {
   font-size: 14px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0,0,0,.22);
 }
-.how-flow-title { font-family: var(--fd); font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.how-flow-content {
+  background: rgba(255,255,255,.82);
+  border-radius: 12px;
+  padding: 11px 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+.how-flow-title { font-family: var(--fd); font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
 .how-flow-desc  { font-size: 13.5px; color: var(--text2); line-height: 1.55; }
-.how-cta { margin-top: 30px; }
+.how-cta { margin-top: 24px; }
 
 /* ── Call stage ──────────────────────────────── */
 .call-stage {

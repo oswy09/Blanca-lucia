@@ -11,9 +11,9 @@
         <p class="diff-tagline reveal" style="transition-delay:80ms">A different approach to language learning</p>
         <h2 class="diff-statement reveal" style="transition-delay:160ms">
           Not a course.<br>
-          Not a programme.<br>
-          <em>A personal consultancy designed around you.</em>
+          Not a programme.
         </h2>
+        <p class="diff-sub reveal" style="transition-delay:240ms">A personal consultancy designed around you.</p>
       </div>
 
       <!-- Right column -->
@@ -82,7 +82,15 @@
   margin-top: 12px;
   margin-bottom: 28px;
 }
-.diff-statement em { font-style: normal; color: var(--teal-sh); }
+.diff-sub {
+  font-family: var(--fd);
+  font-size: clamp(17px, 1.8vw, 23px);
+  font-weight: 500;
+  color: var(--teal-sh);
+  font-style: italic;
+  margin-top: 10px;
+  line-height: 1.35;
+}
 
 @media (max-width: 800px) {
   .diff-grid {
