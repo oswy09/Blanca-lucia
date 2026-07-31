@@ -8,7 +8,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: `${siteUrl}/precios` },
+    { rel: 'canonical', href: `${siteUrl}/pricing` },
   ],
 })
 

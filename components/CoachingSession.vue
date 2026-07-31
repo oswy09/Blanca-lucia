@@ -67,21 +67,21 @@ function startTypewriter() {
           </p>
         </div>
 
-        <!-- Right Side: Student Photo with Organic Frame -->
+        <!-- Right Side: Live Session Photo with Rectangular Amber Frame -->
         <div class="coaching-graphic">
-          <div class="student-card-frame">
-            <!-- Decorative swirl overlay -->
-            <svg class="organic-swirl-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
-              <path d="M15,80 C25,45 65,30 85,50 C95,60 80,85 55,75 C35,65 25,40 55,20 C70,10 90,30 75,50" />
-            </svg>
-
-            <!-- Organic background blob containing the student photo -->
-            <div class="organic-bg-blob">
-              <img src="/imagens/customer-female.webp" alt="Coaching student" class="student-photo" />
+          <div class="session-card-wrap">
+            <!-- Amber dashed ring behind -->
+            <div class="session-ring"></div>
+            <!-- Amber solid offset frame -->
+            <div class="session-frame-offset"></div>
+            <!-- Photo container -->
+            <div class="session-photo-box">
+              <img src="/imagens/live-session.webp" alt="Live coaching session" class="session-photo" />
             </div>
-
-            <!-- Thick organic outline border -->
-            <div class="student-frame-border"></div>
+            <!-- Amber accent dots -->
+            <div class="session-dots">
+              <span></span><span></span><span></span>
+            </div>
           </div>
         </div>
 
@@ -183,59 +183,76 @@ function startTypewriter() {
   z-index: 2;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.student-card-frame {
+.session-card-wrap {
   position: relative;
   width: 100%;
-  max-width: 250px;
-  aspect-ratio: 0.85;
+  max-width: 260px;
 }
 
-.organic-bg-blob {
+/* Dashed amber ring - decorative, sits behind and slightly larger */
+.session-ring {
+  position: absolute;
+  inset: -14px;
+  border: 2px dashed rgba(240,180,80,0.45);
+  border-radius: 26px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Solid amber offset frame - bottom-right shadow frame */
+.session-frame-offset {
   position: absolute;
   inset: 0;
-  background: var(--amber);
-  border-radius: 46px 26px 56px 36px;
+  border: 3px solid var(--amber);
+  border-radius: 20px;
+  transform: translate(8px, 8px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Photo container — portrait ratio matches the image's 0.82 natural ratio */
+.session-photo-box {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(240, 180, 80, 0.22);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.30);
+  aspect-ratio: 5/6;
 }
 
-.student-photo {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
+.session-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   display: block;
-  z-index: 2;
-  transform: scale(1.05);
-  transform-origin: bottom center;
 }
 
-/* Outline border frame */
-.student-frame-border {
+/* Three amber dots - top-right accent cluster */
+.session-dots {
   position: absolute;
-  inset: -6px;
-  border: 5px solid var(--amber);
-  border-radius: 52px 32px 62px 42px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Organic swirl overlay */
-.organic-swirl-svg {
-  position: absolute;
-  top: -36px;
-  right: 8px;
-  width: 80px;
-  height: 80px;
-  color: var(--amber);
+  top: -18px;
+  right: -16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   z-index: 4;
-  pointer-events: none;
-  transform: rotate(-15deg);
 }
+
+.session-dots span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.session-dots span:first-child { opacity: 1; }
+.session-dots span:nth-child(2) { opacity: 0.65; width: 6px; height: 6px; margin-left: 1px; }
+.session-dots span:last-child { opacity: 0.35; width: 5px; height: 5px; margin-left: 2px; }
 
 /* Responsive adjustments */
 @media (max-width: 850px) {
@@ -254,13 +271,8 @@ function startTypewriter() {
   .coaching-session-banner {
     border-radius: 20px;
   }
-  .student-card-frame {
+  .session-card-wrap {
     max-width: 200px;
-  }
-  .organic-swirl-svg {
-    width: 60px;
-    height: 60px;
-    top: -26px;
   }
 }
 </style>

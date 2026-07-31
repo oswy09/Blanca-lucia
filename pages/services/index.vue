@@ -97,6 +97,8 @@ const services = [
       'Video call and telephone communication strategies',
     ],
     accent: 'teal',
+    dark: true,
+    illustration: 'communication',
   },
   {
     eyebrow: 'Interview & Career Communication',
@@ -113,6 +115,8 @@ const services = [
       'Strategies for managing nerves and thinking in English',
     ],
     accent: 'teal',
+    dark: true,
+    illustration: 'interview',
   },
   {
     eyebrow: 'Written Communication',
@@ -129,6 +133,8 @@ const services = [
       'Personalised feedback and recommendations',
     ],
     accent: 'teal',
+    dark: true,
+    illustration: 'editing',
   },
 ]
 
@@ -164,33 +170,168 @@ const steps = [
         class="sv-svc"
         :class="i % 2 === 0 ? 'sv-svc--even' : 'sv-svc--odd'"
       >
-        <div class="wrap sv-svc-grid">
 
-          <!-- Text block -->
-          <div class="sv-svc-text reveal">
-            <span class="eyebrow" :class="`sv-ey--${svc.accent}`">{{ svc.eyebrow }}</span>
-            <h2 class="sv-svc-title">{{ svc.title }}</h2>
-            <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-svc-desc">{{ p }}</p>
-            <a :href="whatsappUrl" class="btn sv-enquire-btn" :class="`sv-enquire--${svc.accent}`" target="_blank" rel="noopener">
-              Enquire About This Service
-            </a>
+        <!-- ── Dark banner layout (Professional Communication) ── -->
+        <template v-if="svc.dark">
+          <div class="wrap">
+
+            <!-- Dark teal card with SVG illustration -->
+            <div class="sv-dark-banner reveal">
+              <div class="sv-dark-content">
+                <span class="eyebrow sv-dark-eyebrow">{{ svc.eyebrow }}</span>
+                <h2 class="sv-dark-title">{{ svc.title }}</h2>
+                <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-dark-desc">{{ p }}</p>
+                <a :href="whatsappUrl" class="btn sv-enquire-btn sv-enquire--white" target="_blank" rel="noopener">
+                  Enquire About This Service
+                </a>
+              </div>
+
+              <!-- SVG Illustrations (switch by type) -->
+              <div class="sv-dark-illus" aria-hidden="true">
+
+                <!-- Professional Communication: person at laptop + speech bubbles -->
+                <svg v-if="svc.illustration === 'communication'" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="sv-dark-svg">
+                  <circle cx="72" cy="58" r="22" stroke="rgba(255,255,255,.85)" stroke-width="2.5"/>
+                  <path d="M40 140 C40 110 104 110 104 140" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+                  <rect x="36" y="140" width="68" height="44" rx="4" stroke="rgba(255,255,255,.85)" stroke-width="2.5"/>
+                  <path d="M28 184 L112 184" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="46" y1="153" x2="80" y2="153" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="46" y1="162" x2="94" y2="162" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="46" y1="171" x2="72" y2="171" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="110" y="30" width="90" height="56" rx="12" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+                  <path d="M122 86 L114 100 L136 86" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linejoin="round"/>
+                  <line x1="124" y1="48" x2="188" y2="48" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="124" y1="58" x2="176" y2="58" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="124" y1="68" x2="184" y2="68" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="128" y="108" width="66" height="40" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.45)" stroke-width="1.8"/>
+                  <path d="M186 148 L194 158 L178 148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.45)" stroke-width="1.8" stroke-linejoin="round"/>
+                  <line x1="140" y1="122" x2="180" y2="122" stroke="rgba(255,255,255,.4)" stroke-width="1.8" stroke-linecap="round"/>
+                  <line x1="140" y1="132" x2="170" y2="132" stroke="rgba(255,255,255,.4)" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="155" cy="170" r="5" fill="rgba(240,180,80,.8)"/>
+                  <circle cx="172" cy="170" r="3.5" fill="rgba(240,180,80,.5)"/>
+                  <circle cx="185" cy="170" r="2.5" fill="rgba(240,180,80,.3)"/>
+                </svg>
+
+                <!-- Interview Preparation: video screen + checklist -->
+                <svg v-else-if="svc.illustration === 'interview'" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="sv-dark-svg">
+                  <!-- Monitor / video screen -->
+                  <rect x="20" y="24" width="120" height="86" rx="8" stroke="rgba(255,255,255,.85)" stroke-width="2.5"/>
+                  <!-- Camera dot -->
+                  <circle cx="80" cy="30" r="3.5" fill="rgba(255,255,255,.5)"/>
+                  <!-- Person face in screen -->
+                  <circle cx="80" cy="68" r="18" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+                  <!-- Shoulders -->
+                  <path d="M52 114 Q80 104 108 114" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Monitor stand -->
+                  <line x1="80" y1="110" x2="80" y2="124" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M60 124 L100 124" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+                  <!-- Speech bubble from screen -->
+                  <rect x="112" y="18" width="84" height="52" rx="10" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+                  <path d="M124 70 L116 82 L138 70" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linejoin="round"/>
+                  <line x1="124" y1="34" x2="184" y2="34" stroke="rgba(255,255,255,.55)" stroke-width="1.8" stroke-linecap="round"/>
+                  <line x1="124" y1="44" x2="178" y2="44" stroke="rgba(255,255,255,.55)" stroke-width="1.8" stroke-linecap="round"/>
+                  <line x1="124" y1="54" x2="180" y2="54" stroke="rgba(255,255,255,.55)" stroke-width="1.8" stroke-linecap="round"/>
+                  <!-- Checklist clipboard -->
+                  <rect x="148" y="96" width="62" height="90" rx="6" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+                  <rect x="162" y="90" width="34" height="14" rx="4" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.6)" stroke-width="1.8"/>
+                  <!-- Check items -->
+                  <circle cx="161" cy="118" r="5" stroke="rgba(240,180,80,.9)" stroke-width="1.8"/>
+                  <polyline points="158,118 160,121 165,115" stroke="rgba(240,180,80,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="172" y1="118" x2="200" y2="118" stroke="rgba(255,255,255,.5)" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="161" cy="136" r="5" stroke="rgba(240,180,80,.9)" stroke-width="1.8"/>
+                  <polyline points="158,136 160,139 165,133" stroke="rgba(240,180,80,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="172" y1="136" x2="200" y2="136" stroke="rgba(255,255,255,.5)" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="161" cy="154" r="5" stroke="rgba(255,255,255,.3)" stroke-width="1.8"/>
+                  <line x1="172" y1="154" x2="196" y2="154" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="161" cy="172" r="5" stroke="rgba(255,255,255,.3)" stroke-width="1.8"/>
+                  <line x1="172" y1="172" x2="200" y2="172" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/>
+                  <!-- Amber dots -->
+                  <circle cx="28" cy="170" r="5" fill="rgba(240,180,80,.8)"/>
+                  <circle cx="41" cy="170" r="3.5" fill="rgba(240,180,80,.5)"/>
+                  <circle cx="51" cy="170" r="2.5" fill="rgba(240,180,80,.3)"/>
+                </svg>
+
+                <!-- English Editing: document with pen and markup -->
+                <svg v-else-if="svc.illustration === 'editing'" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="sv-dark-svg">
+                  <!-- Main document -->
+                  <rect x="18" y="16" width="114" height="158" rx="6" stroke="rgba(255,255,255,.85)" stroke-width="2.5"/>
+                  <!-- Folded corner -->
+                  <path d="M100 16 L132 48 L100 48 Z" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linejoin="round"/>
+                  <!-- Text lines -->
+                  <line x1="34" y1="68" x2="120" y2="68" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="34" y1="82" x2="112" y2="82" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Strikethrough line (edit) -->
+                  <line x1="34" y1="96" x2="110" y2="96" stroke="rgba(255,100,80,.55)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="34" y1="96" x2="110" y2="96" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 4"/>
+                  <!-- Corrected line + amber check -->
+                  <line x1="34" y1="112" x2="106" y2="112" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="118" cy="112" r="7" fill="rgba(240,180,80,.85)"/>
+                  <polyline points="114,112 117,115 123,109" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- More lines -->
+                  <line x1="34" y1="128" x2="100" y2="128" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="34" y1="142" x2="114" y2="142" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="34" y1="156" x2="88" y2="156" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Pen / pencil -->
+                  <line x1="158" y1="38" x2="202" y2="82" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M199,79 L193,95 L209,89 Z" fill="rgba(255,255,255,.7)" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linejoin="round"/>
+                  <rect x="154" y="31" width="10" height="10" rx="2" fill="rgba(240,180,80,.75)" transform="rotate(-45 159 36)"/>
+                  <!-- Edit mark near strikethrough -->
+                  <path d="M118 90 C124 86 130 90 126 96" stroke="rgba(240,180,80,.7)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                  <!-- Amber dots -->
+                  <circle cx="152" cy="170" r="5" fill="rgba(240,180,80,.8)"/>
+                  <circle cx="165" cy="170" r="3.5" fill="rgba(240,180,80,.5)"/>
+                  <circle cx="175" cy="170" r="2.5" fill="rgba(240,180,80,.3)"/>
+                </svg>
+
+              </div>
+            </div>
+
+            <!-- Features list below the card -->
+            <div class="sv-dark-features reveal" style="transition-delay:120ms">
+              <ul class="sv-dark-feat-list">
+                <li v-for="feat in svc.features" :key="feat" class="sv-dark-feat-item">
+                  <div class="sv-feat-icon sv-feat-icon--teal" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </div>
+                  <span>{{ feat }}</span>
+                </li>
+              </ul>
+            </div>
+
           </div>
+        </template>
 
-          <!-- Features list -->
-          <div class="sv-svc-features reveal" style="transition-delay:100ms">
-            <ul class="sv-feat-list">
-              <li v-for="feat in svc.features" :key="feat" class="sv-feat-item">
-                <div class="sv-feat-icon" :class="`sv-feat-icon--${svc.accent}`" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </div>
-                <span>{{ feat }}</span>
-              </li>
-            </ul>
+        <!-- ── Standard two-column layout ── -->
+        <template v-else>
+          <div class="wrap sv-svc-grid">
+
+            <div class="sv-svc-text reveal">
+              <span class="eyebrow" :class="`sv-ey--${svc.accent}`">{{ svc.eyebrow }}</span>
+              <h2 class="sv-svc-title">{{ svc.title }}</h2>
+              <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-svc-desc">{{ p }}</p>
+              <a :href="whatsappUrl" class="btn sv-enquire-btn" :class="`sv-enquire--${svc.accent}`" target="_blank" rel="noopener">
+                Enquire About This Service
+              </a>
+            </div>
+
+            <div class="sv-svc-features reveal" style="transition-delay:100ms">
+              <ul class="sv-feat-list">
+                <li v-for="feat in svc.features" :key="feat" class="sv-feat-item">
+                  <div class="sv-feat-icon" :class="`sv-feat-icon--${svc.accent}`" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </div>
+                  <span>{{ feat }}</span>
+                </li>
+              </ul>
+            </div>
+
           </div>
+        </template>
 
-        </div>
       </section>
     </div>
 
@@ -311,13 +452,114 @@ const steps = [
 }
 
 .sv-svc {
-  padding-block: clamp(56px, 7vw, 96px);
-  border-top: 1px solid var(--border);
+  padding-block: clamp(28px, 3.5vw, 48px);
   position: relative;
 }
 
-.sv-svc--even { background: var(--surface); }
-.sv-svc--odd  { background: var(--bg); }
+.sv-svc--even { background: #fff; }
+.sv-svc--odd  { background: #fff; }
+
+/* ── Dark teal banner card (Professional Communication) ── */
+.sv-dark-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
+  border-radius: 28px;
+  padding: clamp(36px, 5vw, 56px);
+  box-shadow: 0 20px 48px rgba(19,72,78,.22);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.sv-dark-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.sv-dark-content { position: relative; z-index: 1; }
+
+.sv-dark-eyebrow { color: var(--amber) !important; }
+
+.sv-dark-title {
+  font-family: var(--fd);
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.18;
+  margin-top: 6px;
+  margin-bottom: 18px;
+}
+
+.sv-dark-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,.82);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+.sv-dark-desc:last-of-type { margin-bottom: 28px; }
+
+.sv-enquire--white {
+  background: #fff;
+  color: var(--teal-sh);
+  border: none;
+  font-weight: 700;
+}
+.sv-enquire--white:hover {
+  background: rgba(255,255,255,.88);
+}
+
+/* SVG illustration */
+.sv-dark-illus {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sv-dark-svg {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.18));
+}
+
+/* Features below the card — horizontal row */
+.sv-dark-features { margin-bottom: 0; }
+
+.sv-dark-feat-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 24px;
+}
+
+.sv-dark-feat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14.5px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .sv-dark-banner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .sv-dark-illus { display: none; }
+  .sv-dark-feat-list { grid-template-columns: 1fr; }
+}
 
 .sv-svc-grid {
   display: grid;
@@ -366,25 +608,15 @@ const steps = [
   padding: 12px 28px;
 }
 
-.sv-enquire--teal {
-  background: var(--teal);
-  color: #fff;
-  border: none;
-}
-.sv-enquire--teal:hover { background: var(--teal-sh); }
-
-.sv-enquire--amber {
-  background: var(--amber);
-  color: #fff;
-  border: none;
-}
-.sv-enquire--amber:hover { background: var(--amber-sh); }
-
+.sv-enquire--teal,
+.sv-enquire--amber,
 .sv-enquire--coral {
   background: var(--coral);
   color: #fff;
   border: none;
 }
+.sv-enquire--teal:hover,
+.sv-enquire--amber:hover,
 .sv-enquire--coral:hover { background: var(--coral-sh); }
 
 /* Features list */

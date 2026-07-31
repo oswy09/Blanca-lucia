@@ -60,7 +60,7 @@
   transition: color .15s;
 }
 .footer-nav a:hover { color: var(--teal-t2); }
-.footer-copy { font-size: 12px; color: var(--n500); text-align: right; }
+.footer-copy { font-size: 12px; color: var(--n0); text-align: right; }
 @media (max-width: 600px) {
   .footer-inner { grid-template-columns: 1fr; }
   .footer-right { text-align: left; }

@@ -8,7 +8,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: `${siteUrl}/servicios/preparacion-entrevistas` },
+    { rel: 'canonical', href: `${siteUrl}/services/interview-preparation` },
   ],
 })
 </script>
@@ -16,7 +16,7 @@ useHead({
 <template>
   <main>
     <section class="svc-detail wrap">
-      <NuxtLink to="/servicios" class="back-link">
+      <NuxtLink to="/services" class="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="m15 18-6-6 6-6"/>
         </svg>
@@ -62,7 +62,7 @@ useHead({
 .back-link:hover { color: var(--teal); }
 .svc-detail-icon {
   width: 64px; height: 64px;
-  border-radius: 16px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
