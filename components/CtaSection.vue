@@ -3,7 +3,7 @@ const { whatsappUrl, contactEmail } = useSiteConfig()
 </script>
 
 <template>
-  <section class="cta-sec" id="contacto">
+  <section class="cta-sec" id="contact">
     <div class="wrap cta-inner">
       <span class="eyebrow cta-eyebrow reveal">Start with a Conversation</span>
       <h2 class="cta-heading reveal" style="transition-delay:80ms">If you would like to explore how I can support you</h2>

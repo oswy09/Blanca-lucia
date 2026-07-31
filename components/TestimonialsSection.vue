@@ -5,15 +5,15 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 const testimonials = [
   {
     id: 1,
-    quote: 'I have dealt with Blanca for many years and she has always been the consummate professional. <strong>Her teaching techniques, patience, encouragement and outright results are second to none.</strong> Blanca successfully brings the best out in her students, where teacher and pupil are totally congruent.',
+    quote: 'I have dealt with Blanca for many years and she has always been the consummate professional. <strong>Her teaching techniques, patience,</strong> encouragement and outright results are second to none. The evidence is in her classes when you see her pupils respond so well in Spanish. <strong>Blanca successfully brings the best out in them,</strong> where teacher and pupil are totally congruent.',
     name: 'Francis Dowling',
-    role: 'Training & Development Controller · Nissan Technical Centre Europe',
+    role: 'Training & Development Controller, Nissan Technical Centre Europe',
     initials: 'FD',
     color: 'teal',
   },
   {
     id: 2,
-    quote: 'I would like to say thank you for all your hard work with our clients. <strong>They have all much appreciated and benefited from your teaching,</strong> you have always worked to a very high standard which has reflected in the success rate of your lessons. We will be sure to pass further contracts your way.',
+    quote: 'I would like to say thank you for all your hard work with our clients, <strong>they have all much appreciated and benefited from your teaching,</strong> you have always worked to a very high standard which has reflected in the success rate of your lessons. <strong>We will be sure to pass further contracts your way.</strong>',
     name: 'Rosemary Plumbbridge',
     role: 'WIB Language Training',
     initials: 'RP',
@@ -21,15 +21,15 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: 'Her passion and professionalism were second to none. <strong>I found her well structured program ideal for learning and mastering the language.</strong> Under her guidance I have no doubt that anyone, regardless of ability and level, will be able to speak and write fluently. I cannot recommend her enough.',
+    quote: 'I loved learning Spanish with Blanca. She has a wealth of knowledge and experience as a Spanish Tutor, which I soon realised from our first lesson. <strong>I found her well structured program ideal for learning and mastering grammar, vocab and phonetics.</strong> Her handouts and notes were most valuable, a real life-saver. Her passion and professionalism were second to none. I cannot recommend her enough.',
     name: 'Gerald Reinders',
-    role: 'Information Systems · Nissan Europe',
+    role: 'Information Systems (A324), Nissan Europe Information Systems',
     initials: 'GR',
     color: 'teal',
   },
   {
     id: 4,
-    quote: '<strong>Blanca introduced the basics in a very approachable way.</strong> Learning was mixed with a rich source of listening and spoken word tasks, as well as cultural context. I found the teaching methods both fun and well structured, and individual to all class members.',
+    quote: 'I began studying Spanish as a novice with no real qualifications in any other language except my native English. <strong>Blanca introduced basics in a very approachable way</strong> tackling verbs conjugation and tenses in a simple but effective way. Learning was mixed with a rich source of listening and spoken word tasks, as well as cultural studies from Spain. <strong>I found the teaching methods both fun and well structured</strong> and also individual to all class members.',
     name: 'Colin Watts',
     role: 'Lecta Paper UK Ltd',
     initials: 'CW',
@@ -39,8 +39,52 @@ const testimonials = [
 
 const carouselRef = ref(null)
 const autoplayId = ref(null)
+let scrollResetTimer = null
 
 const carouselItems = computed(() => [...testimonials, ...testimonials])
+
+const getStep = () => {
+  const el = carouselRef.value
+  if (!el) return 0
+  const firstCard = el.querySelector('.testi-card')
+  if (!firstCard) return 0
+  return firstCard.getBoundingClientRect().width + 24
+}
+
+// halfway = exactly n cards × step (avoids CSS grid trailing-gap mismatch with scrollWidth/2)
+const getHalfway = () => getStep() * testimonials.length
+
+// After smooth scroll settles, silently snap back to the first half if past halfway
+const onCarouselScroll = () => {
+  clearTimeout(scrollResetTimer)
+  scrollResetTimer = setTimeout(() => {
+    const el = carouselRef.value
+    if (!el) return
+    const halfway = getHalfway()
+    if (el.scrollLeft >= halfway) {
+      el.scrollLeft = el.scrollLeft - halfway
+    }
+  }, 200)
+}
+
+const scrollNext = () => {
+  const el = carouselRef.value
+  if (!el) return
+  el.scrollBy({ left: getStep() * 2, behavior: 'smooth' })
+}
+
+const scrollPrev = () => {
+  const el = carouselRef.value
+  if (!el) return
+  const step = getStep() * 2
+  if (el.scrollLeft <= 0) {
+    // Jump to duplicate section, then animate backward to show last real pair
+    el.scrollLeft = getHalfway()
+    requestAnimationFrame(() => el.scrollBy({ left: -step, behavior: 'smooth' }))
+  } else {
+    el.scrollBy({ left: -step, behavior: 'smooth' })
+  }
+}
 
 const stopAutoplay = () => {
   if (autoplayId.value) {
@@ -52,67 +96,22 @@ const stopAutoplay = () => {
 const startAutoplay = () => {
   if (!carouselRef.value || autoplayId.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
   autoplayId.value = setInterval(() => {
     const el = carouselRef.value
     if (!el) return
-
-    const firstCard = el.querySelector('.testi-card')
-    if (!firstCard) return
-
-    const step = getStep()
-    const halfway = el.scrollWidth / 2
-
-    if (el.scrollLeft >= halfway) {
-      el.scrollLeft = 0
-    }
-
-    el.scrollBy({ left: step, behavior: 'smooth' })
-  }, 4200)
-}
-
-const getStep = () => {
-  const el = carouselRef.value
-  if (!el) return 0
-  const firstCard = el.querySelector('.testi-card')
-  if (!firstCard) return 0
-  const cardWidth = firstCard.getBoundingClientRect().width
-  const gap = 20
-  return cardWidth + gap
-}
-
-const scrollNext = () => {
-  const el = carouselRef.value
-  if (!el) return
-  const step = getStep()
-  const halfway = el.scrollWidth / 2
-
-  if (el.scrollLeft >= halfway) {
-    el.scrollLeft = 0
-  }
-
-  el.scrollBy({ left: step, behavior: 'smooth' })
-}
-
-const scrollPrev = () => {
-  const el = carouselRef.value
-  if (!el) return
-  const step = getStep()
-  const halfway = el.scrollWidth / 2
-
-  if (el.scrollLeft <= 0) {
-    el.scrollLeft = halfway
-  }
-
-  el.scrollBy({ left: -step, behavior: 'smooth' })
+    el.scrollBy({ left: getStep() * 2, behavior: 'smooth' })
+  }, 5000)
 }
 
 onMounted(() => {
+  carouselRef.value?.addEventListener('scroll', onCarouselScroll, { passive: true })
   startAutoplay()
 })
 
 onBeforeUnmount(() => {
+  carouselRef.value?.removeEventListener('scroll', onCarouselScroll)
   stopAutoplay()
+  clearTimeout(scrollResetTimer)
 })
 </script>
 
@@ -223,10 +222,10 @@ onBeforeUnmount(() => {
 .testi-arrow:active { transform: scale(.96); }
 
 .testi-carousel {
-  --gap: 20px;
+  --gap: 24px;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% - (2 * var(--gap))) / 3);
+  grid-auto-columns: calc((100% - var(--gap)) / 2);
   gap: var(--gap);
   margin-top: 48px;
   overflow-x: auto;
@@ -283,14 +282,10 @@ onBeforeUnmount(() => {
 }
 
 .testi-quote {
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.65;
   flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .testi-author {
@@ -318,24 +313,14 @@ onBeforeUnmount(() => {
 .testi-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .testi-role { font-size: 12px; color: var(--text3); margin-top: 1px; }
 
-@media (max-width: 980px) {
-  .testi-head {
-    align-items: center;
-  }
-
-  .testi-carousel {
-    grid-auto-columns: calc((100% - var(--gap)) / 2);
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .testi-head {
     align-items: start;
     flex-direction: column;
   }
 
   .testi-carousel {
-    grid-auto-columns: 100%;
+    grid-auto-columns: 88%;
   }
 }
 </style>

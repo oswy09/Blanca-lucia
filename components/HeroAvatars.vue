@@ -1,9 +1,9 @@
 <template>
-  <div class="av-root" aria-label="Blanca Derby and her clients">
+  <div class="av-root" aria-label="Blanca Derby — English language consultant">
 
-    <!-- ── TOP: Blanca — larger circle + LIVE badge ──────── -->
+    <!-- Blanca — portrait principal -->
     <div class="av av-blanca">
-      <div class="av-frame av-frame--lg">
+      <div class="av-frame">
         <img src="/imagens/blanca.png" alt="Blanca Derby – English consultant" />
       </div>
       <div class="av-live" aria-label="Live sessions available">
@@ -12,57 +12,45 @@
       </div>
     </div>
 
-    <!-- ── BOTTOM-LEFT: female client — words bubble ──────── -->
-    <div class="av av-female">
-      <div class="av-bubble av-bubble--words" aria-hidden="true">
-        <div class="word-track">
-          <span class="word word-1">Sounds great!</span>
-          <span class="word word-2">I'll present it.</span>
-          <span class="word word-3">Let me clarify.</span>
+    <!-- Tarjeta izquierda: sesiones 1-to-1 -->
+    <div class="av av-left" aria-hidden="true">
+      <div class="session-card">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="card-icon">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <p class="session-label">1-to-1 · Personal</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta derecha: sesiones online -->
+    <div class="av av-right" aria-hidden="true">
+      <div class="session-card">
+        <div class="audio-bars">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+          <span class="bar bar-5"></span>
         </div>
+        <p class="session-label">50+ consultations</p>
       </div>
-      <div class="av-frame av-frame--sm">
-        <img src="/imagens/customer-female.webp" alt="" aria-hidden="true" />
-      </div>
-      <div class="av-dot" aria-hidden="true"></div>
     </div>
 
-    <!-- ── BOTTOM-RIGHT: male client — audio wave bubble ──── -->
-    <div class="av av-male">
-      <div class="av-bubble av-bubble--audio" aria-hidden="true">
-        <span class="bar bar-1"></span>
-        <span class="bar bar-2"></span>
-        <span class="bar bar-3"></span>
-        <span class="bar bar-4"></span>
-        <span class="bar bar-5"></span>
-      </div>
-      <div class="av-frame av-frame--sm">
-        <img src="/imagens/customer-male.webp" alt="" aria-hidden="true" />
-      </div>
-      <div class="av-dot" aria-hidden="true"></div>
-    </div>
-
-    <!-- ── SVG: V-shape lines + connector dots ──────────── -->
-    <!--
-      Container: 360 × 320
-      Blanca:   left=108 top=12  → ø144 → center=(180, 84)
-      Female:   left=22  top=188 → ø96  → center=(70,  236)
-      Male:     left=239 top=188 → ø96  → center=(287, 236)
-    -->
+    <!-- Líneas SVG conectoras -->
     <svg class="av-svg" viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="138" y1="142" x2="98"  y2="197" stroke="#10B981" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.55"/>
-      <line x1="221" y1="143" x2="259" y2="197" stroke="#10B981" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.55"/>
-      <circle cx="138" cy="142" r="5"   fill="#10B981" stroke="white" stroke-width="2.5"/>
-      <circle cx="221" cy="143" r="5"   fill="#10B981" stroke="white" stroke-width="2.5"/>
-      <circle cx="98"  cy="197" r="4.5" fill="#10B981" stroke="white" stroke-width="2.5"/>
-      <circle cx="259" cy="197" r="4.5" fill="#10B981" stroke="white" stroke-width="2.5"/>
+      <line x1="148" y1="148" x2="82"  y2="208" stroke="#10B981" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.55"/>
+      <line x1="212" y1="148" x2="278" y2="208" stroke="#10B981" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.55"/>
+      <circle cx="148" cy="148" r="5"   fill="#10B981" stroke="white" stroke-width="2.5"/>
+      <circle cx="212" cy="148" r="5"   fill="#10B981" stroke="white" stroke-width="2.5"/>
+      <circle cx="82"  cy="208" r="4.5" fill="#10B981" stroke="white" stroke-width="2.5"/>
+      <circle cx="278" cy="208" r="4.5" fill="#10B981" stroke="white" stroke-width="2.5"/>
     </svg>
 
   </div>
 </template>
 
 <style scoped>
-/* ── Root ─────────────────────────────────────────────────── */
 .av-root {
   position: relative;
   width: 360px;
@@ -70,7 +58,6 @@
   flex-shrink: 0;
 }
 
-/* ── SVG below avatars ───────────────────────────────────── */
 .av-svg {
   position: absolute;
   inset: 0;
@@ -80,29 +67,20 @@
   z-index: 1;
 }
 
-/* ── Avatar wrappers ─────────────────────────────────────── */
-.av          { position: absolute; z-index: 2; }
-.av-blanca   { top: 12px;  left: 108px; z-index: 4; }
-.av-female   { top: 188px; left: 22px;  }
-.av-male     { top: 188px; left: 239px; }
+.av { position: absolute; z-index: 2; }
+.av-blanca { top: 12px; left: 108px; z-index: 4; }
+.av-left   { top: 210px; left: 10px; }
+.av-right  { top: 210px; left: 218px; }
 
-/* ── Circular frames ─────────────────────────────────────── */
+/* ── Retrato de Blanca ───────────────────────────────────── */
 .av-frame {
+  width: 144px;
+  height: 144px;
   border-radius: 50%;
   overflow: hidden;
   background: #d1ece3;
-}
-.av-frame--lg {
-  width: 144px;
-  height: 144px;
   border: 3.5px solid #fff;
   box-shadow: 0 14px 36px rgba(16,185,129,.26), 0 3px 10px rgba(0,0,0,.10);
-}
-.av-frame--sm {
-  width: 96px;
-  height: 96px;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 22px rgba(16,185,129,.18), 0 2px 6px rgba(0,0,0,.09);
 }
 .av-frame img {
   width: 100%;
@@ -145,83 +123,30 @@
   50%       { opacity: .25; }
 }
 
-/* ── Green status dot (clients) ──────────────────────────── */
-.av-dot {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: #10B981;
-  border: 2.5px solid #fff;
-  border-radius: 50%;
-  bottom: 5px;
-  right: 5px;
-  z-index: 5;
-  box-shadow: 0 1px 6px rgba(16,185,129,.50);
+/* ── Ícono en tarjeta izquierda ──────────────────────────── */
+.card-icon {
+  color: var(--teal);
+  flex-shrink: 0;
 }
 
-/* ── Speech bubble base ──────────────────────────────────── */
-.av-bubble {
-  position: absolute;
+/* ── Tarjeta de sesión (derecha) ─────────────────────────── */
+.session-card {
   background: #fff;
-  border-radius: 14px;
-  width: 104px;
-  left: -4px;
-  top: -55px;
-  z-index: 6;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,.11));
-}
-.av-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 8px solid transparent;
-  border-bottom-width: 0;
-  border-top-color: #fff;
-}
-
-/* ── Words bubble ─────────────────────────────────────────── */
-.av-bubble--words {
-  padding: 8px 8px;
-  height: 36px;
+  border-radius: 16px;
+  padding: 12px 16px;
+  width: 120px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
 }
-.word-track {
-  position: relative;
-  width: 100%;
-  height: 18px;
-}
-.word {
-  position: absolute;
-  inset: 0;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: #0f4a30;
-  opacity: 0;
-  white-space: nowrap;
-  animation: wordFade 6s ease-in-out infinite;
-}
-.word-1 { animation-delay: 0s; }
-.word-2 { animation-delay: 2s; }
-.word-3 { animation-delay: 4s; }
-@keyframes wordFade {
-  0%       { opacity: 0; transform: translateY(5px); }
-  8%, 25%  { opacity: 1; transform: translateY(0); }
-  33%      { opacity: 0; transform: translateY(-5px); }
-  100%     { opacity: 0; transform: translateY(-5px); }
-}
-
-/* ── Audio wave bubble ────────────────────────────────────── */
-.av-bubble--audio {
+.audio-bars {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: 3px;
-  padding: 8px 10px 9px;
+  height: 22px;
 }
 .bar {
   width: 3.5px;
@@ -239,6 +164,13 @@
 @keyframes audioPulse {
   0%, 100% { transform: scaleY(0.22); opacity: 0.55; }
   50%       { transform: scaleY(1);    opacity: 1; }
+}
+.session-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--n500);
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* ── Responsive ───────────────────────────────────────────── */

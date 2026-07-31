@@ -8,10 +8,10 @@
           Over 30 years helping people communicate as the professionals they truly are.
         </p>
         <ul class="footer-nav" role="list">
-          <li><NuxtLink to="/servicios">Services</NuxtLink></li>
-          <li><NuxtLink to="/sobre-mi">About</NuxtLink></li>
-          <li><NuxtLink to="/precios">Pricing</NuxtLink></li>
-          <li><NuxtLink to="/contacto">Contact</NuxtLink></li>
+          <li><NuxtLink to="/">Home</NuxtLink></li>
+          <li><NuxtLink to="/services">Services</NuxtLink></li>
+          <li><NuxtLink to="/about">About</NuxtLink></li>
+          <li><NuxtLink to="/contact">Contact</NuxtLink></li>
         </ul>
       </div>
       <div class="footer-right">

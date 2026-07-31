@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <section class="diff" id="sobre-mi">
+  <section class="diff" id="about">
     <div class="wrap diff-grid">
 
       <!-- Left column -->
@@ -25,7 +25,7 @@
             <li>Refine your communication style with precision</li>
             <li>Resolve long-standing challenges through focused guidance</li>
           </ul>
-          <NuxtLink to="/servicios" class="btn diff-cta">Explore services</NuxtLink>
+          <NuxtLink to="/services" class="btn diff-cta">Explore services</NuxtLink>
         </article>
 
         <p class="diff-note reveal" style="transition-delay:200ms">
@@ -59,7 +59,7 @@
 .diff-tagline {
   font-size: 18px;
   font-weight: 600;
-  color: var(--text2);
+  color: var(--text);
   margin-top: 6px;
   margin-bottom: 16px;
   line-height: 1.4;

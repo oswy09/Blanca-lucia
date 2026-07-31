@@ -3,11 +3,11 @@ const route = useRoute()
 const isOpen = ref(false)
 
 const navLinks = [
-  { to: '/servicios', label: 'Services' },
-  { to: '/sobre-mi', label: 'About' },
-  { to: '/#testimonios', label: 'Testimonials', anchor: true },
-  { to: '/precios', label: 'Pricing' },
-  { to: '/contacto', label: 'Contact' },
+  { to: '/', label: 'Home' },
+  { to: '/services', label: 'Services' },
+  { to: '/about', label: 'About' },
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 const isActive = (link) => {
@@ -27,23 +27,17 @@ watch(() => route.path, () => { isOpen.value = false })
 
       <ul class="nav-links" :class="{ open: isOpen }" role="list">
         <li v-for="link in navLinks" :key="link.to">
-          <a
-            v-if="link.anchor"
-            :href="link.to"
-            class="nav-link"
-            @click="isOpen = false"
-          >{{ link.label }}</a>
           <NuxtLink
-            v-else
+            v-if="!link.anchor"
             :to="link.to"
             class="nav-link"
             :class="{ active: isActive(link) }"
-            @click="isOpen = false"
           >{{ link.label }}</NuxtLink>
+          <a v-else :href="link.to" class="nav-link">{{ link.label }}</a>
         </li>
       </ul>
 
-      <NuxtLink to="/contacto" class="btn btn-primary nav-cta-desktop">Get in touch</NuxtLink>
+      <NuxtLink to="/contact" class="btn btn-primary nav-cta-desktop">Get in touch</NuxtLink>
 
       <button
         class="nav-toggle"

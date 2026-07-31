@@ -71,20 +71,20 @@ onMounted(async () => {
 
       if (!prefersReducedMotion) {
         /* FASE 1: el portal se expande cuando la sección Services está terminando.
-           Trigger en #servicios (referencia directa, sin pin) — el original falló
-           con pin: serviciosEl; solo referencia de trigger no tiene ese problema.
+           Trigger en #services (referencia directa, sin pin) — el original falló
+           con pin: servicesEl; solo referencia de trigger no tiene ese problema.
            start 'bottom 65%': el borde inferior de Services está al 65% del viewport
            → todavía 65% de la pantalla muestra el fondo blanco de Services sobre el
            que el círculo teal es perfectamente visible. */
-        const serviciosEl = document.getElementById('servicios')
+        const servicesEl = document.getElementById('services')
         const portalAnim = gsap.fromTo(portalRef.value,
           { clipPath: 'circle(0% at 50% 50%)' },
           { clipPath: 'circle(160% at 50% 50%)', ease: 'power1.in' }
         )
         ScrollTrigger.create({
-          trigger: serviciosEl || sectionRef.value,
-          start: serviciosEl ? 'bottom 65%' : 'top bottom',
-          end:   serviciosEl ? 'bottom top'  : 'top top',
+          trigger: servicesEl || sectionRef.value,
+          start: servicesEl ? 'bottom 65%' : 'top bottom',
+          end:   servicesEl ? 'bottom top'  : 'top top',
           scrub: 1.5,
           animation: portalAnim,
           invalidateOnRefresh: true,

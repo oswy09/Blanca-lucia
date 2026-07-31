@@ -32,7 +32,7 @@ const plans = [
 </script>
 
 <template>
-  <section class="pricing-sec" id="precios">
+  <section class="pricing-sec" id="pricing">
     <div class="wrap">
       <div class="pricing-header reveal">
         <span class="eyebrow">Investment</span>
@@ -102,6 +102,7 @@ const plans = [
   background: var(--surface);
 }
 .pricing-header { margin-bottom: 52px; }
+.pricing-header .section-desc { max-width: 100%; }
 .p-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -295,9 +296,11 @@ const plans = [
 .pricing-note {
   max-width: 820px;
   margin-top: 28px;
+  margin-inline: auto;
   font-size: 14px;
   color: var(--text2);
   font-style: italic;
+  text-align: center;
 }
 
 @media (max-width: 640px) {

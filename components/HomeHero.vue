@@ -34,7 +34,7 @@ const { whatsappUrl } = useSiteConfig()
             </svg>
             Message me on WhatsApp
           </a>
-          <a href="#servicios" class="btn btn-secondary">View services</a>
+          <a href="#services" class="btn btn-secondary">View services</a>
         </div>
       </div>
 
@@ -106,6 +106,6 @@ const { whatsappUrl } = useSiteConfig()
 
 @media (max-width: 800px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { order: -1; min-height: 280px; }
+  .hero-visual { min-height: 280px; }
 }
 </style>

@@ -2,7 +2,7 @@
 // Storyblok: blok.services (array)
 const services = [
   {
-    slug: 'comunicacion-profesional',
+    slug: 'professional-communication',
     icon: 'chat',
     theme: 'coral',
     eyebrow: 'Professional Communication',
@@ -13,7 +13,7 @@ const services = [
     desc: 'Focused support for professionals who want to communicate clearly and confidently in meetings, presentations, and everyday interactions.',
   },
   {
-    slug: 'preparacion-entrevistas',
+    slug: 'interview-preparation',
     icon: 'calendar',
     theme: 'amber',
     eyebrow: 'Interview & Career Communication',
@@ -24,7 +24,7 @@ const services = [
     desc: 'Preparation for interviews and professional conversations, with a focus on expressing your experience clearly and confidently.',
   },
   {
-    slug: 'edicion-textos',
+    slug: 'document-editing',
     icon: 'doc',
     theme: 'teal',
     eyebrow: 'Written Communication',
@@ -38,7 +38,7 @@ const services = [
 </script>
 
 <template>
-  <section class="svc-sec" id="servicios">
+  <section class="svc-sec" id="services">
     <div class="wrap">
       <div class="svc-header reveal">
         <span class="eyebrow">Services</span>
@@ -76,7 +76,7 @@ const services = [
           <h3 class="svc-outside svc-title">{{ s.title }}</h3>
           <p class="svc-outside svc-outside--bottom">{{ s.desc }}</p>
 
-          <NuxtLink :to="`/servicios/${s.slug}`" class="svc-link">
+          <NuxtLink :to="`/services/${s.slug}`" class="svc-link">
             Find out more <span aria-hidden="true">→</span>
           </NuxtLink>
         </article>

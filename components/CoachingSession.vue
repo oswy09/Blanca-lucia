@@ -59,8 +59,7 @@ function startTypewriter() {
         
         <!-- Left Side: Title & Typewriter Text -->
         <div class="coaching-content">
-          <span class="coaching-eyebrow">Interactive 1:1 Experience</span>
-          <h2 class="coaching-title">
+<h2 class="coaching-title">
             My role is to help you <br><em>bridge that gap.</em>
           </h2>
           <p class="coaching-desc-typewriter">
