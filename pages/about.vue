@@ -160,7 +160,7 @@ onUnmounted(() => {
           </article>
 
           <article class="ab-card reveal" style="transition-delay:120ms">
-            <div class="ab-card-icon ab-card-icon--amber">
+            <div class="ab-card-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"/>
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
@@ -171,7 +171,7 @@ onUnmounted(() => {
           </article>
 
           <article class="ab-card reveal" style="transition-delay:180ms">
-            <div class="ab-card-icon ab-card-icon--coral">
+            <div class="ab-card-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                 <polyline points="17 6 23 6 23 12"/>
