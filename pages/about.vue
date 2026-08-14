@@ -21,6 +21,38 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger)
 
   gsapCtx = gsap.context(() => {
+    // Parallax scroll-drift animation for margin bubbles (Creative touch!)
+    gsap.to('.bubble-1', {
+      y: -100,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.ab-intro',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+    gsap.to('.bubble-2', {
+      y: 120,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.ab-values',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+    gsap.to('.bubble-3', {
+      y: -120,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.ab-split',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+
     // Trace journey line on scroll
     gsap.to('.journey-line-progress', {
       height: '100%',
@@ -81,7 +113,7 @@ onUnmounted(() => {
           </a>
         </div>
 
-        <div class="ab-hero-visual">
+        <div class="ab-hero-visual" style="position: relative;">
           <div class="ab-hero-photo-wrap">
             <img src="/imagens/blanca.png" alt="Blanca Derby – English language consultant" class="ab-hero-photo" />
             <div class="ab-hero-badge">
@@ -265,6 +297,11 @@ onUnmounted(() => {
         <NuxtLink to="/contact" class="btn ab-cta-btn">Get in Touch</NuxtLink>
       </div>
     </section>
+
+    <!-- Floating margin bubbles (Creative touch) -->
+    <ScrollBubble :text="['Speak with confidence', 'Excellent pronunciation']" position="margin-right" :delay="100" class="about-margin-bubble bubble-1" />
+    <ScrollBubble :text="['English & Spanish', 'Bilingual coaching']" position="margin-left" :delay="200" class="about-margin-bubble bubble-2" />
+    <ScrollBubble :text="['Speak with confidence', 'Confidence is key']" position="margin-right" :delay="300" class="about-margin-bubble bubble-3" />
 
   </main>
 </template>
@@ -791,5 +828,51 @@ onUnmounted(() => {
 
 @media (max-width: 520px) {
   .ab-hero-photo-wrap { width: 240px; height: 280px; }
+}
+
+/* Marginal floating scroll bubbles (Creative touch) */
+main {
+  position: relative;
+}
+.about-margin-bubble {
+  position: absolute !important;
+  z-index: 10;
+}
+.bubble-1 {
+  top: 600px;
+  right: 5vw;
+}
+.bubble-2 {
+  top: 1300px;
+  left: 5vw;
+}
+.bubble-3 {
+  top: 2000px;
+  right: 5vw;
+}
+
+@media (max-width: 1200px) {
+  .about-margin-bubble {
+    position: relative !important;
+    display: inline-flex !important;
+    margin: 28px auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    justify-content: center;
+    width: fit-content;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  main > section {
+    width: 100%;
+  }
 }
 </style>

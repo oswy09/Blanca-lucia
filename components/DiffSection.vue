@@ -6,7 +6,7 @@
     <div class="wrap diff-grid">
 
       <!-- Left column -->
-      <div class="diff-left">
+      <div class="diff-left" style="position: relative;">
         <span class="eyebrow reveal">A Personal Approach</span>
         <p class="diff-tagline reveal" style="transition-delay:80ms">A different approach to language learning</p>
         <h2 class="diff-statement reveal" style="transition-delay:160ms">
@@ -14,6 +14,7 @@
           Not a programme.
         </h2>
         <p class="diff-sub reveal" style="transition-delay:240ms">A personal consultancy designed around you.</p>
+        <ScrollBubble :text="['Designed around you', 'Speak with confidence', 'Enjoy your English']" position="top-right" :delay="400" />
       </div>
 
       <!-- Right column -->

@@ -47,7 +47,7 @@ const services = [
       </div>
 
       <div class="svc-grid">
-        <article v-for="(s, i) in services" :key="s.slug" class="svc-item reveal" :class="`svc-item--${s.theme}`" :style="{ transitionDelay: `${i * 110}ms` }">
+        <article v-for="(s, i) in services" :key="s.slug" class="svc-item reveal" :class="`svc-item--${s.theme}`" :style="{ transitionDelay: `${i * 110}ms`, position: 'relative' }">
           <div class="svc-card">
             <div class="svc-bg-shape" aria-hidden="true"></div>
 
@@ -72,6 +72,10 @@ const services = [
               <p class="svc-metric">{{ s.metric }}</p>
             </div>
           </div>
+
+          <ScrollBubble v-if="s.slug === 'professional-communication'" :text="['Sound like you!', 'Speak naturally']" position="top-right" :delay="200" />
+          <ScrollBubble v-if="s.slug === 'interview-preparation'" :text="['Prepare your interviews', 'Confident voice']" position="top-right" :delay="400" />
+          <ScrollBubble v-if="s.slug === 'document-editing'" :text="['Polished writing', 'Clear emails']" position="top-right" :delay="600" />
 
           <h3 class="svc-outside svc-title">{{ s.title }}</h3>
           <p class="svc-outside svc-outside--bottom">{{ s.desc }}</p>

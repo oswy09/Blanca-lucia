@@ -68,7 +68,7 @@ function startTypewriter() {
         </div>
 
         <!-- Right Side: Live Session Photo with Rectangular Amber Frame -->
-        <div class="coaching-graphic">
+        <div class="coaching-graphic" style="position: relative;">
           <div class="session-card-wrap">
             <!-- Amber dashed ring behind -->
             <div class="session-ring"></div>
@@ -83,6 +83,7 @@ function startTypewriter() {
               <span></span><span></span><span></span>
             </div>
           </div>
+          <ScrollBubble :text="['Active listening', 'One-to-one focus']" position="top-right" :delay="600" />
         </div>
 
       </div>

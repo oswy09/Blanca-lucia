@@ -21,7 +21,7 @@ watch(() => route.path, () => { isOpen.value = false })
   <nav class="nav" aria-label="Main navigation">
     <div class="wrap nav-inner">
       <NuxtLink to="/" class="nav-logo">
-        <img src="/logo-fluent-future.png" alt="Fluent Future" class="nav-logo-img" />
+        Fluent<span>Future</span>
       </NuxtLink>
 
       <ul class="nav-links" :class="{ open: isOpen }" role="list">
@@ -34,22 +34,23 @@ watch(() => route.path, () => { isOpen.value = false })
           >{{ link.label }}</NuxtLink>
           <a v-else :href="link.to" class="nav-link">{{ link.label }}</a>
         </li>
+        <li class="nav-mobile-cta">
+          <NuxtLink to="/contact" class="btn btn-primary" style="width: 100%; text-align: center;">Get in touch</NuxtLink>
+        </li>
       </ul>
 
       <NuxtLink to="/contact" class="btn btn-primary nav-cta-desktop">Get in touch</NuxtLink>
 
       <button
         class="nav-toggle"
+        :class="{ open: isOpen }"
         :aria-expanded="isOpen.toString()"
-        aria-label="Open menu"
+        aria-label="Toggle menu"
         @click="isOpen = !isOpen"
       >
-        <svg v-if="!isOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-        <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
       </button>
     </div>
   </nav>
@@ -79,11 +80,14 @@ watch(() => route.path, () => { isOpen.value = false })
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  font-family: var(--fd);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
-.nav-logo-img {
-  height: 44px;
-  width: auto;
-  display: block;
+.nav-logo span {
+  color: var(--teal);
 }
 
 .nav-links {
@@ -96,38 +100,142 @@ watch(() => route.path, () => { isOpen.value = false })
   font-size: 14px;
   color: var(--text2);
   text-decoration: none;
-  transition: color .15s;
+  transition: color .25s ease;
+  position: relative;
+  padding-block: 6px;
 }
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--teal);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 .nav-link:hover,
-.nav-link.active { color: var(--teal); }
+.nav-link.active {
+  color: var(--teal);
+}
 
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text);
-  padding: 4px;
-  line-height: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  z-index: 101;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--text);
+  border-radius: 2px;
+  position: absolute;
+  left: 1px;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              opacity 0.3s ease, 
+              background-color 0.3s ease;
+}
+
+.hamburger-bar:nth-child(1) { top: 6px; }
+.hamburger-bar:nth-child(2) { top: 11px; }
+.hamburger-bar:nth-child(3) { top: 16px; }
+
+.nav-toggle.open .hamburger-bar:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+  background-color: var(--teal);
+}
+.nav-toggle.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open .hamburger-bar:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+  background-color: var(--teal);
+}
+
+.nav-mobile-cta {
+  display: none;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 16px;
+  margin-inline: auto;
 }
 
 @media (max-width: 800px) {
-  .nav-links { display: none; }
-  .nav-links.open {
+  .nav-links {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
     top: 64px;
-    left: 0; right: 0;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 24px var(--px) 28px;
-    gap: 20px;
-    box-shadow: var(--sh-md);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - 64px);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 40px var(--px) 80px;
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 99;
   }
-  .nav-links.open .nav-link { font-size: 16px; }
-  .nav-toggle { display: block; }
-  .nav-cta-desktop { display: none; }
+  
+  .nav-links.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links .nav-link {
+    font-family: var(--fd);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    padding-block: 8px;
+    display: inline-block;
+  }
+  
+  .nav-links .nav-link::after {
+    height: 3px;
+    bottom: -2px;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+  
+  .nav-cta-desktop {
+    display: none;
+  }
+  
+  .nav-mobile-cta {
+    display: block;
+  }
 }
 </style>

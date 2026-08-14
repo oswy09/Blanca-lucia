@@ -283,15 +283,29 @@ onUnmounted(() => {
 
             <!-- Panel derecho: cliente + burbuja -->
             <div class="call-pane call-pane--client">
-              <img src="/imagens/customer-female.webp" alt="Client" />
-              <div class="pane-grad" aria-hidden="true"></div>
+              <div class="pane-camera-off">
+                <div class="avatar-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
+                    <path d="m1 1 22 22" />
+                    <path d="m19 10.5 4-4v11l-4-4" />
+                  </svg>
+                </div>
+              </div>
 
-              <div ref="bubbleRef" class="speech-bubble" aria-live="polite" aria-label="Client is speaking">
-                <span class="phrase phrase-1">Sounds great!</span>
-                <span class="phrase phrase-2">Let me clarify.</span>
-                <span class="phrase phrase-3">I'll present it.</span>
-                <span class="phrase phrase-4">That makes sense!</span>
-                <span class="bubble-tail" aria-hidden="true"></span>
+              <div ref="bubbleRef" class="chat-bubbles-container" aria-live="polite" aria-label="Client is speaking">
+                <div class="chat-bubble chat-bubble--1">
+                  <span>I get it now...</span>
+                  <span class="chat-bubble-tail" aria-hidden="true"></span>
+                </div>
+                <div class="chat-bubble chat-bubble--2">
+                  <span>That makes sense!</span>
+                  <span class="chat-bubble-tail" aria-hidden="true"></span>
+                </div>
+                <div class="chat-bubble chat-bubble--3">
+                  <span>Well done!</span>
+                  <span class="chat-bubble-tail" aria-hidden="true"></span>
+                </div>
               </div>
 
               <div class="pane-label">
@@ -363,9 +377,8 @@ onUnmounted(() => {
             <span class="ctrl-sep" aria-hidden="true"></span>
 
             <button class="ctrl-btn ctrl-end" tabindex="-1" title="End call">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.06-.24 1.12.45 2.34.7 3.6.7.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.26.26 2.48.7 3.6.12.36.03.78-.24 1.06L6.6 10.8z"/>
-                <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="transform: rotate(135deg);">
+                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.26.36-.65.25-1C9.1 6.42 8.9 5.23 8.9 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/>
               </svg>
             </button>
 
@@ -606,6 +619,42 @@ onUnmounted(() => {
 .call-pane { position: relative; overflow: hidden; aspect-ratio: 4/3; }
 .call-pane img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .pane-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,0) 44%); pointer-events: none; }
+.pane-camera-off {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+}
+.avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--teal-t2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.camera-off-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 .pane-label { position: absolute; bottom: 10px; left: 10px; display: flex; align-items: center; gap: 5px; color: rgba(255,255,255,.9); font-size: 11.5px; font-weight: 600; letter-spacing: .01em; }
 
 /* Audio bars */
@@ -622,33 +671,82 @@ onUnmounted(() => {
 .call-live { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); background: #ef4444; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .10em; padding: 5px 11px; border-radius: 999px; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(239,68,68,.45); z-index: 6; }
 .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; flex-shrink: 0; animation: recBlink 1.6s ease-in-out infinite; }
 
-/* Speech bubble: burbuja única con ciclo CSS */
-.speech-bubble {
+/* Speech bubbles container on student screen */
+.chat-bubbles-container {
   position: absolute;
-  top: 14px; left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  background: #fff;
-  border-radius: 12px;
-  padding: 9px 16px;
-  min-width: 148px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 10px 24px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.12);
+  top: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   z-index: 8;
   opacity: 0;
+  transform: translateY(8px);
 }
-.bubble-tail { position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: #fff; box-shadow: 3px 3px 6px rgba(0,0,0,.08); }
 
-.phrase { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; white-space: nowrap; opacity: 0; animation: phraseShow 20s ease-in-out infinite; }
-.phrase-1 { color: #2E8A93; animation-delay: 0s;  }
-.phrase-2 { color: var(--amber-sh); animation-delay: 5s;  }
-.phrase-3 { color: #059669; animation-delay: 10s; }
-.phrase-4 { color: #1E6E76; animation-delay: 15s; }
-@keyframes phraseShow {
-  0%  { opacity: 0; transform: translateY(5px);  }
-  4%  { opacity: 1; transform: translateY(0); }
-  21% { opacity: 1; transform: translateY(0); }
-  25% { opacity: 0; transform: translateY(-5px); }
-  100%{ opacity: 0; transform: translateY(-5px); }
+.chat-bubble {
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.20), 0 2px 5px rgba(0,0,0,.10);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  position: relative;
+  width: fit-content;
+}
+
+/* Chat bubble tails pointing down to student */
+.chat-bubble-tail {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  z-index: -1;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.05);
+}
+
+/* Color and Animation definitions */
+.chat-bubble--1 {
+  color: #1E6E76;
+  animation: bubbleFadeIn 18s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+.chat-bubble--2 {
+  color: var(--amber-sh);
+  animation: bubbleFadeIn 18s ease-in-out infinite;
+  animation-delay: 3.5s;
+}
+.chat-bubble--3 {
+  color: #059669;
+  animation: bubbleFadeIn 18s ease-in-out infinite;
+  animation-delay: 6.5s;
+}
+
+@keyframes bubbleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  3% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 /* Controls bar */
