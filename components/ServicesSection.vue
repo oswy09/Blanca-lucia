@@ -24,11 +24,11 @@ const services = [
     desc: 'Preparation for interviews and professional conversations, with a focus on expressing your experience clearly and confidently.',
   },
   {
-    slug: 'document-editing',
+    slug: 'professional-writing-editing',
     icon: 'doc',
     theme: 'teal',
     eyebrow: 'Written Communication',
-    title: 'English Editing for Emails & Documents',
+    title: 'Professional Writing & Editing',
     metric: '03',
     metricLabel: 'Sharper writing',
     cardHint: 'Emails, decks and reports that sound like you',
@@ -75,7 +75,7 @@ const services = [
 
           <ScrollBubble v-if="s.slug === 'professional-communication'" :text="['Sound like you!', 'Speak naturally']" position="top-right" :delay="200" />
           <ScrollBubble v-if="s.slug === 'interview-preparation'" :text="['Prepare your interviews', 'Confident voice']" position="top-right" :delay="400" />
-          <ScrollBubble v-if="s.slug === 'document-editing'" :text="['Polished writing', 'Clear emails']" position="top-right" :delay="600" />
+          <ScrollBubble v-if="s.slug === 'professional-writing-editing'" :text="['Polished writing', 'Clear emails']" position="top-right" :delay="600" />
 
           <h3 class="svc-outside svc-title">{{ s.title }}</h3>
           <p class="svc-outside svc-outside--bottom">{{ s.desc }}</p>

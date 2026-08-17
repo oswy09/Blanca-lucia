@@ -254,9 +254,9 @@ const submitForm = () => {
                     @blur="touched.service = true"
                   >
                     <option value="" disabled selected hidden></option>
-                    <option value="Professional Communication">Professional Communication</option>
+                    <option value="Personal Consultancy">Personal Consultancy</option>
                     <option value="English Interview Preparation">English Interview Preparation</option>
-                    <option value="English Editing for Emails & Documents">English Editing for Emails &amp; Documents</option>
+                    <option value="Professional Writing & Editing">Professional Writing &amp; Editing</option>
                     <option value="Other / General Inquiry">Other / General Inquiry</option>
                   </select>
                   <label for="service" class="cn-select-label-v2" :class="{ 'has-value': form.service }">Service I'm Interested In</label>
