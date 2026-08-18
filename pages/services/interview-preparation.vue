@@ -203,6 +203,30 @@ useRevealOnScroll()
       </div>
     </section>
 
+    <!-- ── 4b. LIVE SESSION BANNER ──────────────────────────────── -->
+    <section class="ip-session-wrap wrap">
+      <div class="ip-session-banner reveal">
+        <div class="ip-session-content">
+          <span class="eyebrow ip-session-eyebrow">How We Work</span>
+          <h3 class="ip-session-title">All sessions are conducted online</h3>
+          <p class="ip-session-desc">
+            We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.
+          </p>
+          <NuxtLink to="/contact" class="btn ip-session-btn">Book a session</NuxtLink>
+        </div>
+        <div class="ip-session-photo-wrap">
+          <div class="ip-session-ring"></div>
+          <div class="ip-session-offset"></div>
+          <div class="ip-session-img-box">
+            <img src="/imagens/live-session.webp" alt="Blanca Derby conducting an online session" class="ip-session-img" />
+          </div>
+          <div class="ip-session-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ── 5. WHAT YOU CAN EXPECT ───────────────────────────────── -->
     <section class="ip-expect wrap reveal">
       <div class="ip-expect-header">
@@ -285,6 +309,129 @@ useRevealOnScroll()
   font-weight: 700;
   color: #fff;
   line-height: 1.12;
+}
+
+/* ── Live Session Banner ── */
+.ip-session-wrap {
+  padding-block: clamp(24px, 4vw, 44px);
+}
+
+.ip-session-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
+  border-radius: 28px;
+  padding: clamp(36px, 5vw, 52px);
+  box-shadow: 0 20px 48px rgba(19,72,78,.22);
+  position: relative;
+  overflow: hidden;
+}
+
+.ip-session-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.ip-session-content { position: relative; z-index: 1; }
+
+.ip-session-eyebrow { color: var(--amber) !important; }
+
+.ip-session-title {
+  font-family: var(--fd);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.ip-session-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,.82);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.ip-session-btn {
+  background: #fff;
+  color: var(--teal-sh);
+  border: none;
+  font-weight: 700;
+}
+.ip-session-btn:hover { background: rgba(255,255,255,.88); }
+
+.ip-session-photo-wrap {
+  position: relative;
+  max-width: 240px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.ip-session-ring {
+  position: absolute;
+  inset: -14px;
+  border: 2px dashed rgba(240,180,80,.45);
+  border-radius: 26px;
+  pointer-events: none;
+}
+
+.ip-session-offset {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--amber);
+  border-radius: 20px;
+  transform: translate(8px, 8px);
+  pointer-events: none;
+}
+
+.ip-session-img-box {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,.30);
+  aspect-ratio: 5/6;
+}
+
+.ip-session-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.ip-session-dots {
+  position: absolute;
+  top: -18px;
+  right: -16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 4;
+}
+
+.ip-session-dots span {
+  display: block;
+  border-radius: 50%;
+  background: var(--amber);
+}
+.ip-session-dots span:first-child  { width: 8px; height: 8px; opacity: 1; }
+.ip-session-dots span:nth-child(2) { width: 6px; height: 6px; opacity: .65; margin-left: 1px; }
+.ip-session-dots span:last-child   { width: 5px; height: 5px; opacity: .35; margin-left: 2px; }
+
+@media (max-width: 700px) {
+  .ip-session-banner { grid-template-columns: 1fr; }
+  .ip-session-photo-wrap { display: none; }
 }
 
 /* ── Back Link ── */
