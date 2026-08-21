@@ -129,7 +129,7 @@ useRevealOnScroll()
           <p class="pc-session-desc">
             We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs.
           </p>
-          <NuxtLink to="/contact" class="btn pc-session-btn">Book a session</NuxtLink>
+          <NuxtLink to="/contact" class="btn pc-session-btn">Let's Talk</NuxtLink>
         </div>
         <LiveSessionWidget />
       </div>
@@ -176,6 +176,7 @@ useRevealOnScroll()
         </div>
       </div>
     </section>
+
   </main>
 </template>
 
@@ -448,33 +449,21 @@ useRevealOnScroll()
 
 /* ── CTA ── */
 .pc-cta {
-  background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
-  padding-block: clamp(56px, 8vw, 88px);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding-block: clamp(64px, 8vw, 96px);
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin-top: clamp(32px, 5vw, 56px);
 }
-.pc-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-}
-.pc-cta-inner { position: relative; z-index: 1; }
+.pc-cta-inner { max-width: 680px; margin-inline: auto; }
 .pc-cta-title {
   font-family: var(--fd);
-  font-size: clamp(24px, 3vw, 38px);
+  font-size: clamp(24px, 3.5vw, 38px);
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 14px;
-  line-height: 1.18;
+  line-height: 1.2;
 }
-.pc-cta-desc { font-size: 16px; color: rgba(255,255,255,.8); margin-bottom: 32px; }
+.pc-cta-desc { font-size: 16px; color: var(--text2); margin-bottom: 32px; }
 .pc-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 .text-center { text-align: center; }
