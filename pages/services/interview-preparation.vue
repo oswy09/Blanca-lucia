@@ -214,16 +214,7 @@ useRevealOnScroll()
           </p>
           <NuxtLink to="/contact" class="btn ip-session-btn">Book a session</NuxtLink>
         </div>
-        <div class="ip-session-photo-wrap">
-          <div class="ip-session-ring"></div>
-          <div class="ip-session-offset"></div>
-          <div class="ip-session-img-box">
-            <img src="/imagens/live-session.webp" alt="Blanca Derby conducting an online session" class="ip-session-img" />
-          </div>
-          <div class="ip-session-dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
+        <LiveSessionWidget />
       </div>
     </section>
 

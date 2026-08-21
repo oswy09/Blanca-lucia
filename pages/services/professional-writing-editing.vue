@@ -174,16 +174,7 @@ useRevealOnScroll()
           </p>
           <NuxtLink to="/contact" class="btn pwe-session-btn">Book a session</NuxtLink>
         </div>
-        <div class="pwe-session-photo-wrap">
-          <div class="pwe-session-ring"></div>
-          <div class="pwe-session-offset"></div>
-          <div class="pwe-session-img-box">
-            <img src="/imagens/live-session.webp" alt="Blanca Derby conducting an online session" class="pwe-session-img" />
-          </div>
-          <div class="pwe-session-dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
+        <LiveSessionWidget />
       </div>
     </section>
 
