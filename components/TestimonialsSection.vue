@@ -5,7 +5,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 const testimonials = [
   {
     id: 1,
-    quote: 'I have dealt with Blanca for many years and she has always been the consummate professional. <strong>Her teaching techniques, patience,</strong> encouragement and outright results are second to none. The evidence is in her classes when you see her pupils respond so well in Spanish. <strong>Blanca successfully brings the best out in them,</strong> where teacher and pupil are totally congruent.',
+    quote: 'I have dealt with Blanca for many years and she has always been the consummate professional. <strong>Her coaching approach, patience,</strong> encouragement and outright results are second to none. The evidence is in her sessions when you see her clients respond so well. <strong>Blanca successfully brings the best out in them,</strong> where consultant and client are totally congruent.',
     name: 'Francis Dowling',
     role: 'Training & Development Controller, Nissan Technical Centre Europe',
     initials: 'FD',
@@ -13,7 +13,7 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: 'I would like to say thank you for all your hard work with our clients, <strong>they have all much appreciated and benefited from your teaching,</strong> you have always worked to a very high standard which has reflected in the success rate of your lessons. <strong>We will be sure to pass further contracts your way.</strong>',
+    quote: 'I would like to say thank you for all your hard work with our clients, <strong>they have all much appreciated and benefited from your consultancy,</strong> you have always worked to a very high standard which has reflected in the success rate of your sessions. <strong>We will be sure to pass further contracts your way.</strong>',
     name: 'Rosemary Plumbbridge',
     role: 'WIB Language Training',
     initials: 'RP',
@@ -21,7 +21,7 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: 'I loved learning Spanish with Blanca. She has a wealth of knowledge and experience as a Spanish Tutor, which I soon realised from our first lesson. <strong>I found her well structured program ideal for learning and mastering grammar, vocab and phonetics.</strong> Her handouts and notes were most valuable, a real life-saver. Her passion and professionalism were second to none. I cannot recommend her enough.',
+    quote: 'I loved learning with Blanca. She has a wealth of knowledge and experience as a language consultant, which I soon realised from our first session. <strong>I found her well structured program ideal for learning and mastering grammar, vocab and phonetics.</strong> Her handouts and notes were most valuable, a real life-saver. Her passion and professionalism were second to none. I cannot recommend her enough.',
     name: 'Gerald Reinders',
     role: 'Information Systems (A324), Nissan Europe Information Systems',
     initials: 'GR',

@@ -212,7 +212,7 @@ useRevealOnScroll()
           <p class="ip-session-desc">
             We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.
           </p>
-          <NuxtLink to="/contact" class="btn ip-session-btn">Book a session</NuxtLink>
+          <NuxtLink to="/contact" class="btn ip-session-btn">Let's Talk</NuxtLink>
         </div>
         <LiveSessionWidget />
       </div>

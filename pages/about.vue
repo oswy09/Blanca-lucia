@@ -53,6 +53,20 @@ onMounted(async () => {
       }
     })
 
+    // Fade in text reveal for the callout block
+    gsap.from('.ab-callout-text', {
+      opacity: 0,
+      y: 34,
+      scale: 0.97,
+      duration: 0.85,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.ab-callout',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    })
+
     // Trace journey line on scroll
     gsap.to('.journey-line-progress', {
       height: '100%',
@@ -167,7 +181,17 @@ onUnmounted(() => {
             </p>
           </div>
         </div>
+      </div>
+    </section>
 
+    <!-- ── 2b. COMPACT QUOTE / CALLOUT SECTION ────────────────── -->
+    <section class="ab-callout">
+      <div class="wrap">
+        <div class="ab-callout-box">
+          <p class="ab-callout-text">
+            There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -849,6 +873,30 @@ main {
 .bubble-3 {
   top: 2000px;
   right: 5vw;
+}
+
+/* Callout section */
+.ab-callout {
+  padding-block: 84px;
+  background: var(--surface);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+}
+.ab-callout-box {
+  max-width: 860px;
+  margin-inline: auto;
+}
+.ab-callout-text {
+  font-family: var(--fd);
+  font-size: clamp(20px, 3vw, 32px);
+  line-height: 1.4;
+  color: var(--teal-sh);
+  font-weight: 600;
+  text-wrap: balance;
+  margin: 0;
 }
 
 @media (max-width: 1200px) {

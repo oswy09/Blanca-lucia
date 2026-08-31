@@ -20,6 +20,7 @@ const stageRef    = ref(null)
 const windowRef   = ref(null)
 const bubbleRef      = ref(null)
 const heroTitleRef   = ref(null)   // título grande entre portal y call window
+const heroTitleAltRef = ref(null)  // segundo título grande
 
 let gsapCtx  = null
 let mediaCtx = null
@@ -60,6 +61,7 @@ onMounted(async () => {
       gsap.set(copyRef.value,      { autoAlpha: 0, x: -70 })
       gsap.set(stageRef.value,     { autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 1 })
       gsap.set(heroTitleRef.value, { autoAlpha: 0, y: 24 })
+      gsap.set(heroTitleAltRef.value, { autoAlpha: 0, y: 24 })
 
       // ── Steps ocultos individualmente hasta que el copy es visible ──
       const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
@@ -101,11 +103,11 @@ onMounted(async () => {
         scrollTrigger: {
           trigger: sectionRef.value,
           start: 'top top',
-          end: '+=2000',
+          end: '+=2600',
           scrub: true,
           pin: true,
           onUpdate(self) {
-            if (!prefersReducedMotion && self.progress >= 0.75 && !stepsStarted) {
+            if (!prefersReducedMotion && self.progress >= 0.85 && !stepsStarted) {
               stepsStarted = true
               gsap.timeline()
                 .to(flowItems[0], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' })
@@ -119,27 +121,33 @@ onMounted(async () => {
       })
 
       pinTl
-        /* 0→8%: desvanece portal, container visible, cuadrícula */
-        .to(portalRef.value,   { opacity: 0, duration: 0.08, ease: 'none' }, 0)
-        .to(pinStageRef.value, { autoAlpha: 1, duration: 0.06, ease: 'none' }, 0)
-        .to(overlayRef.value,  { opacity: 1, backgroundPosition: '28px 24px', duration: 0.22, ease: 'none' }, 0)
+        /* 0→6%: desvanece portal, container visible, cuadrícula */
+        .to(portalRef.value,   { opacity: 0, duration: 0.06, ease: 'none' }, 0)
+        .to(pinStageRef.value, { autoAlpha: 1, duration: 0.05, ease: 'none' }, 0)
+        .to(overlayRef.value,  { opacity: 1, backgroundPosition: '28px 24px', duration: 0.18, ease: 'none' }, 0)
 
-        /* 8→28%: TÍTULO aparece grande centrado */
-        .to(heroTitleRef.value, { autoAlpha: 1, y: 0, duration: 0.20, ease: 'power2.out' }, 0.08)
+        /* 6→26%: TÍTULO 1 aparece grande centrado */
+        .to(heroTitleRef.value, { autoAlpha: 1, y: 0, duration: 0.20, ease: 'power2.out' }, 0.06)
 
-        /* 44→58%: título desaparece */
-        .to(heroTitleRef.value, { autoAlpha: 0, y: -14, duration: 0.14, ease: 'none' }, 0.44)
+        /* 34→42%: TÍTULO 1 desaparece */
+        .to(heroTitleRef.value, { autoAlpha: 0, y: -14, duration: 0.08, ease: 'none' }, 0.34)
 
-        /* 58→74%: call window aparece centrada */
-        .to(stageRef.value, { autoAlpha: 1, duration: 0.16, ease: 'none' }, 0.58)
-        .to(windowRef.value, { scale: 1.06, duration: 0.14, ease: 'none' }, 0.60)
+        /* 42→60%: TÍTULO 2 aparece grande centrado */
+        .to(heroTitleAltRef.value, { autoAlpha: 1, y: 0, duration: 0.18, ease: 'power2.out' }, 0.42)
 
-        /* 68→80%: burbuja */
-        .to(bubbleRef.value, { autoAlpha: 1, y: 0, duration: 0.12, ease: 'none' }, 0.68)
+        /* 68→76%: TÍTULO 2 desaparece */
+        .to(heroTitleAltRef.value, { autoAlpha: 0, y: -14, duration: 0.08, ease: 'none' }, 0.68)
 
-        /* 72→100%: stage a la derecha, copy desde la izquierda */
-        .to(stageRef.value,  { xPercent: -10, yPercent: -50, scale: 0.85, duration: 0.28, ease: 'none' }, 0.72)
-        .to(copyRef.value,   { autoAlpha: 1, x: 0, duration: 0.26, ease: 'none' }, 0.74)
+        /* 76→86%: call window aparece centrada */
+        .to(stageRef.value, { autoAlpha: 1, duration: 0.10, ease: 'none' }, 0.76)
+        .to(windowRef.value, { scale: 1.06, duration: 0.10, ease: 'none' }, 0.76)
+
+        /* 82→90%: burbuja */
+        .to(bubbleRef.value, { autoAlpha: 1, y: 0, duration: 0.08, ease: 'none' }, 0.82)
+
+        /* 86→100%: stage a la derecha, copy desde la izquierda */
+        .to(stageRef.value,  { xPercent: -10, yPercent: -50, scale: 0.85, duration: 0.14, ease: 'none' }, 0.86)
+        .to(copyRef.value,   { autoAlpha: 1, x: 0, duration: 0.14, ease: 'none' }, 0.86)
 
       /* Micro-movimiento flotante continuo */
       if (!prefersReducedMotion) {
@@ -154,12 +162,13 @@ onMounted(async () => {
 
     /* ═══════════════════════════════════════════════════════════════
        MOBILE (≤ 980px) — sin portal, animación simple de entrada
-    ═══════════════════════════════════════════════════════════════ */
+     ═══════════════════════════════════════════════════════════════ */
     mediaCtx.add('(max-width: 980px)', () => {
       gsap.set(pinStageRef.value,  { autoAlpha: 1 })
       gsap.set(copyRef.value,      { autoAlpha: 1, x: 0 })
       gsap.set(stageRef.value,     { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1 })
       gsap.set(heroTitleRef.value, { display: 'flex', autoAlpha: 1, y: 0 })
+      gsap.set(heroTitleAltRef.value, { display: 'none', autoAlpha: 0 })
 
       // Pasos visibles desde el inicio en mobile
       const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
@@ -206,7 +215,20 @@ onUnmounted(() => {
       <div ref="heroTitleRef" class="how-hero-title" aria-hidden="true">
         <span class="eyebrow">How I work</span>
         <h2 class="how-hero-h2">Tailored, thoughtful, effective</h2>
-        <p class="how-hero-p">Every engagement begins with a conversation — to understand your background, your objectives, and what may have held you back until now.</p>
+        <p class="how-hero-p">
+          I listen carefully to understand not only what you want to improve, but what is holding you back.
+          <br><br>
+          With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.
+        </p>
+      </div>
+
+      <!-- ── Segundo Título grande (aparece después al scroll) ── -->
+      <div ref="heroTitleAltRef" class="how-hero-title" aria-hidden="true" style="opacity: 0; visibility: hidden;">
+        <span class="eyebrow">How I work</span>
+        <h2 class="how-hero-h2">No standard programmes</h2>
+        <p class="how-hero-p">
+          There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.
+        </p>
       </div>
 
       <!-- ── Copy (izquierda) ───────────────────── -->
@@ -244,17 +266,6 @@ onUnmounted(() => {
               <span class="brand-dot" aria-hidden="true"></span>
               <span class="brand-name">Fluent Future</span>
             </div>
-            <div class="call-timer" aria-label="Session duration">
-              <span class="rec-pulse" aria-hidden="true"></span>
-              <span>00:42:18</span>
-            </div>
-            <div class="call-meta">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="5" y="11" width="14" height="11" rx="2"/>
-                <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
-              </svg>
-              Encrypted
-            </div>
           </header>
 
           <!-- Video screen: dos paneles -->
@@ -272,12 +283,7 @@ onUnmounted(() => {
                 <span class="spk spk-5"></span>
               </div>
               <div class="pane-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 2c-1.7 0-3 1.3-3 3v5c0 1.7 1.3 3 3 3s3-1.3 3-3V5c0-1.7-1.3-3-3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                </svg>
-                Blanca D.
+                Blanca Derby
               </div>
             </div>
 
@@ -285,7 +291,7 @@ onUnmounted(() => {
             <div class="call-pane call-pane--client">
               <div class="pane-camera-off">
                 <div class="avatar-circle">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
                     <path d="m1 1 22 22" />
                     <path d="m19 10.5 4-4v11l-4-4" />
@@ -294,40 +300,18 @@ onUnmounted(() => {
               </div>
 
               <div ref="bubbleRef" class="chat-bubbles-container" aria-live="polite" aria-label="Client is speaking">
-                <div class="chat-bubble chat-bubble--1">
-                  <span>I get it now...</span>
-                  <span class="chat-bubble-tail" aria-hidden="true"></span>
-                </div>
-                <div class="chat-bubble chat-bubble--2">
-                  <span>That makes sense!</span>
-                  <span class="chat-bubble-tail" aria-hidden="true"></span>
-                </div>
-                <div class="chat-bubble chat-bubble--3">
-                  <span>Well done!</span>
-                  <span class="chat-bubble-tail" aria-hidden="true"></span>
-                </div>
+                <!-- bubbles temporarily removed -->
               </div>
 
               <div class="pane-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
                 Client
               </div>
-            </div>
-
-            <!-- LIVE pill -->
-            <div class="call-live" aria-label="Live session">
-              <span class="live-dot" aria-hidden="true"></span>
-              LIVE
             </div>
 
           </div><!-- /call-screen -->
 
           <!-- Controls bar -->
           <div class="call-bar" aria-hidden="true">
-
             <button class="ctrl-btn" tabindex="-1" title="Microphone on">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2c-1.7 0-3 1.3-3 3v5c0 1.7 1.3 3 3 3s3-1.3 3-3V5c0-1.7-1.3-3-3-3z"/>
@@ -351,38 +335,7 @@ onUnmounted(() => {
                 <path d="M19 5a10 10 0 0 1 0 14"/>
               </svg>
             </button>
-
-            <button class="ctrl-btn" tabindex="-1" title="Chat">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-            </button>
-
-            <button class="ctrl-btn" tabindex="-1" title="Share screen">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                <line x1="8" y1="21" x2="16" y2="21"/>
-                <line x1="12" y1="17" x2="12" y2="21"/>
-              </svg>
-            </button>
-
-            <button class="ctrl-btn" tabindex="-1" title="Participants">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </button>
-
-            <span class="ctrl-sep" aria-hidden="true"></span>
-
-            <button class="ctrl-btn ctrl-end" tabindex="-1" title="End call">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="transform: rotate(135deg);">
-                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.26.36-.65.25-1C9.1 6.42 8.9 5.23 8.9 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/>
-              </svg>
-            </button>
-
-          </div><!-- /call-bar -->
+          </div>
 
         </article>
       </div><!-- /call-stage -->
