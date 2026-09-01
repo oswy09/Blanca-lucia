@@ -16,6 +16,7 @@
       </div>
       <div class="footer-right">
         <p class="footer-copy">© 2026 Fluent Future · Blanca Derby<br>fluentfuture.co.uk</p>
+        <p class="footer-credit">Designed by <a href="https://oswalstudio.com/" target="_blank" rel="noopener" class="footer-credit-link">Oswal</a></p>
       </div>
     </div>
   </footer>
@@ -61,6 +62,9 @@
 }
 .footer-nav a:hover { color: var(--teal-t2); }
 .footer-copy { font-size: 12px; color: var(--n0); text-align: right; }
+.footer-credit { font-size: 11px; color: var(--n300); text-align: right; margin-top: 8px; }
+.footer-credit-link { color: var(--n300); text-decoration: none; transition: color .15s; }
+.footer-credit-link:hover { color: var(--teal-t2); }
 @media (max-width: 600px) {
   .footer-inner { grid-template-columns: 1fr; }
   .footer-right { text-align: left; }
