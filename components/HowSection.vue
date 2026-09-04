@@ -43,9 +43,18 @@ onUnmounted(() => { gsapCtx?.revert() })
 
     <div class="wrap how-pin-stage">
 
+      <!-- ── Section header (full width) ──────────── -->
+      <div class="how-header">
+        <span class="eyebrow">How I work</span>
+        <h2 class="how-h2">Tailored, thoughtful, effective</h2>
+        <p class="how-lead">
+          I listen carefully to understand not only what you want to improve, but what is holding you back.
+          With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.
+        </p>
+      </div>
+
       <!-- ── Copy (izquierda) ───────────────────── -->
       <div class="how-copy">
-        <span class="eyebrow">How I work</span>
         <p class="section-desc how-desc">
           From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
         </p>
@@ -196,8 +205,30 @@ onUnmounted(() => { gsapCtx?.revert() })
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 64px);
-  align-items: center;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+  row-gap: clamp(48px, 6vw, 72px);
+}
+
+.how-header {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+.how-h2 {
+  font-family: var(--fd);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin-top: 10px;
+  text-wrap: balance;
+}
+.how-lead {
+  font-size: clamp(15px, 1.4vw, 17.5px);
+  color: var(--text2);
+  max-width: 680px;
+  margin: 16px auto 0;
+  line-height: 1.65;
 }
 
 
@@ -445,7 +476,8 @@ onUnmounted(() => { gsapCtx?.revert() })
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 980px) {
-  .how-pin-stage { grid-template-columns: 1fr; gap: 26px; }
+  .how-pin-stage { grid-template-columns: 1fr; gap: 24px; row-gap: 32px; }
+  .how-header { text-align: left; }
   .how-copy  { order: 2; }
   .call-stage { order: 1; }
 }
