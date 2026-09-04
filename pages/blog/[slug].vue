@@ -101,13 +101,6 @@ useRevealOnScroll()
         </div>
         <h1 class="article-title">{{ post.title }}</h1>
         <p class="article-excerpt">{{ post.excerpt }}</p>
-        <div class="article-author">
-          <img src="/imagens/blanca.png" alt="Blanca Derby" class="author-avatar" />
-          <div>
-            <p class="author-name">Blanca Derby</p>
-            <p class="author-role">Language Consultant · Fluent Future</p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -234,25 +227,6 @@ useRevealOnScroll()
   max-width: 620px;
 }
 
-.article-author {
-  display: flex; align-items: center; gap: 10px;
-  margin-top: 4px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 999px;
-  padding: 6px 16px 6px 6px;
-}
-.author-avatar {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  object-fit: cover; object-position: top center;
-  border: 2px solid rgba(255,255,255,.3);
-  flex-shrink: 0;
-}
-.author-name {
-  font-size: 13px; font-weight: 700; color: #fff;
-}
-.author-role { font-size: 11px; color: rgba(255,255,255,.6); }
 
 /* ── Cover image ────────────────────────────── */
 .article-cover { padding-block: clamp(32px, 5vw, 48px) clamp(16px, 3vw, 24px); }
