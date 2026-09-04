@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 // ── Storyblok integration ──────────────────────────────────
 // Fetches blog posts from Storyblok when token is set in .env
 // Content type in Storyblok: "blog-post" with fields:
@@ -8,7 +8,7 @@ const storyblokApi = useStoryblokApi()
 let sbPosts = []
 try {
   const { data } = await storyblokApi.get('cdn/stories', {
-    version: 'published',
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
     starts_with: 'blog/',
     sort_by: 'first_published_at:desc',
     per_page: 20,

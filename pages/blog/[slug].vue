@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 const route = useRoute()
 const { siteUrl, whatsappUrl } = useSiteConfig()
 const slug = route.params.slug
@@ -11,7 +11,7 @@ let sbPost = null
 try {
   const storyblokApi = useStoryblokApi()
   const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
-    version: 'published',
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
   })
   const c = data?.story?.content
   if (c) {
