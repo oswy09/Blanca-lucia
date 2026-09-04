@@ -41,17 +41,23 @@ onUnmounted(() => { gsapCtx?.revert() })
     <!-- Cuadrícula de fondo (se intensifica con el scroll interno) -->
     <div class="how-grid-overlay" aria-hidden="true"></div>
 
-    <div class="wrap how-pin-stage">
-
-      <!-- ── Section header (full width) ──────────── -->
-      <div class="how-header">
-        <span class="eyebrow">How I work</span>
-        <h2 class="how-h2">Tailored, thoughtful, effective</h2>
-        <p class="how-lead">
-          I listen carefully to understand not only what you want to improve, but what is holding you back.
-          With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.
-        </p>
+    <!-- ── Bloque 1: titulo centrado (pantalla completa) ── -->
+    <div class="how-title-block">
+      <div class="wrap">
+        <div class="how-header reveal">
+          <span class="eyebrow">How I work</span>
+          <h2 class="how-h2">Tailored, thoughtful, effective</h2>
+          <p class="how-lead">
+            I listen carefully to understand not only what you want to improve, but what is holding you back.
+            With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.
+          </p>
+        </div>
       </div>
+    </div>
+
+    <!-- ── Bloque 2: pasos + call window ── -->
+    <div class="how-body-block">
+      <div class="wrap how-body-grid">
 
       <!-- ── Copy (izquierda) ───────────────────── -->
       <div class="how-copy">
@@ -161,7 +167,8 @@ onUnmounted(() => { gsapCtx?.revert() })
         </article>
       </div><!-- /call-stage -->
 
-    </div><!-- /how-pin-stage -->
+      </div><!-- /how-body-grid -->
+    </div><!-- /how-body-block -->
   </section>
 </template>
 
@@ -172,7 +179,6 @@ onUnmounted(() => { gsapCtx?.revert() })
 .how {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(70px, 10vw, 120px);
   background: var(--n0);
 }
 
@@ -200,18 +206,17 @@ onUnmounted(() => { gsapCtx?.revert() })
   z-index: 1;
 }
 
-.how-pin-stage {
+/* ── Bloque 1: titulo centrado (pantalla completa) ── */
+.how-title-block {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 56px);
-  align-items: start;
-  row-gap: clamp(48px, 6vw, 72px);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: clamp(80px, 12vw, 120px);
 }
-
 .how-header {
-  grid-column: 1 / -1;
   text-align: center;
 }
 .how-h2 {
@@ -229,6 +234,19 @@ onUnmounted(() => { gsapCtx?.revert() })
   max-width: 680px;
   margin: 16px auto 0;
   line-height: 1.65;
+}
+
+/* ── Bloque 2: pasos + call window ── */
+.how-body-block {
+  position: relative;
+  z-index: 2;
+  padding-block: clamp(60px, 8vw, 100px);
+}
+.how-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
 }
 
 
@@ -476,8 +494,10 @@ onUnmounted(() => { gsapCtx?.revert() })
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 980px) {
-  .how-pin-stage { grid-template-columns: 1fr; gap: 24px; row-gap: 32px; }
+  .how-title-block { min-height: auto; padding-block: clamp(56px, 10vw, 80px); }
   .how-header { text-align: left; }
+  .how-lead { margin-inline: 0; }
+  .how-body-grid { grid-template-columns: 1fr; gap: 24px; }
   .how-copy  { order: 2; }
   .call-stage { order: 1; }
 }
