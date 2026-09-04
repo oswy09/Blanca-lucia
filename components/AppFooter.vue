@@ -1,12 +1,14 @@
+<script setup>
+const sb = useStoryblokGlobal()
+const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal English language consultancy for Spanish-speaking professionals. Over 30 years helping people communicate as the professionals they truly are.')
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer-inner wrap">
       <div>
         <p class="footer-logo">Fluent <span>Future</span></p>
-        <p class="footer-tag">
-          Personal English language consultancy for Spanish-speaking professionals.
-          Over 30 years helping people communicate as the professionals they truly are.
-        </p>
+        <p class="footer-tag">{{ footerTagline }}</p>
         <ul class="footer-nav" role="list">
           <li><NuxtLink to="/">Home</NuxtLink></li>
           <li><NuxtLink to="/services">Services</NuxtLink></li>
