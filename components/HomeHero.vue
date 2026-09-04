@@ -15,14 +15,14 @@ const { whatsappUrl } = useSiteConfig()
         </div>
 
         <!-- Storyblok: blok.title -->
-        <h1 class="hero-title reveal" style="transition-delay:80ms">Hello, I'm Blanca Derby</h1>
+        <h1 class="hero-title reveal" style="transition-delay:80ms">I'm Blanca Derby</h1>
 
         <!-- Storyblok: blok.tagline -->
         <p class="hero-tagline reveal" style="transition-delay:140ms">Personal Language Consultancy by Blanca Derby</p>
 
         <!-- Storyblok: blok.subtitle -->
         <p class="hero-sub reveal" style="transition-delay:200ms">
-          <strong>A consultancy for Spanish-speaking adults seeking to improve how they
+          <strong>A consultancy for Native Spanish-speaking adults seeking to improve how they
           express themselves in English in real-life and professional contexts.</strong>
         </p>
 

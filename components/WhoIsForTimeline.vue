@@ -11,7 +11,7 @@ const list = [
     accent: 'var(--teal)'
   },
   {
-    title: 'Adults returning with a specific goal',
+    title: 'Spanish speakers wanting a specific goal',
     desc: 'Your priorities have evolved. You are looking to reconnect with a language or refine your communication with a clear, practical purpose.',
     iconBg: '#fef3c7',
     accent: 'var(--amber-sh)'
@@ -123,7 +123,7 @@ onUnmounted(() => { gsapCtx?.revert() })
                   <circle cx="24" cy="46" r="2.5" fill="#059669" opacity="0.25"/>
                 </svg>
 
-                <!-- SVG illustration for Adults returning with a specific goal -->
+                <!-- SVG illustration for Spanish speakers wanting a specific goal -->
                 <svg v-else-if="idx === 1" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="timeline-icon-svg" aria-hidden="true">
                   <circle cx="40" cy="40" r="26" stroke="#D97706" stroke-width="2.2" opacity="0.35"/>
                   <circle cx="40" cy="40" r="18" stroke="#D97706" stroke-width="2.2" opacity="0.55"/>

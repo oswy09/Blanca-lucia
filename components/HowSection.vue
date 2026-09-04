@@ -1,205 +1,37 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from ‘vue’
 
 const { whatsappUrl } = useSiteConfig()
 
 const steps = [
-  { n: 1, title: 'Initial Consultation',  desc: 'We begin by understanding where you are, what you need, and the challenges you’ve faced so far.' },
-  { n: 2, title: 'Focused Guidance',       desc: 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
-  { n: 3, title: 'Clarity & Expression',   desc: 'Attention to how you express yourself — ensuring clarity, natural flow, and ease in communication.' },
-  { n: 4, title: 'Confidence in Practice', desc: 'Support in applying your communication skills with confidence in real-world situations.' },
+  { n: 1, title: ‘Initial Consultation’,  desc: ‘We begin by understanding where you are, what you need, and the challenges you’ve faced so far.’ },
+  { n: 2, title: ‘Focused Guidance’,       desc: ‘Targeted, precise work on the areas of communication that matter most in your professional and everyday life.’ },
+  { n: 3, title: ‘Clarity & Expression’,   desc: ‘Attention to how you express yourself — ensuring clarity, natural flow, and ease in communication.’ },
+  { n: 4, title: ‘Confidence in Practice’, desc: ‘Support in applying your communication skills with confidence in real-world situations.’ },
 ]
 
-/* ── Refs ─────────────────────────────────────── */
-const portalRef   = ref(null)   // fixed overlay: círculo que se expande
-const sectionRef  = ref(null)
-const pinStageRef = ref(null)   // .how-pin-stage: se oculta durante el portal
-const overlayRef  = ref(null)
-const copyRef     = ref(null)
-const stageRef    = ref(null)
-const windowRef   = ref(null)
-const bubbleRef      = ref(null)
-const heroTitleRef   = ref(null)   // título grande entre portal y call window
-const heroTitleAltRef = ref(null)  // segundo título grande
+const sectionRef = ref(null)
+const windowRef  = ref(null)
 
-let gsapCtx  = null
-let mediaCtx = null
+let gsapCtx = null
 
 onMounted(async () => {
-  const { gsap } = await import('gsap')
-  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+  const { gsap } = await import(‘gsap’)
+  const { ScrollTrigger } = await import(‘gsap/ScrollTrigger’)
   gsap.registerPlugin(ScrollTrigger)
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   gsapCtx = gsap.context(() => {
-    mediaCtx = gsap.matchMedia()
-
-    /* ═══════════════════════════════════════════════════════════════
-       DESKTOP (≥ 981px)
-       ─────────────────────────────────────────────────────────────
-       Secuencia de scroll en 3 fases:
-
-       FASE 1 — Portal reveal (círculo crece mientras How entra)
-         • Trigger: sectionRef mismo, start:'top bottom' → end:'top top'
-         • Sin pin: How sube normalmente y el círculo se expande.
-         • Cuando How llega al top del viewport el círculo está a 160%.
-
-       FASE 2 — Reveal centrado
-         • pinTl arranca (pin How). El portal se desvanece.
-         • .how-pin-stage aparece, cuadrícula se intensifica.
-         • Título grande aparece centrado.
-
-       FASE 3 — Desplazamiento lateral
-         • El stage (call window) se mueve a la derecha.
-         • El copy desliza desde la izquierda simultáneamente.
-    ═══════════════════════════════════════════════════════════════ */
-    mediaCtx.add('(min-width: 981px)', () => {
-
-      // ── Ocultar contenido durante el portal ──
-      gsap.set(pinStageRef.value,  { autoAlpha: 0 })
-      gsap.set(copyRef.value,      { autoAlpha: 0, x: -70 })
-      gsap.set(stageRef.value,     { autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 1 })
-      gsap.set(heroTitleRef.value, { autoAlpha: 0, y: 24 })
-      gsap.set(heroTitleAltRef.value, { autoAlpha: 0, y: 24 })
-
-      // ── Steps ocultos individualmente hasta que el copy es visible ──
-      const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
-      const ctaBtn    = copyRef.value.querySelector('.how-cta')
-      if (!prefersReducedMotion) {
-        gsap.set(flowItems, { autoAlpha: 0, y: 26, scale: 0.96 })
-        gsap.set(ctaBtn,    { autoAlpha: 0 })
-      }
-
-      if (!prefersReducedMotion) {
-        /* FASE 1: el portal se expande cuando la sección Services está terminando.
-           Trigger en #services (referencia directa, sin pin) — el original falló
-           con pin: servicesEl; solo referencia de trigger no tiene ese problema.
-           start 'bottom 65%': el borde inferior de Services está al 65% del viewport
-           → todavía 65% de la pantalla muestra el fondo blanco de Services sobre el
-           que el círculo teal es perfectamente visible. */
-        const servicesEl = document.getElementById('services')
-        const portalAnim = gsap.fromTo(portalRef.value,
-          { clipPath: 'circle(0% at 50% 50%)' },
-          { clipPath: 'circle(160% at 50% 50%)', ease: 'power1.in' }
-        )
-        ScrollTrigger.create({
-          trigger: servicesEl || sectionRef.value,
-          start: servicesEl ? 'bottom 65%' : 'top bottom',
-          end:   servicesEl ? 'bottom top'  : 'top top',
-          scrub: 1.5,
-          animation: portalAnim,
-          invalidateOnRefresh: true,
-        })
-      } else {
-        /* Sin animación: mostrar contenido directamente */
-        gsap.set(pinStageRef.value, { autoAlpha: 1 })
-      }
-
-      /* ── FASE 2 + 3: pin interno de How ── */
-      let stepsStarted = false
-
-      const pinTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: 'top top',
-          end: '+=2600',
-          scrub: true,
-          pin: true,
-          onUpdate(self) {
-            if (!prefersReducedMotion && self.progress >= 0.85 && !stepsStarted) {
-              stepsStarted = true
-              gsap.timeline()
-                .to(flowItems[0], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' })
-                .to(flowItems[1], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
-                .to(flowItems[2], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
-                .to(flowItems[3], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }, '+=0.45')
-                .to(ctaBtn,       { autoAlpha: 1, duration: 0.35, ease: 'none' }, '+=0.35')
-            }
-          }
-        },
-      })
-
-      pinTl
-        /* 0→6%: desvanece portal, container visible, cuadrícula */
-        .to(portalRef.value,   { opacity: 0, duration: 0.06, ease: 'none' }, 0)
-        .to(pinStageRef.value, { autoAlpha: 1, duration: 0.05, ease: 'none' }, 0)
-        .to(overlayRef.value,  { opacity: 1, backgroundPosition: '28px 24px', duration: 0.18, ease: 'none' }, 0)
-
-        /* 6→26%: TÍTULO 1 aparece grande centrado */
-        .to(heroTitleRef.value, { autoAlpha: 1, y: 0, duration: 0.20, ease: 'power2.out' }, 0.06)
-
-        /* 34→42%: TÍTULO 1 desaparece */
-        .to(heroTitleRef.value, { autoAlpha: 0, y: -14, duration: 0.08, ease: 'none' }, 0.34)
-
-        /* 42→60%: TÍTULO 2 aparece grande centrado */
-        .to(heroTitleAltRef.value, { autoAlpha: 1, y: 0, duration: 0.18, ease: 'power2.out' }, 0.42)
-
-        /* 68→76%: TÍTULO 2 desaparece */
-        .to(heroTitleAltRef.value, { autoAlpha: 0, y: -14, duration: 0.08, ease: 'none' }, 0.68)
-
-        /* 76→86%: call window aparece centrada */
-        .to(stageRef.value, { autoAlpha: 1, duration: 0.10, ease: 'none' }, 0.76)
-        .to(windowRef.value, { scale: 1.06, duration: 0.10, ease: 'none' }, 0.76)
-
-        /* 82→90%: burbuja */
-        .to(bubbleRef.value, { autoAlpha: 1, y: 0, duration: 0.08, ease: 'none' }, 0.82)
-
-        /* 86→100%: stage a la derecha, copy desde la izquierda */
-        .to(stageRef.value,  { xPercent: -10, yPercent: -50, scale: 0.85, duration: 0.14, ease: 'none' }, 0.86)
-        .to(copyRef.value,   { autoAlpha: 1, x: 0, duration: 0.14, ease: 'none' }, 0.86)
-
-      /* Micro-movimiento flotante continuo */
-      if (!prefersReducedMotion) {
-        gsap.to(windowRef.value, {
-          y: '-=7', duration: 2.5, repeat: -1, yoyo: true, ease: 'sine.inOut',
-        })
-        gsap.to(bubbleRef.value, {
-          y: '-=5', duration: 2.1, repeat: -1, yoyo: true, ease: 'sine.inOut',
-        })
-      }
+    gsap.from(windowRef.value, {
+      opacity: 0, y: 26, duration: 0.75, ease: ‘power3.out’,
+      scrollTrigger: { trigger: sectionRef.value, start: ‘top 78%’, once: true },
     })
-
-    /* ═══════════════════════════════════════════════════════════════
-       MOBILE (≤ 980px) — sin portal, animación simple de entrada
-     ═══════════════════════════════════════════════════════════════ */
-    mediaCtx.add('(max-width: 980px)', () => {
-      gsap.set(pinStageRef.value,  { autoAlpha: 1 })
-      gsap.set(copyRef.value,      { autoAlpha: 1, x: 0 })
-      gsap.set(stageRef.value,     { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1 })
-      gsap.set(heroTitleRef.value, { display: 'flex', autoAlpha: 1, y: 0 })
-      gsap.set(heroTitleAltRef.value, { display: 'none', autoAlpha: 0 })
-
-      // Pasos visibles desde el inicio en mobile
-      const flowItems = Array.from(copyRef.value.querySelectorAll('.how-flow-item'))
-      const ctaBtn    = copyRef.value.querySelector('.how-cta')
-      gsap.set(flowItems, { autoAlpha: 1, y: 0, scale: 1 })
-      gsap.set(ctaBtn,    { autoAlpha: 1 })
-
-      gsap.from(windowRef.value, {
-        opacity: 0, y: 26, duration: 0.75, ease: 'power3.out',
-        scrollTrigger: { trigger: sectionRef.value, start: 'top 78%', once: true },
-      })
-    })
-
   }, sectionRef.value)
 })
 
-onUnmounted(() => {
-  mediaCtx?.revert()
-  gsapCtx?.revert()
-})
+onUnmounted(() => { gsapCtx?.revert() })
 </script>
 
 <template>
-
-  <!--
-    PORTAL: div fixed que expande el fondo teal desde el centro.
-    Está fuera del section para no verse afectado por z-index locales.
-    GSAP lo anima con clip-path circle(0%) → circle(160%).
-    Una vez que cubre la pantalla se hace fade-out, revelando How.
-  -->
-  <div ref="portalRef" class="how-portal" aria-hidden="true"></div>
 
   <section ref="sectionRef" class="how" id="metodologia">
 
@@ -207,32 +39,12 @@ onUnmounted(() => {
     <div class="how-bg" aria-hidden="true"></div>
 
     <!-- Cuadrícula de fondo (se intensifica con el scroll interno) -->
-    <div ref="overlayRef" class="how-grid-overlay" aria-hidden="true"></div>
+    <div class="how-grid-overlay" aria-hidden="true"></div>
 
-    <div ref="pinStageRef" class="wrap how-pin-stage">
-
-      <!-- ── Título grande: aparece centrado entre el portal y la call window ── -->
-      <div ref="heroTitleRef" class="how-hero-title" aria-hidden="true">
-        <span class="eyebrow">How I work</span>
-        <h2 class="how-hero-h2">Tailored, thoughtful, effective</h2>
-        <p class="how-hero-p">
-          I listen carefully to understand not only what you want to improve, but what is holding you back.
-          <br><br>
-          With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.
-        </p>
-      </div>
-
-      <!-- ── Segundo Título grande (aparece después al scroll) ── -->
-      <div ref="heroTitleAltRef" class="how-hero-title" aria-hidden="true" style="opacity: 0; visibility: hidden;">
-        <span class="eyebrow">How I work</span>
-        <h2 class="how-hero-h2">No standard programmes</h2>
-        <p class="how-hero-p">
-          There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.
-        </p>
-      </div>
+    <div class="wrap how-pin-stage">
 
       <!-- ── Copy (izquierda) ───────────────────── -->
-      <div ref="copyRef" class="how-copy">
+      <div class="how-copy">
         <span class="eyebrow">How I work</span>
         <p class="section-desc how-desc">
           From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
@@ -257,7 +69,7 @@ onUnmounted(() => {
       </div>
 
       <!-- ── Video call mockup (derecha) ──────────── -->
-      <div ref="stageRef" class="call-stage" aria-label="Live video call preview">
+      <div class="call-stage" aria-label="Live video call preview">
         <article ref="windowRef" class="call-window">
 
           <!-- Top bar -->
@@ -299,7 +111,7 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <div ref="bubbleRef" class="chat-bubbles-container" aria-live="polite" aria-label="Client is speaking">
+              <div class="chat-bubbles-container" aria-live="polite" aria-label="Client is speaking">
                 <!-- bubbles temporarily removed -->
               </div>
 
@@ -346,32 +158,6 @@ onUnmounted(() => {
 
 <style scoped>
 /* ══════════════════════════════════════════════
-   PORTAL — capa fija para la transición
-   Reproduce el mismo fondo que la sección How.
-   GSAP anima clip-path: circle(0%) → circle(160%).
-   ══════════════════════════════════════════════ */
-.how-portal {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  pointer-events: none;
-  clip-path: circle(0% at 50% 50%);
-  background:
-    radial-gradient(540px 280px at 8% 18%,  rgba(46,138,147,.18), transparent 62%),
-    radial-gradient(540px 290px at 92% 84%, rgba(217,96,58,.14),  transparent 64%),
-    var(--teal-t1);
-  /* Cuadrícula interna idéntica a .how-grid-overlay */
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.22) 1px, transparent 1px),
-    radial-gradient(540px 280px at 8% 18%,  rgba(46,138,147,.18), transparent 62%),
-    radial-gradient(540px 290px at 92% 84%, rgba(217,96,58,.14),  transparent 64%),
-    var(--teal-t1);
-  background-size: 34px 34px, 34px 34px, auto, auto, auto;
-  mask-image: none;
-}
-
-/* ══════════════════════════════════════════════
    SECCIÓN HOW
    ══════════════════════════════════════════════ */
 .how {
@@ -408,65 +194,15 @@ onUnmounted(() => {
 .how-pin-stage {
   position: relative;
   z-index: 2;
-  min-height: min(820px, 88vh);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 64px);
+  align-items: center;
 }
 
-/* ── Título hero (centrado, entre portal y call window) ─── */
-.how-hero-title {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  z-index: 10;
-  pointer-events: none;
-  padding-inline: clamp(24px, 5vw, 80px);
-}
-.how-hero-h2 {
-  font-family: var(--fd);
-  font-size: clamp(34px, 4.8vw, 64px);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--text);
-  text-wrap: balance;
-  margin-top: 12px;
-}
-.how-hero-p {
-  font-family: var(--fb);
-  font-size: clamp(16px, 1.6vw, 20px);
-  color: var(--text2);
-  max-width: 680px;
-  margin-top: 20px;
-  line-height: 1.6;
-}
-@media (max-width: 980px) {
-  .how-hero-title {
-    position: relative;
-    inset: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    padding-inline: 0;
-    margin-bottom: 32px;
-    pointer-events: auto;
-  }
-  .how-hero-h2 {
-    font-size: clamp(26px, 4.5vw, 36px);
-    margin-top: 8px;
-    line-height: 1.15;
-  }
-  .how-hero-p {
-    font-size: 16px;
-    margin-top: 12px;
-  }
-}
 
 /* ── Copy (izquierda) ────────────────────────── */
-.how-copy { width: min(420px, 37%); position: relative; z-index: 4; }
+.how-copy { width: 100%; position: relative; z-index: 4; }
 .how-desc { margin-inline: 0; margin-bottom: 12px; }
 
 .how-flow {
@@ -522,11 +258,8 @@ onUnmounted(() => {
 
 /* ── Call stage ──────────────────────────────── */
 .call-stage {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  /* Sin transform CSS: GSAP gestiona xPercent:-50 yPercent:-50 para centrar */
-  width: min(800px, 88vw);
+  position: relative;
+  width: 100%;
   z-index: 3;
 }
 
@@ -712,9 +445,9 @@ onUnmounted(() => {
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 980px) {
-  .how-pin-stage { min-height: auto; display: grid; gap: 26px; }
-  .how-copy  { width: 100%; order: 2; }
-  .call-stage { position: relative; left: 0; top: 0; width: 100%; order: 1; }
+  .how-pin-stage { grid-template-columns: 1fr; gap: 26px; }
+  .how-copy  { order: 2; }
+  .call-stage { order: 1; }
 }
 @media (max-width: 640px) {
   .how-grid-overlay { background-size: 26px 26px; }

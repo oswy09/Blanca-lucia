@@ -70,7 +70,7 @@ function setSlide(index) {
 function startAutoplay() {
   slideInterval = setInterval(() => {
     currentSlide.value = (currentSlide.value + 1) % slides.length
-  }, 5000)
+  }, 9000)
 }
 
 function resetAutoplay() {
@@ -126,7 +126,7 @@ onMounted(async () => {
         y: '+=6',
         x: '+=2',
         rotate: -8,
-        duration: 2.4,
+        duration: 4.5,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
@@ -135,7 +135,7 @@ onMounted(async () => {
         y: '-=6',
         x: '-=2',
         rotate: 9,
-        duration: 2.8,
+        duration: 5.0,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
