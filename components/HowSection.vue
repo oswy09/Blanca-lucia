@@ -12,6 +12,7 @@ const steps = [
 
 const sectionRef = ref(null)
 const headerRef  = ref(null)
+const bodyRef    = ref(null)
 const copyRef    = ref(null)
 const windowRef  = ref(null)
 
@@ -27,7 +28,7 @@ onMounted(async () => {
 
   gsapCtx = gsap.context(() => {
 
-    // Block 1: eyebrow -> h2 -> lead stagger slide-up as section enters view
+    // Block 1: eyebrow -> h2 -> lead stagger slide-up
     const headerEls = headerRef.value.querySelectorAll('.eyebrow, .how-h2, .how-lead')
     gsap.from(headerEls, {
       opacity: 0,
@@ -42,33 +43,49 @@ onMounted(async () => {
       },
     })
 
-    // Block 2: desc paragraphs + step items stagger in from left
-    const copyEls = copyRef.value.querySelectorAll('.how-desc, .how-flow-item, .how-cta')
-    gsap.from(copyEls, {
-      opacity: 0,
-      x: -28,
-      y: 16,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: copyRef.value,
-        start: 'top 82%',
-        once: true,
-      },
+    // Block 2 desktop: call window starts centered/large, scrubs right;
+    // copy slides in from the left simultaneously
+    gsap.matchMedia().add('(min-width: 981px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bodyRef.value,
+          start: 'top 90%',
+          end: 'top 10%',
+          scrub: 1.2,
+        },
+      })
+
+      // window moves from left-center to its right-column resting position
+      tl.from(windowRef.value, { xPercent: -100, scale: 1.15 }, 0)
+      // copy slides in from the left
+      tl.from(copyRef.value, { xPercent: -18, opacity: 0 }, 0)
+
+      // after layout settles: stagger individual copy items
+      const copyEls = copyRef.value.querySelectorAll('.how-desc, .how-flow-item, .how-cta')
+      gsap.from(copyEls, {
+        opacity: 0,
+        y: 18,
+        duration: 0.5,
+        stagger: 0.09,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: bodyRef.value,
+          start: 'top 18%',
+          once: true,
+        },
+      })
     })
 
-    // Block 2: call window slides in from right
-    gsap.from(windowRef.value, {
-      opacity: 0,
-      x: 40,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: windowRef.value,
-        start: 'top 85%',
-        once: true,
-      },
+    // Block 2 mobile: simple entrance, no scrub
+    gsap.matchMedia().add('(max-width: 980px)', () => {
+      gsap.from(windowRef.value, {
+        opacity: 0, y: 30, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: bodyRef.value, start: 'top 85%', once: true },
+      })
+      gsap.from(copyRef.value, {
+        opacity: 0, y: 24, duration: 0.7, delay: 0.2, ease: 'power3.out',
+        scrollTrigger: { trigger: bodyRef.value, start: 'top 85%', once: true },
+      })
     })
 
   }, sectionRef.value)
@@ -102,7 +119,7 @@ onUnmounted(() => { gsapCtx?.revert() })
     </div>
 
     <!-- ── Bloque 2: pasos + call window ── -->
-    <div class="how-body-block">
+    <div ref="bodyRef" class="how-body-block">
       <div class="wrap how-body-grid">
 
       <!-- ── Copy (izquierda) ───────────────────── -->
@@ -355,7 +372,7 @@ onUnmounted(() => { gsapCtx?.revert() })
 .call-stage {
   position: relative;
   width: 100%;
-  z-index: 3;
+  z-index: 5;
 }
 
 /* ── Call window ─────────────────────────────── */
