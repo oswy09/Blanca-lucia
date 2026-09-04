@@ -1,15 +1,35 @@
 <script setup>
-// TODO: Replace mock data with Storyblok API call
-// import { useStoryblokApi } from '@storyblok/nuxt'
-// const storyblokApi = useStoryblokApi()
-// const route = useRoute()
-// const { data } = await storyblokApi.get(`cdn/stories/blog/${route.params.slug}`, {
-//   version: 'published',
-// })
-// const post = data.story.content
-
 const route = useRoute()
 const { siteUrl, whatsappUrl } = useSiteConfig()
+const slug = route.params.slug
+
+// ── Storyblok integration ──────────────────────────────────
+// Fetches the article from Storyblok when token is set.
+// Content type: "blog-post" — fields: title, excerpt, category,
+//   read_time, date (ISO text), image (asset), body (rich text)
+let sbPost = null
+try {
+  const storyblokApi = useStoryblokApi()
+  const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
+    version: 'published',
+  })
+  const c = data?.story?.content
+  if (c) {
+    sbPost = {
+      title: c.title,
+      excerpt: c.excerpt,
+      category: c.category,
+      readTime: c.read_time,
+      date: c.date || data.story.first_published_at,
+      image: c.image?.filename || '/imagens/live-session.webp',
+      // body from Storyblok is rendered via StoryblokRichText — stored raw
+      sbBody: c.body,
+      body: null,
+    }
+  }
+} catch {
+  // Token not set or story not found — falls back to mock data below
+}
 
 // Mock articles — body array mirrors Storyblok rich-text blocks for easy swap
 const articles = {
@@ -54,8 +74,8 @@ const articles = {
   },
 }
 
-const slug = route.params.slug
-const post = articles[slug]
+// Use Storyblok data when available, otherwise mock data
+const post = sbPost || articles[slug]
 
 if (!post) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
@@ -78,6 +98,8 @@ const relatedSlugs = Object.keys(articles).filter(s => s !== slug).slice(0, 2)
 const related = relatedSlugs.map(s => ({ slug: s, ...articles[s] }))
 
 useRevealOnScroll()
+
+import { renderRichText } from '@storyblok/nuxt'
 </script>
 
 <template>
@@ -117,7 +139,10 @@ useRevealOnScroll()
     <article class="article-body">
       <div class="wrap">
         <div class="article-content">
-          <template v-for="(block, i) in post.body" :key="i">
+          <!-- Storyblok rich text (when token is active) -->
+          <div v-if="post.sbBody" class="sb-richtext" v-html="renderRichText(post.sbBody)" />
+          <!-- Mock body blocks (development fallback) -->
+          <template v-else-if="post.body" v-for="(block, i) in post.body" :key="i">
             <h2 v-if="block.type === 'h2'" class="content-h2">{{ block.text }}</h2>
             <p v-else-if="block.type === 'p'" class="content-p">{{ block.text }}</p>
           </template>
@@ -248,6 +273,29 @@ useRevealOnScroll()
 .article-content {
   max-width: 700px;
   margin-inline: auto;
+}
+
+/* Storyblok rich text output */
+.sb-richtext :deep(h2) {
+  font-family: var(--fd);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 700; color: var(--text);
+  line-height: 1.25; text-wrap: balance;
+  margin-top: 48px; margin-bottom: 16px;
+}
+.sb-richtext :deep(p) {
+  font-size: clamp(16px, 1.5vw, 17.5px);
+  color: var(--text2); line-height: 1.85; margin-bottom: 22px;
+}
+.sb-richtext :deep(a) { color: var(--teal); text-decoration: underline; }
+.sb-richtext :deep(strong) { font-weight: 700; color: var(--text); }
+.sb-richtext :deep(em) { font-style: italic; }
+.sb-richtext :deep(ul), .sb-richtext :deep(ol) {
+  padding-left: 24px; margin-bottom: 22px;
+}
+.sb-richtext :deep(li) {
+  font-size: clamp(16px, 1.5vw, 17.5px);
+  color: var(--text2); line-height: 1.75; margin-bottom: 8px;
 }
 
 .content-h2 {

@@ -1,10 +1,31 @@
 <script setup>
-// TODO: Replace mock data with Storyblok API call
-// import { useStoryblokApi } from '@storyblok/nuxt'
-// const storyblokApi = useStoryblokApi()
-// const { data } = await storyblokApi.get('cdn/stories', {
-//   version: 'published', starts_with: 'blog/', sort_by: 'first_published_at:desc',
-// })
+// ── Storyblok integration ──────────────────────────────────
+// Fetches blog posts from Storyblok when token is set in .env
+// Content type in Storyblok: "blog-post" with fields:
+//   title (text), excerpt (text), category (text), read_time (text),
+//   date (text, ISO), image (asset), slug (auto from story slug)
+const storyblokApi = useStoryblokApi()
+let sbPosts = []
+try {
+  const { data } = await storyblokApi.get('cdn/stories', {
+    version: 'published',
+    starts_with: 'blog/',
+    sort_by: 'first_published_at:desc',
+    per_page: 20,
+  })
+  sbPosts = (data?.stories || []).map(s => ({
+    slug: s.slug,
+    title: s.content.title,
+    excerpt: s.content.excerpt,
+    category: s.content.category,
+    readTime: s.content.read_time,
+    date: s.content.date || s.first_published_at,
+    image: s.content.image?.filename || '/imagens/live-session.webp',
+    featured: s.content.featured === true,
+  }))
+} catch {
+  // Token not set or API unavailable — falls back to mock data below
+}
 
 const { siteUrl } = useSiteConfig()
 
@@ -71,8 +92,11 @@ const posts = [
   },
 ]
 
-const featured = posts.find(p => p.featured)
-const rest = posts.filter(p => !p.featured)
+// Use Storyblok data when available, otherwise mock data
+const activePosts = sbPosts.length > 0 ? sbPosts : posts
+
+const featured = activePosts.find(p => p.featured)
+const rest = activePosts.filter(p => !p.featured)
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
