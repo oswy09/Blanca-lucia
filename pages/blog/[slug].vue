@@ -98,8 +98,6 @@ const relatedSlugs = Object.keys(articles).filter(s => s !== slug).slice(0, 2)
 const related = relatedSlugs.map(s => ({ slug: s, ...articles[s] }))
 
 useRevealOnScroll()
-
-import { renderRichText } from '@storyblok/nuxt'
 </script>
 
 <template>

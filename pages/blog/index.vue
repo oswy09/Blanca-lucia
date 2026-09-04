@@ -102,6 +102,12 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+function truncate(text, words = 30) {
+  if (!text) return ''
+  const w = text.trim().split(/\s+/)
+  return w.length <= words ? text : w.slice(0, words).join(' ') + '…'
+}
+
 useRevealOnScroll()
 </script>
 
@@ -128,7 +134,7 @@ useRevealOnScroll()
           <div class="bfc-content">
             <span class="bfc-cat">{{ featured.category }}</span>
             <h2 class="bfc-title">{{ featured.title }}</h2>
-            <p class="bfc-excerpt">{{ featured.excerpt }}</p>
+            <p class="bfc-excerpt">{{ truncate(featured.excerpt) }}</p>
             <div class="bfc-meta">
               <span>{{ formatDate(featured.date) }}</span>
               <span class="meta-dot" aria-hidden="true"></span>
@@ -153,7 +159,7 @@ useRevealOnScroll()
               <div class="bc-body">
                 <span class="bc-cat">{{ post.category }}</span>
                 <h3 class="bc-title">{{ post.title }}</h3>
-                <p class="bc-excerpt">{{ post.excerpt }}</p>
+                <p class="bc-excerpt">{{ truncate(post.excerpt) }}</p>
                 <div class="bc-meta">
                   <span>{{ formatDate(post.date) }}</span>
                   <span class="meta-dot" aria-hidden="true"></span>
