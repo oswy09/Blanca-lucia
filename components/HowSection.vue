@@ -1,13 +1,13 @@
-<script setup>
-import { onMounted, onUnmounted, ref } from ‘vue’
+﻿<script setup>
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const { whatsappUrl } = useSiteConfig()
 
 const steps = [
-  { n: 1, title: ‘Initial Consultation’,  desc: ‘We begin by understanding where you are, what you need, and the challenges you’ve faced so far.’ },
-  { n: 2, title: ‘Focused Guidance’,       desc: ‘Targeted, precise work on the areas of communication that matter most in your professional and everyday life.’ },
-  { n: 3, title: ‘Clarity & Expression’,   desc: ‘Attention to how you express yourself — ensuring clarity, natural flow, and ease in communication.’ },
-  { n: 4, title: ‘Confidence in Practice’, desc: ‘Support in applying your communication skills with confidence in real-world situations.’ },
+  { n: 1, title: 'Initial Consultation',  desc: "We begin by understanding where you are, what you need, and the challenges you've faced so far." },
+  { n: 2, title: 'Focused Guidance',       desc: 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
+  { n: 3, title: 'Clarity & Expression',   desc: 'Attention to how you express yourself — ensuring clarity, natural flow, and ease in communication.' },
+  { n: 4, title: 'Confidence in Practice', desc: 'Support in applying your communication skills with confidence in real-world situations.' },
 ]
 
 const sectionRef = ref(null)
@@ -16,14 +16,14 @@ const windowRef  = ref(null)
 let gsapCtx = null
 
 onMounted(async () => {
-  const { gsap } = await import(‘gsap’)
-  const { ScrollTrigger } = await import(‘gsap/ScrollTrigger’)
+  const { gsap } = await import('gsap')
+  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
   gsap.registerPlugin(ScrollTrigger)
 
   gsapCtx = gsap.context(() => {
     gsap.from(windowRef.value, {
-      opacity: 0, y: 26, duration: 0.75, ease: ‘power3.out’,
-      scrollTrigger: { trigger: sectionRef.value, start: ‘top 78%’, once: true },
+      opacity: 0, y: 26, duration: 0.75, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.value, start: 'top 78%', once: true },
     })
   }, sectionRef.value)
 })
