@@ -11,6 +11,8 @@ const steps = [
 ]
 
 const sectionRef = ref(null)
+const headerRef  = ref(null)
+const copyRef    = ref(null)
 const windowRef  = ref(null)
 
 let gsapCtx = null
@@ -20,11 +22,55 @@ onMounted(async () => {
   const { ScrollTrigger } = await import('gsap/ScrollTrigger')
   gsap.registerPlugin(ScrollTrigger)
 
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduced) return
+
   gsapCtx = gsap.context(() => {
-    gsap.from(windowRef.value, {
-      opacity: 0, y: 26, duration: 0.75, ease: 'power3.out',
-      scrollTrigger: { trigger: sectionRef.value, start: 'top 78%', once: true },
+
+    // Block 1: eyebrow -> h2 -> lead stagger slide-up as section enters view
+    const headerEls = headerRef.value.querySelectorAll('.eyebrow, .how-h2, .how-lead')
+    gsap.from(headerEls, {
+      opacity: 0,
+      y: 36,
+      duration: 0.75,
+      stagger: 0.18,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: headerRef.value,
+        start: 'top 78%',
+        once: true,
+      },
     })
+
+    // Block 2: desc paragraphs + step items stagger in from left
+    const copyEls = copyRef.value.querySelectorAll('.how-desc, .how-flow-item, .how-cta')
+    gsap.from(copyEls, {
+      opacity: 0,
+      x: -28,
+      y: 16,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: copyRef.value,
+        start: 'top 82%',
+        once: true,
+      },
+    })
+
+    // Block 2: call window slides in from right
+    gsap.from(windowRef.value, {
+      opacity: 0,
+      x: 40,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: windowRef.value,
+        start: 'top 85%',
+        once: true,
+      },
+    })
+
   }, sectionRef.value)
 })
 
@@ -44,7 +90,7 @@ onUnmounted(() => { gsapCtx?.revert() })
     <!-- ── Bloque 1: titulo centrado (pantalla completa) ── -->
     <div class="how-title-block">
       <div class="wrap">
-        <div class="how-header reveal">
+        <div ref="headerRef" class="how-header">
           <span class="eyebrow">How I work</span>
           <h2 class="how-h2">Tailored, thoughtful, effective</h2>
           <p class="how-lead">
@@ -60,7 +106,7 @@ onUnmounted(() => { gsapCtx?.revert() })
       <div class="wrap how-body-grid">
 
       <!-- ── Copy (izquierda) ───────────────────── -->
-      <div class="how-copy">
+      <div ref="copyRef" class="how-copy">
         <p class="section-desc how-desc">
           From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
         </p>
