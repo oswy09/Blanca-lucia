@@ -3,9 +3,7 @@
 // import { useStoryblokApi } from '@storyblok/nuxt'
 // const storyblokApi = useStoryblokApi()
 // const { data } = await storyblokApi.get('cdn/stories', {
-//   version: 'published',
-//   starts_with: 'blog/',
-//   sort_by: 'first_published_at:desc',
+//   version: 'published', starts_with: 'blog/', sort_by: 'first_published_at:desc',
 // })
 
 const { siteUrl } = useSiteConfig()
@@ -28,7 +26,7 @@ const posts = [
     category: 'Language & Communication',
     readTime: '4 min read',
     date: '2026-08-18',
-    image: '/imagens/live-session.webp',
+    image: '/imagens/personalized advice.JPG',
     featured: true,
   },
   {
@@ -38,7 +36,7 @@ const posts = [
     category: 'Professional English',
     readTime: '5 min read',
     date: '2026-07-30',
-    image: '/imagens/live-session.webp',
+    image: '/imagens/video call learning.JPG',
     featured: false,
   },
   {
@@ -48,7 +46,7 @@ const posts = [
     category: 'Language & Communication',
     readTime: '3 min read',
     date: '2026-07-14',
-    image: '/imagens/live-session.webp',
+    image: '/imagens/adult learning English.jpg',
     featured: false,
   },
   {
@@ -58,7 +56,7 @@ const posts = [
     category: 'Professional Writing',
     readTime: '6 min read',
     date: '2026-06-22',
-    image: '/imagens/live-session.webp',
+    image: '/imagens/woman speechless.JPG',
     featured: false,
   },
   {
@@ -79,28 +77,26 @@ const rest = posts.filter(p => !p.featured)
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
+
+useRevealOnScroll()
 </script>
 
 <template>
   <div class="blog-page">
 
-    <!-- ── Hero ── -->
+    <!-- ── Hero (matches service pages style) ── -->
     <section class="blog-hero">
-      <div class="wrap">
-        <div class="blog-hero-inner reveal">
-          <span class="eyebrow">Blog</span>
-          <h1 class="blog-hero-title">Insights on language,<br>communication & professional English</h1>
-          <p class="blog-hero-desc">
-            Practical perspectives from over 30 years working with Spanish-speaking professionals.
-          </p>
-        </div>
+      <div class="wrap blog-hero-inner reveal">
+        <span class="eyebrow blog-eyebrow">Blog</span>
+        <h1 class="blog-hero-title">Insights on language,<br>communication &amp; professional English</h1>
+        <p class="blog-hero-sub">Practical perspectives from over 30 years working with Spanish-speaking professionals.</p>
       </div>
     </section>
 
     <!-- ── Featured post ── -->
     <section v-if="featured" class="blog-featured-section">
       <div class="wrap">
-        <NuxtLink :to="`/blog/${featured.slug}`" class="blog-featured-card">
+        <NuxtLink :to="`/blog/${featured.slug}`" class="blog-featured-card reveal">
           <div class="bfc-image">
             <img :src="featured.image" :alt="featured.title" />
             <span class="bfc-badge">Featured</span>
@@ -123,7 +119,7 @@ function formatDate(iso) {
     <!-- ── Post grid ── -->
     <section class="blog-grid-section">
       <div class="wrap">
-        <h2 class="blog-section-label">All articles</h2>
+        <p class="blog-section-label">All articles</p>
         <ul class="blog-grid" role="list">
           <li v-for="post in rest" :key="post.slug" class="blog-card-wrap">
             <NuxtLink :to="`/blog/${post.slug}`" class="blog-card reveal">
@@ -152,28 +148,42 @@ function formatDate(iso) {
 <style scoped>
 .blog-page { background: var(--bg); }
 
-/* ── Hero ───────────────────────────────────── */
+/* ── Hero — matches pc-hero pattern ─────────── */
 .blog-hero {
-  padding-block: clamp(64px, 10vw, 100px) clamp(48px, 7vw, 72px);
-  background: linear-gradient(160deg, var(--teal-t1) 0%, var(--bg) 70%);
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
+  padding-top: clamp(88px, 12vw, 140px);
+  padding-bottom: clamp(48px, 8vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-.blog-hero-inner { max-width: 720px; }
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.blog-hero-inner { position: relative; z-index: 1; }
+.blog-eyebrow { color: rgba(255,255,255,.7); margin-bottom: 14px; }
 .blog-hero-title {
   font-family: var(--fd);
   font-size: clamp(28px, 4.5vw, 52px);
   font-weight: 700;
-  line-height: 1.1;
-  color: var(--text);
-  margin-top: 10px;
+  color: #fff;
+  line-height: 1.12;
+  margin-bottom: 14px;
   text-wrap: balance;
 }
-.blog-hero-desc {
-  font-size: clamp(15px, 1.4vw, 17px);
-  color: var(--text2);
-  margin-top: 16px;
-  line-height: 1.7;
-  max-width: 540px;
+.blog-hero-sub {
+  font-size: clamp(15px, 1.5vw, 17px);
+  color: rgba(255,255,255,.75);
+  font-style: italic;
+  max-width: 560px;
+  margin-inline: auto;
 }
 
 /* ── Featured ───────────────────────────────── */
@@ -200,83 +210,53 @@ function formatDate(iso) {
 }
 .bfc-image img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
+  object-fit: cover; object-position: center;
   transition: transform .5s ease;
 }
 .blog-featured-card:hover .bfc-image img { transform: scale(1.04); }
 
 .bfc-badge {
-  position: absolute;
-  top: 16px; left: 16px;
-  background: var(--teal);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  padding: 4px 10px;
-  border-radius: 999px;
+  position: absolute; top: 16px; left: 16px;
+  background: var(--teal); color: #fff;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: 4px 10px; border-radius: 999px;
 }
 
 .bfc-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: flex; flex-direction: column; justify-content: center;
   padding: clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) 0;
   gap: 10px;
 }
 
 .bfc-cat {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--teal);
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--teal);
 }
 .bfc-title {
   font-family: var(--fd);
   font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.25;
-  text-wrap: balance;
+  font-weight: 700; color: var(--text);
+  line-height: 1.25; text-wrap: balance;
 }
-.bfc-excerpt {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.7;
-}
+.bfc-excerpt { font-size: 15px; color: var(--text2); line-height: 1.7; }
 .bfc-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text3);
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text3);
 }
 .meta-dot {
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: var(--text3);
-  display: inline-block;
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--text3); display: inline-block;
 }
-.bfc-read {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--teal);
-  margin-top: 4px;
-}
+.bfc-read { font-size: 14px; font-weight: 600; color: var(--teal); margin-top: 4px; }
 
 /* ── Grid ───────────────────────────────────── */
 .blog-grid-section { padding-block: clamp(24px, 3vw, 32px) clamp(64px, 8vw, 100px); }
 
 .blog-section-label {
-  font-family: var(--fb);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: var(--text3);
-  margin-bottom: 28px;
+  font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--text3); margin-bottom: 28px;
 }
 
 .blog-grid {
@@ -287,76 +267,46 @@ function formatDate(iso) {
 }
 
 .blog-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  text-decoration: none;
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden; text-decoration: none;
   transition: box-shadow .25s ease, transform .25s ease;
-  height: 100%;
-  box-shadow: var(--sh-sm);
+  height: 100%; box-shadow: var(--sh-sm);
 }
 .blog-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
 
-.bc-image {
-  overflow: hidden;
-  aspect-ratio: 16/9;
-}
+.bc-image { overflow: hidden; aspect-ratio: 16/9; }
 .bc-image img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
+  object-fit: cover; object-position: center;
   transition: transform .45s ease;
 }
 .blog-card:hover .bc-image img { transform: scale(1.05); }
 
 .bc-body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-  flex: 1;
+  display: flex; flex-direction: column;
+  gap: 8px; padding: 20px; flex: 1;
 }
 .bc-cat {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--teal);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--teal);
 }
 .bc-title {
   font-family: var(--fd);
   font-size: clamp(16px, 1.6vw, 19px);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
-  text-wrap: balance;
+  font-weight: 700; color: var(--text);
+  line-height: 1.3; text-wrap: balance;
 }
-.bc-excerpt {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.68;
-  flex: 1;
-}
+.bc-excerpt { font-size: 14px; color: var(--text2); line-height: 1.68; flex: 1; }
 .bc-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text3);
-  margin-top: 4px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text3); margin-top: 4px;
 }
 
 /* ── Responsive ─────────────────────────────── */
 @media (max-width: 800px) {
-  .blog-featured-card {
-    grid-template-columns: 1fr;
-  }
+  .blog-featured-card { grid-template-columns: 1fr; }
   .bfc-image { aspect-ratio: 16/9; }
-  .bfc-content {
-    padding: 20px 20px 28px;
-    gap: 8px;
-  }
+  .bfc-content { padding: 20px 20px 28px; gap: 8px; }
 }
 </style>
