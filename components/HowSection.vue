@@ -273,11 +273,11 @@ onUnmounted(() => { gsapCtx?.revert() })
 .how-title-block {
   position: relative;
   z-index: 2;
-  min-height: 80vh;
+  min-height: 45vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: clamp(80px, 12vw, 120px);
+  padding-block: clamp(56px, 8vw, 80px);
 }
 .how-header {
   text-align: center;

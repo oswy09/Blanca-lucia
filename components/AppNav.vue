@@ -14,6 +14,7 @@ const navLinks = [
       { to: '/services/professional-writing-editing', label: 'Professional Writing & Editing', icon: 'doc', color: 'var(--amber-sh)', bgColor: 'var(--amber-t1)' },
     ]
   },
+  { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact me' },
 ]
 
