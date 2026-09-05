@@ -1,6 +1,6 @@
 ﻿<script setup>
 const { whatsappUrl } = useSiteConfig()
-const sb = useState('sb-home', () => ({} as Record<string, string>))
+const sb = useState('sb-home', () => ({}))
 const pill    = computed(() => sb.value?.hero_pill         || 'Personal Language Consultancy for Adults')
 const title   = computed(() => sb.value?.hero_title        || "I'm Blanca Derby")
 const tagline = computed(() => sb.value?.hero_tagline      || 'Personal Language Consultancy by Blanca Derby')
