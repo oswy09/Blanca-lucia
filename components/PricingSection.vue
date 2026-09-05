@@ -65,7 +65,7 @@ const plans = [
            LAYOUT OPTION 1: COMPACT TABLE FLOW
            ========================================== -->
       <div class="pricing-header reveal">
-        <span class="eyebrow">Investment (Option 1)</span>
+        <span class="eyebrow">Investment</span>
         <h2 class="section-title">A simple, transparent approach to fees</h2>
         <p class="section-desc">
           Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.
@@ -109,9 +109,8 @@ const plans = [
         </div>
       </div>
 
-      <!-- Pricing Table Layout -->
+      <!-- Pricing Table -->
       <div class="p-table-container reveal">
-        <h3 class="alt-section-title">Layout Option 1: Compact Table</h3>
         <div class="alt-table-wrap">
           <table class="alt-table">
             <thead>
@@ -142,82 +141,6 @@ const plans = [
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <!-- ==========================================
-           LAYOUT OPTION 2: CLASSIC CARD GRID FLOW
-           ========================================== -->
-      <div class="alt-pricing-container reveal">
-        
-        <!-- Header Option 2 -->
-        <div class="pricing-header reveal">
-          <span class="eyebrow">Investment (Option 2)</span>
-          <h2 class="section-title">A simple, transparent approach to fees</h2>
-          <p class="section-desc">
-            Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.
-          </p>
-          <p class="section-desc" style="margin-top: 12px;">
-            A limited number of clients are accepted at any one time to ensure the highest level of personal attention.
-          </p>
-        </div>
-
-        <!-- Discovery Call Callout Banner (Original Banner Design) -->
-        <div class="discovery-callout reveal">
-          <div class="discovery-content">
-            <div class="discovery-badge-wrap">
-              <span class="discovery-callout-badge">Introductory</span>
-            </div>
-            <h3 class="discovery-callout-title">Free Discovery Call</h3>
-            <p class="discovery-callout-desc">
-              A free, 20–30 minute conversation to discuss your background, your objectives, and how we can work together.
-            </p>
-          </div>
-          <a :href="whatsappUrl" class="btn discovery-callout-btn" target="_blank" rel="noopener">
-            Book a Discovery Call
-          </a>
-        </div>
-
-        <!-- 4-Card Grid -->
-        <h3 class="alt-section-title">Layout Option 2: 4-Card Grid</h3>
-        <div class="p-grid">
-          <article v-for="(p, i) in plans" :key="`card-${p.id}`" class="p-card reveal" :class="{ 'featured-card': p.featured }" :style="{ transitionDelay: `${i * 100}ms` }">
-            <div v-if="p.featured" class="p-badge">Recommended</div>
-            
-            <!-- Top portion -->
-            <div class="p-card-top">
-              <p class="p-type">{{ p.type }}</p>
-              <h3 class="p-name">{{ p.name }}</h3>
-              
-              <div class="p-price-wrap">
-                <span class="p-currency">£</span>
-                <span class="p-amount">{{ p.amount.replace('£', '') }}</span>
-                <span class="p-period-suffix" v-if="p.id.startsWith('block')">/ block</span>
-                <span class="p-period-suffix" v-else>/ session</span>
-              </div>
-              
-              <p class="p-period">{{ p.period }}</p>
-              
-              <a :href="whatsappUrl" class="btn p-btn" target="_blank" rel="noopener">
-                Get started
-              </a>
-            </div>
-            
-            <hr class="p-divider">
-            
-            <!-- Bottom portion -->
-            <div class="p-card-bottom">
-              <p class="p-features-label">FEATURES</p>
-              <ul class="p-list">
-                <li v-for="perk in p.perks" :key="perk" class="p-perk">
-                  <svg class="p-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span>{{ perk }}</span>
-                </li>
-              </ul>
-            </div>
-          </article>
         </div>
       </div>
 

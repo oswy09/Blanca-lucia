@@ -6,7 +6,7 @@ const typedText = ref('')
 const isFinished = ref(false)
 const hasStarted = ref(false)
 
-const fullText = "Many adults have spent years studying a language, yet still feel uncertain when speaking. My role is to help you bridge that gap — through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme."
+const fullText = "Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap — through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme."
 
 onMounted(() => {
   if (!cardRef.value) return
@@ -146,7 +146,7 @@ function startTypewriter() {
   font-family: var(--fd);
   font-size: clamp(24px, 3.2vw, 36px);
   font-weight: 700;
-  color: #fff;
+  color: var(--amber);
   line-height: 1.2;
   margin-bottom: 20px;
 }

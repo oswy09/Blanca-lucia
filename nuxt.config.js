@@ -31,14 +31,15 @@ export default defineNuxtConfig({
   },
 
   // ─── Storyblok ─────────────────────────────────────────────
-  // Descomentar cuando Blanca tenga el token de Storyblok.
-  // Instalar primero: npm install @storyblok/nuxt
-  //
-  // modules: ['@storyblok/nuxt'],
-  // storyblok: {
-  //   accessToken: process.env.STORYBLOK_TOKEN,
-  //   apiOptions: { region: 'eu' }
-  // },
+  modules: [
+    [
+      '@storyblok/nuxt',
+      {
+        accessToken: process.env.STORYBLOK_DELIVERY_API_TOKEN,
+        apiOptions: { region: 'eu' },
+      },
+    ],
+  ],
   // ────────────────────────────────────────────────────────────
 
   future: {

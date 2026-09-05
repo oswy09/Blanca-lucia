@@ -9,6 +9,7 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@storyblok/nuxt": "^11.2.0",
     "gsap": "^3.15.0",
     "nuxt": "^3.13.0"
   }

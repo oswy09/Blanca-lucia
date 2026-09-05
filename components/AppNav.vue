@@ -1,6 +1,8 @@
 <script setup>
 const route = useRoute()
 const isOpen = ref(false)
+const sb = useStoryblokGlobal()
+const navCta = computed(() => sb.value?.nav_cta_label || '{{ navCta }}')
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -14,6 +16,7 @@ const navLinks = [
       { to: '/services/professional-writing-editing', label: 'Professional Writing & Editing', icon: 'doc', color: 'var(--amber-sh)', bgColor: 'var(--amber-t1)' },
     ]
   },
+  { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact me' },
 ]
 
@@ -79,11 +82,11 @@ watch(() => route.path, () => { isOpen.value = false })
           </template>
         </li>
         <li class="nav-mobile-cta">
-          <NuxtLink to="/contact" class="btn btn-primary" style="width: 100%; text-align: center;">Get in touch</NuxtLink>
+          <NuxtLink to="/contact" class="btn btn-primary" style="width: 100%; text-align: center;">{{ navCta }}</NuxtLink>
         </li>
       </ul>
 
-      <NuxtLink to="/contact" class="btn btn-primary nav-cta-desktop">Get in touch</NuxtLink>
+      <NuxtLink to="/contact" class="btn btn-primary nav-cta-desktop">{{ navCta }}</NuxtLink>
 
       <button
         class="nav-toggle"
