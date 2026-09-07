@@ -37,7 +37,7 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
   align-items: end;
 }
 .footer-logo-img {
-  height: 44px;
+  height: 64px;
   width: auto;
   display: block;
   margin-bottom: 10px;
