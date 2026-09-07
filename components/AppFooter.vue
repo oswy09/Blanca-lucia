@@ -7,7 +7,7 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
   <footer class="footer">
     <div class="footer-inner wrap">
       <div>
-        <p class="footer-logo">Fluent <span>Future</span></p>
+        <img src="/logo-blanco.png" alt="Fluent Future" class="footer-logo-img" />
         <p class="footer-tag">{{ footerTagline }}</p>
         <ul class="footer-nav" role="list">
           <li><NuxtLink to="/">Home</NuxtLink></li>
@@ -36,13 +36,12 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
   gap: 40px;
   align-items: end;
 }
-.footer-logo {
-  font-family: var(--fd);
-  font-size: 19px;
-  font-weight: 700;
+.footer-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
   margin-bottom: 10px;
 }
-.footer-logo span { color: var(--teal-t2); }
 .footer-tag {
   font-size: 14px;
   color: var(--n300);

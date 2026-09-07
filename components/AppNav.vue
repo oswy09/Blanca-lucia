@@ -33,7 +33,7 @@ watch(() => route.path, () => { isOpen.value = false })
   <nav class="nav" aria-label="Main navigation">
     <div class="wrap nav-inner">
       <NuxtLink to="/" class="nav-logo">
-        <img src="/logo-fluent-future.png" alt="Fluent Future" class="nav-logo-img" />
+        <img src="/logo-fluent.png" alt="Fluent Future" class="nav-logo-img" />
       </NuxtLink>
 
       <ul class="nav-links" :class="{ open: isOpen }" role="list">
