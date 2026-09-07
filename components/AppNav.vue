@@ -129,7 +129,7 @@ watch(() => route.path, () => { isOpen.value = false })
   flex-shrink: 0;
 }
 .nav-logo-img {
-  height: 52px;
+  height: 64px;
   width: auto;
   display: block;
 }
