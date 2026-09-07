@@ -1,6 +1,4 @@
 <script setup>
-// Storyblok component — renders a blog post blok.
-// Fields expected in Storyblok: title, excerpt, category, read_time, image (asset), body (rich text)
 defineProps({ blok: Object })
 </script>
 
@@ -17,10 +15,6 @@ defineProps({ blok: Object })
     <div v-if="blok.body" class="sb-body" v-html="renderRichText(blok.body)" />
   </article>
 </template>
-
-<script>
-import { renderRichText } from '@storyblok/nuxt'
-</script>
 
 <style scoped>
 .sb-post { max-width: 700px; margin-inline: auto; padding-block: 40px; }
