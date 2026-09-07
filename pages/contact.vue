@@ -297,6 +297,10 @@ const submitForm = () => {
 
       </div>
     </section>
+
+    <!-- ── PRICING ──────────────────────────────────────────── -->
+    <PricingSection />
+
   </main>
 </template>
 

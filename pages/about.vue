@@ -119,7 +119,7 @@ onUnmounted(() => {
             <em class="ab-em">Blanca Derby</em>
           </h1>
           <p class="ab-subtitle">
-            Working with adults to develop clear, confident, and natural communication
+            Working with Spanish-speaking adults to develop clear, confident, and natural communication
             through a tailored, one-to-one approach.
           </p>
           <a :href="whatsappUrl" class="btn btn-primary ab-hero-btn" target="_blank" rel="noopener">
@@ -248,7 +248,7 @@ onUnmounted(() => {
         <!-- Left: My Background (Journey Timeline) -->
         <div class="ab-split-left">
           <span class="eyebrow reveal">My Background</span>
-          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms">A Lifetime<br>in Language</h2>
+          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms">A Lifetime<br>in Languages</h2>
           
           <div class="journey-timeline">
             <!-- Central connection lines -->

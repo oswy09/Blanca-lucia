@@ -1,8 +1,8 @@
-<script setup>
+﻿<script setup>
 const route = useRoute()
 const isOpen = ref(false)
 const sb = useStoryblokGlobal()
-const navCta = computed(() => sb.value?.nav_cta_label || '{{ navCta }}')
+const navCta = computed(() => sb.value?.nav_cta_label || 'Get in touch')
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -33,7 +33,7 @@ watch(() => route.path, () => { isOpen.value = false })
   <nav class="nav" aria-label="Main navigation">
     <div class="wrap nav-inner">
       <NuxtLink to="/" class="nav-logo">
-        Fluent<span>Future</span>
+        <img src="/logo-fluent-future.png" alt="Fluent Future" class="nav-logo-img" />
       </NuxtLink>
 
       <ul class="nav-links" :class="{ open: isOpen }" role="list">
@@ -127,11 +127,11 @@ watch(() => route.path, () => { isOpen.value = false })
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
-  font-family: var(--fd);
-  font-size: 21px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.02em;
+}
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 .nav-logo span {
   color: var(--teal);
