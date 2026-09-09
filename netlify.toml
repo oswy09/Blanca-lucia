@@ -1,4 +1,12 @@
+[build]
+  command = "nuxt build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "20"
+
 [[headers]]
   for = "/*"
   [headers.values]
     Content-Security-Policy = "frame-ancestors 'self' https://app.storyblok.com"
+    Cache-Control = "no-cache, no-store, must-revalidate"
