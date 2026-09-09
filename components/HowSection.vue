@@ -1,15 +1,18 @@
 ﻿<script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const { whatsappUrl } = useSiteConfig()
 
-const steps = [
-  { n: 1, title: 'Initial Consultation',  desc: "We begin by understanding where you are, what you need, and the challenges you've faced so far." },
-  { n: 2, title: 'Focused Guidance',       desc: 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
-  { n: 3, title: 'Clarity & Expression',   desc: 'Attention to how you express yourself — ensuring clarity, natural flow, and ease in communication.' },
-  { n: 4, title: 'Confidence in Practice', desc: 'Support in applying your communication skills with confidence in real-world situations.' },
-]
-
+const sb = useState('sb-home', () => ({}))
+const howEyebrow = computed(() => sb.value?.how_eyebrow || 'How I work')
+const howH2      = computed(() => sb.value?.how_h2      || 'Tailored, thoughtful, effective')
+const howLead    = computed(() => sb.value?.how_lead    || 'I listen carefully to understand not only what you want to improve, but what is holding you back. With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.')
+const steps = computed(() => [
+  { n: 1, title: sb.value?.how_step_1_title || 'Initial Consultation',  desc: sb.value?.how_step_1_desc  || 'We begin by understanding where you are, what you need, and the challenges you have faced so far.' },
+  { n: 2, title: sb.value?.how_step_2_title || 'Focused Guidance',       desc: sb.value?.how_step_2_desc  || 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
+  { n: 3, title: sb.value?.how_step_3_title || 'Clarity & Expression',   desc: sb.value?.how_step_3_desc  || 'Attention to how you express yourself, ensuring clarity, natural flow, and ease in communication.' },
+  { n: 4, title: sb.value?.how_step_4_title || 'Confidence in Practice', desc: sb.value?.how_step_4_desc  || 'Support in applying your communication skills with confidence in real-world situations.' },
+])
 const sectionRef = ref(null)
 const headerRef  = ref(null)
 const bodyRef    = ref(null)

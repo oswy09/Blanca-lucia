@@ -1,14 +1,18 @@
 <script setup>
 const { whatsappUrl, contactEmail } = useSiteConfig()
+const sb = useState('sb-home', () => ({}))
+const ctaEyebrow = computed(() => sb.value?.cta_eyebrow || 'Start with a Conversation')
+const ctaHeading = computed(() => sb.value?.cta_heading || 'If you would like to explore how I can support you')
+const ctaBody    = computed(() => sb.value?.cta_body    || 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
 </script>
 
 <template>
   <section class="cta-sec" id="contact">
     <div class="wrap cta-inner">
-      <span class="eyebrow cta-eyebrow reveal">Start with a Conversation</span>
-      <h2 class="cta-heading reveal" style="transition-delay:80ms">If you would like to explore how I can support you</h2>
+      <span class="eyebrow cta-eyebrow reveal">{{ ctaEyebrow }}</span>
+      <h2 class="cta-heading reveal" style="transition-delay:80ms">{{ ctaHeading }}</h2>
       <p class="cta-body reveal" style="transition-delay:160ms">
-        You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.
+        {{ ctaBody }}
       </p>
       <div class="cta-btns reveal" style="transition-delay:240ms">
         <a :href="whatsappUrl" class="btn cta-btn-white" target="_blank" rel="noopener">

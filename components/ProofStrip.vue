@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <section class="proof" ref="sectionRef" role="region" aria-label="Experience and corporate clients">
     <div class="wrap">
 
@@ -34,7 +34,7 @@
 
       <!-- Marcas debajo -->
       <div class="proof-clients" ref="clientsRef">
-        <span class="proof-label">Trusted by professionals at</span>
+        <span class="proof-label">{{ proofLabel }}</span>
         <ul class="proof-logos" role="list">
           <li v-for="client in clients" :key="client" class="proof-item">{{ client }}</li>
         </ul>
@@ -45,19 +45,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
-const clients = [
-  'Nissan Technical Centre Europe',
-  'WIB Language Training',
-  'Lecta Paper UK Ltd',
-  'Nissan Europe Information Systems',
-]
-
-const slides = [
-  "With over 30 years of experience in language teaching, translation, and personalised guidance, I now offer a focused, consultancy-based approach tailored to each individual.",
-  "My work is centred on understanding your needs and guiding you towards meaningful, lasting progress — without rigid programmes or unnecessary complexity."
-]
+const sb = useState('sb-home', () => ({}))
+const proofLabel = computed(() => sb.value?.proof_label || 'Trusted by professionals at')
+const clients = computed(() => [
+  sb.value?.proof_client_1 || 'Nissan Technical Centre Europe',
+  sb.value?.proof_client_2 || 'WIB Language Training',
+  sb.value?.proof_client_3 || 'Lecta Paper UK Ltd',
+  sb.value?.proof_client_4 || 'Nissan Europe Information Systems',
+])
+const slides = computed(() => [
+  sb.value?.proof_slide_1 || 'With over 30 years of experience in language teaching, translation, and personalised guidance, I now offer a focused, consultancy-based approach tailored to each individual.',
+  sb.value?.proof_slide_2 || 'My work is centred on understanding your needs and guiding you towards meaningful, lasting progress, without rigid programmes or unnecessary complexity.',
+])
 
 const currentSlide = ref(0)
 let slideInterval = null
@@ -69,7 +70,7 @@ function setSlide(index) {
 
 function startAutoplay() {
   slideInterval = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % slides.length
+    currentSlide.value = (currentSlide.value + 1) % slides.value.length
   }, 9000)
 }
 
@@ -79,7 +80,6 @@ function resetAutoplay() {
   }
   startAutoplay()
 }
-
 const sectionRef   = ref(null)
 const cardRef      = ref(null)
 const quoteRef     = ref(null)

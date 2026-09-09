@@ -1,4 +1,13 @@
-<script setup>
+﻿<script setup>
+const sb = useState('sb-home', () => ({}))
+const diffEyebrow = computed(() => sb.value?.diff_eyebrow || 'A Personal Approach')
+const diffTagline = computed(() => sb.value?.diff_tagline || 'A different approach to language learning')
+const diffSub     = computed(() => sb.value?.diff_sub     || 'A personal consultancy designed around you.')
+const diffGuide   = computed(() => sb.value?.diff_guidance_label || 'My guidance helps you:')
+const diffCheck1  = computed(() => sb.value?.diff_check_1 || 'Communicate with clarity and confidence in professional and everyday settings')
+const diffCheck2  = computed(() => sb.value?.diff_check_2 || 'Refine your communication style with precision')
+const diffCheck3  = computed(() => sb.value?.diff_check_3 || 'Resolve long-standing challenges through focused guidance')
+const diffNote    = computed(() => sb.value?.diff_note    || 'Every consultation is shaped around your individual needs. There are no rigid structures here.')
 </script>
 
 <template>
@@ -7,32 +16,29 @@
 
       <!-- Left column -->
       <div class="diff-left" style="position: relative;">
-        <span class="eyebrow reveal">A Personal Approach</span>
-        <p class="diff-tagline reveal" style="transition-delay:80ms">A different approach to language learning</p>
+        <span class="eyebrow reveal">{{ diffEyebrow }}</span>
+        <p class="diff-tagline reveal" style="transition-delay:80ms">{{ diffTagline }}</p>
         <h2 class="diff-statement reveal" style="transition-delay:160ms">
           Not a course.<br>
           Not a programme.
         </h2>
-        <p class="diff-sub reveal" style="transition-delay:240ms">A personal consultancy designed around you.</p>
+        <p class="diff-sub reveal" style="transition-delay:240ms">{{ diffSub }}</p>
         <ScrollBubble :text="['Designed around you', 'Speak with confidence', 'Enjoy your English']" position="top-right" :delay="400" />
       </div>
 
       <!-- Right column -->
       <div class="diff-right">
         <article class="diff-panel reveal" style="transition-delay:80ms">
-          <p class="diff-guidance-label">My guidance helps you:</p>
+          <p class="diff-guidance-label">{{ diffGuide }}</p>
           <ul class="check-list diff-checklist">
-            <li>Communicate with clarity and confidence in professional and everyday settings</li>
-            <li>Refine your communication style with precision</li>
-            <li>Resolve long-standing challenges through focused guidance</li>
+            <li>{{ diffCheck1 }}</li>
+            <li>{{ diffCheck2 }}</li>
+            <li>{{ diffCheck3 }}</li>
           </ul>
           <NuxtLink to="/services" class="btn diff-cta">Explore services</NuxtLink>
         </article>
 
-        <p class="diff-note reveal" style="transition-delay:200ms">
-          Every consultation is shaped around your individual needs.
-          There are no rigid structures here.
-        </p>
+        <p class="diff-note reveal" style="transition-delay:200ms">{{ diffNote }}</p>
       </div>
 
     </div>

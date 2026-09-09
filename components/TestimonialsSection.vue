@@ -2,6 +2,10 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 // Storyblok: blok.testimonials (array)
+const sb = useState('sb-home', () => ({}))
+const testiEyebrow = computed(() => sb.value?.testi_eyebrow || 'Why Choose Fluent Future')
+const testiH2      = computed(() => sb.value?.testi_h2      || 'Real stories of professional growth')
+
 const testimonials = [
   {
     id: 1,
@@ -120,8 +124,8 @@ onBeforeUnmount(() => {
     <div class="wrap">
       <div class="testi-head reveal">
         <div>
-          <span class="eyebrow">Why Choose Fluent Future</span>
-          <h2 class="section-title">Real stories of professional growth</h2>
+          <span class="eyebrow">{{ testiEyebrow }}</span>
+          <h2 class="section-title">{{ testiH2 }}</h2>
         </div>
 
         <div class="testi-controls" aria-label="Testimonials controls">
