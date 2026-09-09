@@ -1,5 +1,10 @@
 <script setup>
 // Storyblok: blok.services (array)
+const sb = useState('sb-home', () => ({}))
+const svcEyebrow = computed(() => sb.value?.svc_eyebrow || 'Services')
+const svcH2      = computed(() => sb.value?.svc_h2      || 'How can I help you?')
+const svcDesc    = computed(() => sb.value?.svc_desc    || 'Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication.')
+
 const services = [
   {
     slug: 'professional-communication',
@@ -41,9 +46,9 @@ const services = [
   <section class="svc-sec" id="services">
     <div class="wrap">
       <div class="svc-header reveal">
-        <span class="eyebrow">Services</span>
-        <h2 class="section-title">How can I help you?</h2>
-        <p class="section-desc">Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication.</p>
+        <span class="eyebrow">{{ svcEyebrow }}</span>
+        <h2 class="section-title">{{ svcH2 }}</h2>
+        <p class="section-desc">{{ svcDesc }}</p>
       </div>
 
       <div class="svc-grid">

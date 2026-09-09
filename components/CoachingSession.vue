@@ -1,12 +1,14 @@
-<script setup>
-import { onMounted, ref } from 'vue'
+﻿<script setup>
+import { computed, onMounted, ref } from 'vue'
 
 const cardRef = ref(null)
 const typedText = ref('')
 const isFinished = ref(false)
 const hasStarted = ref(false)
 
-const fullText = "Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap — through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme."
+const sb = useState('sb-home', () => ({}))
+const coachingTitle = computed(() => sb.value?.coaching_title || 'My role is to help you bridge that gap.')
+const fullText = computed(() => sb.value?.coaching_desc || 'Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme.')
 
 onMounted(() => {
   if (!cardRef.value) return
@@ -26,7 +28,7 @@ onMounted(() => {
 function startTypewriter() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
-    typedText.value = fullText
+    typedText.value = fullText.value
     isFinished.value = true
     return
   }
@@ -38,8 +40,8 @@ function startTypewriter() {
     const elapsed = now - startTime
     const progress = Math.min(elapsed / duration, 1)
 
-    const charCount = Math.floor(progress * fullText.length)
-    typedText.value = fullText.slice(0, charCount)
+    const charCount = Math.floor(progress * fullText.value.length)
+    typedText.value = fullText.value.slice(0, charCount)
 
     if (progress < 1) {
       requestAnimationFrame(tick)
