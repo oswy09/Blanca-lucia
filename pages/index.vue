@@ -1,12 +1,26 @@
-﻿<script setup>
+<script setup>
 const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
-// Storyblok bridge: real-time Visual Editor updates + v-editable
+// Storyblok bridge: real-time Visual Editor updates
 const version = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const story = await useStoryblok('home', { version })
 const sbHome = useState('sb-home', () => ({}))
-if (story.value?.content) sbHome.value = story.value.content
-watch(story, (s) => { if (s?.content) sbHome.value = s.content }, { deep: true })
+
+const { data: homeData } = await useAsyncData('home-story', () =>
+  useStoryblokApi().get('cdn/stories/home', { version })
+)
+
+if (homeData.value?.data?.story?.content) {
+  sbHome.value = homeData.value.data.story.content
+}
+
+onMounted(() => {
+  const storyId = homeData.value?.data?.story?.id
+  if (storyId) {
+    useStoryblokBridge(storyId, (updatedStory) => {
+      sbHome.value = updatedStory.content
+    })
+  }
+})
 
 useSeoMeta({
   title: 'Fluent Future — Personal English language consultancy for Spanish-speaking professionals',
@@ -44,7 +58,7 @@ useRevealOnScroll()
 </script>
 
 <template>
-  <main v-editable="story">
+  <main>
     <HomeHero />
     <ProofStrip />
     <DiffSection />
