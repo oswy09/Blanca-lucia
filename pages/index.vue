@@ -1,5 +1,12 @@
-<script setup>
+﻿<script setup>
 const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
+
+// Storyblok bridge: real-time Visual Editor updates + v-editable
+const version = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+const story = await useStoryblok('home', { version })
+const sbHome = useState('sb-home', () => ({}))
+if (story.value?.content) sbHome.value = story.value.content
+watch(story, (s) => { if (s?.content) sbHome.value = s.content }, { deep: true })
 
 useSeoMeta({
   title: 'Fluent Future — Personal English language consultancy for Spanish-speaking professionals',
@@ -37,7 +44,7 @@ useRevealOnScroll()
 </script>
 
 <template>
-  <main>
+  <main v-editable="story">
     <HomeHero />
     <ProofStrip />
     <DiffSection />
