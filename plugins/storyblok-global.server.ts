@@ -1,5 +1,5 @@
 export default defineNuxtPlugin(async () => {
-  const version = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+  const version = 'draft'
   const api = useStoryblokApi()
 
   const sbGlobal = useState('sb-global', () => ({} as Record<string, string>))

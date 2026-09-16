@@ -1,9 +1,7 @@
 <script setup>
 const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
-const route = useRoute()
-const isEditor = !!route.query._storyblok
-const version = isEditor || process.env.NODE_ENV !== 'production' ? 'draft' : 'published'
+const version = 'draft'
 const sbHome = useState('sb-home', () => ({}))
 const story = ref(null)
 
