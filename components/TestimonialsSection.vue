@@ -2,9 +2,11 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 // Storyblok: blok.testimonials (array)
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const testiEyebrow = computed(() => sb.value?.testi_eyebrow || 'Why Choose Fluent Future')
-const testiH2      = computed(() => sb.value?.testi_h2      || 'Real stories of professional growth')
+const src = computed(() => props.blok || sb.value)
+const testiEyebrow = computed(() => src.value?.testi_eyebrow || 'Why Choose Fluent Future')
+const testiH2      = computed(() => src.value?.testi_h2      || 'Real stories of professional growth')
 
 const testimonials = [
   {

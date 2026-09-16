@@ -6,9 +6,11 @@ const typedText = ref('')
 const isFinished = ref(false)
 const hasStarted = ref(false)
 
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const coachingTitle = computed(() => sb.value?.coaching_title || 'My role is to help you bridge that gap.')
-const fullText = computed(() => sb.value?.coaching_desc || 'Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme.')
+const src = computed(() => props.blok || sb.value)
+const coachingTitle = computed(() => src.value?.coaching_title || 'My role is to help you bridge that gap.')
+const fullText = computed(() => src.value?.coaching_desc || 'Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme.')
 
 onMounted(() => {
   if (!cardRef.value) return

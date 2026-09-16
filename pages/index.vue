@@ -1,23 +1,24 @@
 <script setup>
 const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
-// Storyblok bridge: real-time Visual Editor updates
 const version = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
 const sbHome = useState('sb-home', () => ({}))
+const story = ref(null)
 
 const { data: homeData } = await useAsyncData('home-story', () =>
   useStoryblokApi().get('cdn/stories/home', { version })
 )
 
-if (homeData.value?.data?.story?.content) {
-  sbHome.value = homeData.value.data.story.content
+if (homeData.value?.data?.story) {
+  story.value = homeData.value.data.story
+  sbHome.value = homeData.value.data.story.content || {}
 }
 
 onMounted(() => {
-  const storyId = homeData.value?.data?.story?.id
-  if (storyId) {
-    useStoryblokBridge(storyId, (updatedStory) => {
-      sbHome.value = updatedStory.content
+  if (story.value?.id) {
+    useStoryblokBridge(story.value.id, (updatedStory) => {
+      story.value = updatedStory
+      sbHome.value = updatedStory.content || {}
     })
   }
 })
@@ -59,15 +60,24 @@ useRevealOnScroll()
 
 <template>
   <main>
-    <HomeHero />
-    <ProofStrip />
-    <DiffSection />
-    <CoachingSession />
-    <TestimonialsSection />
-    <WhoIsForTimeline />
-    <ServicesSection />
-    <HowSection />
-    <PricingSection />
-    <CtaSection />
+    <template v-if="story?.content?.sections?.length">
+      <StoryblokComponent
+        v-for="blok in story.content.sections"
+        :key="blok._uid"
+        :blok="blok"
+      />
+    </template>
+    <template v-else>
+      <HomeHero />
+      <ProofStrip />
+      <DiffSection />
+      <CoachingSession />
+      <TestimonialsSection />
+      <WhoIsForTimeline />
+      <ServicesSection />
+      <HowSection />
+      <PricingSection />
+      <CtaSection />
+    </template>
   </main>
 </template>

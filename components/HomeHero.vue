@@ -1,12 +1,14 @@
 ﻿<script setup>
+const props = defineProps({ blok: Object })
 const { whatsappUrl } = useSiteConfig()
 const sb = useState('sb-home', () => ({}))
-const pill    = computed(() => sb.value?.hero_pill         || 'Personal Language Consultancy for Adults')
-const title   = computed(() => sb.value?.hero_title        || "I'm Blanca Derby")
-const tagline = computed(() => sb.value?.hero_tagline      || 'Personal Language Consultancy by Blanca Derby')
-const sub     = computed(() => sb.value?.hero_subtitle     || 'A consultancy for Native Spanish-speaking adults seeking to improve how they express themselves in English in real-life and professional contexts.')
-const ctaPri  = computed(() => sb.value?.hero_cta_primary  || 'Message me on WhatsApp')
-const ctaSec  = computed(() => sb.value?.hero_cta_secondary || 'View services')
+const src = computed(() => props.blok || sb.value)
+const pill    = computed(() => src.value?.hero_pill         || 'Personal Language Consultancy for Adults')
+const title   = computed(() => src.value?.hero_title        || "I'm Blanca Derby")
+const tagline = computed(() => src.value?.hero_tagline      || 'Personal Language Consultancy by Blanca Derby')
+const sub     = computed(() => src.value?.hero_subtitle     || 'A consultancy for Native Spanish-speaking adults seeking to improve how they express themselves in English in real-life and professional contexts.')
+const ctaPri  = computed(() => src.value?.hero_cta_primary  || 'Message me on WhatsApp')
+const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 </script>
 
 <template>

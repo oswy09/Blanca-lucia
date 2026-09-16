@@ -1,9 +1,11 @@
 <script setup>
 const { whatsappUrl, contactEmail } = useSiteConfig()
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const ctaEyebrow = computed(() => sb.value?.cta_eyebrow || 'Start with a Conversation')
-const ctaHeading = computed(() => sb.value?.cta_heading || 'If you would like to explore how I can support you')
-const ctaBody    = computed(() => sb.value?.cta_body    || 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
+const src = computed(() => props.blok || sb.value)
+const ctaEyebrow = computed(() => src.value?.cta_eyebrow || 'Start with a Conversation')
+const ctaHeading = computed(() => src.value?.cta_heading || 'If you would like to explore how I can support you')
+const ctaBody    = computed(() => src.value?.cta_body    || 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
 </script>
 
 <template>

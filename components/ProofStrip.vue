@@ -47,17 +47,19 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const proofLabel = computed(() => sb.value?.proof_label || 'Trusted by professionals at')
+const src = computed(() => props.blok || sb.value)
+const proofLabel = computed(() => src.value?.proof_label || 'Trusted by professionals at')
 const clients = computed(() => [
-  sb.value?.proof_client_1 || 'Nissan Technical Centre Europe',
-  sb.value?.proof_client_2 || 'WIB Language Training',
-  sb.value?.proof_client_3 || 'Lecta Paper UK Ltd',
-  sb.value?.proof_client_4 || 'Nissan Europe Information Systems',
+  src.value?.proof_client_1 || 'Nissan Technical Centre Europe',
+  src.value?.proof_client_2 || 'WIB Language Training',
+  src.value?.proof_client_3 || 'Lecta Paper UK Ltd',
+  src.value?.proof_client_4 || 'Nissan Europe Information Systems',
 ])
 const slides = computed(() => [
-  sb.value?.proof_slide_1 || 'With over 30 years of experience in language teaching, translation, and personalised guidance, I now offer a focused, consultancy-based approach tailored to each individual.',
-  sb.value?.proof_slide_2 || 'My work is centred on understanding your needs and guiding you towards meaningful, lasting progress, without rigid programmes or unnecessary complexity.',
+  src.value?.proof_slide_1 || 'With over 30 years of experience in language teaching, translation, and personalised guidance, I now offer a focused, consultancy-based approach tailored to each individual.',
+  src.value?.proof_slide_2 || 'My work is centred on understanding your needs and guiding you towards meaningful, lasting progress, without rigid programmes or unnecessary complexity.',
 ])
 
 const currentSlide = ref(0)

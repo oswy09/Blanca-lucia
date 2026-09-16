@@ -1,9 +1,11 @@
 <script setup>
 // Storyblok: blok.services (array)
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const svcEyebrow = computed(() => sb.value?.svc_eyebrow || 'Services')
-const svcH2      = computed(() => sb.value?.svc_h2      || 'How can I help you?')
-const svcDesc    = computed(() => sb.value?.svc_desc    || 'Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication.')
+const src = computed(() => props.blok || sb.value)
+const svcEyebrow = computed(() => src.value?.svc_eyebrow || 'Services')
+const svcH2      = computed(() => src.value?.svc_h2      || 'How can I help you?')
+const svcDesc    = computed(() => src.value?.svc_desc    || 'Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication.')
 
 const services = [
   {

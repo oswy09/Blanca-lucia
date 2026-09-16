@@ -3,32 +3,34 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const timelineRef = ref(null)
 
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const whoEyebrow = computed(() => sb.value?.who_eyebrow || 'Who This Is For')
-const whoH2      = computed(() => sb.value?.who_h2      || 'Designed for adults who want more than standard approaches')
-const whoDesc    = computed(() => sb.value?.who_desc    || 'This personal consultancy is suited to individuals who feel that traditional methods have not fully addressed their needs.')
+const src = computed(() => props.blok || sb.value)
+const whoEyebrow = computed(() => src.value?.who_eyebrow || 'Who This Is For')
+const whoH2      = computed(() => src.value?.who_h2      || 'Designed for adults who want more than standard approaches')
+const whoDesc    = computed(() => src.value?.who_desc    || 'This personal consultancy is suited to individuals who feel that traditional methods have not fully addressed their needs.')
 const list = computed(() => [
   {
-    title: sb.value?.who_item_1_title || 'Professionals seeking clarity in communication',
-    desc: sb.value?.who_item_1_desc  || 'You need to communicate clearly and confidently at work, in meetings, with clients, or across international environments, yet feel you are not fully expressing your capabilities.',
+    title: src.value?.who_item_1_title || 'Professionals seeking clarity in communication',
+    desc: src.value?.who_item_1_desc  || 'You need to communicate clearly and confidently at work, in meetings, with clients, or across international environments, yet feel you are not fully expressing your capabilities.',
     iconBg: '#d1ece3',
     accent: 'var(--teal)'
   },
   {
-    title: sb.value?.who_item_2_title || 'Spanish speakers wanting a specific goal',
-    desc: sb.value?.who_item_2_desc  || 'Your priorities have evolved. You are looking to reconnect with a language or refine your communication with a clear, practical purpose.',
+    title: src.value?.who_item_2_title || 'Spanish speakers wanting a specific goal',
+    desc: src.value?.who_item_2_desc  || 'Your priorities have evolved. You are looking to reconnect with a language or refine your communication with a clear, practical purpose.',
     iconBg: '#fef3c7',
     accent: 'var(--amber-sh)'
   },
   {
-    title: sb.value?.who_item_3_title || 'Those who feel stuck despite experience',
-    desc: sb.value?.who_item_3_desc  || 'You have spent years working with the language, yet still feel a gap between understanding and natural expression. This is where focused, individual guidance becomes essential.',
+    title: src.value?.who_item_3_title || 'Those who feel stuck despite experience',
+    desc: src.value?.who_item_3_desc  || 'You have spent years working with the language, yet still feel a gap between understanding and natural expression. This is where focused, individual guidance becomes essential.',
     iconBg: '#fde8e1',
     accent: 'var(--coral)'
   },
   {
-    title: sb.value?.who_item_4_title || 'Individuals who value a personal approach',
-    desc: sb.value?.who_item_4_desc  || 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
+    title: src.value?.who_item_4_title || 'Individuals who value a personal approach',
+    desc: src.value?.who_item_4_desc  || 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
     image: '/imagens/personalized advice.JPG',
     accent: 'var(--teal-sh)'
   }

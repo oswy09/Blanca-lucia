@@ -1,13 +1,15 @@
 ﻿<script setup>
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const diffEyebrow = computed(() => sb.value?.diff_eyebrow || 'A Personal Approach')
-const diffTagline = computed(() => sb.value?.diff_tagline || 'A different approach to language learning')
-const diffSub     = computed(() => sb.value?.diff_sub     || 'A personal consultancy designed around you.')
-const diffGuide   = computed(() => sb.value?.diff_guidance_label || 'My guidance helps you:')
-const diffCheck1  = computed(() => sb.value?.diff_check_1 || 'Communicate with clarity and confidence in professional and everyday settings')
-const diffCheck2  = computed(() => sb.value?.diff_check_2 || 'Refine your communication style with precision')
-const diffCheck3  = computed(() => sb.value?.diff_check_3 || 'Resolve long-standing challenges through focused guidance')
-const diffNote    = computed(() => sb.value?.diff_note    || 'Every consultation is shaped around your individual needs. There are no rigid structures here.')
+const src = computed(() => props.blok || sb.value)
+const diffEyebrow = computed(() => src.value?.diff_eyebrow || 'A Personal Approach')
+const diffTagline = computed(() => src.value?.diff_tagline || 'A different approach to language learning')
+const diffSub     = computed(() => src.value?.diff_sub     || 'A personal consultancy designed around you.')
+const diffGuide   = computed(() => src.value?.diff_guidance_label || 'My guidance helps you:')
+const diffCheck1  = computed(() => src.value?.diff_check_1 || 'Communicate with clarity and confidence in professional and everyday settings')
+const diffCheck2  = computed(() => src.value?.diff_check_2 || 'Refine your communication style with precision')
+const diffCheck3  = computed(() => src.value?.diff_check_3 || 'Resolve long-standing challenges through focused guidance')
+const diffNote    = computed(() => src.value?.diff_note    || 'Every consultation is shaped around your individual needs. There are no rigid structures here.')
 </script>
 
 <template>

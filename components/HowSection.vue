@@ -3,15 +3,17 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const { whatsappUrl } = useSiteConfig()
 
+const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
-const howEyebrow = computed(() => sb.value?.how_eyebrow || 'How I work')
-const howH2      = computed(() => sb.value?.how_h2      || 'Tailored, thoughtful, effective')
-const howLead    = computed(() => sb.value?.how_lead    || 'I listen carefully to understand not only what you want to improve, but what is holding you back. With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.')
+const src = computed(() => props.blok || sb.value)
+const howEyebrow = computed(() => src.value?.how_eyebrow || 'How I work')
+const howH2      = computed(() => src.value?.how_h2      || 'Tailored, thoughtful, effective')
+const howLead    = computed(() => src.value?.how_lead    || 'I listen carefully to understand not only what you want to improve, but what is holding you back. With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.')
 const steps = computed(() => [
-  { n: 1, title: sb.value?.how_step_1_title || 'Initial Consultation',  desc: sb.value?.how_step_1_desc  || 'We begin by understanding where you are, what you need, and the challenges you have faced so far.' },
-  { n: 2, title: sb.value?.how_step_2_title || 'Focused Guidance',       desc: sb.value?.how_step_2_desc  || 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
-  { n: 3, title: sb.value?.how_step_3_title || 'Clarity & Expression',   desc: sb.value?.how_step_3_desc  || 'Attention to how you express yourself, ensuring clarity, natural flow, and ease in communication.' },
-  { n: 4, title: sb.value?.how_step_4_title || 'Confidence in Practice', desc: sb.value?.how_step_4_desc  || 'Support in applying your communication skills with confidence in real-world situations.' },
+  { n: 1, title: src.value?.how_step_1_title || 'Initial Consultation',  desc: src.value?.how_step_1_desc  || 'We begin by understanding where you are, what you need, and the challenges you have faced so far.' },
+  { n: 2, title: src.value?.how_step_2_title || 'Focused Guidance',       desc: src.value?.how_step_2_desc  || 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
+  { n: 3, title: src.value?.how_step_3_title || 'Clarity & Expression',   desc: src.value?.how_step_3_desc  || 'Attention to how you express yourself, ensuring clarity, natural flow, and ease in communication.' },
+  { n: 4, title: src.value?.how_step_4_title || 'Confidence in Practice', desc: src.value?.how_step_4_desc  || 'Support in applying your communication skills with confidence in real-world situations.' },
 ])
 const sectionRef = ref(null)
 const headerRef  = ref(null)
