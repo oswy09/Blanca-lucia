@@ -1,26 +1,16 @@
 <script setup>
 const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
-const version = 'draft'
 const sbHome = useState('sb-home', () => ({}))
-const story = ref(null)
 
-const { data: homeData } = await useAsyncData('home-story', () =>
-  useStoryblokApi().get('cdn/stories/home', { version })
-)
+const story = await useStoryblok('home', { version: 'draft' })
 
-if (homeData.value?.data?.story) {
-  story.value = homeData.value.data.story
-  sbHome.value = homeData.value.data.story.content || {}
+if (story.value?.content) {
+  sbHome.value = story.value.content
 }
 
-onMounted(() => {
-  if (story.value?.id) {
-    useStoryblokBridge(story.value.id, (updatedStory) => {
-      story.value = updatedStory
-      sbHome.value = updatedStory.content || {}
-    })
-  }
+watch(story, (s) => {
+  if (s?.content) sbHome.value = s.content
 })
 
 useSeoMeta({
@@ -66,6 +56,7 @@ useRevealOnScroll()
         :key="blok._uid"
         :blok="blok"
       />
+      <!-- DEBUG: remove after confirming sections load -->
     </template>
     <template v-else>
       <HomeHero />
