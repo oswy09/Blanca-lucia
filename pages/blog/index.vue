@@ -92,8 +92,10 @@ const posts = [
   },
 ]
 
-// Use Storyblok data when available, otherwise mock data
-const activePosts = sbPosts.length > 0 ? sbPosts : posts
+// Merge: Storyblok posts first, then mock posts not already in Storyblok
+const activePosts = sbPosts.length > 0
+  ? [...sbPosts, ...posts.filter(m => !sbPosts.some(s => s.slug === m.slug))]
+  : posts
 
 const featured = activePosts.find(p => p.featured)
 const rest = activePosts.filter(p => !p.featured)
