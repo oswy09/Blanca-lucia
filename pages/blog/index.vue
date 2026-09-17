@@ -14,13 +14,15 @@ try {
     per_page: 20,
   })
   sbPosts = (data?.stories || []).map(s => ({
-    slug: s.slug,
+    slug: s.full_slug?.split('/').pop() || s.slug,
     title: s.content.title,
     excerpt: s.content.excerpt,
     category: s.content.category,
     readTime: s.content.read_time,
     date: s.content.date || s.first_published_at,
-    image: s.content.image?.filename || '/imagens/live-session.webp',
+    image: s.content.image?.filename
+      || (typeof s.content.image === 'string' ? s.content.image : null)
+      || '/imagens/live-session.webp',
     featured: s.content.featured === true,
   }))
 } catch {
@@ -92,10 +94,11 @@ const posts = [
   },
 ]
 
-// Merge: Storyblok posts first, then mock posts not already in Storyblok
-const activePosts = sbPosts.length > 0
+// Merge: Storyblok posts first, then mock posts not already in Storyblok; sorted by date desc
+const activePosts = (sbPosts.length > 0
   ? [...sbPosts, ...posts.filter(m => !sbPosts.some(s => s.slug === m.slug))]
   : posts
+).sort((a, b) => new Date(b.date) - new Date(a.date))
 
 const featured = activePosts.find(p => p.featured)
 const rest = activePosts.filter(p => !p.featured)

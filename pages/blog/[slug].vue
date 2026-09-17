@@ -21,7 +21,9 @@ try {
       category: c.category,
       readTime: c.read_time,
       date: c.date || data.story.first_published_at,
-      image: c.image?.filename || '/imagens/live-session.webp',
+      image: c.image?.filename
+        || (typeof c.image === 'string' ? c.image : null)
+        || '/imagens/live-session.webp',
       // body from Storyblok is rendered via StoryblokRichText — stored raw
       sbBody: c.body,
       body: null,
