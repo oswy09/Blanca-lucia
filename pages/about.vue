@@ -3,6 +3,51 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
+const story = await useStoryblok('about', { version: 'draft' })
+const sb = computed(() => story.value?.content || {})
+
+const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')
+const abHeroTitle    = computed(() => sb.value.ab_hero_title    || 'A personal language consultancy by Blanca Derby')
+const abHeroSubtitle = computed(() => sb.value.ab_hero_subtitle || 'Working with Spanish-speaking adults to develop clear, confident, and natural communication through a tailored, one-to-one approach.')
+
+const abIntroEyebrow = computed(() => sb.value.ab_intro_eyebrow || 'A Personal Approach')
+const abIntroH2      = computed(() => sb.value.ab_intro_h2      || 'A more focused, individual approach')
+const abIntroLead    = computed(() => sb.value.ab_intro_lead    || 'I support Spanish-speaking professionals in developing clear, confident communication in English.')
+const abIntroBlock1  = computed(() => sb.value.ab_intro_block_1 || 'My approach is shaped by over 30 years of experience in language teaching, translation, and personalised guidance, now refined into a consultancy model that prioritises the individual.')
+const abIntroBlock2  = computed(() => sb.value.ab_intro_block_2 || 'Rather than following a standard structure, each engagement is carefully tailored — allowing us to focus on what will make a meaningful difference to you.')
+const abIntroBlock3  = computed(() => sb.value.ab_intro_block_3 || 'My services for evaluating their prospective employees. To this end I provide a detailed assessment for each individual candidate, enabling my clients to make a more informed decision during their hiring process.')
+
+const abCalloutText  = computed(() => sb.value.ab_callout_text  || 'There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.')
+
+const abValuesEyebrow = computed(() => sb.value.ab_values_eyebrow || 'How I work')
+const abValuesH2      = computed(() => sb.value.ab_values_h2      || 'Built on Three Core Values')
+const abVal1Title     = computed(() => sb.value.ab_val_1_title    || 'Careful understanding')
+const abVal1Desc      = computed(() => sb.value.ab_val_1_desc     || 'Each engagement begins with listening — understanding your background, needs, and goals.')
+const abVal2Title     = computed(() => sb.value.ab_val_2_title    || 'Focused guidance')
+const abVal2Desc      = computed(() => sb.value.ab_val_2_desc     || 'Work is directed towards what matters most, avoiding unnecessary complexity.')
+const abVal3Title     = computed(() => sb.value.ab_val_3_title    || 'Meaningful progress')
+const abVal3Desc      = computed(() => sb.value.ab_val_3_desc     || 'The aim is not speed, but clarity, confidence, and lasting improvement.')
+
+const abJourneyEyebrow = computed(() => sb.value.ab_journey_eyebrow || 'My Background')
+const abJourneyH2      = computed(() => sb.value.ab_journey_h2      || 'A Lifetime in Languages')
+const abStep1Title     = computed(() => sb.value.ab_step_1_title    || 'The Foundation')
+const abStep1Desc      = computed(() => sb.value.ab_step_1_desc     || 'I have spent more than three decades working with adults from a wide range of professional backgrounds.')
+const abStep2Title     = computed(() => sb.value.ab_step_2_title    || 'The Insight')
+const abStep2Desc      = computed(() => sb.value.ab_step_2_desc     || 'This experience allows me to quickly recognise patterns, identify challenges, and provide clear, practical guidance tailored to each individual.')
+const abStep3Title     = computed(() => sb.value.ab_step_3_title    || 'The Evolution')
+const abStep3Desc      = computed(() => sb.value.ab_step_3_desc     || 'Over time, my work has evolved from traditional teaching into a more focused consultancy approach — one that values depth, precision, and personal attention.')
+
+const abDiffEyebrow = computed(() => sb.value.ab_diff_eyebrow || 'What Makes This Different')
+const abDiffH2      = computed(() => sb.value.ab_diff_h2      || 'Personal. Not a Platform.')
+const abDiffP1      = computed(() => sb.value.ab_diff_p1      || 'This is a personal consultancy — not a platform or standardised service.')
+const abDiffP2      = computed(() => sb.value.ab_diff_p2      || 'I work with a limited number of clients to ensure each person receives thoughtful, individual attention.')
+const abDiffP3      = computed(() => sb.value.ab_diff_p3      || 'If you are looking for a calm, focused, and personal approach, I would be pleased to work with you.')
+const abDiffNote    = computed(() => sb.value.ab_diff_note    || 'A limited number of clients are accepted to ensure a high level of personal attention.')
+
+const abCtaEyebrow = computed(() => sb.value.ab_cta_eyebrow || 'Ready to Work Together?')
+const abCtaTitle   = computed(() => sb.value.ab_cta_title   || 'If you would like to get in touch')
+const abCtaSub     = computed(() => sb.value.ab_cta_sub     || 'You are welcome to contact me. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
+
 useSeoMeta({
   title: 'About — Blanca Derby · Fluent Future',
   description: 'Over 30 years helping Spanish-speaking professionals communicate with clarity and confidence in English.',
@@ -112,16 +157,9 @@ onUnmounted(() => {
       <div class="wrap ab-hero-grid">
 
         <div class="ab-hero-text">
-          <span class="eyebrow ab-eyebrow">About Me</span>
-          <h1 class="ab-title">
-            A personal language<br>
-            consultancy by<br>
-            <em class="ab-em">Blanca Derby</em>
-          </h1>
-          <p class="ab-subtitle">
-            Working with Spanish-speaking adults to develop clear, confident, and natural communication
-            through a tailored, one-to-one approach.
-          </p>
+          <span class="eyebrow ab-eyebrow">{{ abEyebrow }}</span>
+          <h1 class="ab-title">{{ abHeroTitle }}</h1>
+          <p class="ab-subtitle">{{ abHeroSubtitle }}</p>
           <a :href="whatsappUrl" class="btn btn-primary ab-hero-btn" target="_blank" rel="noopener">
             Get in touch
           </a>
@@ -148,37 +186,24 @@ onUnmounted(() => {
 
         <!-- Left Column: Main Message -->
         <div class="ab-intro-main reveal">
-          <span class="eyebrow">A Personal Approach</span>
-          <h2 class="section-title ab-intro-h2">A more focused,<br>individual approach</h2>
-          <p class="ab-lead-p">
-            I support Spanish-speaking professionals in developing clear, confident communication in English.
-          </p>
-          <p class="ab-p">
-            I work with adults who want to communicate clearly, confidently, and naturally — particularly those who feel that traditional methods have not fully met their needs.
-          </p>
+          <span class="eyebrow">{{ abIntroEyebrow }}</span>
+          <h2 class="section-title ab-intro-h2">{{ abIntroH2 }}</h2>
+          <p class="ab-lead-p">{{ abIntroLead }}</p>
         </div>
 
         <!-- Right Column: Supporting Details -->
         <div class="ab-intro-details">
           <div class="ab-intro-block reveal" style="transition-delay: 80ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">
-              My approach is shaped by over 30 years of experience in language teaching, translation, and personalised guidance, now refined into a consultancy model that prioritises the individual.
-            </p>
+            <p class="block-body">{{ abIntroBlock1 }}</p>
           </div>
-
           <div class="ab-intro-block reveal" style="transition-delay: 160ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">
-              Rather than following a standard structure, each engagement is carefully tailored — allowing us to focus on what will make a meaningful difference to you.
-            </p>
+            <p class="block-body">{{ abIntroBlock2 }}</p>
           </div>
-
           <div class="ab-intro-block reveal" style="transition-delay: 240ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">
-              My services for evaluating their prospective employees. To this end I provide a detailed assessment for each individual candidate, enabling my clients to make a more informed decision during their hiring process.
-            </p>
+            <p class="block-body">{{ abIntroBlock3 }}</p>
           </div>
         </div>
       </div>
@@ -188,9 +213,7 @@ onUnmounted(() => {
     <section class="ab-callout">
       <div class="wrap">
         <div class="ab-callout-box">
-          <p class="ab-callout-text">
-            There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.
-          </p>
+          <p class="ab-callout-text">{{ abCalloutText }}</p>
         </div>
       </div>
     </section>
@@ -199,8 +222,8 @@ onUnmounted(() => {
     <section class="ab-values">
       <div class="wrap">
         <div class="ab-values-head reveal">
-          <span class="eyebrow">How I work</span>
-          <h2 class="section-title" style="margin-top:10px">Built on Three Core Values</h2>
+          <span class="eyebrow">{{ abValuesEyebrow }}</span>
+          <h2 class="section-title" style="margin-top:10px">{{ abValuesH2 }}</h2>
         </div>
         <div class="ab-values-grid">
 
@@ -211,8 +234,8 @@ onUnmounted(() => {
                 <path d="M15 3H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v4l4-4h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">Careful understanding</h3>
-            <p class="ab-card-desc">Each engagement begins with listening — understanding your background, needs, and goals.</p>
+            <h3 class="ab-card-title">{{ abVal1Title }}</h3>
+            <p class="ab-card-desc">{{ abVal1Desc }}</p>
           </article>
 
           <article class="ab-card reveal" style="transition-delay:120ms">
@@ -222,8 +245,8 @@ onUnmounted(() => {
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">Focused guidance</h3>
-            <p class="ab-card-desc">Work is directed towards what matters most, avoiding unnecessary complexity.</p>
+            <h3 class="ab-card-title">{{ abVal2Title }}</h3>
+            <p class="ab-card-desc">{{ abVal2Desc }}</p>
           </article>
 
           <article class="ab-card reveal" style="transition-delay:180ms">
@@ -233,8 +256,8 @@ onUnmounted(() => {
                 <polyline points="17 6 23 6 23 12"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">Meaningful progress</h3>
-            <p class="ab-card-desc">The aim is not speed, but clarity, confidence, and lasting improvement.</p>
+            <h3 class="ab-card-title">{{ abVal3Title }}</h3>
+            <p class="ab-card-desc">{{ abVal3Desc }}</p>
           </article>
 
         </div>
@@ -247,44 +270,34 @@ onUnmounted(() => {
 
         <!-- Left: My Background (Journey Timeline) -->
         <div class="ab-split-left">
-          <span class="eyebrow reveal">My Background</span>
-          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms">A Lifetime<br>in Languages</h2>
-          
+          <span class="eyebrow reveal">{{ abJourneyEyebrow }}</span>
+          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms">{{ abJourneyH2 }}</h2>
+
           <div class="journey-timeline">
-            <!-- Central connection lines -->
             <div class="journey-line" aria-hidden="true"></div>
             <div class="journey-line-progress" aria-hidden="true"></div>
 
-            <!-- Step 1 -->
             <div class="journey-step">
-              <div class="journey-node">
-                <span class="node-dot"></span>
-              </div>
+              <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">The Foundation</h3>
-                <p class="ab-p">I have spent more than three decades working with adults from a wide range of professional backgrounds.</p>
+                <h3 class="journey-step-title">{{ abStep1Title }}</h3>
+                <p class="ab-p">{{ abStep1Desc }}</p>
               </div>
             </div>
 
-            <!-- Step 2 -->
             <div class="journey-step">
-              <div class="journey-node">
-                <span class="node-dot"></span>
-              </div>
+              <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">The Insight</h3>
-                <p class="ab-p">This experience allows me to quickly recognise patterns, identify challenges, and provide clear, practical guidance tailored to each individual.</p>
+                <h3 class="journey-step-title">{{ abStep2Title }}</h3>
+                <p class="ab-p">{{ abStep2Desc }}</p>
               </div>
             </div>
 
-            <!-- Step 3 -->
             <div class="journey-step">
-              <div class="journey-node">
-                <span class="node-dot"></span>
-              </div>
+              <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">The Evolution</h3>
-                <p class="ab-p">Over time, my work has evolved from traditional teaching into a more focused consultancy approach — one that values depth, precision, and personal attention.</p>
+                <h3 class="journey-step-title">{{ abStep3Title }}</h3>
+                <p class="ab-p">{{ abStep3Desc }}</p>
               </div>
             </div>
           </div>
@@ -293,14 +306,14 @@ onUnmounted(() => {
         <!-- Right: What Makes This Different -->
         <div class="ab-split-right reveal" style="transition-delay:120ms">
           <div class="ab-diff-panel">
-            <span class="eyebrow ab-diff-eyebrow">What Makes This Different</span>
-            <h2 class="ab-diff-h2">Personal.<br>Not a Platform.</h2>
-            <p class="ab-diff-p">This is a personal consultancy — not a platform or standardised service.</p>
-            <p class="ab-diff-p">I work with a limited number of clients to ensure each person receives thoughtful, individual attention.</p>
-            <p class="ab-diff-p">If you are looking for a calm, focused, and personal approach, I would be pleased to work with you.</p>
+            <span class="eyebrow ab-diff-eyebrow">{{ abDiffEyebrow }}</span>
+            <h2 class="ab-diff-h2">{{ abDiffH2 }}</h2>
+            <p class="ab-diff-p">{{ abDiffP1 }}</p>
+            <p class="ab-diff-p">{{ abDiffP2 }}</p>
+            <p class="ab-diff-p">{{ abDiffP3 }}</p>
             <p class="ab-diff-note">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              A limited number of clients are accepted to ensure a high level of personal attention.
+              {{ abDiffNote }}
             </p>
             <NuxtLink to="/contact" class="btn ab-diff-btn">Get in Touch</NuxtLink>
           </div>
@@ -312,12 +325,9 @@ onUnmounted(() => {
     <!-- ── 5. CTA ───────────────────────────────────────────────── -->
     <section class="ab-cta">
       <div class="wrap ab-cta-inner reveal">
-        <span class="eyebrow ab-cta-eyebrow">Ready to Work Together?</span>
-        <h2 class="ab-cta-title">If you would like to get in touch</h2>
-        <p class="ab-cta-sub">
-          You are welcome to contact me. We can begin with an initial conversation
-          to understand your needs and consider the most appropriate way forward.
-        </p>
+        <span class="eyebrow ab-cta-eyebrow">{{ abCtaEyebrow }}</span>
+        <h2 class="ab-cta-title">{{ abCtaTitle }}</h2>
+        <p class="ab-cta-sub">{{ abCtaSub }}</p>
         <NuxtLink to="/contact" class="btn ab-cta-btn">Get in Touch</NuxtLink>
       </div>
     </section>
