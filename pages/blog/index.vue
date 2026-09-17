@@ -25,6 +25,7 @@ try {
       || '/imagens/live-session.webp',
     featured: s.content.featured === true,
   }))
+  if (import.meta.dev) console.log('[blog] SB slugs:', sbPosts.map(s => s.slug))
 } catch {
   // Token not set or API unavailable — falls back to mock data below
 }
@@ -83,7 +84,7 @@ const posts = [
     featured: false,
   },
   {
-    slug: 'preparing-for-english-job-interviews',
+    slug: 'preparing-for-english-job-interviews-as-a-native-spanish-speaker',
     title: 'Preparing for English job interviews as a native Spanish speaker',
     excerpt: 'An interview is not a test of your English level. It is a conversation — and preparation changes everything about how you show up.',
     category: 'Interview Preparation',
