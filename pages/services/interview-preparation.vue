@@ -1,6 +1,64 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
+const story = await useStoryblok('interview-preparation', { version: 'draft' })
+const sb = computed(() => story.value?.content || {})
+
+// Hero
+const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
+const heroTitle   = computed(() => sb.value.hero_title   || 'Interview Confidence & Preparation')
+
+// Intro
+const introTitle     = computed(() => sb.value.intro_title     || 'Be ready to present the best version of yourself in English')
+const introLead      = computed(() => sb.value.intro_lead      || 'An interview can be challenging in any language. When it takes place in English, the pressure can feel even greater.')
+const introBody      = computed(() => sb.value.intro_body      || "You may have the experience, qualifications and ability for the position, but if you're concentrating so hard on finding the right English words, it can become difficult to communicate your strengths with confidence.")
+const introHighlight = computed(() => sb.value.intro_highlight || 'I can help you prepare.')
+const cardTitle      = computed(() => sb.value.card_title      || 'Your experience deserves to be heard')
+const cardText1      = computed(() => sb.value.card_text_1     || 'You already have your own experience, knowledge and professional achievements.')
+const cardText2      = computed(() => sb.value.card_text_2     || 'My role is to help you communicate them effectively in English.')
+const cardText3      = computed(() => sb.value.card_text_3     || 'We will focus on your interview, your experience and your goals, so that your preparation is practical and relevant to the position you are applying for.')
+const cardFooter     = computed(() => sb.value.card_footer     || 'The aim is not perfection. The aim is to walk into the interview thinking: "I know what I want to say, and I can say it confidently in English."')
+
+// Prep
+const prepSubtitle = computed(() => sb.value.prep_subtitle || 'Preparation changes everything')
+const prepText1    = computed(() => sb.value.prep_text_1   || "The purpose of our preparation isn't to give you a script to memorise.")
+const prepText2    = computed(() => sb.value.prep_text_2   || "It's to help you feel sufficiently prepared and confident to respond naturally when the questions come.")
+const prepText3    = computed(() => sb.value.prep_text_3   || "Together, we'll work on the language and communication skills you need for your particular interview and professional situation.")
+const workHeading  = computed(() => sb.value.work_heading  || 'What can we work on?')
+const workSub      = computed(() => sb.value.work_sub      || 'Your preparation may include:')
+const workItems = computed(() => [
+  sb.value.work_1  || 'Anticipating likely interview questions',
+  sb.value.work_2  || 'Structuring strong and concise answers',
+  sb.value.work_3  || 'Presenting your professional experience clearly',
+  sb.value.work_4  || 'Describing your achievements and strengths',
+  sb.value.work_5  || 'Explaining your skills and responsibilities naturally in English',
+  sb.value.work_6  || 'Handling difficult or unexpected questions',
+  sb.value.work_7  || 'Improving vocabulary and professional expressions',
+  sb.value.work_8  || 'Avoiding literal translation from Spanish',
+  sb.value.work_9  || 'Practising confident responses',
+  sb.value.work_10 || 'Conducting a realistic mock interview',
+  sb.value.work_11 || 'Reviewing your performance and identifying areas for improvement',
+].filter(Boolean))
+
+// Session
+const sessionEyebrow = computed(() => sb.value.session_eyebrow || 'How We Work')
+const sessionTitle   = computed(() => sb.value.session_title   || 'All sessions are conducted online')
+const sessionDesc    = computed(() => sb.value.session_desc    || 'We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.')
+
+// Expect
+const expectSubtitle = computed(() => sb.value.expect_subtitle || 'What you can expect')
+const expectIntro    = computed(() => sb.value.expect_intro    || 'By the time you reach your interview, you should feel:')
+const expects = computed(() => [
+  { label: sb.value.expect_1_label || 'Prepared',  color: 'teal',  desc: sb.value.expect_1_desc || "because you've practised the situations you're likely to face." },
+  { label: sb.value.expect_2_label || 'Clear',     color: 'coral', desc: sb.value.expect_2_desc || 'because you know how to explain your experience effectively.' },
+  { label: sb.value.expect_3_label || 'Confident', color: 'amber', desc: sb.value.expect_3_desc || 'because you have practised expressing yourself naturally.' },
+  { label: sb.value.expect_4_label || 'Ready',     color: 'teal',  desc: sb.value.expect_4_desc || 'because you can concentrate on the interview rather than worrying about your English.' },
+])
+
+// CTA
+const ctaTitle = computed(() => sb.value.cta_title || 'Your next opportunity deserves your best communication.')
+const ctaDesc  = computed(() => sb.value.cta_desc  || "Let's prepare for it together.")
+
 useSeoMeta({
   title: 'Interview Confidence & Preparation | Fluent Future',
   description: 'Prepare for job interviews in English with Blanca Derby. Practise mock interviews, structure strong answers, build confidence, and present the best version of yourself.',
@@ -29,8 +87,8 @@ useRevealOnScroll()
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="ip-hero">
       <div class="wrap ip-hero-inner reveal">
-        <span class="eyebrow ip-hero-eyebrow">Service</span>
-        <h1 class="ip-hero-title">Interview Confidence &amp; Preparation</h1>
+        <span class="eyebrow ip-hero-eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="ip-hero-title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -49,41 +107,25 @@ useRevealOnScroll()
       <div class="ip-grid">
         <!-- Left: Intro & Highlight -->
         <div class="ip-intro-section reveal">
-          <h2 class="ip-section-title">Be ready to present the best version of yourself in English</h2>
-          <p class="ip-lead-text">
-            An interview can be challenging in any language. When it takes place in English, the pressure can feel even greater.
-          </p>
-          <p class="ip-body-text">
-            You may have the experience, qualifications and ability for the position, but if you’re concentrating so hard on finding the right English words, it can become difficult to communicate your strengths with confidence.
-          </p>
-          
+          <h2 class="ip-section-title">{{ introTitle }}</h2>
+          <p class="ip-lead-text">{{ introLead }}</p>
+          <p class="ip-body-text">{{ introBody }}</p>
           <div class="ip-highlight-box">
             <div class="ip-highlight-border"></div>
-            <p class="ip-highlight-text">
-              <strong>I can help you prepare.</strong>
-            </p>
+            <p class="ip-highlight-text"><strong>{{ introHighlight }}</strong></p>
           </div>
         </div>
 
         <!-- Right: Your experience deserves to be heard card -->
         <div class="ip-sidebar-section reveal">
           <div class="ip-experience-card">
-            <h3 class="ip-card-title">Your experience deserves to be heard</h3>
-            <p class="ip-card-text">
-              You already have your own experience, knowledge and professional achievements.
-            </p>
-            <p class="ip-card-text">
-              My role is to help you communicate them effectively in English.
-            </p>
-            <p class="ip-card-text">
-              We will focus on your interview, your experience and your goals, so that your preparation is practical and relevant to the position you are applying for.
-            </p>
-            <div class="ip-card-footer">
-              <span class="ip-footer-icon" aria-hidden="true">🎯</span>
-              <p class="ip-footer-text">
-                The aim is not perfection. The aim is to walk into the interview thinking: 
-                <em>“I know what I want to say, and I can say it confidently in English.”</em>
-              </p>
+            <h3 class=”ip-card-title”>{{ cardTitle }}</h3>
+            <p class=”ip-card-text”>{{ cardText1 }}</p>
+            <p class=”ip-card-text”>{{ cardText2 }}</p>
+            <p class=”ip-card-text”>{{ cardText3 }}</p>
+            <div class=”ip-card-footer”>
+              <span class=”ip-footer-icon” aria-hidden=”true”>🎯</span>
+              <p class=”ip-footer-text”>{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -94,109 +136,23 @@ useRevealOnScroll()
     <section class="ip-prep wrap reveal">
       <div class="ip-prep-grid">
         <div class="ip-prep-content">
-          <h3 class="ip-subtitle">Preparation changes everything</h3>
-          <p class="ip-prep-text">
-            The purpose of our preparation isn’t to give you a script to memorise.
-          </p>
-          <p class="ip-prep-text">
-            It’s to help you feel sufficiently prepared and confident to respond naturally when the questions come.
-          </p>
-          <p class="ip-prep-text">
-            Together, we’ll work on the language and communication skills you need for your particular interview and professional situation.
-          </p>
+          <h3 class="ip-subtitle">{{ prepSubtitle }}</h3>
+          <p class="ip-prep-text">{{ prepText1 }}</p>
+          <p class="ip-prep-text">{{ prepText2 }}</p>
+          <p class="ip-prep-text">{{ prepText3 }}</p>
         </div>
 
         <div class="ip-work-card">
-          <h4 class="ip-work-heading">What can we work on?</h4>
-          <p class="ip-work-sub">Your preparation may include:</p>
+          <h4 class="ip-work-heading">{{ workHeading }}</h4>
+          <p class="ip-work-sub">{{ workSub }}</p>
           <ul class="ip-help-list">
-            <li>
+            <li v-for="item in workItems" :key="item">
               <div class="ip-bullet-check">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span>Anticipating likely interview questions</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Structuring strong and concise answers</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Presenting your professional experience clearly</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Describing your achievements and strengths</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Explaining your skills and responsibilities naturally in English</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Handling difficult or unexpected questions</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Improving vocabulary and professional expressions</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Avoiding literal translation from Spanish</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Practising confident responses</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Conducting a realistic mock interview</span>
-            </li>
-            <li>
-              <div class="ip-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Reviewing your performance and identifying areas for improvement</span>
+              <span>{{ item }}</span>
             </li>
           </ul>
         </div>
@@ -207,11 +163,9 @@ useRevealOnScroll()
     <section class="ip-session-wrap wrap">
       <div class="ip-session-banner reveal">
         <div class="ip-session-content">
-          <span class="eyebrow ip-session-eyebrow">How We Work</span>
-          <h3 class="ip-session-title">All sessions are conducted online</h3>
-          <p class="ip-session-desc">
-            We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.
-          </p>
+          <span class="eyebrow ip-session-eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="ip-session-title">{{ sessionTitle }}</h3>
+          <p class="ip-session-desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn ip-session-btn">Let's Talk</NuxtLink>
         </div>
         <LiveSessionWidget />
@@ -221,26 +175,14 @@ useRevealOnScroll()
     <!-- ── 5. WHAT YOU CAN EXPECT ───────────────────────────────── -->
     <section class="ip-expect wrap reveal">
       <div class="ip-expect-header">
-        <h3 class="ip-subtitle text-center">What you can expect</h3>
-        <p class="ip-expect-intro text-center">By the time you reach your interview, you should feel:</p>
+        <h3 class="ip-subtitle text-center">{{ expectSubtitle }}</h3>
+        <p class="ip-expect-intro text-center">{{ expectIntro }}</p>
       </div>
 
       <div class="ip-expect-grid">
-        <div class="ip-expect-card">
-          <div class="ip-expect-tag expect-tag--teal">Prepared</div>
-          <p class="ip-expect-desc">because you’ve practised the situations you’re likely to face.</p>
-        </div>
-        <div class="ip-expect-card">
-          <div class="ip-expect-tag expect-tag--coral">Clear</div>
-          <p class="ip-expect-desc">because you know how to explain your experience effectively.</p>
-        </div>
-        <div class="ip-expect-card">
-          <div class="ip-expect-tag expect-tag--amber">Confident</div>
-          <p class="ip-expect-desc">because you have practised expressing yourself naturally.</p>
-        </div>
-        <div class="ip-expect-card">
-          <div class="ip-expect-tag expect-tag--teal">Ready</div>
-          <p class="ip-expect-desc">because you can concentrate on the interview rather than worrying about your English.</p>
+        <div v-for="exp in expects" :key="exp.label" class="ip-expect-card">
+          <div class="ip-expect-tag" :class="`expect-tag--${exp.color}`">{{ exp.label }}</div>
+          <p class="ip-expect-desc">{{ exp.desc }}</p>
         </div>
       </div>
     </section>
@@ -248,8 +190,8 @@ useRevealOnScroll()
     <!-- ── 6. CTA SECTION ───────────────────────────────────────── -->
     <section class="ip-cta">
       <div class="wrap ip-cta-inner reveal">
-        <h2 class="ip-cta-title">Your next opportunity deserves your best communication.</h2>
-        <p class="ip-cta-desc">Let’s prepare for it together.</p>
+        <h2 class="ip-cta-title">{{ ctaTitle }}</h2>
+        <p class="ip-cta-desc">{{ ctaDesc }}</p>
         <div class="ip-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">
