@@ -1,7 +1,7 @@
 <script setup>
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-const story = await useStoryblok('services/professional-communication', { version: 'draft' })
+const story = await useStoryblok('professional-communication', { version: 'draft' })
 const sb = computed(() => story.value?.content || {})
 
 // Hero
