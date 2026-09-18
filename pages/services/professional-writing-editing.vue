@@ -1,6 +1,61 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
+let story = null
+try { story = await useStoryblok('professional-writing-editing', { version: 'draft' }) } catch {}
+const sb = computed(() => story?.value?.content || {})
+
+// Hero
+const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
+const heroTitle   = computed(() => sb.value.hero_title   || 'Professional Writing & Editing')
+
+// Intro
+const introTitle     = computed(() => sb.value.intro_title     || 'Make your English say exactly what you mean.')
+const introLead      = computed(() => sb.value.intro_lead      || 'You may know exactly what you want to say, but expressing it naturally and professionally in English can sometimes be difficult.')
+const introBody      = computed(() => sb.value.intro_body      || 'I can help you turn your ideas into clear, polished English while preserving your meaning, your personality and your voice.')
+const introHighlight = computed(() => sb.value.intro_highlight || 'This is more than correcting grammar or spelling. I look at the whole message — the wording, tone, clarity and structure — so that your writing communicates exactly what you intend.')
+
+// Card
+const cardTitle  = computed(() => sb.value.card_title  || 'More than proofreading')
+const cardText1  = computed(() => sb.value.card_text_1 || 'Good communication is not simply about having correct English.')
+const cardText2  = computed(() => sb.value.card_text_2 || 'The same message can sound confident, uncertain, too direct, too informal or unnecessarily complicated depending on the words you choose.')
+const cardText3  = computed(() => sb.value.card_text_3 || 'I will help you understand why a particular wording works better, so that over time you become increasingly confident in making those decisions yourself.')
+const cardFooter = computed(() => sb.value.card_footer || 'Your message remains yours. I simply help you express it at its best.')
+
+// When
+const whenSubtitle = computed(() => sb.value.when_subtitle || 'When can I help?')
+const whenIntro    = computed(() => sb.value.when_intro    || 'This service is particularly useful when you need to write something important and want to feel confident about how it will be received.')
+const whenHeading  = computed(() => sb.value.when_heading  || 'I can help you with:')
+const whenItems = computed(() => [
+  sb.value.when_1 || 'Professional and business emails',
+  sb.value.when_2 || 'Important correspondence',
+  sb.value.when_3 || 'Reports and presentations',
+  sb.value.when_4 || 'Professional documents',
+  sb.value.when_5 || 'CVs and supporting documents',
+  sb.value.when_6 || 'Written communication with clients or colleagues',
+  sb.value.when_7 || 'Messages where tone and wording really matter',
+].filter(Boolean))
+
+// Session
+const sessionEyebrow = computed(() => sb.value.session_eyebrow || 'How We Work')
+const sessionTitle   = computed(() => sb.value.session_title   || 'All sessions are conducted online')
+const sessionDesc    = computed(() => sb.value.session_desc    || 'We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.')
+
+// Expect
+const expectSubtitle = computed(() => sb.value.expect_subtitle || 'What you can expect')
+const expectIntro    = computed(() => sb.value.expect_intro    || 'Together, we will make your writing:')
+const expects = computed(() => [
+  { label: sb.value.expect_1_label || 'Clear',        color: 'teal',  desc: sb.value.expect_1_desc || 'so your meaning is immediately understood.' },
+  { label: sb.value.expect_2_label || 'Natural',      color: 'coral', desc: sb.value.expect_2_desc || 'so your English sounds fluent rather than translated.' },
+  { label: sb.value.expect_3_label || 'Professional', color: 'amber', desc: sb.value.expect_3_desc || 'so your communication reflects the person you are.' },
+  { label: sb.value.expect_4_label || 'Appropriate',  color: 'teal',  desc: sb.value.expect_4_desc || 'so the tone suits the situation and the person receiving it.' },
+  { label: sb.value.expect_5_label || 'Confident',    color: 'coral', desc: sb.value.expect_5_desc || 'so your written English represents your abilities accurately.' },
+])
+
+// CTA
+const ctaTitle = computed(() => sb.value.cta_title || 'Ready to make your written English work for you?')
+const ctaDesc  = computed(() => sb.value.cta_desc  || "Let's talk about what you need and how I can help.")
+
 useSeoMeta({
   title: 'Professional Writing & Editing | Fluent Future',
   description: 'Professional editing for emails, documents, and business writing in English. Get clear, polished, natural-sounding text — reviewed by Blanca Derby, with 30+ years of language consultancy experience.',
@@ -29,8 +84,8 @@ useRevealOnScroll()
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="pwe-hero">
       <div class="wrap pwe-hero-inner reveal">
-        <span class="eyebrow pwe-hero-eyebrow">Service</span>
-        <h1 class="pwe-hero-title">Professional Writing &amp; Editing</h1>
+        <span class="eyebrow pwe-hero-eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="pwe-hero-title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -49,40 +104,25 @@ useRevealOnScroll()
       <div class="pwe-grid">
         <!-- Left: Intro & Highlight -->
         <div class="pwe-intro-section reveal">
-          <h2 class="pwe-section-title">Make your English say exactly what you mean.</h2>
-          <p class="pwe-lead-text">
-            You may know exactly what you want to say, but expressing it naturally and professionally in English can sometimes be difficult.
-          </p>
-          <p class="pwe-body-text">
-            I can help you turn your ideas into clear, polished English while preserving your meaning, your personality and your voice.
-          </p>
-          
+          <h2 class="pwe-section-title">{{ introTitle }}</h2>
+          <p class="pwe-lead-text">{{ introLead }}</p>
+          <p class="pwe-body-text">{{ introBody }}</p>
           <div class="pwe-highlight-box">
             <div class="pwe-highlight-border"></div>
-            <p class="pwe-highlight-text">
-              <strong>This is more than correcting grammar or spelling.</strong> I look at the whole message — the wording, tone, clarity and structure — so that your writing communicates exactly what you intend.
-            </p>
+            <p class="pwe-highlight-text">{{ introHighlight }}</p>
           </div>
         </div>
 
         <!-- Right: More than proofreading callout card -->
         <div class="pwe-sidebar-section reveal">
           <div class="pwe-proof-card">
-            <h3 class="pwe-card-title">More than proofreading</h3>
-            <p class="pwe-card-text">
-              Good communication is not simply about having correct English.
-            </p>
-            <p class="pwe-card-text">
-              The same message can sound confident, uncertain, too direct, too informal or unnecessarily complicated depending on the words you choose.
-            </p>
-            <p class="pwe-card-text">
-              I will help you understand why a particular wording works better, so that over time you become increasingly confident in making those decisions yourself.
-            </p>
+            <h3 class="pwe-card-title">{{ cardTitle }}</h3>
+            <p class="pwe-card-text">{{ cardText1 }}</p>
+            <p class="pwe-card-text">{{ cardText2 }}</p>
+            <p class="pwe-card-text">{{ cardText3 }}</p>
             <div class="pwe-card-footer">
               <span class="pwe-footer-icon" aria-hidden="true">💡</span>
-              <p class="pwe-footer-text">
-                Your message remains yours. I simply help you express it at its best.
-              </p>
+              <p class="pwe-footer-text">{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -92,71 +132,21 @@ useRevealOnScroll()
     <!-- ── 4. WHEN I CAN HELP ───────────────────────────────────── -->
     <section class="pwe-when wrap reveal">
       <div class="pwe-when-header">
-        <h3 class="pwe-subtitle">When can I help?</h3>
-        <p class="pwe-when-intro">
-          This service is particularly useful when you need to write something important and want to feel confident about how it will be received.
-        </p>
+        <h3 class="pwe-subtitle">{{ whenSubtitle }}</h3>
+        <p class="pwe-when-intro">{{ whenIntro }}</p>
       </div>
 
       <div class="pwe-when-grid">
         <div class="pwe-when-card">
-          <h4 class="pwe-when-heading">I can help you with:</h4>
+          <h4 class="pwe-when-heading">{{ whenHeading }}</h4>
           <ul class="pwe-help-list">
-            <li>
+            <li v-for="item in whenItems" :key="item">
               <div class="pwe-bullet-check">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span>Professional and business emails</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Important correspondence</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Reports and presentations</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Professional documents</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>CVs and supporting documents</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Written communication with clients or colleagues</span>
-            </li>
-            <li>
-              <div class="pwe-bullet-check">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </div>
-              <span>Messages where tone and wording really matter</span>
+              <span>{{ item }}</span>
             </li>
           </ul>
         </div>
@@ -167,11 +157,9 @@ useRevealOnScroll()
     <section class="pwe-session-wrap wrap">
       <div class="pwe-session-banner reveal">
         <div class="pwe-session-content">
-          <span class="eyebrow pwe-session-eyebrow">How We Work</span>
-          <h3 class="pwe-session-title">All sessions are conducted online</h3>
-          <p class="pwe-session-desc">
-            We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs and situation.
-          </p>
+          <span class="eyebrow pwe-session-eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="pwe-session-title">{{ sessionTitle }}</h3>
+          <p class="pwe-session-desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn pwe-session-btn">Let's Talk</NuxtLink>
         </div>
         <LiveSessionWidget />
@@ -181,30 +169,14 @@ useRevealOnScroll()
     <!-- ── 5. WHAT YOU CAN EXPECT ───────────────────────────────── -->
     <section class="pwe-expect wrap reveal">
       <div class="pwe-expect-header">
-        <h3 class="pwe-subtitle text-center">What you can expect</h3>
-        <p class="pwe-expect-intro text-center">Together, we will make your writing:</p>
+        <h3 class="pwe-subtitle text-center">{{ expectSubtitle }}</h3>
+        <p class="pwe-expect-intro text-center">{{ expectIntro }}</p>
       </div>
 
       <div class="pwe-expect-grid">
-        <div class="pwe-expect-card">
-          <div class="pwe-expect-tag expect-tag--teal">Clear</div>
-          <p class="pwe-expect-desc">so your meaning is immediately understood.</p>
-        </div>
-        <div class="pwe-expect-card">
-          <div class="pwe-expect-tag expect-tag--coral">Natural</div>
-          <p class="pwe-expect-desc">so your English sounds fluent rather than translated.</p>
-        </div>
-        <div class="pwe-expect-card">
-          <div class="pwe-expect-tag expect-tag--amber">Professional</div>
-          <p class="pwe-expect-desc">so your communication reflects the person you are.</p>
-        </div>
-        <div class="pwe-expect-card">
-          <div class="pwe-expect-tag expect-tag--teal">Appropriate</div>
-          <p class="pwe-expect-desc">so the tone suits the situation and the person receiving it.</p>
-        </div>
-        <div class="pwe-expect-card">
-          <div class="pwe-expect-tag expect-tag--coral">Confident</div>
-          <p class="pwe-expect-desc">so your written English represents your abilities accurately.</p>
+        <div v-for="exp in expects" :key="exp.label" class="pwe-expect-card">
+          <div class="pwe-expect-tag" :class="`expect-tag--${exp.color}`">{{ exp.label }}</div>
+          <p class="pwe-expect-desc">{{ exp.desc }}</p>
         </div>
       </div>
     </section>
@@ -212,8 +184,8 @@ useRevealOnScroll()
     <!-- ── 6. CTA SECTION ───────────────────────────────────────── -->
     <section class="pwe-cta">
       <div class="wrap pwe-cta-inner reveal">
-        <h2 class="pwe-cta-title">Ready to make your written English work for you?</h2>
-        <p class="pwe-cta-desc">Let’s talk about what you need and how I can help.</p>
+        <h2 class="pwe-cta-title">{{ ctaTitle }}</h2>
+        <p class="pwe-cta-desc">{{ ctaDesc }}</p>
         <div class="pwe-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">
