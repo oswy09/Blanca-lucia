@@ -1,13 +1,24 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
-const plans = [
+let pricingStory = null
+try {
+  pricingStory = await useStoryblok('pricing', { version: 'draft' })
+} catch {}
+const sb = computed(() => pricingStory?.value?.content || {})
+
+const headerEyebrow = computed(() => sb.value.pricing_eyebrow || 'Investment')
+const headerTitle = computed(() => sb.value.pricing_title || 'A simple, transparent approach to fees')
+const headerDesc1 = computed(() => sb.value.pricing_desc_1 || 'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.')
+const headerDesc2 = computed(() => sb.value.pricing_desc_2 || 'A limited number of clients are accepted at any one time to ensure the highest level of personal attention.')
+
+const plans = computed(() => [
   {
     id: 'focus',
     type: 'Consultation',
-    name: '30-minute Focus Session',
-    amount: '£35',
-    period: 'Single 30-minute consultation',
+    name: sb.value.plan_1_name || '30-minute Focus Session',
+    amount: sb.value.plan_1_amount || '£35',
+    period: sb.value.plan_1_period || 'Single 30-minute consultation',
     featured: false,
     perks: [
       'Focused one-to-one consultation',
@@ -18,9 +29,9 @@ const plans = [
   {
     id: 'individual',
     type: 'Consultation',
-    name: '60-minute Individual Session',
-    amount: '£60',
-    period: 'Full 60-minute consultation',
+    name: sb.value.plan_2_name || '60-minute Individual Session',
+    amount: sb.value.plan_2_amount || '£60',
+    period: sb.value.plan_2_period || 'Full 60-minute consultation',
     featured: true,
     perks: [
       'Full-length individual consultation',
@@ -31,9 +42,9 @@ const plans = [
   {
     id: 'block4',
     type: 'Block Package',
-    name: '4 × 60-minute Sessions',
-    amount: '£220',
-    period: 'Block of 4 consultations (Save £20)',
+    name: sb.value.plan_3_name || '4 × 60-minute Sessions',
+    amount: sb.value.plan_3_amount || '£220',
+    period: sb.value.plan_3_period || 'Block of 4 consultations (Save £20)',
     featured: false,
     perks: [
       'Structured series of 4 consultations',
@@ -44,9 +55,9 @@ const plans = [
   {
     id: 'block8',
     type: 'Block Package',
-    name: '8 × 60-minute Sessions',
-    amount: '£400',
-    period: 'Block of 8 consultations (Save £80)',
+    name: sb.value.plan_4_name || '8 × 60-minute Sessions',
+    amount: sb.value.plan_4_amount || '£400',
+    period: sb.value.plan_4_period || 'Block of 8 consultations (Save £80)',
     featured: false,
     perks: [
       'Comprehensive communication consultancy series',
@@ -54,7 +65,7 @@ const plans = [
       'Ongoing support and progressive material tailoring',
     ],
   },
-]
+])
 </script>
 
 <template>
@@ -65,14 +76,10 @@ const plans = [
            LAYOUT OPTION 1: COMPACT TABLE FLOW
            ========================================== -->
       <div class="pricing-header reveal">
-        <span class="eyebrow">Investment</span>
-        <h2 class="section-title">A simple, transparent approach to fees</h2>
-        <p class="section-desc">
-          Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.
-        </p>
-        <p class="section-desc" style="margin-top: 12px;">
-          A limited number of clients are accepted at any one time to ensure the highest level of personal attention.
-        </p>
+        <span class="eyebrow">{{ headerEyebrow }}</span>
+        <h2 class="section-title">{{ headerTitle }}</h2>
+        <p class="section-desc">{{ headerDesc1 }}</p>
+        <p class="section-desc" style="margin-top: 12px;">{{ headerDesc2 }}</p>
       </div>
 
       <!-- Discovery Call Callout Card (New Layout) -->

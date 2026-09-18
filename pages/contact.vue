@@ -3,6 +3,29 @@ import { computed, ref } from 'vue'
 
 const { siteUrl } = useSiteConfig()
 
+let story = null
+try {
+  story = await useStoryblok('contact-page', { version: 'draft' })
+} catch {}
+const sb = computed(() => story?.value?.content || {})
+
+const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Get in Touch')
+const heroTitle   = computed(() => sb.value.hero_title   || 'Let\'s start a conversation')
+
+const consultBadge    = computed(() => sb.value.consult_badge    || 'Service Option')
+const consultTitle    = computed(() => sb.value.consult_title    || 'Initial Consultation')
+const consultPrice    = computed(() => sb.value.consult_price    || '£25')
+const consultDuration = computed(() => sb.value.consult_duration || '/ 30 minutes')
+const consultIntro    = computed(() => sb.value.consult_intro    || 'A one-to-one conversation to discuss:')
+const consultBullet1  = computed(() => sb.value.consult_bullet_1 || 'Your background and experience')
+const consultBullet2  = computed(() => sb.value.consult_bullet_2 || 'Your current level and challenges')
+const consultBullet3  = computed(() => sb.value.consult_bullet_3 || 'Your goals and expectations')
+const consultFooter   = computed(() => sb.value.consult_footer   || 'This allows us to determine whether this consultancy is the right fit for you.')
+
+const formTitle    = computed(() => sb.value.form_title    || 'I\'d love to hear from you')
+const formSubtitle = computed(() => sb.value.form_subtitle || 'If you feel this approach is right for you, I would be pleased to hear from you. Before we begin, I offer a brief initial consultation to understand your needs and answer any questions you may have.')
+const formReply    = computed(() => sb.value.form_reply    || 'I aim to respond within 24–48 hours.')
+
 useSeoMeta({
   title: 'Contact — Fluent Future · Blanca Derby',
   description: 'Start a conversation for English language consultancy. Request an initial consultation or send a message.',
@@ -78,8 +101,8 @@ const submitForm = () => {
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="cn-hero">
       <div class="wrap cn-hero-inner reveal">
-        <span class="eyebrow cn-hero-eyebrow">Get in Touch</span>
-        <h1 class="cn-hero-title">Let's start a conversation</h1>
+        <span class="eyebrow cn-hero-eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="cn-hero-title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -151,16 +174,16 @@ const submitForm = () => {
         <div class="cn-consult-wrap reveal">
           <div class="cn-consult-card-v2">
             <div class="cn-consult-header-v2">
-              <span class="consult-badge">Service Option</span>
-              <h3 class="consult-title-v2">Initial Consultation</h3>
+              <span class="consult-badge">{{ consultBadge }}</span>
+              <h3 class="consult-title-v2">{{ consultTitle }}</h3>
               <div class="consult-price-v2">
-                <span class="price-val">£25</span>
-                <span class="price-dur">/ 30 minutes</span>
+                <span class="price-val">{{ consultPrice }}</span>
+                <span class="price-dur">{{ consultDuration }}</span>
               </div>
             </div>
             
             <div class="cn-consult-body-v2">
-              <p class="consult-intro-text">A one-to-one conversation to discuss:</p>
+              <p class="consult-intro-text">{{ consultIntro }}</p>
               <ul class="consult-bullets-v2">
                 <li>
                   <div class="bullet-check-circle">
@@ -168,7 +191,7 @@ const submitForm = () => {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
-                  <span>Your background and experience</span>
+                  <span>{{ consultBullet1 }}</span>
                 </li>
                 <li>
                   <div class="bullet-check-circle">
@@ -176,7 +199,7 @@ const submitForm = () => {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
-                  <span>Your current level and challenges</span>
+                  <span>{{ consultBullet2 }}</span>
                 </li>
                 <li>
                   <div class="bullet-check-circle">
@@ -184,13 +207,13 @@ const submitForm = () => {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
-                  <span>Your goals and expectations</span>
+                  <span>{{ consultBullet3 }}</span>
                 </li>
               </ul>
             </div>
             
             <div class="cn-consult-footer-v2">
-              <p class="consult-footer-text">This allows us to determine whether this consultancy is the right fit for you.</p>
+              <p class="consult-footer-text">{{ consultFooter }}</p>
             </div>
           </div>
         </div>
@@ -199,13 +222,9 @@ const submitForm = () => {
         <div class="cn-form-wrap reveal" style="transition-delay: 80ms">
           <div class="cn-form-card-v2">
             <div class="cn-form-header-v2">
-              <h2 class="cn-form-title-v2">I'd love to hear from you</h2>
-              <p class="cn-form-subtitle-v2">
-                If you feel this approach is right for you, I would be pleased to hear from you. Before we begin, I offer a brief initial consultation to understand your needs and answer any questions you may have.
-              </p>
-              <p class="cn-form-subtitle-v2 reply-tag">
-                I aim to respond within 24–48 hours.
-              </p>
+              <h2 class="cn-form-title-v2">{{ formTitle }}</h2>
+              <p class="cn-form-subtitle-v2">{{ formSubtitle }}</p>
+              <p class="cn-form-subtitle-v2 reply-tag">{{ formReply }}</p>
             </div>
 
             <!-- Form -->
