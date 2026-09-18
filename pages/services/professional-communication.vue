@@ -1,25 +1,66 @@
 <script setup>
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-const workItems = [
-  'Speaking clearly and confidently',
-  'Expressing your ideas concisely',
-  'Participating effectively in meetings',
-  'Presenting your opinions and recommendations',
-  'Communicating with clients and colleagues',
-  'Adjusting your tone to different professional situations',
-  'Avoiding direct translation from Spanish',
-  'Finding natural and appropriate ways to express yourself',
-  'Building confidence when speaking spontaneously',
-  'Understanding how cultural differences can influence communication',
-]
+const story = await useStoryblok('services/professional-communication', { version: 'draft' })
+const sb = computed(() => story.value?.content || {})
 
-const expects = [
-  { label: 'What you say', color: 'teal', desc: 'choosing the right words and expressions.' },
-  { label: 'How you say it', color: 'coral', desc: 'using appropriate tone and emphasis.' },
-  { label: 'How you present yourself', color: 'amber', desc: 'communicating your experience and ideas with confidence.' },
-  { label: 'How you respond', color: 'teal', desc: 'handling conversations more naturally and spontaneously.' },
-]
+// Hero
+const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
+const heroTitle   = computed(() => sb.value.hero_title   || 'Professional Communication & Confidence')
+const heroSub     = computed(() => sb.value.hero_sub     || 'Communicate clearly. Project yourself confidently.')
+
+// Intro
+const introTitle     = computed(() => sb.value.intro_title     || 'Knowing English is one thing. Using it confidently in professional situations is another.')
+const introLead      = computed(() => sb.value.intro_lead      || 'You may have the vocabulary and knowledge you need, yet still find yourself translating from Spanish, searching for the right words, speaking less than you would in your own language, or worrying about how you are being perceived.')
+const introHighlight = computed(() => sb.value.intro_highlight || "That's where I can help.")
+const cardTitle      = computed(() => sb.value.card_title      || 'Communication is more than words')
+const cardText1      = computed(() => sb.value.card_text_1     || 'Professional communication is about much more than grammar.')
+const cardText2      = computed(() => sb.value.card_text_2     || "It's about clarity, tone, confidence, intention and perception.")
+const cardText3      = computed(() => sb.value.card_text_3     || 'Together, we can work on how you express your ideas so that your English reflects your knowledge, experience and professional ability.')
+const cardFooter     = computed(() => sb.value.card_footer     || 'Your words should represent who you are — clearly and naturally.')
+
+// Work items
+const workSubtitle = computed(() => sb.value.work_subtitle || 'What can we work on?')
+const workIntro    = computed(() => sb.value.work_intro    || 'Depending on your individual needs, we can focus on:')
+const workItems = computed(() => [
+  sb.value.work_1  || 'Speaking clearly and confidently',
+  sb.value.work_2  || 'Expressing your ideas concisely',
+  sb.value.work_3  || 'Participating effectively in meetings',
+  sb.value.work_4  || 'Presenting your opinions and recommendations',
+  sb.value.work_5  || 'Communicating with clients and colleagues',
+  sb.value.work_6  || 'Adjusting your tone to different professional situations',
+  sb.value.work_7  || 'Avoiding direct translation from Spanish',
+  sb.value.work_8  || 'Finding natural and appropriate ways to express yourself',
+  sb.value.work_9  || 'Building confidence when speaking spontaneously',
+  sb.value.work_10 || 'Understanding how cultural differences can influence communication',
+].filter(Boolean))
+
+// Session
+const sessionEyebrow = computed(() => sb.value.session_eyebrow || 'How We Work')
+const sessionTitle   = computed(() => sb.value.session_title   || 'All sessions are conducted online')
+const sessionDesc    = computed(() => sb.value.session_desc    || 'We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs.')
+
+// Bridge
+const bridgeSubtitle = computed(() => sb.value.bridge_subtitle || 'Your English should not hide your expertise')
+const bridge1        = computed(() => sb.value.bridge_1        || "Sometimes the problem isn't a lack of knowledge. It's that your English doesn't allow you to show what you already know.")
+const bridge2        = computed(() => sb.value.bridge_2        || 'My role is to help you bridge that gap.')
+const bridge3        = computed(() => sb.value.bridge_3        || 'Through practical, individual work based on situations that are relevant to your professional life, we can identify where communication becomes difficult and develop strategies that work for you.')
+const bridge4        = computed(() => sb.value.bridge_4        || "The goal isn't to make you sound like somebody else.")
+const bridge5        = computed(() => sb.value.bridge_5        || 'The goal is to help you sound like yourself — confidently, naturally and effectively in English.')
+
+// Expect
+const expectSubtitle = computed(() => sb.value.expect_subtitle || 'What you can expect')
+const expectIntro    = computed(() => sb.value.expect_intro    || 'You will develop greater confidence in:')
+const expects = computed(() => [
+  { label: sb.value.expect_1_label || 'What you say',           color: 'teal',  desc: sb.value.expect_1_desc || 'choosing the right words and expressions.' },
+  { label: sb.value.expect_2_label || 'How you say it',         color: 'coral', desc: sb.value.expect_2_desc || 'using appropriate tone and emphasis.' },
+  { label: sb.value.expect_3_label || 'How you present yourself', color: 'amber', desc: sb.value.expect_3_desc || 'communicating your experience and ideas with confidence.' },
+  { label: sb.value.expect_4_label || 'How you respond',        color: 'teal',  desc: sb.value.expect_4_desc || 'handling conversations more naturally and spontaneously.' },
+])
+
+// CTA
+const ctaTitle = computed(() => sb.value.cta_title || 'Ready to communicate with greater confidence?')
+const ctaDesc  = computed(() => sb.value.cta_desc  || "Let's talk about the situations you find challenging and see how I can help.")
 
 useSeoMeta({
   title: 'Professional Communication & Confidence | Fluent Future',
@@ -45,9 +86,9 @@ useRevealOnScroll()
     <!-- ── 1. HERO ─────────────────────────────────────────────── -->
     <section class="pc-hero">
       <div class="wrap pc-hero-inner reveal">
-        <span class="eyebrow pc-hero-eyebrow">Service</span>
-        <h1 class="pc-hero-title">Professional Communication &amp; Confidence</h1>
-        <p class="pc-hero-sub">Communicate clearly. Project yourself confidently.</p>
+        <span class="eyebrow pc-hero-eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="pc-hero-title">{{ heroTitle }}</h1>
+        <p class="pc-hero-sub">{{ heroSub }}</p>
       </div>
     </section>
 
@@ -65,33 +106,23 @@ useRevealOnScroll()
     <section class="pc-main-content wrap">
       <div class="pc-grid">
         <div class="pc-intro-section reveal">
-          <h2 class="pc-section-title">Knowing English is one thing. Using it confidently in professional situations is another.</h2>
-          <p class="pc-lead-text">
-            You may have the vocabulary and knowledge you need, yet still find yourself translating from Spanish, searching for the right words, speaking less than you would in your own language, or worrying about how you are being perceived.
-          </p>
+          <h2 class="pc-section-title">{{ introTitle }}</h2>
+          <p class="pc-lead-text">{{ introLead }}</p>
           <div class="pc-highlight-box">
             <div class="pc-highlight-border"></div>
-            <p class="pc-highlight-text"><strong>That's where I can help.</strong></p>
+            <p class="pc-highlight-text"><strong>{{ introHighlight }}</strong></p>
           </div>
         </div>
 
         <div class="pc-sidebar-section reveal">
           <div class="pc-card">
-            <h3 class="pc-card-title">Communication is more than words</h3>
-            <p class="pc-card-text">
-              Professional communication is about much more than grammar.
-            </p>
-            <p class="pc-card-text">
-              It's about clarity, tone, confidence, intention and perception.
-            </p>
-            <p class="pc-card-text">
-              Together, we can work on how you express your ideas so that your English reflects your knowledge, experience and professional ability.
-            </p>
+            <h3 class="pc-card-title">{{ cardTitle }}</h3>
+            <p class="pc-card-text">{{ cardText1 }}</p>
+            <p class="pc-card-text">{{ cardText2 }}</p>
+            <p class="pc-card-text">{{ cardText3 }}</p>
             <div class="pc-card-footer">
               <span class="pc-footer-icon" aria-hidden="true">💬</span>
-              <p class="pc-footer-text">
-                Your words should represent who you are — clearly and naturally.
-              </p>
+              <p class="pc-footer-text">{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -102,8 +133,8 @@ useRevealOnScroll()
     <section class="pc-work wrap reveal">
       <div class="pc-work-grid">
         <div class="pc-work-content">
-          <h3 class="pc-subtitle">What can we work on?</h3>
-          <p class="pc-work-intro">Depending on your individual needs, we can focus on:</p>
+          <h3 class="pc-subtitle">{{ workSubtitle }}</h3>
+          <p class="pc-work-intro">{{ workIntro }}</p>
         </div>
         <div class="pc-work-card">
           <ul class="pc-help-list">
@@ -124,11 +155,9 @@ useRevealOnScroll()
     <section class="pc-session-wrap wrap">
       <div class="pc-session-banner reveal">
         <div class="pc-session-content">
-          <span class="eyebrow pc-session-eyebrow">How We Work</span>
-          <h3 class="pc-session-title">All sessions are conducted online</h3>
-          <p class="pc-session-desc">
-            We meet via video call, making it easy to work together wherever you are in the world. Sessions are personal, focused, and structured entirely around your needs.
-          </p>
+          <span class="eyebrow pc-session-eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="pc-session-title">{{ sessionTitle }}</h3>
+          <p class="pc-session-desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn pc-session-btn">Let's Talk</NuxtLink>
         </div>
         <LiveSessionWidget />
@@ -137,16 +166,16 @@ useRevealOnScroll()
 
     <!-- ── 6. BRIDGE THAT GAP ─────────────────────────────────────── -->
     <section class="pc-bridge wrap reveal">
-      <h3 class="pc-subtitle">Your English should not hide your expertise</h3>
+      <h3 class="pc-subtitle">{{ bridgeSubtitle }}</h3>
       <div class="pc-bridge-grid">
         <div>
-          <p class="pc-bridge-text">Sometimes the problem isn't a lack of knowledge. It's that your English doesn't allow you to show what you already know.</p>
-          <p class="pc-bridge-text">My role is to help you bridge that gap.</p>
-          <p class="pc-bridge-text">Through practical, individual work based on situations that are relevant to your professional life, we can identify where communication becomes difficult and develop strategies that work for you.</p>
+          <p class="pc-bridge-text">{{ bridge1 }}</p>
+          <p class="pc-bridge-text">{{ bridge2 }}</p>
+          <p class="pc-bridge-text">{{ bridge3 }}</p>
         </div>
         <div>
-          <p class="pc-bridge-text">The goal isn't to make you sound like somebody else.</p>
-          <p class="pc-bridge-text pc-bridge-text--em">The goal is to help you sound like yourself — confidently, naturally and effectively in English.</p>
+          <p class="pc-bridge-text">{{ bridge4 }}</p>
+          <p class="pc-bridge-text pc-bridge-text--em">{{ bridge5 }}</p>
         </div>
       </div>
     </section>
@@ -154,8 +183,8 @@ useRevealOnScroll()
     <!-- ── 7. WHAT YOU CAN EXPECT ─────────────────────────────────── -->
     <section class="pc-expect wrap reveal">
       <div class="pc-expect-header">
-        <h3 class="pc-subtitle text-center">What you can expect</h3>
-        <p class="pc-expect-intro text-center">You will develop greater confidence in:</p>
+        <h3 class="pc-subtitle text-center">{{ expectSubtitle }}</h3>
+        <p class="pc-expect-intro text-center">{{ expectIntro }}</p>
       </div>
       <div class="pc-expect-grid">
         <div v-for="exp in expects" :key="exp.label" class="pc-expect-card">
@@ -168,8 +197,8 @@ useRevealOnScroll()
     <!-- ── 8. CTA ──────────────────────────────────────────────────── -->
     <section class="pc-cta">
       <div class="wrap pc-cta-inner reveal">
-        <h2 class="pc-cta-title">Ready to communicate with greater confidence?</h2>
-        <p class="pc-cta-desc">Let's talk about the situations you find challenging and see how I can help.</p>
+        <h2 class="pc-cta-title">{{ ctaTitle }}</h2>
+        <p class="pc-cta-desc">{{ ctaDesc }}</p>
         <div class="pc-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">Contact on WhatsApp</a>
