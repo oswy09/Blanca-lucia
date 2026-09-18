@@ -1,8 +1,9 @@
 <script setup>
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-const story = await useStoryblok('professional-communication', { version: 'draft' })
-const sb = computed(() => story.value?.content || {})
+let story = null
+try { story = await useStoryblok('professional-communication', { version: 'draft' }) } catch {}
+const sb = computed(() => story?.value?.content || {})
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')

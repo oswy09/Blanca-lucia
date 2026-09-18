@@ -3,7 +3,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-const story = await useStoryblok('about', { version: 'draft' })
+let story = null
+try { story = await useStoryblok('about', { version: 'draft' }) } catch {}
 const sb = computed(() => story.value?.content || {})
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')
