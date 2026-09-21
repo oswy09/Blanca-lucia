@@ -5,7 +5,7 @@ const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
 const { data: sbData } = await useAsyncData('interview-preparation', async () => {
   try {
     const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/interview-preparation', { version: sbVersion })
+    const { data } = await api.get('cdn/stories/service-interview', { version: sbVersion })
     return data?.story?.content || {}
   } catch { return {} }
 })
