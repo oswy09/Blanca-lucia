@@ -2,13 +2,14 @@
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
 const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-let sbContent = {}
-try {
-  const api = useStoryblokApi()
-  const { data } = await api.get('cdn/stories/professional-communication', { version: sbVersion })
-  sbContent = data?.story?.content || {}
-} catch {}
-const sb = computed(() => sbContent)
+const { data: sbData } = await useAsyncData('professional-communication', async () => {
+  try {
+    const api = useStoryblokApi()
+    const { data } = await api.get('cdn/stories/professional-communication', { version: sbVersion })
+    return data?.story?.content || {}
+  } catch { return {} }
+})
+const sb = computed(() => sbData.value || {})
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')

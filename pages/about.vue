@@ -4,13 +4,14 @@ import { onMounted, onUnmounted, ref } from 'vue'
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
 const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-let sbContent = {}
-try {
-  const api = useStoryblokApi()
-  const { data } = await api.get('cdn/stories/about', { version: sbVersion })
-  sbContent = data?.story?.content || {}
-} catch {}
-const sb = computed(() => sbContent)
+const { data: sbData } = await useAsyncData('about', async () => {
+  try {
+    const api = useStoryblokApi()
+    const { data } = await api.get('cdn/stories/about', { version: sbVersion })
+    return data?.story?.content || {}
+  } catch { return {} }
+})
+const sb = computed(() => sbData.value || {})
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')
 const abHeroTitle    = computed(() => sb.value.ab_hero_title    || 'A personal language consultancy by Blanca Derby')
