@@ -2,7 +2,7 @@
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
 let story = null
-try { story = await useStoryblok('professional-communication', { version: 'draft' }) } catch {}
+try { story = await useStoryblok('professional-communication', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' }) } catch {}
 const sb = computed(() => story?.value?.content || {})
 
 // Hero

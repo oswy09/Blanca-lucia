@@ -3,7 +3,7 @@ const { whatsappUrl } = useSiteConfig()
 
 let pricingStory = null
 try {
-  pricingStory = await useStoryblok('pricing', { version: 'draft' })
+  pricingStory = await useStoryblok('pricing', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
 } catch {}
 const sb = computed(() => pricingStory?.value?.content || {})
 

@@ -4,7 +4,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
 let story = null
-try { story = await useStoryblok('about', { version: 'draft' }) } catch {}
+try { story = await useStoryblok('about', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' }) } catch {}
 const sb = computed(() => story.value?.content || {})
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')

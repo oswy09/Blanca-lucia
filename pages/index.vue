@@ -3,7 +3,7 @@ const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
 const sbHome = useState('sb-home', () => ({}))
 
-const story = await useStoryblok('home', { version: 'draft' })
+const story = await useStoryblok('home', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
 
 if (story.value?.content) {
   sbHome.value = story.value.content

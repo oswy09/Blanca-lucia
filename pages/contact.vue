@@ -5,7 +5,7 @@ const { siteUrl } = useSiteConfig()
 
 let story = null
 try {
-  story = await useStoryblok('contact-page', { version: 'draft' })
+  story = await useStoryblok('contact-page', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
 } catch {}
 const sb = computed(() => story?.value?.content || {})
 
