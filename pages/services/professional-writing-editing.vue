@@ -6,8 +6,12 @@ const { data: sbData } = await useAsyncData('professional-writing-editing', asyn
   try {
     const api = useStoryblokApi()
     const { data } = await api.get('cdn/stories/professional-writing-editing', { version: sbVersion })
+    console.log('[SB writing] version:', sbVersion, 'content keys:', Object.keys(data?.story?.content || {}))
     return data?.story?.content || {}
-  } catch { return {} }
+  } catch (err) {
+    console.error('[SB writing] error:', err?.message)
+    return {}
+  }
 })
 const sb = computed(() => sbData.value || {})
 
