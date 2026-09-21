@@ -1,11 +1,14 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
-let pricingStory = null
+const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+let sbPricingContent = {}
 try {
-  pricingStory = await useStoryblok('pricing', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
+  const api = useStoryblokApi()
+  const { data } = await api.get('cdn/stories/pricing', { version: sbVersion })
+  sbPricingContent = data?.story?.content || {}
 } catch {}
-const sb = computed(() => pricingStory?.value?.content || {})
+const sb = computed(() => sbPricingContent)
 
 const headerEyebrow = computed(() => sb.value.pricing_eyebrow || 'Investment')
 const headerTitle = computed(() => sb.value.pricing_title || 'A simple, transparent approach to fees')

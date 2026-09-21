@@ -1,9 +1,14 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
-let story = null
-try { story = await useStoryblok('professional-writing-editing', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' }) } catch {}
-const sb = computed(() => story?.value?.content || {})
+const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+let sbContent = {}
+try {
+  const api = useStoryblokApi()
+  const { data } = await api.get('cdn/stories/professional-writing-editing', { version: sbVersion })
+  sbContent = data?.story?.content || {}
+} catch {}
+const sb = computed(() => sbContent)
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')

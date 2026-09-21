@@ -3,9 +3,14 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-let story = null
-try { story = await useStoryblok('about', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' }) } catch {}
-const sb = computed(() => story.value?.content || {})
+const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+let sbContent = {}
+try {
+  const api = useStoryblokApi()
+  const { data } = await api.get('cdn/stories/about', { version: sbVersion })
+  sbContent = data?.story?.content || {}
+} catch {}
+const sb = computed(() => sbContent)
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')
 const abHeroTitle    = computed(() => sb.value.ab_hero_title    || 'A personal language consultancy by Blanca Derby')

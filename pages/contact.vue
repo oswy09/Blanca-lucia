@@ -3,11 +3,14 @@ import { computed, ref } from 'vue'
 
 const { siteUrl } = useSiteConfig()
 
-let story = null
+const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+let sbContent = {}
 try {
-  story = await useStoryblok('contact-page', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
+  const api = useStoryblokApi()
+  const { data } = await api.get('cdn/stories/contact-page', { version: sbVersion })
+  sbContent = data?.story?.content || {}
 } catch {}
-const sb = computed(() => story?.value?.content || {})
+const sb = computed(() => sbContent)
 
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Get in Touch')
 const heroTitle   = computed(() => sb.value.hero_title   || 'Let\'s start a conversation')
