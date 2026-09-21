@@ -2,23 +2,20 @@ export default defineEventHandler(async () => {
   const token = process.env.STORYBLOK_DELIVERY_API_TOKEN
   if (!token) return { error: 'No token' }
 
-  const base = `https://api.storyblok.com/v2/cdn/stories`
   const cv = Date.now()
 
-  async function trySlug(slug: string, version: string) {
-    const res = await fetch(`${base}/${slug}?version=${version}&token=${token}&cv=${cv}`)
-    const json = await res.json()
-    return { status: res.status, hasStory: !!json?.story, slug, version }
-  }
-
   try {
-    const results = await Promise.all([
-      trySlug('professional-writing-editing', 'published'),
-      trySlug('professional-writing-editing', 'draft'),
-      trySlug('services/professional-writing-editing', 'published'),
-      trySlug('services/professional-writing-editing', 'draft'),
+    const [resDraft, resPub] = await Promise.all([
+      fetch(`https://api.storyblok.com/v2/cdn/stories?version=draft&token=${token}&cv=${cv}&per_page=100`),
+      fetch(`https://api.storyblok.com/v2/cdn/stories?version=published&token=${token}&cv=${cv}&per_page=100`),
     ])
-    return { results }
+    const draft = await resDraft.json()
+    const pub   = await resPub.json()
+
+    return {
+      allDraftSlugs:     (draft.stories  || []).map((s: any) => s.full_slug),
+      allPublishedSlugs: (pub.stories    || []).map((s: any) => s.full_slug),
+    }
   } catch (err: any) {
     return { error: err.message }
   }
