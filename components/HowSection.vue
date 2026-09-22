@@ -1,118 +1,28 @@
 ﻿<script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-
 const { whatsappUrl } = useSiteConfig()
 
 const props = defineProps({ blok: Object })
 const sb = useState('sb-home', () => ({}))
 const src = computed(() => props.blok || sb.value)
-const howEyebrow = computed(() => src.value?.how_eyebrow || 'How I work')
-const howH2      = computed(() => src.value?.how_h2      || 'Tailored, thoughtful, effective')
-const howLead    = computed(() => src.value?.how_lead    || 'I listen carefully to understand not only what you want to improve, but what is holding you back. With years of experience working with adults and professionals, I know that effective communication is about much more than speaking English correctly.')
 const steps = computed(() => [
   { n: 1, title: src.value?.how_step_1_title || 'Initial Consultation',  desc: src.value?.how_step_1_desc  || 'We begin by understanding where you are, what you need, and the challenges you have faced so far.' },
   { n: 2, title: src.value?.how_step_2_title || 'Focused Guidance',       desc: src.value?.how_step_2_desc  || 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.' },
   { n: 3, title: src.value?.how_step_3_title || 'Clarity & Expression',   desc: src.value?.how_step_3_desc  || 'Attention to how you express yourself, ensuring clarity, natural flow, and ease in communication.' },
   { n: 4, title: src.value?.how_step_4_title || 'Confidence in Practice', desc: src.value?.how_step_4_desc  || 'Support in applying your communication skills with confidence in real-world situations.' },
 ])
-const sectionRef = ref(null)
-const headerRef  = ref(null)
-const bodyRef    = ref(null)
-const copyRef    = ref(null)
-const windowRef  = ref(null)
-
-let gsapCtx = null
-
-onMounted(async () => {
-  const { gsap } = await import('gsap')
-  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
-  gsap.registerPlugin(ScrollTrigger)
-
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reduced) return
-
-  gsapCtx = gsap.context(() => {
-
-    // Block 1: eyebrow -> h2 -> lead stagger slide-up
-    const headerEls = headerRef.value.querySelectorAll('.eyebrow, .how-h2, .how-lead')
-    gsap.from(headerEls, {
-      opacity: 0,
-      y: 36,
-      duration: 0.75,
-      stagger: 0.18,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: headerRef.value,
-        start: 'top 78%',
-        once: true,
-      },
-    })
-
-    // Block 2 desktop: call window starts centered/large, scrubs right;
-    // copy slides in from the left simultaneously
-    gsap.matchMedia().add('(min-width: 981px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: bodyRef.value,
-          start: 'top 90%',
-          end: 'top 10%',
-          scrub: 1.2,
-        },
-      })
-
-      // window moves from left-center to its right-column resting position
-      tl.from(windowRef.value, { xPercent: -100, scale: 1.15 }, 0)
-      // copy slides in from the left
-      tl.from(copyRef.value, { xPercent: -18, opacity: 0 }, 0)
-
-      // after layout settles: stagger individual copy items
-      const copyEls = copyRef.value.querySelectorAll('.how-desc, .how-flow-item, .how-cta')
-      gsap.from(copyEls, {
-        opacity: 0,
-        y: 18,
-        duration: 0.5,
-        stagger: 0.09,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: bodyRef.value,
-          start: 'top 18%',
-          once: true,
-        },
-      })
-    })
-
-    // Block 2 mobile: simple entrance, no scrub
-    gsap.matchMedia().add('(max-width: 980px)', () => {
-      gsap.from(windowRef.value, {
-        opacity: 0, y: 30, duration: 0.7, ease: 'power3.out',
-        scrollTrigger: { trigger: bodyRef.value, start: 'top 85%', once: true },
-      })
-      gsap.from(copyRef.value, {
-        opacity: 0, y: 24, duration: 0.7, delay: 0.2, ease: 'power3.out',
-        scrollTrigger: { trigger: bodyRef.value, start: 'top 85%', once: true },
-      })
-    })
-
-  }, sectionRef.value)
-})
-
-onUnmounted(() => { gsapCtx?.revert() })
 </script>
 
 <template>
 
-  <section ref="sectionRef" class="how" id="metodologia">
+  <section class="how" id="metodologia">
 
-    <!-- Fondo teal permanente de la sección -->
     <div class="how-bg" aria-hidden="true"></div>
-
-    <!-- Cuadrícula de fondo (se intensifica con el scroll interno) -->
     <div class="how-grid-overlay" aria-hidden="true"></div>
 
-    <!-- ── Bloque 1: titulo centrado (pantalla completa) ── -->
+    <!-- Bloque 1: título centrado -->
     <div class="how-title-block">
       <div class="wrap">
-        <div ref="headerRef" class="how-header">
+        <div class="how-header reveal">
           <span class="eyebrow">How I work</span>
           <h2 class="how-h2">Tailored, thoughtful, effective</h2>
           <p class="how-lead">
@@ -123,19 +33,19 @@ onUnmounted(() => { gsapCtx?.revert() })
       </div>
     </div>
 
-    <!-- ── Bloque 2: pasos centrados ── -->
-    <div ref="bodyRef" class="how-body-block">
+    <!-- Bloque 2: pasos centrados -->
+    <div class="how-body-block">
       <div class="wrap">
-        <div ref="copyRef" class="how-copy how-copy--centered">
-          <p class="section-desc how-desc">
+        <div class="how-copy how-copy--centered">
+          <p class="section-desc how-desc reveal" style="text-align:center">
             From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
           </p>
-          <p class="section-desc how-desc" style="margin-top: 14px;">
+          <p class="section-desc how-desc reveal" style="text-align:center; margin-top: 14px;">
             There are no rigid programmes. Only focused, meaningful progress at a pace that suits you.
           </p>
 
           <ol class="how-flow" role="list">
-            <li v-for="s in steps" :key="s.n" class="how-flow-item">
+            <li v-for="s in steps" :key="s.n" class="how-flow-item reveal">
               <div class="how-flow-node">{{ s.n }}</div>
               <div class="how-flow-content">
                 <p class="how-flow-title">{{ s.title }}</p>
@@ -144,12 +54,14 @@ onUnmounted(() => { gsapCtx?.revert() })
             </li>
           </ol>
 
-          <a :href="whatsappUrl" class="btn btn-primary how-cta" target="_blank" rel="noopener">
-            Start with a live conversation
-          </a>
+          <div class="how-cta-wrap reveal">
+            <a :href="whatsappUrl" class="btn btn-primary" target="_blank" rel="noopener">
+              Start with a live conversation
+            </a>
+          </div>
         </div>
       </div>
-    </div><!-- /how-body-block -->
+    </div>
   </section>
 </template>
 
@@ -281,7 +193,7 @@ onUnmounted(() => { gsapCtx?.revert() })
 }
 .how-flow-title { font-family: var(--fd); font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
 .how-flow-desc  { font-size: 13.5px; color: var(--text2); line-height: 1.55; }
-.how-cta { margin-top: 24px; }
+.how-cta-wrap { margin-top: 24px; display: flex; justify-content: center; }
 
 /* ── Call stage ──────────────────────────────── */
 .call-stage {
