@@ -278,11 +278,10 @@ onUnmounted(() => { gsapCtx?.revert() })
 .how-title-block {
   position: relative;
   z-index: 2;
-  min-height: 45vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: clamp(56px, 8vw, 80px);
+  padding-block: clamp(48px, 6vw, 64px);
 }
 .how-header {
   text-align: center;
@@ -308,7 +307,7 @@ onUnmounted(() => { gsapCtx?.revert() })
 .how-body-block {
   position: relative;
   z-index: 2;
-  padding-block: clamp(60px, 8vw, 100px);
+  padding-block: clamp(24px, 4vw, 48px) clamp(60px, 8vw, 100px);
 }
 .how-body-grid {
   display: grid;

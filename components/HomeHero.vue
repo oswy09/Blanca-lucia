@@ -54,8 +54,8 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 55fr 45fr;
-  gap: clamp(40px, 6vw, 80px);
+  grid-template-columns: 65fr 35fr;
+  gap: clamp(16px, 2vw, 32px);
   align-items: center;
 }
 .hero-pill {
