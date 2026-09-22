@@ -126,15 +126,6 @@ useRevealOnScroll()
       </div>
     </section>
 
-    <!-- ── Hero image ── -->
-    <div class="article-cover">
-      <div class="wrap">
-        <div class="article-cover-wrap">
-          <img :src="post.image" :alt="post.title" />
-        </div>
-      </div>
-    </div>
-
     <!-- ── Article body — centered text ── -->
     <article class="article-body">
       <div class="wrap">
@@ -166,9 +157,6 @@ useRevealOnScroll()
         <ul class="related-grid" role="list">
           <li v-for="r in related" :key="r.slug">
             <NuxtLink :to="`/blog/${r.slug}`" class="blog-card">
-              <div class="bc-image">
-                <img :src="r.image" :alt="r.title" loading="lazy" />
-              </div>
               <div class="bc-body">
                 <span class="bc-cat">{{ r.category }}</span>
                 <h3 class="bc-title">{{ r.title }}</h3>
@@ -252,20 +240,6 @@ useRevealOnScroll()
   max-width: 620px;
 }
 
-
-/* ── Cover image ────────────────────────────── */
-.article-cover { padding-block: clamp(32px, 5vw, 48px) clamp(16px, 3vw, 24px); }
-.article-cover-wrap {
-  max-width: 800px;
-  margin-inline: auto;
-  border-radius: 20px; overflow: hidden;
-  aspect-ratio: 16/7;
-  box-shadow: var(--sh-md);
-}
-.article-cover-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-}
 
 /* ── Body — centered single column ──────────── */
 .article-body { padding-block: clamp(16px, 3vw, 32px) clamp(56px, 8vw, 96px); }
@@ -355,13 +329,6 @@ useRevealOnScroll()
   height: 100%; box-shadow: var(--sh-sm);
 }
 .blog-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
-.bc-image { overflow: hidden; aspect-ratio: 16/9; }
-.bc-image img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  transition: transform .45s ease;
-}
-.blog-card:hover .bc-image img { transform: scale(1.05); }
 .bc-body { display: flex; flex-direction: column; gap: 8px; padding: 18px; flex: 1; }
 .bc-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); }
 .bc-title { font-family: var(--fd); font-size: clamp(15px, 1.4vw, 17px); font-weight: 700; color: var(--text); line-height: 1.3; text-wrap: balance; }

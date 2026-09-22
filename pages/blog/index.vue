@@ -133,10 +133,6 @@ useRevealOnScroll()
     <section v-if="featured" class="blog-featured-section">
       <div class="wrap">
         <NuxtLink :to="`/blog/${featured.slug}`" class="blog-featured-card reveal">
-          <div class="bfc-image">
-            <img :src="featured.image" :alt="featured.title" />
-            <span class="bfc-badge">Featured</span>
-          </div>
           <div class="bfc-content">
             <span class="bfc-cat">{{ featured.category }}</span>
             <h2 class="bfc-title">{{ featured.title }}</h2>
@@ -159,9 +155,6 @@ useRevealOnScroll()
         <ul class="blog-grid" role="list">
           <li v-for="post in rest" :key="post.slug" class="blog-card-wrap">
             <NuxtLink :to="`/blog/${post.slug}`" class="blog-card reveal">
-              <div class="bc-image">
-                <img :src="post.image" :alt="post.title" loading="lazy" />
-              </div>
               <div class="bc-body">
                 <span class="bc-cat">{{ post.category }}</span>
                 <h3 class="bc-title">{{ post.title }}</h3>
@@ -226,9 +219,7 @@ useRevealOnScroll()
 .blog-featured-section { padding-block: clamp(48px, 7vw, 72px) clamp(24px, 3vw, 32px); }
 
 .blog-featured-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 4vw, 48px);
+  display: block;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 24px;
@@ -239,29 +230,9 @@ useRevealOnScroll()
 }
 .blog-featured-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
 
-.bfc-image {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-}
-.bfc-image img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  transition: transform .5s ease;
-}
-.blog-featured-card:hover .bfc-image img { transform: scale(1.04); }
-
-.bfc-badge {
-  position: absolute; top: 16px; left: 16px;
-  background: var(--teal); color: #fff;
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .08em;
-  padding: 4px 10px; border-radius: 999px;
-}
-
 .bfc-content {
-  display: flex; flex-direction: column; justify-content: center;
-  padding: clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) 0;
+  display: flex; flex-direction: column;
+  padding: clamp(28px, 4vw, 48px);
   gap: 10px;
 }
 
@@ -311,14 +282,6 @@ useRevealOnScroll()
 }
 .blog-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
 
-.bc-image { overflow: hidden; aspect-ratio: 16/9; }
-.bc-image img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  transition: transform .45s ease;
-}
-.blog-card:hover .bc-image img { transform: scale(1.05); }
-
 .bc-body {
   display: flex; flex-direction: column;
   gap: 8px; padding: 20px; flex: 1;
@@ -341,8 +304,6 @@ useRevealOnScroll()
 
 /* ── Responsive ─────────────────────────────── */
 @media (max-width: 800px) {
-  .blog-featured-card { grid-template-columns: 1fr; }
-  .bfc-image { aspect-ratio: 16/9; }
   .bfc-content { padding: 20px 20px 28px; gap: 8px; }
 }
 </style>
