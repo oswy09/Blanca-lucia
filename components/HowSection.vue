@@ -123,119 +123,32 @@ onUnmounted(() => { gsapCtx?.revert() })
       </div>
     </div>
 
-    <!-- ── Bloque 2: pasos + call window ── -->
+    <!-- ── Bloque 2: pasos centrados ── -->
     <div ref="bodyRef" class="how-body-block">
-      <div class="wrap how-body-grid">
+      <div class="wrap">
+        <div ref="copyRef" class="how-copy how-copy--centered">
+          <p class="section-desc how-desc">
+            From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
+          </p>
+          <p class="section-desc how-desc" style="margin-top: 14px;">
+            There are no rigid programmes. Only focused, meaningful progress at a pace that suits you.
+          </p>
 
-      <!-- ── Copy (izquierda) ───────────────────── -->
-      <div ref="copyRef" class="how-copy">
-        <p class="section-desc how-desc">
-          From there, I shape a personalised approach built around you — not a fixed structure, but a considered path aligned with your needs.
-        </p>
-        <p class="section-desc how-desc" style="margin-top: 14px;">
-          There are no rigid programmes. Only focused, meaningful progress at a pace that suits you.
-        </p>
+          <ol class="how-flow" role="list">
+            <li v-for="s in steps" :key="s.n" class="how-flow-item">
+              <div class="how-flow-node">{{ s.n }}</div>
+              <div class="how-flow-content">
+                <p class="how-flow-title">{{ s.title }}</p>
+                <p class="how-flow-desc">{{ s.desc }}</p>
+              </div>
+            </li>
+          </ol>
 
-        <ol class="how-flow" role="list">
-          <li v-for="s in steps" :key="s.n" class="how-flow-item">
-            <div class="how-flow-node">{{ s.n }}</div>
-            <div class="how-flow-content">
-              <p class="how-flow-title">{{ s.title }}</p>
-              <p class="how-flow-desc">{{ s.desc }}</p>
-            </div>
-          </li>
-        </ol>
-
-        <a :href="whatsappUrl" class="btn btn-primary how-cta" target="_blank" rel="noopener">
-          Start with a live conversation
-        </a>
+          <a :href="whatsappUrl" class="btn btn-primary how-cta" target="_blank" rel="noopener">
+            Start with a live conversation
+          </a>
+        </div>
       </div>
-
-      <!-- ── Video call mockup (derecha) ──────────── -->
-      <div class="call-stage" aria-label="Live video call preview">
-        <article ref="windowRef" class="call-window">
-
-          <!-- Top bar -->
-          <header class="call-top">
-            <div class="call-brand">
-              <span class="brand-dot" aria-hidden="true"></span>
-              <span class="brand-name">Fluent Future</span>
-            </div>
-          </header>
-
-          <!-- Video screen: dos paneles -->
-          <div class="call-screen" role="presentation">
-
-            <!-- Panel izquierdo: imagen live-session (Blanca) -->
-            <div class="call-pane call-pane--blanca">
-              <img src="/imagens/live-session.webp" alt="Blanca Derby — consultant" />
-              <div class="pane-grad" aria-hidden="true"></div>
-              <div class="pane-speak" aria-hidden="true">
-                <span class="spk spk-1"></span>
-                <span class="spk spk-2"></span>
-                <span class="spk spk-3"></span>
-                <span class="spk spk-4"></span>
-                <span class="spk spk-5"></span>
-              </div>
-              <div class="pane-label">
-                Blanca Derby
-              </div>
-            </div>
-
-            <!-- Panel derecho: cliente + burbuja -->
-            <div class="call-pane call-pane--client">
-              <div class="pane-camera-off">
-                <div class="avatar-circle">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
-                    <path d="m1 1 22 22" />
-                    <path d="m19 10.5 4-4v11l-4-4" />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="chat-bubbles-container" aria-live="polite" aria-label="Client is speaking">
-                <!-- bubbles temporarily removed -->
-              </div>
-
-              <div class="pane-label">
-                Client
-              </div>
-            </div>
-
-          </div><!-- /call-screen -->
-
-          <!-- Controls bar -->
-          <div class="call-bar" aria-hidden="true">
-            <button class="ctrl-btn" tabindex="-1" title="Microphone on">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2c-1.7 0-3 1.3-3 3v5c0 1.7 1.3 3 3 3s3-1.3 3-3V5c0-1.7-1.3-3-3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="23"/>
-                <line x1="8" y1="23" x2="16" y2="23"/>
-              </svg>
-            </button>
-
-            <button class="ctrl-btn" tabindex="-1" title="Camera on">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 10l4.6-2.3A1 1 0 0 1 21 8.7v6.6a1 1 0 0 1-1.4.9L15 14v-4z"/>
-                <rect x="1" y="6" width="14" height="12" rx="2"/>
-              </svg>
-            </button>
-
-            <button class="ctrl-btn" tabindex="-1" title="Volume">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
-                <path d="M19 5a10 10 0 0 1 0 14"/>
-              </svg>
-            </button>
-          </div>
-
-        </article>
-      </div><!-- /call-stage -->
-
-      </div><!-- /how-body-grid -->
     </div><!-- /how-body-block -->
   </section>
 </template>
@@ -309,11 +222,9 @@ onUnmounted(() => { gsapCtx?.revert() })
   z-index: 2;
   padding-block: clamp(24px, 4vw, 48px) clamp(60px, 8vw, 100px);
 }
-.how-body-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 56px);
-  align-items: start;
+.how-copy--centered {
+  max-width: 680px;
+  margin-inline: auto;
 }
 
 
