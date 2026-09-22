@@ -26,15 +26,31 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
 
 <style scoped>
 .footer {
-  background: var(--n800);
-  color: var(--n0);
+  background: linear-gradient(135deg, #13484e 0%, #1e6e76 60%, #235f65 100%);
+  color: #fff;
   padding: clamp(48px, 7vw, 72px) var(--px);
+  border-top: 3px solid var(--amber);
+  position: relative;
+  overflow: hidden;
 }
+
+/* Detalle sutil: puntos decorativos en ámbar */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,180,80,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .footer-inner {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 40px;
   align-items: end;
+  position: relative; z-index: 1;
 }
 .footer-logo-img {
   height: 64px;
@@ -44,7 +60,7 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
 }
 .footer-tag {
   font-size: 14px;
-  color: var(--n300);
+  color: rgba(255,255,255,.65);
   line-height: 1.6;
   max-width: 380px;
   margin-bottom: 20px;
@@ -57,15 +73,23 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
 }
 .footer-nav a {
   font-size: 13px;
-  color: var(--n300);
+  color: rgba(255,255,255,.6);
   text-decoration: none;
   transition: color .15s;
 }
-.footer-nav a:hover { color: var(--teal-t2); }
-.footer-copy { font-size: 12px; color: var(--n0); text-align: right; }
-.footer-credit { font-size: 11px; color: var(--n300); text-align: right; margin-top: 8px; }
-.footer-credit-link { color: var(--n300); text-decoration: none; transition: color .15s; }
-.footer-credit-link:hover { color: var(--teal-t2); }
+.footer-nav a:hover { color: var(--amber); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.85); text-align: right; }
+.footer-credit { font-size: 11px; color: rgba(255,255,255,.4); text-align: right; margin-top: 8px; }
+.footer-credit-link { color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
+.footer-credit-link:hover { color: var(--amber); }
+
+/* Línea ámbar sutil bajo el logo */
+.footer-logo-img {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(240,180,80,.25);
+  margin-bottom: 16px;
+}
+
 @media (max-width: 600px) {
   .footer-inner { grid-template-columns: 1fr; }
   .footer-right { text-align: left; }
