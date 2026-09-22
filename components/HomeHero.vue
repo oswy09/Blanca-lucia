@@ -75,6 +75,10 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
   font-weight: 700;
   line-height: 1.06;
   margin-bottom: 24px;
+  white-space: nowrap;
+}
+@media (max-width: 800px) {
+  .hero-title { white-space: normal; }
 }
 .hero-title .accent { color: var(--teal); }
 .hero-tagline {
