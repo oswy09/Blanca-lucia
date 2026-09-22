@@ -330,12 +330,16 @@ onUnmounted(() => {
     </section>
 
     <!-- ── 5. CTA ───────────────────────────────────────────────── -->
-    <section class="ab-cta">
-      <div class="wrap ab-cta-inner reveal">
-        <span class="eyebrow ab-cta-eyebrow">{{ abCtaEyebrow }}</span>
-        <h2 class="ab-cta-title">{{ abCtaTitle }}</h2>
-        <p class="ab-cta-sub">{{ abCtaSub }}</p>
-        <NuxtLink to="/contact" class="btn ab-cta-btn">Get in Touch</NuxtLink>
+    <section class="ab-cta-wrap">
+      <div class="wrap">
+        <div class="ab-cta reveal">
+          <div class="ab-cta-inner">
+            <span class="eyebrow ab-cta-eyebrow">{{ abCtaEyebrow }}</span>
+            <h2 class="ab-cta-title">{{ abCtaTitle }}</h2>
+            <p class="ab-cta-sub">{{ abCtaSub }}</p>
+            <NuxtLink to="/contact" class="btn ab-cta-btn">Get in Touch</NuxtLink>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -788,23 +792,17 @@ onUnmounted(() => {
 /* ══════════════════════════════════════════════
    5. CTA
    ══════════════════════════════════════════════ */
-.ab-cta {
-  background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 100%);
-  padding-block: clamp(72px, 10vw, 112px);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.ab-cta-wrap {
+  padding-block: clamp(48px, 7vw, 80px);
+  background: var(--bg);
 }
 
-.ab-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
+.ab-cta {
+  background: var(--teal);
+  border-radius: 24px;
+  padding: clamp(48px, 7vw, 80px) clamp(24px, 5vw, 64px);
+  text-align: center;
+  overflow: hidden;
 }
 
 .ab-cta-inner { position: relative; z-index: 1; }

@@ -168,7 +168,6 @@ useRevealOnScroll()
           <p class="pwe-session-desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn pwe-session-btn">Let's Talk</NuxtLink>
         </div>
-        <LiveSessionWidget />
       </div>
     </section>
 

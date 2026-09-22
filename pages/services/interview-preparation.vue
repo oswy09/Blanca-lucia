@@ -175,7 +175,6 @@ useRevealOnScroll()
           <p class="ip-session-desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn ip-session-btn">Let's Talk</NuxtLink>
         </div>
-        <LiveSessionWidget />
       </div>
     </section>
 

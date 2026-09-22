@@ -18,7 +18,7 @@ const heroTitle   = computed(() => sb.value.hero_title   || 'Let\'s start a conv
 
 const consultBadge    = computed(() => sb.value.consult_badge    || 'Service Option')
 const consultTitle    = computed(() => sb.value.consult_title    || 'Initial Consultation')
-const consultPrice    = computed(() => sb.value.consult_price    || '£25')
+const consultPrice    = computed(() => sb.value.consult_price    || '£35')
 const consultDuration = computed(() => sb.value.consult_duration || '/ 30 minutes')
 const consultIntro    = computed(() => sb.value.consult_intro    || 'A one-to-one conversation to discuss:')
 const consultBullet1  = computed(() => sb.value.consult_bullet_1 || 'Your background and experience')
