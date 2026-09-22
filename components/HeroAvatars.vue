@@ -16,8 +16,8 @@
 
 /* ── Retrato de Blanca ───────────────────────────────────── */
 .av-frame {
-  width: 340px;
-  height: 340px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   overflow: hidden;
   background: #d1ece3;

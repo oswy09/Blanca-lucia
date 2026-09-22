@@ -101,12 +101,12 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 /* Visual */
 .hero-visual {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
-  background: radial-gradient(ellipse at 55% 45%, rgba(16,185,129,.07) 0%, transparent 68%);
   border-radius: 24px;
   min-height: 340px;
+  padding-top: 8px;
 }
 
 @media (max-width: 800px) {
