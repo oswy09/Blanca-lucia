@@ -395,14 +395,14 @@ onUnmounted(() => {
 .ab-hero-visual {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .ab-hero-photo-wrap {
   position: relative;
-  width: 340px;
-  height: 380px;
+  width: 220px;
+  height: 250px;
   flex-shrink: 0;
 }
 

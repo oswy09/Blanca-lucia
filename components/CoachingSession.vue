@@ -194,7 +194,7 @@ function startTypewriter() {
 .session-card-wrap {
   position: relative;
   width: 100%;
-  max-width: 260px;
+  max-width: 180px;
 }
 
 /* Dashed amber ring - decorative, sits behind and slightly larger */
