@@ -26,7 +26,7 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
 
 <style scoped>
 .footer {
-  background: linear-gradient(135deg, #13484e 0%, #1e6e76 60%, #235f65 100%);
+  background: #13484e;
   color: #fff;
   padding: clamp(48px, 7vw, 72px) var(--px);
   border-top: 3px solid var(--amber);
