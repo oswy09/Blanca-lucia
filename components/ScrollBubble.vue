@@ -161,7 +161,7 @@ onUnmounted(() => {
   transform: translateY(0) scale(1);
 }
 
-/* inner container which wiggles / floats continuously */
+/* inner container which floats continuously */
 .bubble-inner {
   position: relative;
   background: var(--surface);
@@ -172,30 +172,19 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 1px;
-  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-/* Infinite drifting floating animation active when visible */
+/* Infinite gentle float — no rotation to avoid sub-pixel text blur */
 .scroll-bubble.is-visible .bubble-inner {
-  animation: floatBubble 6s ease-in-out infinite;
+  animation: floatBubble 5s ease-in-out infinite;
 }
 
 @keyframes floatBubble {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-3px) rotate(0.5deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(-0.5deg);
-  }
-  75% {
-    transform: translateY(-3px) rotate(0.2deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
+  0%   { transform: translateY(0px) translateZ(0); }
+  50%  { transform: translateY(-5px) translateZ(0); }
+  100% { transform: translateY(0px) translateZ(0); }
 }
 
 .bubble-text {
@@ -204,6 +193,8 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--teal);
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .bubble-cursor {
