@@ -396,7 +396,7 @@ const steps = [
     radial-gradient(480px 280px at 85% 100%, rgba(217,96,58,.03), transparent 60%),
     linear-gradient(to bottom, var(--bg) 0%, rgba(254, 250, 245, 0.15) 15%, rgba(254, 250, 245, 0.15) 85%, var(--bg) 100%),
     linear-gradient(to right, var(--bg) 0%, rgba(254, 250, 245, 0.15) 15%, rgba(254, 250, 245, 0.15) 85%, var(--bg) 100%),
-    url('/imagens/background_services.png') no-repeat center center;
+    url('/imagens/fondo-fluent-servicios.jpg') no-repeat center center;
   background-size: cover;
   padding-top: clamp(72px, 10vw, 120px);
   padding-bottom: clamp(56px, 8vw, 88px);

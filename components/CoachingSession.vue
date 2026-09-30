@@ -61,33 +61,17 @@ function startTypewriter() {
     <div class="wrap">
       <div ref="cardRef" class="coaching-session-banner">
         
-        <!-- Left Side: Title & Typewriter Text -->
+        <!-- Title & Typewriter Text -->
         <div class="coaching-content">
-<h2 class="coaching-title">
+          <h2 class="coaching-title">
             My role is to help you <br><em>bridge that gap.</em>
           </h2>
           <p class="coaching-desc-typewriter">
             {{ typedText }}<span v-if="!isFinished" class="typewriter-cursor">|</span>
           </p>
-        </div>
-
-        <!-- Right Side: Live Session Photo with Rectangular Amber Frame -->
-        <div class="coaching-graphic" style="position: relative;">
-          <div class="session-card-wrap">
-            <!-- Amber dashed ring behind -->
-            <div class="session-ring"></div>
-            <!-- Amber solid offset frame -->
-            <div class="session-frame-offset"></div>
-            <!-- Photo container -->
-            <div class="session-photo-box">
-              <img src="/imagens/live-session.webp" alt="Live coaching session" class="session-photo" />
-            </div>
-            <!-- Amber accent dots -->
-            <div class="session-dots">
-              <span></span><span></span><span></span>
-            </div>
+          <div class="coaching-bubble-wrap">
+            <ScrollBubble :text="['Active listening', 'One-to-one focus']" position="inline" :delay="600" />
           </div>
-          <ScrollBubble :text="['Active listening', 'One-to-one focus']" position="top-right" :delay="600" />
         </div>
 
       </div>
@@ -103,17 +87,14 @@ function startTypewriter() {
 }
 
 .coaching-session-banner {
-  max-width: 1040px;
+  max-width: 760px;
   margin-inline: auto;
   background: linear-gradient(135deg, rgba(30,110,118, 0.97) 0%, rgba(46,138,147, 0.92) 100%);
   border: 1.5px solid rgba(46, 138, 147, 0.25);
   border-radius: 28px;
-  padding: clamp(32px, 5vw, 48px);
+  padding: clamp(40px, 6vw, 64px) clamp(32px, 5vw, 56px);
   box-shadow: 0 20px 40px rgba(30,110,118,0.18);
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
+  text-align: center;
   position: relative;
   overflow: hidden;
 }
@@ -182,102 +163,19 @@ function startTypewriter() {
   50% { opacity: 0; }
 }
 
-/* Graphic styling */
-.coaching-graphic {
-  position: relative;
-  z-index: 2;
+.coaching-bubble-wrap {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.session-card-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 180px;
-}
-
-/* Dashed amber ring - decorative, sits behind and slightly larger */
-.session-ring {
-  position: absolute;
-  inset: -14px;
-  border: 2px dashed rgba(240,180,80,0.45);
-  border-radius: 26px;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Solid amber offset frame - bottom-right shadow frame */
-.session-frame-offset {
-  position: absolute;
-  inset: 0;
-  border: 3px solid var(--amber);
-  border-radius: 20px;
-  transform: translate(8px, 8px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Photo container — portrait ratio matches the image's 0.82 natural ratio */
-.session-photo-box {
-  position: relative;
-  z-index: 1;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.30);
-  aspect-ratio: 5/6;
-}
-
-.session-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-
-/* Three amber dots - top-right accent cluster */
-.session-dots {
-  position: absolute;
-  top: -18px;
-  right: -16px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 4;
-}
-
-.session-dots span {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--amber);
-}
-
-.session-dots span:first-child { opacity: 1; }
-.session-dots span:nth-child(2) { opacity: 0.65; width: 6px; height: 6px; margin-left: 1px; }
-.session-dots span:last-child { opacity: 0.35; width: 5px; height: 5px; margin-left: 2px; }
-
-/* Responsive adjustments */
-@media (max-width: 850px) {
-  .coaching-session-banner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 32px 24px;
-    text-align: center;
-  }
-  .coaching-desc-typewriter {
-    min-height: auto;
-  }
+  margin-top: 24px;
 }
 
 @media (max-width: 550px) {
   .coaching-session-banner {
     border-radius: 20px;
+    padding: 32px 20px;
   }
-  .session-card-wrap {
-    max-width: 200px;
+  .coaching-desc-typewriter {
+    min-height: auto;
   }
 }
 </style>

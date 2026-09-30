@@ -35,7 +35,7 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
             </svg>
             {{ ctaPri }}
           </a>
-          <a href="#services" class="btn btn-secondary">{{ ctaSec }}</a>
+          <NuxtLink to="/services" class="btn btn-secondary">{{ ctaSec }}</NuxtLink>
         </div>
       </div>
 
