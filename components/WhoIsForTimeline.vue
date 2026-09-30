@@ -31,7 +31,7 @@ const list = computed(() => [
   {
     title: src.value?.who_item_4_title || 'Individuals who value a personal approach',
     desc: src.value?.who_item_4_desc  || 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
-    image: '/imagens/personalized advice.JPG',
+    iconBg: '#d1eef2',
     accent: 'var(--teal-sh)'
   }
 ])
@@ -138,6 +138,19 @@ onUnmounted(() => { gsapCtx?.revert() })
                   <line x1="40" y1="60" x2="40" y2="66" stroke="#D97706" stroke-width="2.2" stroke-linecap="round"/>
                   <line x1="14" y1="40" x2="20" y2="40" stroke="#D97706" stroke-width="2.2" stroke-linecap="round"/>
                   <line x1="60" y1="40" x2="66" y2="40" stroke="#D97706" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+
+                <!-- SVG illustration for Individuals who value a personal approach -->
+                <svg v-else-if="idx === 3" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="timeline-icon-svg" aria-hidden="true">
+                  <!-- Head -->
+                  <circle cx="36" cy="26" r="10" fill="#2e8a93" opacity="0.18" stroke="#2e8a93" stroke-width="2.2"/>
+                  <!-- Shoulders -->
+                  <path d="M18 60 C18 48 26 41 36 41 C46 41 54 48 54 60" fill="#2e8a93" opacity="0.13" stroke="#2e8a93" stroke-width="2.2" stroke-linecap="round"/>
+                  <!-- Star / sparkle – personal touch -->
+                  <path d="M61 13 L63 19 L69 21 L63 23 L61 29 L59 23 L53 21 L59 19 Z" fill="#2e8a93" opacity="0.72"/>
+                  <!-- Small accent dots -->
+                  <circle cx="59" cy="38" r="2.5" fill="#2e8a93" opacity="0.38"/>
+                  <circle cx="65" cy="45" r="1.6" fill="#2e8a93" opacity="0.22"/>
                 </svg>
 
                 <!-- SVG illustration for Those who feel stuck -->
