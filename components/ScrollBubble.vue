@@ -149,16 +149,28 @@ onUnmounted(() => {
   position: absolute;
   z-index: 99;
   opacity: 0;
-  transform: translateY(15px) scale(0.92);
-  transition: opacity 0.55s cubic-bezier(0.165, 0.84, 0.44, 1),
-              transform 0.55s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
 }
 
 /* Visibility State */
 .scroll-bubble.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
+}
+
+/* Inline: flows in the document, no absolute offset */
+.scroll-bubble.inline {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  display: inline-flex;
+}
+.scroll-bubble.inline .bubble-tail {
+  display: none;
 }
 
 /* inner container which floats continuously */
