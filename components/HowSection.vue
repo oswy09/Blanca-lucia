@@ -106,7 +106,7 @@ const steps = computed(() => [
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: clamp(48px, 6vw, 64px);
+  padding-block: clamp(48px, 6vw, 64px) clamp(16px, 2vw, 24px);
 }
 .how-header {
   text-align: center;

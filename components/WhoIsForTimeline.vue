@@ -194,7 +194,8 @@ onUnmounted(() => { gsapCtx?.revert() })
 
 <style scoped>
 .timeline-sec {
-  padding-block: var(--spy);
+  padding-top: clamp(32px, 4vw, 48px);
+  padding-bottom: var(--spy);
   background: var(--bg);
   position: relative;
   overflow: hidden;

@@ -563,7 +563,8 @@ onUnmounted(() => {
    3. CORE VALUES
    ══════════════════════════════════════════════ */
 .ab-values {
-  padding-block: var(--spy);
+  padding-top: clamp(32px, 4vw, 48px);
+  padding-bottom: var(--spy);
   background: var(--bg);
 }
 
