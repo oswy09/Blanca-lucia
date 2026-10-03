@@ -170,60 +170,12 @@ const submitForm = () => {
       </div>
     </section>
 
-    <!-- ── 3. MAIN FORM & CONSULTATION GRID ─────────────────────── -->
+    <!-- ── 3. MAIN FORM ─────────────────────────────────────────── -->
     <section class="cn-main wrap">
       <div class="cn-main-grid">
-        
-        <!-- Left: Consultation Card -->
-        <div class="cn-consult-wrap reveal">
-          <div class="cn-consult-card-v2">
-            <div class="cn-consult-header-v2">
-              <span class="consult-badge">{{ consultBadge }}</span>
-              <h3 class="consult-title-v2">{{ consultTitle }}</h3>
-              <div class="consult-price-v2">
-                <span class="price-val">{{ consultPrice }}</span>
-                <span class="price-dur">{{ consultDuration }}</span>
-              </div>
-            </div>
-            
-            <div class="cn-consult-body-v2">
-              <p class="consult-intro-text">{{ consultIntro }}</p>
-              <ul class="consult-bullets-v2">
-                <li>
-                  <div class="bullet-check-circle">
-                    <svg class="bullet-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"/>
-                    </svg>
-                  </div>
-                  <span>{{ consultBullet1 }}</span>
-                </li>
-                <li>
-                  <div class="bullet-check-circle">
-                    <svg class="bullet-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"/>
-                    </svg>
-                  </div>
-                  <span>{{ consultBullet2 }}</span>
-                </li>
-                <li>
-                  <div class="bullet-check-circle">
-                    <svg class="bullet-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"/>
-                    </svg>
-                  </div>
-                  <span>{{ consultBullet3 }}</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="cn-consult-footer-v2">
-              <p class="consult-footer-text">{{ consultFooter }}</p>
-            </div>
-          </div>
-        </div>
 
-        <!-- Right: Message Form -->
-        <div class="cn-form-wrap reveal" style="transition-delay: 80ms">
+        <!-- Form (centered) -->
+        <div class="cn-form-wrap reveal">
           <div class="cn-form-card-v2">
             <div class="cn-form-header-v2">
               <h2 class="cn-form-title-v2">{{ formTitle }}</h2>
@@ -455,11 +407,15 @@ const submitForm = () => {
 }
 
 .cn-main-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1.5fr;
-  gap: clamp(40px, 5vw, 64px);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 40px;
+}
+
+.cn-form-wrap {
+  width: 100%;
+  max-width: 680px;
 }
 
 /* Consultation Card V2 styling */
@@ -816,11 +772,6 @@ const submitForm = () => {
 @media (max-width: 992px) {
   .cn-quick-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .cn-main-grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
   }
 }
 

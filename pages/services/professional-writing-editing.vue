@@ -5,7 +5,7 @@ const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
 const { data: sbData } = await useAsyncData('professional-writing-editing', async () => {
   try {
     const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/service-writing', { version: sbVersion })
+    const { data } = await api.get('cdn/stories/services/professional-writing-editing', { version: sbVersion })
     return data?.story?.content || {}
   } catch { return {} }
 })
