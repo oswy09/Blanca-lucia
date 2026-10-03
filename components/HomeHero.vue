@@ -1,10 +1,10 @@
-﻿<script setup>
+<script setup>
 const props = defineProps({ blok: Object })
 const { whatsappUrl } = useSiteConfig()
 const sb = useState('sb-home', () => ({}))
 const src = computed(() => props.blok || sb.value)
 const pill    = computed(() => src.value?.hero_pill         || 'Personal Language Consultancy for Adults')
-const title   = computed(() => src.value?.hero_title        || "I'm Blanca Derby")
+const title   = computed(() => src.value?.hero_title        || '')
 const tagline = computed(() => src.value?.hero_tagline      || 'Personal Language Consultancy by Blanca Derby')
 const sub     = computed(() => src.value?.hero_subtitle     || 'A consultancy for Native Spanish-speaking adults seeking to improve how they express themselves in English in real-life and professional contexts.')
 const ctaPri  = computed(() => src.value?.hero_cta_primary  || 'Message me on WhatsApp')
@@ -13,34 +13,28 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 
 <template>
   <section class="hero">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-content">
 
-      <div class="hero-content">
-        <div class="hero-pill reveal">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-          </svg>
-          {{ pill }}
-        </div>
-
-        <h1 class="hero-title reveal" style="transition-delay:80ms">{{ title }}</h1>
-        <p class="hero-tagline reveal" style="transition-delay:140ms">{{ tagline }}</p>
-        <p class="hero-sub reveal" style="transition-delay:200ms"><strong>{{ sub }}</strong></p>
-
-        <div class="hero-ctas reveal" style="transition-delay:280ms">
-          <a :href="whatsappUrl" class="btn btn-primary" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.08-1.34A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.66 0-3.21-.46-4.54-1.26l-.32-.2-3.02.79.82-2.95-.21-.34A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
-            </svg>
-            {{ ctaPri }}
-          </a>
-          <NuxtLink to="/services" class="btn btn-secondary">{{ ctaSec }}</NuxtLink>
-        </div>
+      <div class="hero-pill reveal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        {{ pill }}
       </div>
 
-      <div class="hero-visual reveal" style="transition-delay:160ms">
-        <HeroAvatars />
+      <h1 v-if="title" class="hero-title reveal" style="transition-delay:80ms">{{ title }}</h1>
+      <p class="hero-tagline reveal" :style="title ? 'transition-delay:140ms' : 'transition-delay:80ms'">{{ tagline }}</p>
+      <p class="hero-sub reveal" :style="title ? 'transition-delay:200ms' : 'transition-delay:140ms'"><strong>{{ sub }}</strong></p>
+
+      <div class="hero-ctas reveal" :style="title ? 'transition-delay:280ms' : 'transition-delay:200ms'">
+        <a :href="whatsappUrl" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.08-1.34A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.66 0-3.21-.46-4.54-1.26l-.32-.2-3.02.79.82-2.95-.21-.34A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+          </svg>
+          {{ ctaPri }}
+        </a>
+        <NuxtLink to="/services" class="btn btn-secondary">{{ ctaSec }}</NuxtLink>
       </div>
 
     </div>
@@ -50,14 +44,13 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 <style scoped>
 .hero {
   padding-top: clamp(72px, 10vw, 120px);
-  padding-bottom: clamp(140px, 16vw, 180px);
+  padding-bottom: clamp(80px, 10vw, 120px);
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 65fr 35fr;
-  gap: clamp(16px, 2vw, 32px);
-  align-items: center;
+
+.hero-content {
+  max-width: 720px;
 }
+
 .hero-pill {
   display: inline-flex;
   align-items: center;
@@ -70,17 +63,14 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
   border-radius: 999px;
   margin-bottom: 28px;
 }
+
 .hero-title {
   font-size: clamp(38px, 5.5vw, 68px);
   font-weight: 700;
   line-height: 1.06;
   margin-bottom: 24px;
-  white-space: nowrap;
 }
-@media (max-width: 800px) {
-  .hero-title { white-space: normal; }
-}
-.hero-title .accent { color: var(--teal); }
+
 .hero-tagline {
   font-size: 15px;
   font-weight: 600;
@@ -88,28 +78,15 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
   margin-bottom: 16px;
   letter-spacing: .01em;
 }
+
 .hero-sub {
   font-size: clamp(16px, 1.8vw, 18px);
   color: var(--text);
-  max-width: 460px;
+  max-width: 560px;
   margin-bottom: 36px;
   line-height: 1.7;
 }
+
 .hero-sub strong { font-weight: 700; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-
-/* Visual */
-.hero-visual {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  position: relative;
-  border-radius: 24px;
-  min-height: 340px;
-}
-
-@media (max-width: 800px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { min-height: 280px; }
-}
 </style>
