@@ -161,29 +161,13 @@ onUnmounted(() => {
 
     <!-- ── 1. HERO ─────────────────────────────────────────────── -->
     <section class="ab-hero">
-      <div class="wrap ab-hero-grid">
-
-        <div class="ab-hero-text">
-          <span class="eyebrow ab-eyebrow">{{ abEyebrow }}</span>
-          <h1 class="ab-title">{{ abHeroTitle }}</h1>
-          <p class="ab-subtitle">{{ abHeroSubtitle }}</p>
-          <a :href="whatsappUrl" class="btn btn-primary ab-hero-btn" target="_blank" rel="noopener">
-            Get in touch
-          </a>
-        </div>
-
-        <div class="ab-hero-visual" style="position: relative;">
-          <div class="ab-hero-photo-wrap">
-            <img src="/imagens/blanca.png" alt="Blanca Derby – English language consultant" class="ab-hero-photo" />
-            <div class="ab-hero-badge">
-              <span class="badge-num">30<sup>+</sup></span>
-              <span class="badge-lbl">years of experience</span>
-            </div>
-          </div>
-          <!-- decorative dashed ring -->
-          <div class="ab-ring" aria-hidden="true"></div>
-        </div>
-
+      <div class="wrap ab-hero-text">
+        <span class="eyebrow ab-eyebrow">{{ abEyebrow }}</span>
+        <h1 class="ab-title">{{ abHeroTitle }}</h1>
+        <p class="ab-subtitle">{{ abHeroSubtitle }}</p>
+        <a :href="whatsappUrl" class="btn btn-primary ab-hero-btn" target="_blank" rel="noopener">
+          Get in touch
+        </a>
       </div>
     </section>
 
@@ -365,11 +349,8 @@ onUnmounted(() => {
   padding-bottom: clamp(56px, 8vw, 96px);
 }
 
-.ab-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(48px, 6vw, 96px);
-  align-items: center;
+.ab-hero-text {
+  max-width: 680px;
 }
 
 .ab-eyebrow { color: var(--teal-sh); margin-bottom: 20px; }

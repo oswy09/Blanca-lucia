@@ -44,7 +44,7 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
 <style scoped>
 .hero {
   padding-top: clamp(72px, 10vw, 120px);
-  padding-bottom: clamp(80px, 10vw, 120px);
+  padding-bottom: clamp(120px, 16vw, 180px);
 }
 
 .hero-content {
