@@ -350,7 +350,13 @@ onUnmounted(() => {
 }
 
 .ab-hero-text {
-  max-width: 900px;
+  max-width: 860px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.ab-hero-btn {
+  display: inline-flex;
 }
 
 .ab-eyebrow { color: var(--teal-sh); margin-bottom: 20px; }
