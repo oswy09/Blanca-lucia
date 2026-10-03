@@ -350,7 +350,7 @@ onUnmounted(() => {
 }
 
 .ab-hero-text {
-  max-width: 680px;
+  max-width: 900px;
 }
 
 .ab-eyebrow { color: var(--teal-sh); margin-bottom: 20px; }
