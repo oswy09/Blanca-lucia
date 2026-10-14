@@ -1,11 +1,21 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 
-const { siteUrl, whatsappUrl } = useSiteConfig()
+const { siteUrl, locale, whatsappUrl } = useSiteConfig()
 
 useSeoMeta({
-  title: 'Services — Fluent Future · Blanca Derby',
-  description: 'Professional communication, interview preparation and document editing in English for Spanish-speaking professionals.',
+  title: 'Services — Fluent Future · Personalised English Communication Support',
+  description: 'Personalised English communication support for Native Spanish-Speaking Adults, including professional emails, meetings, interviews and confidence-building.',
+  ogType: 'website',
+  ogSiteName: 'Fluent Future',
+  ogTitle: 'Services — Personalised English Communication Support · Fluent Future',
+  ogDescription: 'Personalised English communication support for Native Spanish-Speaking Adults, including professional emails, meetings, interviews and confidence-building.',
+  ogUrl: `${siteUrl}/services`,
+  ogLocale: locale,
+  ogImage: `${siteUrl}/imagens/blanca.png`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Services — Personalised English Communication Support · Fluent Future',
+  twitterDescription: 'Personalised English communication support for Native Spanish-Speaking Adults, including professional emails, meetings, interviews and confidence-building.',
 })
 
 useHead({

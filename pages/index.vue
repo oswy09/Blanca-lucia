@@ -14,14 +14,18 @@ watch(story, (s) => {
 })
 
 useSeoMeta({
-  title: 'Fluent Future — Personal English language consultancy for Spanish-speaking professionals',
-  description: 'Blanca Derby has over 30 years helping Spanish-speaking professionals express themselves with clarity and confidence in English. No courses. No rigid programmes.',
-  ogTitle: 'Fluent Future — Communicate in English as the professional you truly are',
-  ogDescription: 'Personal English language consultancy for Spanish-speaking professionals with working English.',
+  title: 'Fluent Future — Personal English Language Consultancy for Spanish-Speaking Adults',
+  description: 'Personalised Language Consultancy for Native Spanish-Speaking Adults who want to communicate in English with confidence, ease and greater naturalness.',
+  ogType: 'website',
+  ogSiteName: 'Fluent Future',
+  ogTitle: 'Fluent Future — Communicate in English with confidence, ease and greater naturalness',
+  ogDescription: 'Personalised Language Consultancy for Native Spanish-Speaking Adults who want to communicate in English with confidence, ease and greater naturalness.',
   ogUrl: siteUrl,
   ogLocale: locale,
-  twitterTitle: 'Fluent Future — Communicate in English as the professional you truly are',
-  twitterDescription: 'Personal English language consultancy for Spanish-speaking professionals with working English.',
+  ogImage: `${siteUrl}/imagens/blanca.png`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Fluent Future — Communicate in English with confidence, ease and greater naturalness',
+  twitterDescription: 'Personalised Language Consultancy for Native Spanish-Speaking Adults who want to communicate in English with confidence, ease and greater naturalness.',
 })
 
 useHead({

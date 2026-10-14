@@ -30,11 +30,21 @@ try {
   // Token not set or API unavailable — falls back to mock data below
 }
 
-const { siteUrl } = useSiteConfig()
+const { siteUrl, locale } = useSiteConfig()
 
 useSeoMeta({
-  title: 'Blog — Fluent Future · Blanca Derby',
-  description: 'Insights on English communication, language learning, and professional expression — from Blanca Derby.',
+  title: 'Blog — Fluent Future · English Communication for Spanish-Speaking Adults',
+  description: 'Practical advice on English communication for Native Spanish-Speaking Adults, helping you move beyond being simply correct to communicating naturally and confidently.',
+  ogType: 'website',
+  ogSiteName: 'Fluent Future',
+  ogTitle: 'Blog — Practical English Communication Advice · Fluent Future',
+  ogDescription: 'Practical advice on English communication for Native Spanish-Speaking Adults, helping you move beyond being simply correct to communicating naturally and confidently.',
+  ogUrl: `${siteUrl}/blog`,
+  ogLocale: locale,
+  ogImage: `${siteUrl}/imagens/blanca.png`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Blog — Practical English Communication Advice · Fluent Future',
+  twitterDescription: 'Practical advice on English communication for Native Spanish-Speaking Adults, helping you move beyond being simply correct to communicating naturally and confidently.',
 })
 
 useHead({

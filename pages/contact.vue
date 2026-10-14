@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-const { siteUrl } = useSiteConfig()
+const { siteUrl, locale } = useSiteConfig()
 
 const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
 const { data: sbData } = await useAsyncData('contact-page', async () => {
@@ -31,8 +31,18 @@ const formSubtitle = computed(() => sb.value.form_subtitle || 'If you feel this 
 const formReply    = computed(() => sb.value.form_reply    || 'I aim to respond within 24–48 hours.')
 
 useSeoMeta({
-  title: 'Contact — Fluent Future · Blanca Derby',
-  description: 'Start a conversation for English language consultancy. Request an initial consultation or send a message.',
+  title: 'Contact — Fluent Future · Arrange a Free Consultation',
+  description: 'Get in touch with Fluent Future to arrange a free consultation and discover how personalised Language Consultancy can help you communicate with greater confidence.',
+  ogType: 'website',
+  ogSiteName: 'Fluent Future',
+  ogTitle: 'Contact Fluent Future — Arrange a Free Consultation',
+  ogDescription: 'Get in touch with Fluent Future to arrange a free consultation and discover how personalised Language Consultancy can help you communicate with greater confidence.',
+  ogUrl: `${siteUrl}/contact`,
+  ogLocale: locale,
+  ogImage: `${siteUrl}/imagens/blanca.png`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Contact Fluent Future — Arrange a Free Consultation',
+  twitterDescription: 'Get in touch with Fluent Future to arrange a free consultation and discover how personalised Language Consultancy can help you communicate with greater confidence.',
 })
 
 useHead({

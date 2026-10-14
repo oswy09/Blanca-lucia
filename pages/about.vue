@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const { siteUrl, whatsappUrl } = useSiteConfig()
+const { siteUrl, locale, whatsappUrl } = useSiteConfig()
 
 const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
 const { data: sbData } = await useAsyncData('about', async () => {
@@ -56,8 +56,18 @@ const abCtaTitle   = computed(() => sb.value.ab_cta_title   || 'If you would lik
 const abCtaSub     = computed(() => sb.value.ab_cta_sub     || 'You are welcome to contact me. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
 
 useSeoMeta({
-  title: 'About — Blanca Derby · Fluent Future',
-  description: 'Over 30 years helping Spanish-speaking professionals communicate with clarity and confidence in English.',
+  title: 'About Blanca Derby — Fluent Future Language Consultancy',
+  description: 'Discover Blanca Derby\'s 30+ years of experience in language and communication, and her personal approach to helping Spanish speakers communicate confidently in English.',
+  ogType: 'profile',
+  ogSiteName: 'Fluent Future',
+  ogTitle: 'About Blanca Derby — 30+ Years Helping Spanish Speakers Communicate in English',
+  ogDescription: 'Discover Blanca Derby\'s 30+ years of experience in language and communication, and her personal approach to helping Spanish speakers communicate confidently in English.',
+  ogUrl: `${siteUrl}/about`,
+  ogLocale: locale,
+  ogImage: `${siteUrl}/imagens/blanca.png`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'About Blanca Derby — 30+ Years Helping Spanish Speakers Communicate in English',
+  twitterDescription: 'Discover Blanca Derby\'s 30+ years of experience in language and communication, and her personal approach to helping Spanish speakers communicate confidently in English.',
 })
 
 useHead({
