@@ -34,17 +34,6 @@ const ctaSec  = computed(() => src.value?.hero_cta_secondary || 'View services')
           </svg>
           {{ ctaPri }}
         </a>
-        <button
-          class="btn btn-secondary"
-          data-cal-link="fluent-future/consultation"
-          data-cal-config='{"layout":"month_view"}'
-          type="button"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          Book a consultation
-        </button>
         <NuxtLink to="/services" class="btn btn-secondary">{{ ctaSec }}</NuxtLink>
       </div>
 
