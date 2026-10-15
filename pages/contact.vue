@@ -180,7 +180,28 @@ const submitForm = () => {
       </div>
     </section>
 
-    <!-- ── 3. MAIN FORM ─────────────────────────────────────────── -->
+    <!-- ── 3. BOOK A CONSULTATION ───────────────────────────────── -->
+    <section class="cn-book wrap reveal">
+      <div class="cn-book-inner">
+        <span class="eyebrow">Free Consultation</span>
+        <h2 class="cn-book-title">Book a time that works for you</h2>
+        <p class="cn-book-sub">Choose a slot directly in my calendar — no back and forth, no commitment.</p>
+        <button
+          class="btn btn-primary cn-book-btn"
+          data-cal-link="fluent-future/consultation"
+          data-cal-config='{"layout":"month_view"}'
+          type="button"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Book a free consultation
+        </button>
+        <p class="cn-book-or">— or send a message below —</p>
+      </div>
+    </section>
+
+    <!-- ── 4. MAIN FORM ─────────────────────────────────────────── -->
     <section class="cn-main wrap">
       <div class="cn-main-grid">
 
@@ -292,6 +313,46 @@ const submitForm = () => {
 <style scoped>
 .cn-page {
   background: var(--bg);
+}
+
+/* ── Book section ── */
+.cn-book {
+  padding-block: clamp(48px, 6vw, 72px);
+  text-align: center;
+}
+.cn-book-inner {
+  max-width: 560px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.cn-book-title {
+  font-family: var(--fd);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--text);
+  text-wrap: balance;
+  margin: 0;
+}
+.cn-book-sub {
+  font-size: 15px;
+  color: var(--text2);
+  margin: 0;
+  line-height: 1.6;
+}
+.cn-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.cn-book-or {
+  font-size: 13px;
+  color: var(--text3);
+  margin: 8px 0 0;
+  letter-spacing: .03em;
 }
 
 .cn-hero {
