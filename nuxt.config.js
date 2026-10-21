@@ -42,6 +42,18 @@ export default defineNuxtConfig({
   ],
   // ────────────────────────────────────────────────────────────
 
+  nitro: {
+    preset: 'cloudflare-pages',
+    routeRules: {
+      '/**': {
+        headers: {
+          'Content-Security-Policy': "frame-ancestors 'self' https://app.storyblok.com",
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+        },
+      },
+    },
+  },
+
   future: {
     compatibilityVersion: 3,
   },
