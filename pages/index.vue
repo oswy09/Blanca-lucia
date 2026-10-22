@@ -3,15 +3,16 @@ const { siteName, siteUrl, locale, contactEmail } = useSiteConfig()
 
 const sbHome = useState('sb-home', () => ({}))
 
-const story = await useStoryblok('home', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
-
-if (story.value?.content) {
-  sbHome.value = story.value.content
-}
-
-watch(story, (s) => {
-  if (s?.content) sbHome.value = s.content
-})
+let story = null
+try {
+  story = await useStoryblok('home', { version: process.env.NODE_ENV === 'production' ? 'published' : 'draft' })
+  if (story?.value?.content) {
+    sbHome.value = story.value.content
+  }
+  watch(story, (s) => {
+    if (s?.content) sbHome.value = s.content
+  })
+} catch {}
 
 useSeoMeta({
   title: 'Fluent Future — Personal English Language Consultancy for Spanish-Speaking Adults',
@@ -54,9 +55,9 @@ useRevealOnScroll()
 
 <template>
   <main>
-    <template v-if="story?.content?.sections?.length">
+    <template v-if="story?.value?.content?.sections?.length">
       <StoryblokComponent
-        v-for="blok in story.content.sections"
+        v-for="blok in story.value.content.sections"
         :key="blok._uid"
         :blok="blok"
       />
