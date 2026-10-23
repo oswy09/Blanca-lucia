@@ -87,6 +87,44 @@ const sections = [
   },
 ]
 
+const defaults = {
+  ab_eyebrow: 'About Me',
+  ab_hero_title: 'A personal language consultancy by Blanca Derby',
+  ab_hero_subtitle: 'Working with Spanish-speaking adults to develop clear, confident, and natural communication through a tailored, one-to-one approach.',
+  ab_intro_eyebrow: 'A Personal Approach',
+  ab_intro_h2: 'A more focused, individual approach',
+  ab_intro_lead: 'I support Spanish-speaking professionals in developing clear, confident communication in English.',
+  ab_intro_block_1: 'My approach is shaped by over 30 years of experience in language teaching, translation, and personalised guidance, now refined into a consultancy model that prioritises the individual.',
+  ab_intro_block_2: 'Rather than following a standard structure, each engagement is carefully tailored — allowing us to focus on what will make a meaningful difference to you.',
+  ab_intro_block_3: 'My services for evaluating their prospective employees. To this end I provide a detailed assessment for each individual candidate, enabling my clients to make a more informed decision during their hiring process.',
+  ab_callout_text: 'There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.',
+  ab_values_eyebrow: 'How I work',
+  ab_values_h2: 'Built on Three Core Values',
+  ab_val_1_title: 'Careful understanding',
+  ab_val_1_desc: 'Each engagement begins with listening — understanding your background, needs, and goals.',
+  ab_val_2_title: 'Focused guidance',
+  ab_val_2_desc: 'Work is directed towards what matters most, avoiding unnecessary complexity.',
+  ab_val_3_title: 'Meaningful progress',
+  ab_val_3_desc: 'The aim is not speed, but clarity, confidence, and lasting improvement.',
+  ab_journey_eyebrow: 'My Background',
+  ab_journey_h2: 'A Lifetime in Languages',
+  ab_step_1_title: 'The Foundation',
+  ab_step_1_desc: 'I have spent more than three decades working with adults from a wide range of professional backgrounds.',
+  ab_step_2_title: 'The Insight',
+  ab_step_2_desc: 'This experience allows me to quickly recognise patterns, identify challenges, and provide clear, practical guidance tailored to each individual.',
+  ab_step_3_title: 'The Evolution',
+  ab_step_3_desc: 'Over time, my work has evolved from traditional teaching into a more focused consultancy approach — one that values depth, precision, and personal attention.',
+  ab_diff_eyebrow: 'What Makes This Different',
+  ab_diff_h2: 'Personal. Not a Platform.',
+  ab_diff_p1: 'This is a personal consultancy — not a platform or standardised service.',
+  ab_diff_p2: 'I work with a limited number of clients to ensure each person receives thoughtful, individual attention.',
+  ab_diff_p3: 'If you are looking for a calm, focused, and personal approach, I would be pleased to work with you.',
+  ab_diff_note: 'A limited number of clients are accepted to ensure a high level of personal attention.',
+  ab_cta_eyebrow: 'Ready to Work Together?',
+  ab_cta_title: 'If you would like to get in touch',
+  ab_cta_sub: 'You are welcome to contact me. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.',
+}
+
 const openSections = ref(new Set(['hero']))
 
 function toggleSection(id) {
@@ -97,8 +135,10 @@ function toggleSection(id) {
 onMounted(async () => {
   try {
     const data = await $fetch('/api/content/about')
-    content.value = data || {}
-  } catch {}
+    content.value = { ...defaults, ...data }
+  } catch {
+    content.value = { ...defaults }
+  }
 })
 
 async function save() {
@@ -167,7 +207,9 @@ async function save() {
             Actualizar
           </button>
         </div>
-        <iframe ref="previewIframe" src="/about" class="preview-iframe" />
+        <div class="preview-wrap">
+          <iframe ref="previewIframe" src="/about" class="preview-iframe" />
+        </div>
       </div>
     </div>
   </div>
@@ -201,10 +243,11 @@ async function save() {
 .field-input, .field-textarea { border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px 12px; font-size: 14px; color: #1a1f2e; background: #f8fafc; font-family: inherit; transition: border-color .15s, background .15s; outline: none; resize: vertical; width: 100%; }
 .field-input:focus, .field-textarea:focus { border-color: #2e8a93; background: #fff; }
 .field-textarea { min-height: 72px; }
-.editor-preview { flex: 0 0 50%; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; background: #e8ecf1; }
+.editor-preview { flex: 0 0 50%; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; background: #e8ecf1; overflow: hidden; }
 .preview-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; border-bottom: 1px solid #e2e8f0; flex-shrink: 0; }
 .preview-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .06em; }
 .preview-refresh { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; border: 1.5px solid #e2e8f0; background: #fff; color: #374151; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
 .preview-refresh:hover { border-color: #2e8a93; color: #2e8a93; }
-.preview-iframe { flex: 1; border: none; transform-origin: top left; width: 200%; height: 200%; transform: scale(0.5); margin-bottom: -100%; margin-right: -100%; }
+.preview-wrap { flex: 1; position: relative; overflow: hidden; }
+.preview-iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; transform: scale(0.5); transform-origin: 0 0; border: none; }
 </style>

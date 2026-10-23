@@ -40,6 +40,27 @@ const sections = [
   },
 ]
 
+const defaults = {
+  hero_pill: 'Personal Language Consultancy for Adults',
+  hero_tagline: 'Personal Language Consultancy by Blanca Derby',
+  hero_subtitle: 'A consultancy for Native Spanish-speaking adults seeking to improve how they express themselves in English in real-life and professional contexts.',
+  hero_cta_primary: 'Message me on WhatsApp',
+  hero_cta_secondary: 'View services',
+  pricing_eyebrow: 'Investment',
+  pricing_title: 'A simple, transparent approach to fees',
+  pricing_desc_1: 'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.',
+  pricing_desc_2: 'A limited number of clients are accepted at any one time to ensure the highest level of personal attention.',
+  plan_1_name: '30-minute Focus Session',
+  plan_1_amount: '£35',
+  plan_1_period: 'Single 30-minute consultation',
+  plan_2_name: '60-minute Individual Session',
+  plan_2_amount: '£60',
+  plan_2_period: 'Full 60-minute consultation',
+  plan_3_name: '4 × 60-minute Sessions',
+  plan_3_amount: '£220',
+  plan_3_period: '4 × 60-minute consultations',
+}
+
 const openSections = ref(new Set(['hero', 'pricing']))
 
 function toggleSection(id) {
@@ -50,8 +71,10 @@ function toggleSection(id) {
 onMounted(async () => {
   try {
     const data = await $fetch('/api/content/home')
-    content.value = data || {}
-  } catch {}
+    content.value = { ...defaults, ...data }
+  } catch {
+    content.value = { ...defaults }
+  }
 })
 
 async function save() {
@@ -146,7 +169,9 @@ async function save() {
             Actualizar
           </button>
         </div>
-        <iframe ref="previewIframe" src="/" class="preview-iframe" />
+        <div class="preview-wrap">
+          <iframe ref="previewIframe" src="/" class="preview-iframe" />
+        </div>
       </div>
     </div>
   </div>
@@ -252,6 +277,7 @@ async function save() {
   display: flex;
   flex-direction: column;
   background: #e8ecf1;
+  overflow: hidden;
 }
 .preview-bar {
   display: flex;
@@ -270,14 +296,18 @@ async function save() {
   cursor: pointer; transition: all .15s; font-family: inherit;
 }
 .preview-refresh:hover { border-color: #2e8a93; color: #2e8a93; }
-.preview-iframe {
+.preview-wrap {
   flex: 1;
-  border: none;
-  transform-origin: top left;
+  position: relative;
+  overflow: hidden;
+}
+.preview-iframe {
+  position: absolute;
+  top: 0; left: 0;
   width: 200%;
   height: 200%;
   transform: scale(0.5);
-  margin-bottom: -100%;
-  margin-right: -100%;
+  transform-origin: 0 0;
+  border: none;
 }
 </style>
