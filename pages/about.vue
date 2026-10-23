@@ -3,14 +3,9 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const { siteUrl, locale, whatsappUrl } = useSiteConfig()
 
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbData } = await useAsyncData('about', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/about', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
+const { data: sbData } = await useAsyncData('about', () =>
+  $fetch('/api/content/about').catch(() => ({}))
+)
 const sb = computed(() => sbData.value || {})
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')

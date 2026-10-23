@@ -6,3 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = ".output/public"
 binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "CONTENT_KV"
+id = "2358e3a1626d4d83a342945235f37538"

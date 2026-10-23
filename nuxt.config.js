@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    adminEmail: process.env.ADMIN_EMAIL || '',
+    adminPassword: process.env.ADMIN_PASSWORD || '',
+    jwtSecret: process.env.JWT_SECRET || 'dev-fallback-secret',
+  },
+
   // SSR activo — obligatorio para SEO. Nunca cambiar a SPA.
   ssr: true,
 
