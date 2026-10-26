@@ -296,7 +296,7 @@ const defaults = {
   who_item_4_desc: 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
 }
 
-const openSections = ref(new Set(['hero']))
+const openSections = ref(new Set(sections.map(s => s.id)))
 
 function toggleSection(id) {
   if (openSections.value.has(id)) openSections.value.delete(id)
