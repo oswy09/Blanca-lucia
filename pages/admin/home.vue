@@ -130,7 +130,24 @@ async function save() {
     <!-- Body -->
     <div class="editor-body" :class="{ 'split': showPreview }">
 
-      <!-- Form -->
+      <!-- Preview (left, fills all space) -->
+      <div v-if="showPreview" class="editor-preview">
+        <div class="preview-bar">
+          <span class="preview-label">Preview en vivo</span>
+          <button class="preview-refresh" @click="previewIframe?.contentWindow?.location?.reload()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Actualizar
+          </button>
+        </div>
+        <div class="preview-wrap">
+          <iframe ref="previewIframe" src="/" class="preview-iframe" @load="onIframeLoad" />
+        </div>
+      </div>
+
+      <!-- Form (right panel, fixed width) -->
       <div class="editor-form">
         <div
           v-for="section in sections"
@@ -167,23 +184,6 @@ async function save() {
               />
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Preview -->
-      <div v-if="showPreview" class="editor-preview">
-        <div class="preview-bar">
-          <span class="preview-label">Preview en vivo</span>
-          <button class="preview-refresh" @click="previewIframe?.contentWindow?.location?.reload()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-            Actualizar
-          </button>
-        </div>
-        <div class="preview-wrap">
-          <iframe ref="previewIframe" src="/" class="preview-iframe" @load="onIframeLoad" />
         </div>
       </div>
     </div>
@@ -228,7 +228,11 @@ async function save() {
   flex: 1;
   overflow: hidden;
 }
-.editor-body.split .editor-form { flex: 0 0 40%; }
+.editor-body.split .editor-form {
+  flex: 0 0 360px;
+  border-left: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
 
 .editor-form {
   flex: 1;
@@ -285,8 +289,7 @@ async function save() {
 .field-textarea { min-height: 72px; }
 
 .editor-preview {
-  flex: 0 0 60%;
-  border-left: 1px solid #e2e8f0;
+  flex: 1;
   display: flex;
   flex-direction: column;
   background: #e8ecf1;

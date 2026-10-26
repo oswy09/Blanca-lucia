@@ -191,6 +191,22 @@ async function save() {
     </div>
 
     <div class="editor-body" :class="{ 'split': showPreview }">
+      <div v-if="showPreview" class="editor-preview">
+        <div class="preview-bar">
+          <span class="preview-label">Preview en vivo</span>
+          <button class="preview-refresh" @click="previewIframe?.contentWindow?.location?.reload()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Actualizar
+          </button>
+        </div>
+        <div class="preview-wrap">
+          <iframe ref="previewIframe" src="/about" class="preview-iframe" @load="onIframeLoad" />
+        </div>
+      </div>
+
       <div class="editor-form">
         <div v-for="section in sections" :key="section.id" class="section-block">
           <button class="section-header" @click="toggleSection(section.id)">
@@ -206,22 +222,6 @@ async function save() {
               <input v-else v-model="content[field.key]" :placeholder="field.placeholder" class="field-input" type="text" />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div v-if="showPreview" class="editor-preview">
-        <div class="preview-bar">
-          <span class="preview-label">Preview en vivo</span>
-          <button class="preview-refresh" @click="previewIframe?.contentWindow?.location?.reload()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-            Actualizar
-          </button>
-        </div>
-        <div class="preview-wrap">
-          <iframe ref="previewIframe" src="/about" class="preview-iframe" @load="onIframeLoad" />
         </div>
       </div>
     </div>
@@ -242,7 +242,7 @@ async function save() {
 .btn-save:hover:not(:disabled) { background: #13484e; }
 .btn-save:disabled { opacity: .55; cursor: not-allowed; }
 .editor-body { display: flex; flex: 1; overflow: hidden; }
-.editor-body.split .editor-form { flex: 0 0 40%; }
+.editor-body.split .editor-form { flex: 0 0 360px; border-left: 1px solid #e2e8f0; background: #f8fafc; }
 .editor-form { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .section-block { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
 .section-header { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: none; border: none; cursor: pointer; text-align: left; transition: background .15s; }
@@ -256,7 +256,7 @@ async function save() {
 .field-input, .field-textarea { border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px 12px; font-size: 14px; color: #1a1f2e; background: #f8fafc; font-family: inherit; transition: border-color .15s, background .15s; outline: none; resize: vertical; width: 100%; }
 .field-input:focus, .field-textarea:focus { border-color: #2e8a93; background: #fff; }
 .field-textarea { min-height: 72px; }
-.editor-preview { flex: 0 0 60%; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; background: #e8ecf1; overflow: hidden; }
+.editor-preview { flex: 1; display: flex; flex-direction: column; background: #e8ecf1; overflow: hidden; }
 .preview-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; border-bottom: 1px solid #e2e8f0; flex-shrink: 0; }
 .preview-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .06em; }
 .preview-refresh { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; border: 1.5px solid #e2e8f0; background: #fff; color: #374151; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
