@@ -262,5 +262,5 @@ async function save() {
 .preview-refresh { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; border: 1.5px solid #e2e8f0; background: #fff; color: #374151; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
 .preview-refresh:hover { border-color: #2e8a93; color: #2e8a93; }
 .preview-wrap { flex: 1; position: relative; overflow: hidden; }
-.preview-iframe { position: absolute; top: 0; left: 0; width: 133.33%; height: 133.33%; transform: scale(0.75); transform-origin: 0 0; border: none; }
+.preview-iframe { position: absolute; top: 0; left: 0; width: 117.65%; height: 117.65%; transform: scale(0.85); transform-origin: 0 0; border: none; }
 </style>

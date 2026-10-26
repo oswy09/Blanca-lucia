@@ -1,15 +1,6 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
-
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbPricingData } = await useAsyncData('pricing', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/pricing', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
-const sb = computed(() => sbPricingData.value || {})
+const sb = useState('sb-home', () => ({}))
 
 const headerEyebrow = computed(() => sb.value.pricing_eyebrow || 'Investment')
 const headerTitle = computed(() => sb.value.pricing_title || 'A simple, transparent approach to fees')
@@ -80,10 +71,10 @@ const plans = computed(() => [
            LAYOUT OPTION 1: COMPACT TABLE FLOW
            ========================================== -->
       <div class="pricing-header reveal">
-        <span class="eyebrow">{{ headerEyebrow }}</span>
-        <h2 class="section-title">{{ headerTitle }}</h2>
-        <p class="section-desc">{{ headerDesc1 }}</p>
-        <p class="section-desc" style="margin-top: 12px;">{{ headerDesc2 }}</p>
+        <span class="eyebrow" data-cms-key="pricing_eyebrow">{{ headerEyebrow }}</span>
+        <h2 class="section-title" data-cms-key="pricing_title">{{ headerTitle }}</h2>
+        <p class="section-desc" data-cms-key="pricing_desc_1">{{ headerDesc1 }}</p>
+        <p class="section-desc" data-cms-key="pricing_desc_2" style="margin-top: 12px;">{{ headerDesc2 }}</p>
       </div>
 
       <!-- Discovery Call Callout Card (New Layout) -->

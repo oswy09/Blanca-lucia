@@ -6,15 +6,95 @@ const showPreview = ref(true)
 const saving = ref(false)
 const saveStatus = ref('')
 const content = ref({})
+const isInlineEditing = ref(false)
 
 let previewDebounce = null
 function sendPreview() {
+  if (isInlineEditing.value) return
   previewIframe.value?.contentWindow?.postMessage(
     { type: 'CMS_PREVIEW', page: 'home', content: JSON.parse(JSON.stringify(content.value)) },
     window.location.origin
   )
 }
-function onIframeLoad() { sendPreview() }
+
+const INLINE_EDITOR_CODE = `(function(){
+  var a=null;
+  function hl(el,on){
+    el.style.outline=on?'2px solid #2e8a93':'';
+    el.style.outlineOffset=on?'3px':'';
+    el.style.borderRadius=on?'3px':'';
+    el.style.cursor=on?'text':'';
+    el.style.background=on?'rgba(46,138,147,0.06)':'';
+  }
+  document.addEventListener('mouseover',function(e){
+    var el=e.target.closest('[data-cms-key]');
+    if(el&&el!==a)hl(el,true);
+  });
+  document.addEventListener('mouseout',function(e){
+    var el=e.target.closest('[data-cms-key]');
+    if(el&&el!==a)hl(el,false);
+  });
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-cms-key]');
+    if(!el){if(a)end(a);return;}
+    if(el===a)return;
+    e.preventDefault();e.stopPropagation();
+    if(a)end(a);
+    begin(el);
+  },true);
+  function begin(el){
+    a=el;
+    var k=el.getAttribute('data-cms-key');
+    hl(el,true);
+    el.contentEditable='true';
+    el.focus();
+    try{var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(x){}
+    window.parent.postMessage({type:'CMS_INLINE_START',key:k},'*');
+    el._i=function(){window.parent.postMessage({type:'CMS_FIELD_CHANGE',key:k,value:el.innerText},'*');};
+    el._k=function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();end(el);}if(e.key==='Escape')end(el);};
+    el.addEventListener('input',el._i);
+    el.addEventListener('keydown',el._k);
+  }
+  function end(el){
+    if(!el)return;
+    el.contentEditable='false';
+    el.removeEventListener('input',el._i);
+    el.removeEventListener('keydown',el._k);
+    hl(el,false);
+    window.parent.postMessage({type:'CMS_INLINE_END',key:el.getAttribute('data-cms-key')},'*');
+    a=null;
+  }
+})()`
+
+function injectInlineEditor() {
+  const win = previewIframe.value?.contentWindow
+  if (!win?.document) return
+  try {
+    win.document.getElementById('_cms_ie')?.remove()
+    const s = win.document.createElement('script')
+    s.id = '_cms_ie'
+    s.textContent = INLINE_EDITOR_CODE
+    win.document.head.appendChild(s)
+  } catch(e) {}
+}
+
+function onIframeMsg(event) {
+  if (event.source !== previewIframe.value?.contentWindow) return
+  const d = event.data || {}
+  if (d.type === 'CMS_INLINE_START') {
+    isInlineEditing.value = true
+  } else if (d.type === 'CMS_INLINE_END') {
+    isInlineEditing.value = false
+    nextTick(sendPreview)
+  } else if (d.type === 'CMS_FIELD_CHANGE') {
+    if (content.value) content.value[d.key] = d.value
+  }
+}
+
+function onIframeLoad() {
+  sendPreview()
+  setTimeout(injectInlineEditor, 200)
+}
 watch(content, () => {
   clearTimeout(previewDebounce)
   previewDebounce = setTimeout(sendPreview, 250)
@@ -82,12 +162,17 @@ function toggleSection(id) {
 }
 
 onMounted(async () => {
+  window.addEventListener('message', onIframeMsg)
   try {
     const data = await $fetch('/api/content/home')
     content.value = { ...defaults, ...data }
   } catch {
     content.value = { ...defaults }
   }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('message', onIframeMsg)
 })
 
 async function save() {
@@ -320,9 +405,9 @@ async function save() {
 .preview-iframe {
   position: absolute;
   top: 0; left: 0;
-  width: 133.33%;
-  height: 133.33%;
-  transform: scale(0.75);
+  width: 117.65%;
+  height: 117.65%;
+  transform: scale(0.85);
   transform-origin: 0 0;
   border: none;
 }
