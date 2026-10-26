@@ -103,7 +103,7 @@ watch(content, () => {
 const sections = [
   {
     id: 'hero',
-    label: 'Hero',
+    label: '① Hero',
     fields: [
       { key: 'hero_pill', label: 'Badge', type: 'text' },
       { key: 'hero_tagline', label: 'Tagline', type: 'text' },
@@ -113,8 +113,21 @@ const sections = [
     ],
   },
   {
+    id: 'proof',
+    label: '② Frase destacada',
+    fields: [
+      { key: 'proof_slide_1', label: 'Frase 1', type: 'textarea' },
+      { key: 'proof_slide_2', label: 'Frase 2', type: 'textarea' },
+      { key: 'proof_label', label: 'Etiqueta clientes', type: 'text' },
+      { key: 'proof_client_1', label: 'Cliente 1', type: 'text' },
+      { key: 'proof_client_2', label: 'Cliente 2', type: 'text' },
+      { key: 'proof_client_3', label: 'Cliente 3', type: 'text' },
+      { key: 'proof_client_4', label: 'Cliente 4', type: 'text' },
+    ],
+  },
+  {
     id: 'diff',
-    label: 'Enfoque personal',
+    label: '③ Enfoque personal',
     fields: [
       { key: 'diff_eyebrow', label: 'Badge', type: 'text' },
       { key: 'diff_tagline', label: 'Tagline', type: 'text' },
@@ -128,15 +141,40 @@ const sections = [
   },
   {
     id: 'coaching',
-    label: 'Coaching (cita)',
+    label: '④ Coaching (cita)',
     fields: [
       { key: 'coaching_title', label: 'Título', type: 'textarea' },
       { key: 'coaching_desc', label: 'Descripción', type: 'textarea' },
     ],
   },
   {
+    id: 'testi',
+    label: '⑤ Testimonios',
+    fields: [
+      { key: 'testi_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'testi_h2', label: 'Título', type: 'text' },
+    ],
+  },
+  {
+    id: 'who',
+    label: '⑥ ¿Para quién es?',
+    fields: [
+      { key: 'who_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'who_h2', label: 'Título', type: 'textarea' },
+      { key: 'who_desc', label: 'Descripción', type: 'textarea' },
+      { key: 'who_item_1_title', label: 'Ítem 1 — Título', type: 'text' },
+      { key: 'who_item_1_desc', label: 'Ítem 1 — Descripción', type: 'textarea' },
+      { key: 'who_item_2_title', label: 'Ítem 2 — Título', type: 'text' },
+      { key: 'who_item_2_desc', label: 'Ítem 2 — Descripción', type: 'textarea' },
+      { key: 'who_item_3_title', label: 'Ítem 3 — Título', type: 'text' },
+      { key: 'who_item_3_desc', label: 'Ítem 3 — Descripción', type: 'textarea' },
+      { key: 'who_item_4_title', label: 'Ítem 4 — Título', type: 'text' },
+      { key: 'who_item_4_desc', label: 'Ítem 4 — Descripción', type: 'textarea' },
+    ],
+  },
+  {
     id: 'services',
-    label: 'Servicios',
+    label: '⑦ Servicios',
     fields: [
       { key: 'svc_eyebrow', label: 'Badge', type: 'text' },
       { key: 'svc_h2', label: 'Título', type: 'text' },
@@ -145,7 +183,7 @@ const sections = [
   },
   {
     id: 'how',
-    label: 'Cómo trabajo',
+    label: '⑧ Cómo trabajo',
     fields: [
       { key: 'how_step_1_title', label: 'Paso 1 — Título', type: 'text' },
       { key: 'how_step_1_desc', label: 'Paso 1 — Descripción', type: 'textarea' },
@@ -159,7 +197,7 @@ const sections = [
   },
   {
     id: 'pricing',
-    label: 'Precios',
+    label: '⑨ Precios',
     fields: [
       { key: 'pricing_eyebrow', label: 'Badge', type: 'text' },
       { key: 'pricing_title', label: 'Título', type: 'text' },
@@ -181,32 +219,11 @@ const sections = [
   },
   {
     id: 'cta',
-    label: 'CTA Final',
+    label: '⑩ CTA Final',
     fields: [
       { key: 'cta_eyebrow', label: 'Badge', type: 'text' },
       { key: 'cta_heading', label: 'Título', type: 'textarea' },
       { key: 'cta_body', label: 'Cuerpo', type: 'textarea' },
-    ],
-  },
-  {
-    id: 'proof',
-    label: 'Frase destacada (hero)',
-    fields: [
-      { key: 'proof_slide_1', label: 'Frase 1', type: 'textarea' },
-      { key: 'proof_slide_2', label: 'Frase 2', type: 'textarea' },
-      { key: 'proof_label', label: 'Etiqueta clientes', type: 'text' },
-      { key: 'proof_client_1', label: 'Cliente 1', type: 'text' },
-      { key: 'proof_client_2', label: 'Cliente 2', type: 'text' },
-      { key: 'proof_client_3', label: 'Cliente 3', type: 'text' },
-      { key: 'proof_client_4', label: 'Cliente 4', type: 'text' },
-    ],
-  },
-  {
-    id: 'testi',
-    label: 'Testimonios',
-    fields: [
-      { key: 'testi_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'testi_h2', label: 'Título', type: 'text' },
     ],
   },
 ]
@@ -266,6 +283,17 @@ const defaults = {
   proof_client_4: 'Nissan Europe Information Systems',
   testi_eyebrow: 'Why Choose Fluent Future',
   testi_h2: 'Real stories of professional growth',
+  who_eyebrow: 'Who This Is For',
+  who_h2: 'Designed for adults who want more than standard approaches',
+  who_desc: 'This personal consultancy is suited to individuals who feel that traditional methods have not fully addressed their needs.',
+  who_item_1_title: 'Professionals seeking clarity in communication',
+  who_item_1_desc: 'You need to communicate clearly and confidently at work, in meetings, with clients, or across international environments, yet feel you are not fully expressing your capabilities.',
+  who_item_2_title: 'Spanish speakers wanting a specific goal',
+  who_item_2_desc: 'Your priorities have evolved. You are looking to reconnect with a language or refine your communication with a clear, practical purpose.',
+  who_item_3_title: 'Those who feel stuck despite experience',
+  who_item_3_desc: 'You have spent years working with the language, yet still feel a gap between understanding and natural expression. This is where focused, individual guidance becomes essential.',
+  who_item_4_title: 'Individuals who value a personal approach',
+  who_item_4_desc: 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
 }
 
 const openSections = ref(new Set(['hero']))

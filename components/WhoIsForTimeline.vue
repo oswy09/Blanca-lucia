@@ -90,11 +90,9 @@ onUnmounted(() => { gsapCtx?.revert() })
     <div class="wrap">
 
       <div class="timeline-header reveal">
-        <span class="eyebrow">Who This Is For</span>
-        <h2 class="section-title">Designed for adults who want <br class="dt-only">more than standard approaches</h2>
-        <p class="section-desc">
-          This personal consultancy is suited to individuals who feel that traditional methods have not fully addressed their needs.
-        </p>
+        <span class="eyebrow" data-cms-key="who_eyebrow">{{ whoEyebrow }}</span>
+        <h2 class="section-title" data-cms-key="who_h2">{{ whoH2 }}</h2>
+        <p class="section-desc" data-cms-key="who_desc">{{ whoDesc }}</p>
       </div>
 
       <div class="timeline-grid">
@@ -180,8 +178,8 @@ onUnmounted(() => { gsapCtx?.revert() })
           <!-- Text card -->
           <div class="timeline-text-side">
             <div class="timeline-card">
-              <h3 class="timeline-card-title">{{ item.title }}</h3>
-              <p class="timeline-card-desc">{{ item.desc }}</p>
+              <h3 class="timeline-card-title" :data-cms-key="'who_item_' + (idx + 1) + '_title'">{{ item.title }}</h3>
+              <p class="timeline-card-desc" :data-cms-key="'who_item_' + (idx + 1) + '_desc'">{{ item.desc }}</p>
             </div>
           </div>
 
