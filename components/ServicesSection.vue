@@ -48,9 +48,9 @@ const services = [
   <section class="svc-sec" id="services">
     <div class="wrap">
       <div class="svc-header reveal">
-        <span class="eyebrow">{{ svcEyebrow }}</span>
-        <h2 class="section-title">{{ svcH2 }}</h2>
-        <p class="section-desc">{{ svcDesc }}</p>
+        <span class="eyebrow" data-cms-key="svc_eyebrow">{{ svcEyebrow }}</span>
+        <h2 class="section-title" data-cms-key="svc_h2">{{ svcH2 }}</h2>
+        <p class="section-desc" data-cms-key="svc_desc">{{ svcDesc }}</p>
       </div>
 
       <div class="svc-grid">

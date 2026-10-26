@@ -105,30 +105,84 @@ const sections = [
     id: 'hero',
     label: 'Hero',
     fields: [
-      { key: 'hero_pill', label: 'Badge text', type: 'text', placeholder: 'Personal Language Consultancy for Adults' },
-      { key: 'hero_tagline', label: 'Tagline (línea pequeña)', type: 'text', placeholder: 'Personal Language Consultancy by Blanca Derby' },
-      { key: 'hero_subtitle', label: 'Subtítulo', type: 'textarea', placeholder: 'A consultancy for Native Spanish-speaking adults…' },
-      { key: 'hero_cta_primary', label: 'Botón WhatsApp', type: 'text', placeholder: 'Message me on WhatsApp' },
-      { key: 'hero_cta_secondary', label: 'Botón servicios', type: 'text', placeholder: 'View services' },
+      { key: 'hero_pill', label: 'Badge', type: 'text' },
+      { key: 'hero_tagline', label: 'Tagline', type: 'text' },
+      { key: 'hero_subtitle', label: 'Subtítulo', type: 'textarea' },
+      { key: 'hero_cta_primary', label: 'Botón WhatsApp', type: 'text' },
+      { key: 'hero_cta_secondary', label: 'Botón servicios', type: 'text' },
+    ],
+  },
+  {
+    id: 'diff',
+    label: 'Enfoque personal',
+    fields: [
+      { key: 'diff_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'diff_tagline', label: 'Tagline', type: 'text' },
+      { key: 'diff_sub', label: 'Subtítulo', type: 'text' },
+      { key: 'diff_guidance_label', label: 'Etiqueta lista', type: 'text' },
+      { key: 'diff_check_1', label: 'Punto 1', type: 'textarea' },
+      { key: 'diff_check_2', label: 'Punto 2', type: 'textarea' },
+      { key: 'diff_check_3', label: 'Punto 3', type: 'textarea' },
+      { key: 'diff_note', label: 'Nota inferior', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'coaching',
+    label: 'Coaching (cita)',
+    fields: [
+      { key: 'coaching_title', label: 'Título', type: 'textarea' },
+      { key: 'coaching_desc', label: 'Descripción', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'services',
+    label: 'Servicios',
+    fields: [
+      { key: 'svc_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'svc_h2', label: 'Título', type: 'text' },
+      { key: 'svc_desc', label: 'Descripción', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'how',
+    label: 'Cómo trabajo',
+    fields: [
+      { key: 'how_step_1_title', label: 'Paso 1 — Título', type: 'text' },
+      { key: 'how_step_1_desc', label: 'Paso 1 — Descripción', type: 'textarea' },
+      { key: 'how_step_2_title', label: 'Paso 2 — Título', type: 'text' },
+      { key: 'how_step_2_desc', label: 'Paso 2 — Descripción', type: 'textarea' },
+      { key: 'how_step_3_title', label: 'Paso 3 — Título', type: 'text' },
+      { key: 'how_step_3_desc', label: 'Paso 3 — Descripción', type: 'textarea' },
+      { key: 'how_step_4_title', label: 'Paso 4 — Título', type: 'text' },
+      { key: 'how_step_4_desc', label: 'Paso 4 — Descripción', type: 'textarea' },
     ],
   },
   {
     id: 'pricing',
     label: 'Precios',
     fields: [
-      { key: 'pricing_eyebrow', label: 'Badge sección', type: 'text', placeholder: 'Investment' },
-      { key: 'pricing_title', label: 'Título sección', type: 'text', placeholder: 'A simple, transparent approach to fees' },
-      { key: 'pricing_desc_1', label: 'Descripción 1', type: 'textarea', placeholder: 'Fees are straightforward…' },
-      { key: 'pricing_desc_2', label: 'Descripción 2', type: 'textarea', placeholder: 'A limited number of clients…' },
-      { key: 'plan_1_name', label: 'Plan 1 — Nombre', type: 'text', placeholder: '30-minute Focus Session' },
-      { key: 'plan_1_amount', label: 'Plan 1 — Precio', type: 'text', placeholder: '£35' },
-      { key: 'plan_1_period', label: 'Plan 1 — Descripción precio', type: 'text', placeholder: 'Single 30-minute consultation' },
-      { key: 'plan_2_name', label: 'Plan 2 — Nombre', type: 'text', placeholder: '60-minute Individual Session' },
-      { key: 'plan_2_amount', label: 'Plan 2 — Precio', type: 'text', placeholder: '£60' },
-      { key: 'plan_2_period', label: 'Plan 2 — Descripción precio', type: 'text', placeholder: 'Full 60-minute consultation' },
-      { key: 'plan_3_name', label: 'Plan 3 — Nombre', type: 'text', placeholder: '4 × 60-minute Sessions' },
-      { key: 'plan_3_amount', label: 'Plan 3 — Precio', type: 'text', placeholder: '£220' },
-      { key: 'plan_3_period', label: 'Plan 3 — Descripción precio', type: 'text', placeholder: '4 × 60-minute consultations' },
+      { key: 'pricing_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'pricing_title', label: 'Título', type: 'text' },
+      { key: 'pricing_desc_1', label: 'Descripción 1', type: 'textarea' },
+      { key: 'pricing_desc_2', label: 'Descripción 2', type: 'textarea' },
+      { key: 'plan_1_name', label: 'Plan 1 — Nombre', type: 'text' },
+      { key: 'plan_1_amount', label: 'Plan 1 — Precio', type: 'text' },
+      { key: 'plan_1_period', label: 'Plan 1 — Período', type: 'text' },
+      { key: 'plan_2_name', label: 'Plan 2 — Nombre', type: 'text' },
+      { key: 'plan_2_amount', label: 'Plan 2 — Precio', type: 'text' },
+      { key: 'plan_2_period', label: 'Plan 2 — Período', type: 'text' },
+      { key: 'plan_3_name', label: 'Plan 3 — Nombre', type: 'text' },
+      { key: 'plan_3_amount', label: 'Plan 3 — Precio', type: 'text' },
+      { key: 'plan_3_period', label: 'Plan 3 — Período', type: 'text' },
+    ],
+  },
+  {
+    id: 'cta',
+    label: 'CTA Final',
+    fields: [
+      { key: 'cta_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'cta_heading', label: 'Título', type: 'textarea' },
+      { key: 'cta_body', label: 'Cuerpo', type: 'textarea' },
     ],
   },
 ]
@@ -139,6 +193,27 @@ const defaults = {
   hero_subtitle: 'A consultancy for Native Spanish-speaking adults seeking to improve how they express themselves in English in real-life and professional contexts.',
   hero_cta_primary: 'Message me on WhatsApp',
   hero_cta_secondary: 'View services',
+  diff_eyebrow: 'A Personal Approach',
+  diff_tagline: 'A different approach to language learning',
+  diff_sub: 'A personal consultancy designed around you.',
+  diff_guidance_label: 'My guidance helps you:',
+  diff_check_1: 'Communicate with clarity and confidence in professional and everyday settings',
+  diff_check_2: 'Refine your communication style with precision',
+  diff_check_3: 'Resolve long-standing challenges through focused guidance',
+  diff_note: 'Every consultation is shaped around your individual needs. There are no rigid structures here.',
+  coaching_title: 'My role is to help you bridge that gap.',
+  coaching_desc: 'Many adults have spent years studying Spanish, yet still feel uncertain when speaking. My role is to help you bridge that gap through careful listening, deep experience, and an approach that treats you as an individual, not part of a standard programme.',
+  svc_eyebrow: 'Services',
+  svc_h2: 'How can I help you?',
+  svc_desc: 'Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication.',
+  how_step_1_title: 'Initial Consultation',
+  how_step_1_desc: 'We begin by understanding where you are, what you need, and the challenges you have faced so far.',
+  how_step_2_title: 'Focused Guidance',
+  how_step_2_desc: 'Targeted, precise work on the areas of communication that matter most in your professional and everyday life.',
+  how_step_3_title: 'Clarity & Expression',
+  how_step_3_desc: 'Attention to how you express yourself, ensuring clarity, natural flow, and ease in communication.',
+  how_step_4_title: 'Confidence in Practice',
+  how_step_4_desc: 'Support in applying your communication skills with confidence in real-world situations.',
   pricing_eyebrow: 'Investment',
   pricing_title: 'A simple, transparent approach to fees',
   pricing_desc_1: 'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.',
@@ -152,9 +227,12 @@ const defaults = {
   plan_3_name: '4 × 60-minute Sessions',
   plan_3_amount: '£220',
   plan_3_period: '4 × 60-minute consultations',
+  cta_eyebrow: 'Start with a Conversation',
+  cta_heading: 'If you would like to explore how I can support you',
+  cta_body: 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.',
 }
 
-const openSections = ref(new Set(['hero', 'pricing']))
+const openSections = ref(new Set(['hero']))
 
 function toggleSection(id) {
   if (openSections.value.has(id)) openSections.value.delete(id)
@@ -322,6 +400,7 @@ async function save() {
 .editor-form {
   flex: 1;
   overflow-y: auto;
+  min-height: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;

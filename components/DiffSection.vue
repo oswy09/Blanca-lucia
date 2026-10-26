@@ -18,29 +18,29 @@ const diffNote    = computed(() => src.value?.diff_note    || 'Every consultatio
 
       <!-- Left column -->
       <div class="diff-left" style="position: relative;">
-        <span class="eyebrow reveal">{{ diffEyebrow }}</span>
-        <p class="diff-tagline reveal" style="transition-delay:80ms">{{ diffTagline }}</p>
+        <span class="eyebrow reveal" data-cms-key="diff_eyebrow">{{ diffEyebrow }}</span>
+        <p class="diff-tagline reveal" style="transition-delay:80ms" data-cms-key="diff_tagline">{{ diffTagline }}</p>
         <h2 class="diff-statement reveal" style="transition-delay:160ms">
           Not a course.<br>
           Not a programme.
         </h2>
-        <p class="diff-sub reveal" style="transition-delay:240ms">{{ diffSub }}</p>
+        <p class="diff-sub reveal" style="transition-delay:240ms" data-cms-key="diff_sub">{{ diffSub }}</p>
         <ScrollBubble :text="['Designed around you', 'Speak with confidence', 'Enjoy your English']" position="top-right" :delay="400" />
       </div>
 
       <!-- Right column -->
       <div class="diff-right">
         <article class="diff-panel reveal" style="transition-delay:80ms">
-          <p class="diff-guidance-label">{{ diffGuide }}</p>
+          <p class="diff-guidance-label" data-cms-key="diff_guidance_label">{{ diffGuide }}</p>
           <ul class="check-list diff-checklist">
-            <li>{{ diffCheck1 }}</li>
-            <li>{{ diffCheck2 }}</li>
-            <li>{{ diffCheck3 }}</li>
+            <li data-cms-key="diff_check_1">{{ diffCheck1 }}</li>
+            <li data-cms-key="diff_check_2">{{ diffCheck2 }}</li>
+            <li data-cms-key="diff_check_3">{{ diffCheck3 }}</li>
           </ul>
           <NuxtLink to="/services" class="btn diff-cta">Explore services</NuxtLink>
         </article>
 
-        <p class="diff-note reveal" style="transition-delay:200ms">{{ diffNote }}</p>
+        <p class="diff-note reveal" style="transition-delay:200ms" data-cms-key="diff_note">{{ diffNote }}</p>
       </div>
 
     </div>

@@ -243,7 +243,7 @@ async function save() {
 .btn-save:disabled { opacity: .55; cursor: not-allowed; }
 .editor-body { display: flex; flex: 1; overflow: hidden; }
 .editor-body.split .editor-form { flex: 0 0 420px; border-left: 1px solid #e2e8f0; background: #f8fafc; }
-.editor-form { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.editor-form { flex: 1; overflow-y: auto; min-height: 0; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .section-block { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
 .section-header { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: none; border: none; cursor: pointer; text-align: left; transition: background .15s; }
 .section-header:hover { background: #f8fafc; }

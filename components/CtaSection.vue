@@ -12,9 +12,9 @@ const ctaBody    = computed(() => src.value?.cta_body    || 'You are welcome to 
   <section class="cta-sec" id="contact">
     <div class="wrap">
       <div class="cta-box reveal">
-        <span class="eyebrow cta-eyebrow">{{ ctaEyebrow }}</span>
-        <h2 class="cta-heading" style="transition-delay:80ms">{{ ctaHeading }}</h2>
-        <p class="cta-body" style="transition-delay:160ms">{{ ctaBody }}</p>
+        <span class="eyebrow cta-eyebrow" data-cms-key="cta_eyebrow">{{ ctaEyebrow }}</span>
+        <h2 class="cta-heading" style="transition-delay:80ms" data-cms-key="cta_heading">{{ ctaHeading }}</h2>
+        <p class="cta-body" style="transition-delay:160ms" data-cms-key="cta_body">{{ ctaBody }}</p>
         <div class="cta-btns" style="transition-delay:240ms">
           <button
             class="btn cta-btn-white"

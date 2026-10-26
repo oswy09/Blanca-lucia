@@ -48,8 +48,8 @@ const steps = computed(() => [
             <li v-for="s in steps" :key="s.n" class="how-flow-item reveal">
               <div class="how-flow-node">{{ s.n }}</div>
               <div class="how-flow-content">
-                <p class="how-flow-title">{{ s.title }}</p>
-                <p class="how-flow-desc">{{ s.desc }}</p>
+                <p class="how-flow-title" :data-cms-key="'how_step_' + s.n + '_title'">{{ s.title }}</p>
+                <p class="how-flow-desc" :data-cms-key="'how_step_' + s.n + '_desc'">{{ s.desc }}</p>
               </div>
             </li>
           </ol>

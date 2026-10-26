@@ -63,9 +63,7 @@ function startTypewriter() {
         
         <!-- Title & Typewriter Text -->
         <div class="coaching-content">
-          <h2 class="coaching-title">
-            My role is to help you <br><em>bridge that gap.</em>
-          </h2>
+          <h2 class="coaching-title" data-cms-key="coaching_title">{{ coachingTitle }}</h2>
           <p class="coaching-desc-typewriter">
             {{ typedText }}<span v-if="!isFinished" class="typewriter-cursor">|</span>
           </p>
