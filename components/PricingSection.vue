@@ -9,6 +9,7 @@ const headerDesc2 = computed(() => sb.value.pricing_desc_2 || 'A limited number 
 
 const plans = computed(() => [
   {
+    n: 1,
     id: 'focus',
     type: 'Consultation',
     name: sb.value.plan_1_name || '30-minute Focus Session',
@@ -22,6 +23,7 @@ const plans = computed(() => [
     ],
   },
   {
+    n: 2,
     id: 'individual',
     type: 'Consultation',
     name: sb.value.plan_2_name || '60-minute Individual Session',
@@ -35,6 +37,7 @@ const plans = computed(() => [
     ],
   },
   {
+    n: 3,
     id: 'block4',
     type: 'Block Package',
     name: sb.value.plan_3_name || '4 × 60-minute Sessions',
@@ -48,6 +51,7 @@ const plans = computed(() => [
     ],
   },
   {
+    n: 4,
     id: 'block8',
     type: 'Block Package',
     name: sb.value.plan_4_name || '8 × 60-minute Sessions',
@@ -126,12 +130,12 @@ const plans = computed(() => [
             <tbody>
               <tr v-for="p in plans" :key="`table-${p.id}`" :class="{ 'table-featured': p.featured }">
                 <td class="table-name-td">
-                  <strong>{{ p.name }}</strong>
+                  <strong :data-cms-key="'plan_' + p.n + '_name'">{{ p.name }}</strong>
                   <span v-if="p.featured" class="table-rec-badge">Recommended</span>
                 </td>
-                <td class="table-desc-td">{{ p.period }}</td>
+                <td class="table-desc-td" :data-cms-key="'plan_' + p.n + '_period'">{{ p.period }}</td>
                 <td class="table-price-td">
-                  <span class="table-price-val">{{ p.amount }}</span>
+                  <span class="table-price-val" :data-cms-key="'plan_' + p.n + '_amount'">{{ p.amount }}</span>
                   <span class="table-price-period" v-if="p.id.startsWith('block')">/ block</span>
                   <span class="table-price-period" v-else>/ session</span>
                 </td>

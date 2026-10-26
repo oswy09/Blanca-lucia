@@ -11,7 +11,7 @@
 
         <div class="proof-slides-container" ref="quoteRef">
           <transition name="slide-fade" mode="out-in">
-            <blockquote :key="currentSlide" class="proof-quote">
+            <blockquote :key="currentSlide" class="proof-quote" :data-cms-key="'proof_slide_' + (currentSlide + 1)">
               {{ slides[currentSlide] }}
             </blockquote>
           </transition>
@@ -34,9 +34,9 @@
 
       <!-- Marcas debajo -->
       <div class="proof-clients" ref="clientsRef">
-        <span class="proof-label">{{ proofLabel }}</span>
+        <span class="proof-label" data-cms-key="proof_label">{{ proofLabel }}</span>
         <ul class="proof-logos" role="list">
-          <li v-for="client in clients" :key="client" class="proof-item">{{ client }}</li>
+          <li v-for="(client, i) in clients" :key="client" class="proof-item" :data-cms-key="'proof_client_' + (i + 1)">{{ client }}</li>
         </ul>
       </div>
 

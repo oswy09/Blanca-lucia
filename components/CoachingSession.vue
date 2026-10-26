@@ -64,7 +64,7 @@ function startTypewriter() {
         <!-- Title & Typewriter Text -->
         <div class="coaching-content">
           <h2 class="coaching-title" data-cms-key="coaching_title">{{ coachingTitle }}</h2>
-          <p class="coaching-desc-typewriter">
+          <p class="coaching-desc-typewriter" data-cms-key="coaching_desc">
             {{ typedText }}<span v-if="!isFinished" class="typewriter-cursor">|</span>
           </p>
           <div class="coaching-bubble-wrap">

@@ -174,6 +174,9 @@ const sections = [
       { key: 'plan_3_name', label: 'Plan 3 — Nombre', type: 'text' },
       { key: 'plan_3_amount', label: 'Plan 3 — Precio', type: 'text' },
       { key: 'plan_3_period', label: 'Plan 3 — Período', type: 'text' },
+      { key: 'plan_4_name', label: 'Plan 4 — Nombre', type: 'text' },
+      { key: 'plan_4_amount', label: 'Plan 4 — Precio', type: 'text' },
+      { key: 'plan_4_period', label: 'Plan 4 — Período', type: 'text' },
     ],
   },
   {
@@ -183,6 +186,27 @@ const sections = [
       { key: 'cta_eyebrow', label: 'Badge', type: 'text' },
       { key: 'cta_heading', label: 'Título', type: 'textarea' },
       { key: 'cta_body', label: 'Cuerpo', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'proof',
+    label: 'Frase destacada (hero)',
+    fields: [
+      { key: 'proof_slide_1', label: 'Frase 1', type: 'textarea' },
+      { key: 'proof_slide_2', label: 'Frase 2', type: 'textarea' },
+      { key: 'proof_label', label: 'Etiqueta clientes', type: 'text' },
+      { key: 'proof_client_1', label: 'Cliente 1', type: 'text' },
+      { key: 'proof_client_2', label: 'Cliente 2', type: 'text' },
+      { key: 'proof_client_3', label: 'Cliente 3', type: 'text' },
+      { key: 'proof_client_4', label: 'Cliente 4', type: 'text' },
+    ],
+  },
+  {
+    id: 'testi',
+    label: 'Testimonios',
+    fields: [
+      { key: 'testi_eyebrow', label: 'Badge', type: 'text' },
+      { key: 'testi_h2', label: 'Título', type: 'text' },
     ],
   },
 ]
@@ -227,9 +251,21 @@ const defaults = {
   plan_3_name: '4 × 60-minute Sessions',
   plan_3_amount: '£220',
   plan_3_period: '4 × 60-minute consultations',
+  plan_4_name: '8 × 60-minute Sessions',
+  plan_4_amount: '£400',
+  plan_4_period: '8 × 60-minute consultations',
   cta_eyebrow: 'Start with a Conversation',
   cta_heading: 'If you would like to explore how I can support you',
   cta_body: 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.',
+  proof_slide_1: 'With over 30 years of experience in language teaching, translation, and personalised guidance, I now offer a focused, consultancy-based approach tailored to each individual.',
+  proof_slide_2: 'My work is centred on understanding your needs and guiding you towards meaningful, lasting progress, without rigid programmes or unnecessary complexity.',
+  proof_label: 'Trusted by professionals at',
+  proof_client_1: 'Nissan Technical Centre Europe',
+  proof_client_2: 'WIB Language Training',
+  proof_client_3: 'Lecta Paper UK Ltd',
+  proof_client_4: 'Nissan Europe Information Systems',
+  testi_eyebrow: 'Why Choose Fluent Future',
+  testi_h2: 'Real stories of professional growth',
 }
 
 const openSections = ref(new Set(['hero']))

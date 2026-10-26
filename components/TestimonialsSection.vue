@@ -126,8 +126,8 @@ onBeforeUnmount(() => {
     <div class="wrap">
       <div class="testi-head reveal">
         <div>
-          <span class="eyebrow">{{ testiEyebrow }}</span>
-          <h2 class="section-title">{{ testiH2 }}</h2>
+          <span class="eyebrow" data-cms-key="testi_eyebrow">{{ testiEyebrow }}</span>
+          <h2 class="section-title" data-cms-key="testi_h2">{{ testiH2 }}</h2>
         </div>
 
         <div class="testi-controls" aria-label="Testimonials controls">
