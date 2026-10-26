@@ -229,7 +229,7 @@ async function save() {
   overflow: hidden;
 }
 .editor-body.split .editor-form {
-  flex: 0 0 360px;
+  flex: 0 0 420px;
   border-left: 1px solid #e2e8f0;
   background: #f8fafc;
 }
@@ -320,9 +320,9 @@ async function save() {
 .preview-iframe {
   position: absolute;
   top: 0; left: 0;
-  width: 200%;
-  height: 200%;
-  transform: scale(0.5);
+  width: 133.33%;
+  height: 133.33%;
+  transform: scale(0.75);
   transform-origin: 0 0;
   border: none;
 }

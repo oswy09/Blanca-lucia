@@ -242,7 +242,7 @@ async function save() {
 .btn-save:hover:not(:disabled) { background: #13484e; }
 .btn-save:disabled { opacity: .55; cursor: not-allowed; }
 .editor-body { display: flex; flex: 1; overflow: hidden; }
-.editor-body.split .editor-form { flex: 0 0 360px; border-left: 1px solid #e2e8f0; background: #f8fafc; }
+.editor-body.split .editor-form { flex: 0 0 420px; border-left: 1px solid #e2e8f0; background: #f8fafc; }
 .editor-form { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .section-block { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
 .section-header { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: none; border: none; cursor: pointer; text-align: left; transition: background .15s; }
@@ -262,5 +262,5 @@ async function save() {
 .preview-refresh { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; border: 1.5px solid #e2e8f0; background: #fff; color: #374151; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
 .preview-refresh:hover { border-color: #2e8a93; color: #2e8a93; }
 .preview-wrap { flex: 1; position: relative; overflow: hidden; }
-.preview-iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; transform: scale(0.5); transform-origin: 0 0; border: none; }
+.preview-iframe { position: absolute; top: 0; left: 0; width: 133.33%; height: 133.33%; transform: scale(0.75); transform-origin: 0 0; border: none; }
 </style>
