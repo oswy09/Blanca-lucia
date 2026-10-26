@@ -6,7 +6,7 @@ const { siteUrl, locale, whatsappUrl } = useSiteConfig()
 const { data: sbData } = await useAsyncData('about', () =>
   $fetch('/api/content/about').catch(() => ({}))
 )
-const sb = computed(() => sbData.value || {})
+const sb = useState('sb-about', () => sbData.value || {})
 
 const abEyebrow      = computed(() => sb.value.ab_eyebrow      || 'About Me')
 const abHeroTitle    = computed(() => sb.value.ab_hero_title    || 'A personal language consultancy by Blanca Derby')

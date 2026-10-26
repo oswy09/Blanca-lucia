@@ -7,6 +7,19 @@ const saving = ref(false)
 const saveStatus = ref('')
 const content = ref({})
 
+let previewDebounce = null
+function sendPreview() {
+  previewIframe.value?.contentWindow?.postMessage(
+    { type: 'CMS_PREVIEW', page: 'home', content: JSON.parse(JSON.stringify(content.value)) },
+    window.location.origin
+  )
+}
+function onIframeLoad() { sendPreview() }
+watch(content, () => {
+  clearTimeout(previewDebounce)
+  previewDebounce = setTimeout(sendPreview, 250)
+}, { deep: true })
+
 const sections = [
   {
     id: 'hero',
@@ -170,7 +183,7 @@ async function save() {
           </button>
         </div>
         <div class="preview-wrap">
-          <iframe ref="previewIframe" src="/" class="preview-iframe" />
+          <iframe ref="previewIframe" src="/" class="preview-iframe" @load="onIframeLoad" />
         </div>
       </div>
     </div>
@@ -215,7 +228,7 @@ async function save() {
   flex: 1;
   overflow: hidden;
 }
-.editor-body.split .editor-form { flex: 0 0 50%; }
+.editor-body.split .editor-form { flex: 0 0 40%; }
 
 .editor-form {
   flex: 1;
@@ -272,7 +285,7 @@ async function save() {
 .field-textarea { min-height: 72px; }
 
 .editor-preview {
-  flex: 0 0 50%;
+  flex: 0 0 60%;
   border-left: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;

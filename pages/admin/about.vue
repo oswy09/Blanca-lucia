@@ -7,6 +7,19 @@ const saving = ref(false)
 const saveStatus = ref('')
 const content = ref({})
 
+let previewDebounce = null
+function sendPreview() {
+  previewIframe.value?.contentWindow?.postMessage(
+    { type: 'CMS_PREVIEW', page: 'about', content: JSON.parse(JSON.stringify(content.value)) },
+    window.location.origin
+  )
+}
+function onIframeLoad() { sendPreview() }
+watch(content, () => {
+  clearTimeout(previewDebounce)
+  previewDebounce = setTimeout(sendPreview, 250)
+}, { deep: true })
+
 const sections = [
   {
     id: 'hero',
@@ -208,7 +221,7 @@ async function save() {
           </button>
         </div>
         <div class="preview-wrap">
-          <iframe ref="previewIframe" src="/about" class="preview-iframe" />
+          <iframe ref="previewIframe" src="/about" class="preview-iframe" @load="onIframeLoad" />
         </div>
       </div>
     </div>
@@ -229,7 +242,7 @@ async function save() {
 .btn-save:hover:not(:disabled) { background: #13484e; }
 .btn-save:disabled { opacity: .55; cursor: not-allowed; }
 .editor-body { display: flex; flex: 1; overflow: hidden; }
-.editor-body.split .editor-form { flex: 0 0 50%; }
+.editor-body.split .editor-form { flex: 0 0 40%; }
 .editor-form { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .section-block { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
 .section-header { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: none; border: none; cursor: pointer; text-align: left; transition: background .15s; }
@@ -243,7 +256,7 @@ async function save() {
 .field-input, .field-textarea { border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px 12px; font-size: 14px; color: #1a1f2e; background: #f8fafc; font-family: inherit; transition: border-color .15s, background .15s; outline: none; resize: vertical; width: 100%; }
 .field-input:focus, .field-textarea:focus { border-color: #2e8a93; background: #fff; }
 .field-textarea { min-height: 72px; }
-.editor-preview { flex: 0 0 50%; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; background: #e8ecf1; overflow: hidden; }
+.editor-preview { flex: 0 0 60%; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; background: #e8ecf1; overflow: hidden; }
 .preview-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; border-bottom: 1px solid #e2e8f0; flex-shrink: 0; }
 .preview-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .06em; }
 .preview-refresh { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; border: 1.5px solid #e2e8f0; background: #fff; color: #374151; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
