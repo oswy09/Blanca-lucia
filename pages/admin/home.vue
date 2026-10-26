@@ -296,12 +296,6 @@ const defaults = {
   who_item_4_desc: 'You prefer thoughtful, one-to-one consultancy where your needs are understood, and your progress is shaped with care and attention.',
 }
 
-const openSections = ref(new Set(sections.map(s => s.id)))
-
-function toggleSection(id) {
-  if (openSections.value.has(id)) openSections.value.delete(id)
-  else openSections.value.add(id)
-}
 
 onMounted(async () => {
   window.addEventListener('message', onIframeMsg)
@@ -376,42 +370,30 @@ async function save() {
 
       <!-- Form (right panel, fixed width) -->
       <div class="editor-form">
-        <div
-          v-for="section in sections"
-          :key="section.id"
-          class="section-block"
-        >
-          <button class="section-header" @click="toggleSection(section.id)">
-            <span class="section-title">{{ section.label }}</span>
-            <svg class="section-chevron" :class="{ open: openSections.has(section.id) }" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-
-          <div v-show="openSections.has(section.id)" class="section-body">
-            <div
-              v-for="field in section.fields"
-              :key="field.key"
-              class="field"
-            >
-              <label class="field-label">{{ field.label }}</label>
-              <textarea
-                v-if="field.type === 'textarea'"
-                v-model="content[field.key]"
-                :placeholder="field.placeholder"
-                class="field-textarea"
-                rows="3"
-              />
-              <input
-                v-else
-                v-model="content[field.key]"
-                :placeholder="field.placeholder"
-                class="field-input"
-                type="text"
-              />
-            </div>
+        <template v-for="section in sections" :key="section.id">
+          <div class="sec-divider">
+            <span class="sec-divider-label">{{ section.label }}</span>
           </div>
-        </div>
+          <div
+            v-for="field in section.fields"
+            :key="field.key"
+            class="field"
+          >
+            <label class="field-label">{{ field.label }}</label>
+            <textarea
+              v-if="field.type === 'textarea'"
+              v-model="content[field.key]"
+              class="field-textarea"
+              rows="3"
+            />
+            <input
+              v-else
+              v-model="content[field.key]"
+              class="field-input"
+              type="text"
+            />
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -465,56 +447,77 @@ async function save() {
   flex: 1;
   overflow-y: auto;
   min-height: 0;
-  padding: 20px;
+  padding: 16px 20px 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0;
+  background: #f8fafc;
 }
 
-.section-block {
-  background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
-}
-.section-header {
+/* Section divider */
+.sec-divider {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 14px 18px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  transition: background .15s;
+  gap: 10px;
+  padding: 22px 0 10px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8fafc;
 }
-.section-header:hover { background: #f8fafc; }
-.section-title { font-size: 14px; font-weight: 700; color: #1a1f2e; }
-.section-chevron { color: #9ca3af; transition: transform .2s; flex-shrink: 0; }
-.section-chevron.open { transform: rotate(180deg); }
+.sec-divider:first-child { padding-top: 6px; }
+.sec-divider-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #2e8a93;
+  white-space: nowrap;
+  background: #f8fafc;
+  padding-right: 10px;
+}
+.sec-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
 
-.section-body { padding: 4px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
-
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .06em; }
+/* Fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
 .field-input,
 .field-textarea {
   border: 1.5px solid #e2e8f0;
   border-radius: 8px;
   padding: 9px 12px;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #1a1f2e;
-  background: #f8fafc;
+  background: #fff;
   font-family: inherit;
-  transition: border-color .15s, background .15s;
+  transition: border-color .15s, box-shadow .15s;
   outline: none;
   resize: vertical;
   width: 100%;
+  box-sizing: border-box;
 }
 .field-input:focus,
-.field-textarea:focus { border-color: #2e8a93; background: #fff; }
-.field-textarea { min-height: 72px; }
+.field-textarea:focus {
+  border-color: #2e8a93;
+  box-shadow: 0 0 0 3px rgba(46,138,147,.12);
+}
+.field-textarea { min-height: 70px; line-height: 1.55; }
 
 .editor-preview {
   flex: 1;
