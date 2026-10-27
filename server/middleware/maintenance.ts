@@ -1,5 +1,7 @@
 export default defineEventHandler((event) => {
-  if (process.env.MAINTENANCE_MODE !== 'true') return
+  const cfEnv = (event.context.cloudflare as any)?.env
+  const maintenanceMode = cfEnv?.MAINTENANCE_MODE || process.env.MAINTENANCE_MODE
+  if (maintenanceMode !== 'true') return
 
   const path = getRequestPath(event)
 
