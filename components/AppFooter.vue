@@ -29,7 +29,7 @@ const footerCopyright = computed(() => sb.value?.footer_copyright || '© 2026 Fl
 .footer {
   background: #2e8a93;
   color: #fff;
-  padding: clamp(48px, 7vw, 72px) var(--px);
+  padding: clamp(28px, 4vw, 44px) var(--px);
   position: relative;
   overflow: hidden;
 }
