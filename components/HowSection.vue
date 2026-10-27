@@ -132,7 +132,7 @@ const steps = computed(() => [
 .how-body-block {
   position: relative;
   z-index: 2;
-  padding-block: clamp(24px, 4vw, 48px) clamp(60px, 8vw, 100px);
+  padding-block: clamp(24px, 4vw, 48px) clamp(32px, 4vw, 52px);
 }
 .how-copy--centered {
   max-width: 680px;

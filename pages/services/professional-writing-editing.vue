@@ -240,7 +240,7 @@ useRevealOnScroll()
 
 /* ── Live Session Banner ── */
 .pwe-session-wrap {
-  padding-block: clamp(24px, 4vw, 44px);
+  padding-block: 8px clamp(24px, 4vw, 44px);
 }
 
 .pwe-session-banner {

@@ -383,7 +383,7 @@ useRevealOnScroll()
 }
 
 /* ── Live session banner ── */
-.pc-session-wrap { padding-block: clamp(24px, 4vw, 44px); }
+.pc-session-wrap { padding-block: 8px clamp(24px, 4vw, 44px); }
 .pc-session-banner {
   display: grid;
   grid-template-columns: 1fr 1fr;

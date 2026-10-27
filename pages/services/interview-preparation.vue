@@ -247,7 +247,7 @@ useRevealOnScroll()
 
 /* ── Live Session Banner ── */
 .ip-session-wrap {
-  padding-block: clamp(24px, 4vw, 44px);
+  padding-block: 8px clamp(24px, 4vw, 44px);
 }
 
 .ip-session-banner {
