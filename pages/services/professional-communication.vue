@@ -217,7 +217,7 @@ useRevealOnScroll()
 /* ── Hero ── */
 .pc-hero {
   background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
-  padding-top: clamp(88px, 12vw, 140px);
+  padding-top: clamp(56px, 8vw, 96px);
   padding-bottom: clamp(48px, 8vw, 80px);
   text-align: center;
   position: relative;
@@ -447,7 +447,7 @@ useRevealOnScroll()
 }
 
 /* ── Expect ── */
-.pc-expect { padding-block: clamp(32px, 5vw, 56px); }
+.pc-expect { padding-block: clamp(16px, 2vw, 24px) clamp(32px, 5vw, 56px); }
 .pc-expect-header { margin-bottom: 32px; }
 .pc-expect-intro { font-size: 15px; color: var(--text2); line-height: 1.65; margin-top: 8px; }
 .pc-expect-grid {
@@ -481,7 +481,7 @@ useRevealOnScroll()
 .pc-cta {
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding-block: clamp(64px, 8vw, 96px);
+  padding-block: clamp(32px, 5vw, 52px);
   text-align: center;
 }
 .pc-cta-inner { max-width: 680px; margin-inline: auto; }

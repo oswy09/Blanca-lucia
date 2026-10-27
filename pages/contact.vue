@@ -357,8 +357,8 @@ const submitForm = () => {
 
 .cn-hero {
   background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
-  padding-top: clamp(88px, 12vw, 140px);
-  padding-bottom: clamp(64px, 10vw, 96px);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(48px, 8vw, 80px);
   text-align: center;
   position: relative;
   overflow: hidden;

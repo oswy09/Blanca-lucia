@@ -420,7 +420,7 @@ const steps = computed(() => [
     linear-gradient(to right, var(--bg) 0%, rgba(254, 250, 245, 0.15) 15%, rgba(254, 250, 245, 0.15) 85%, var(--bg) 100%),
     url('/imagens/fondo-fluent-servicios.jpg') no-repeat center center;
   background-size: cover;
-  padding-top: clamp(72px, 10vw, 120px);
+  padding-top: clamp(48px, 6vw, 72px);
   padding-bottom: clamp(56px, 8vw, 88px);
   text-align: center;
 }
@@ -685,7 +685,7 @@ const steps = computed(() => [
    ══════════════════════════════════════════════ */
 .sv-steps {
   background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.9) 100%);
-  padding-block: clamp(36px, 5vw, 56px) clamp(64px, 9vw, 104px);
+  padding-block: clamp(36px, 5vw, 56px) clamp(40px, 5vw, 64px);
   position: relative;
   overflow: hidden;
 }
@@ -794,7 +794,7 @@ const steps = computed(() => [
    4. CTA
    ══════════════════════════════════════════════ */
 .sv-cta {
-  padding-block: clamp(36px, 5vw, 56px) clamp(72px, 10vw, 112px);
+  padding-block: clamp(32px, 4vw, 48px) clamp(40px, 5vw, 64px);
   background: var(--bg);
   text-align: center;
 }

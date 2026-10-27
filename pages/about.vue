@@ -350,7 +350,7 @@ onUnmounted(() => {
     radial-gradient(700px 420px at 0% 0%, rgba(46,138,147,.22), transparent 65%),
     radial-gradient(500px 320px at 100% 100%, rgba(217,96,58,.09), transparent 60%),
     var(--bg);
-  padding-top: clamp(72px, 10vw, 120px);
+  padding-top: clamp(56px, 8vw, 96px);
   padding-bottom: clamp(56px, 8vw, 96px);
 }
 
@@ -616,7 +616,8 @@ onUnmounted(() => {
    4. BACKGROUND (JOURNEY ROADMAP)
    ══════════════════════════════════════════════ */
 .ab-split {
-  padding-block: var(--spy);
+  padding-top: clamp(32px, 4vw, 48px);
+  padding-bottom: var(--spy);
   background: var(--surface);
 }
 
@@ -786,7 +787,7 @@ onUnmounted(() => {
    5. CTA
    ══════════════════════════════════════════════ */
 .ab-cta-wrap {
-  padding-block: clamp(48px, 7vw, 80px);
+  padding-block: clamp(28px, 4vw, 44px);
   background: var(--bg);
 }
 
@@ -885,7 +886,7 @@ main {
 
 /* Callout section */
 .ab-callout {
-  padding-block: 84px;
+  padding-block: 48px;
   background: var(--surface);
   text-align: center;
   position: relative;

@@ -212,8 +212,8 @@ useRevealOnScroll()
 /* ── Hero Style from contact.vue ── */
 .ip-hero {
   background: linear-gradient(135deg, rgba(19,72,78,.97) 0%, rgba(46,138,147,.93) 60%, rgba(93,179,188,.88) 100%);
-  padding-top: clamp(88px, 12vw, 140px);
-  padding-bottom: clamp(64px, 10vw, 96px);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(48px, 8vw, 80px);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -502,7 +502,7 @@ useRevealOnScroll()
 
 /* ── Preparation Changes Everything ── */
 .ip-prep {
-  padding-block: 40px 60px;
+  padding-block: 24px 40px;
 }
 
 .ip-prep-grid {
@@ -580,7 +580,7 @@ useRevealOnScroll()
 
 /* ── What You Can Expect ── */
 .ip-expect {
-  padding-block: 60px 80px;
+  padding-block: 24px 52px;
 }
 
 .text-center { text-align: center; }
@@ -639,7 +639,7 @@ useRevealOnScroll()
 
 /* ── CTA Section ── */
 .ip-cta {
-  padding-block: clamp(64px, 8vw, 96px);
+  padding-block: clamp(32px, 5vw, 52px);
   background: var(--surface);
   border-top: 1px solid var(--border);
   text-align: center;
