@@ -1,7 +1,7 @@
+const MAINTENANCE_ACTIVE = true   // ← cambiar a false cuando el sitio esté listo
+
 export default defineEventHandler((event) => {
-  const cfEnv = (event.context.cloudflare as any)?.env
-  const maintenanceMode = cfEnv?.MAINTENANCE_MODE || process.env.MAINTENANCE_MODE
-  if (maintenanceMode !== 'true') return
+  if (!MAINTENANCE_ACTIVE) return
 
   const path = getRequestPath(event)
 
