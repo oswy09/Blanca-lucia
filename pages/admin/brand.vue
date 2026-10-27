@@ -389,7 +389,7 @@ function downloadSvg(opts = {}) {
             <input class="field-input" v-model="cfg.line1" />
           </div>
           <div v-if="cfg.twoLines" class="field">
-            <Line 2</label>
+            <label class="field-label">Line 2</label>
             <input class="field-input" v-model="cfg.line2" />
           </div>
         </div>
