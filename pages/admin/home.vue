@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -103,18 +103,18 @@ watch(content, () => {
 const sections = [
   {
     id: 'hero',
-    label: '① Hero',
+    label: 'â‘  Hero',
     fields: [
       { key: 'hero_pill', label: 'Badge', type: 'text' },
       { key: 'hero_tagline', label: 'Tagline', type: 'text' },
-      { key: 'hero_subtitle', label: 'Subtítulo', type: 'textarea' },
-      { key: 'hero_cta_primary', label: 'Botón WhatsApp', type: 'text' },
-      { key: 'hero_cta_secondary', label: 'Botón servicios', type: 'text' },
+      { key: 'hero_subtitle', label: 'SubtÃ­tulo', type: 'textarea' },
+      { key: 'hero_cta_primary', label: 'BotÃ³n WhatsApp', type: 'text' },
+      { key: 'hero_cta_secondary', label: 'BotÃ³n servicios', type: 'text' },
     ],
   },
   {
     id: 'proof',
-    label: '② Frase destacada',
+    label: 'â‘¡ Frase destacada',
     fields: [
       { key: 'proof_slide_1', label: 'Frase 1', type: 'textarea' },
       { key: 'proof_slide_2', label: 'Frase 2', type: 'textarea' },
@@ -127,11 +127,11 @@ const sections = [
   },
   {
     id: 'diff',
-    label: '③ Enfoque personal',
+    label: 'â‘¢ Enfoque personal',
     fields: [
       { key: 'diff_eyebrow', label: 'Badge', type: 'text' },
       { key: 'diff_tagline', label: 'Tagline', type: 'text' },
-      { key: 'diff_sub', label: 'Subtítulo', type: 'text' },
+      { key: 'diff_sub', label: 'SubtÃ­tulo', type: 'text' },
       { key: 'diff_guidance_label', label: 'Etiqueta lista', type: 'text' },
       { key: 'diff_check_1', label: 'Punto 1', type: 'textarea' },
       { key: 'diff_check_2', label: 'Punto 2', type: 'textarea' },
@@ -141,88 +141,88 @@ const sections = [
   },
   {
     id: 'coaching',
-    label: '④ Coaching (cita)',
+    label: 'â‘£ Coaching (cita)',
     fields: [
-      { key: 'coaching_title', label: 'Título', type: 'textarea' },
-      { key: 'coaching_desc', label: 'Descripción', type: 'textarea' },
+      { key: 'coaching_title', label: 'TÃ­tulo', type: 'textarea' },
+      { key: 'coaching_desc', label: 'DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
     id: 'testi',
-    label: '⑤ Testimonios',
+    label: 'â‘¤ Testimonios',
     fields: [
       { key: 'testi_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'testi_h2', label: 'Título', type: 'text' },
+      { key: 'testi_h2', label: 'TÃ­tulo', type: 'text' },
     ],
   },
   {
     id: 'who',
-    label: '⑥ ¿Para quién es?',
+    label: 'â‘¥ Â¿Para quiÃ©n es?',
     fields: [
       { key: 'who_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'who_h2', label: 'Título', type: 'textarea' },
-      { key: 'who_desc', label: 'Descripción', type: 'textarea' },
-      { key: 'who_item_1_title', label: 'Ítem 1 — Título', type: 'text' },
-      { key: 'who_item_1_desc', label: 'Ítem 1 — Descripción', type: 'textarea' },
-      { key: 'who_item_2_title', label: 'Ítem 2 — Título', type: 'text' },
-      { key: 'who_item_2_desc', label: 'Ítem 2 — Descripción', type: 'textarea' },
-      { key: 'who_item_3_title', label: 'Ítem 3 — Título', type: 'text' },
-      { key: 'who_item_3_desc', label: 'Ítem 3 — Descripción', type: 'textarea' },
-      { key: 'who_item_4_title', label: 'Ítem 4 — Título', type: 'text' },
-      { key: 'who_item_4_desc', label: 'Ítem 4 — Descripción', type: 'textarea' },
+      { key: 'who_h2', label: 'TÃ­tulo', type: 'textarea' },
+      { key: 'who_desc', label: 'DescripciÃ³n', type: 'textarea' },
+      { key: 'who_item_1_title', label: 'Ãtem 1 â€” TÃ­tulo', type: 'text' },
+      { key: 'who_item_1_desc', label: 'Ãtem 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'who_item_2_title', label: 'Ãtem 2 â€” TÃ­tulo', type: 'text' },
+      { key: 'who_item_2_desc', label: 'Ãtem 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'who_item_3_title', label: 'Ãtem 3 â€” TÃ­tulo', type: 'text' },
+      { key: 'who_item_3_desc', label: 'Ãtem 3 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'who_item_4_title', label: 'Ãtem 4 â€” TÃ­tulo', type: 'text' },
+      { key: 'who_item_4_desc', label: 'Ãtem 4 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
     id: 'services',
-    label: '⑦ Servicios',
+    label: 'â‘¦ Servicios',
     fields: [
       { key: 'svc_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'svc_h2', label: 'Título', type: 'text' },
-      { key: 'svc_desc', label: 'Descripción', type: 'textarea' },
+      { key: 'svc_h2', label: 'TÃ­tulo', type: 'text' },
+      { key: 'svc_desc', label: 'DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
     id: 'how',
-    label: '⑧ Cómo trabajo',
+    label: 'â‘§ CÃ³mo trabajo',
     fields: [
-      { key: 'how_step_1_title', label: 'Paso 1 — Título', type: 'text' },
-      { key: 'how_step_1_desc', label: 'Paso 1 — Descripción', type: 'textarea' },
-      { key: 'how_step_2_title', label: 'Paso 2 — Título', type: 'text' },
-      { key: 'how_step_2_desc', label: 'Paso 2 — Descripción', type: 'textarea' },
-      { key: 'how_step_3_title', label: 'Paso 3 — Título', type: 'text' },
-      { key: 'how_step_3_desc', label: 'Paso 3 — Descripción', type: 'textarea' },
-      { key: 'how_step_4_title', label: 'Paso 4 — Título', type: 'text' },
-      { key: 'how_step_4_desc', label: 'Paso 4 — Descripción', type: 'textarea' },
+      { key: 'how_step_1_title', label: 'Paso 1 â€” TÃ­tulo', type: 'text' },
+      { key: 'how_step_1_desc', label: 'Paso 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'how_step_2_title', label: 'Paso 2 â€” TÃ­tulo', type: 'text' },
+      { key: 'how_step_2_desc', label: 'Paso 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'how_step_3_title', label: 'Paso 3 â€” TÃ­tulo', type: 'text' },
+      { key: 'how_step_3_desc', label: 'Paso 3 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'how_step_4_title', label: 'Paso 4 â€” TÃ­tulo', type: 'text' },
+      { key: 'how_step_4_desc', label: 'Paso 4 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
     id: 'pricing',
-    label: '⑨ Precios',
+    label: 'â‘¨ Precios',
     fields: [
       { key: 'pricing_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'pricing_title', label: 'Título', type: 'text' },
-      { key: 'pricing_desc_1', label: 'Descripción 1', type: 'textarea' },
-      { key: 'pricing_desc_2', label: 'Descripción 2', type: 'textarea' },
-      { key: 'plan_1_name', label: 'Plan 1 — Nombre', type: 'text' },
-      { key: 'plan_1_amount', label: 'Plan 1 — Precio', type: 'text' },
-      { key: 'plan_1_period', label: 'Plan 1 — Período', type: 'text' },
-      { key: 'plan_2_name', label: 'Plan 2 — Nombre', type: 'text' },
-      { key: 'plan_2_amount', label: 'Plan 2 — Precio', type: 'text' },
-      { key: 'plan_2_period', label: 'Plan 2 — Período', type: 'text' },
-      { key: 'plan_3_name', label: 'Plan 3 — Nombre', type: 'text' },
-      { key: 'plan_3_amount', label: 'Plan 3 — Precio', type: 'text' },
-      { key: 'plan_3_period', label: 'Plan 3 — Período', type: 'text' },
-      { key: 'plan_4_name', label: 'Plan 4 — Nombre', type: 'text' },
-      { key: 'plan_4_amount', label: 'Plan 4 — Precio', type: 'text' },
-      { key: 'plan_4_period', label: 'Plan 4 — Período', type: 'text' },
+      { key: 'pricing_title', label: 'TÃ­tulo', type: 'text' },
+      { key: 'pricing_desc_1', label: 'DescripciÃ³n 1', type: 'textarea' },
+      { key: 'pricing_desc_2', label: 'DescripciÃ³n 2', type: 'textarea' },
+      { key: 'plan_1_name', label: 'Plan 1 â€” Nombre', type: 'text' },
+      { key: 'plan_1_amount', label: 'Plan 1 â€” Precio', type: 'text' },
+      { key: 'plan_1_period', label: 'Plan 1 â€” PerÃ­odo', type: 'text' },
+      { key: 'plan_2_name', label: 'Plan 2 â€” Nombre', type: 'text' },
+      { key: 'plan_2_amount', label: 'Plan 2 â€” Precio', type: 'text' },
+      { key: 'plan_2_period', label: 'Plan 2 â€” PerÃ­odo', type: 'text' },
+      { key: 'plan_3_name', label: 'Plan 3 â€” Nombre', type: 'text' },
+      { key: 'plan_3_amount', label: 'Plan 3 â€” Precio', type: 'text' },
+      { key: 'plan_3_period', label: 'Plan 3 â€” PerÃ­odo', type: 'text' },
+      { key: 'plan_4_name', label: 'Plan 4 â€” Nombre', type: 'text' },
+      { key: 'plan_4_amount', label: 'Plan 4 â€” Precio', type: 'text' },
+      { key: 'plan_4_period', label: 'Plan 4 â€” PerÃ­odo', type: 'text' },
     ],
   },
   {
     id: 'cta',
-    label: '⑩ CTA Final',
+    label: 'â‘© CTA Final',
     fields: [
       { key: 'cta_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'cta_heading', label: 'Título', type: 'textarea' },
+      { key: 'cta_heading', label: 'TÃ­tulo', type: 'textarea' },
       { key: 'cta_body', label: 'Cuerpo', type: 'textarea' },
     ],
   },
@@ -260,17 +260,17 @@ const defaults = {
   pricing_desc_1: 'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.',
   pricing_desc_2: 'A limited number of clients are accepted at any one time to ensure the highest level of personal attention.',
   plan_1_name: '30-minute Focus Session',
-  plan_1_amount: '£35',
+  plan_1_amount: 'Â£35',
   plan_1_period: 'Single 30-minute consultation',
   plan_2_name: '60-minute Individual Session',
-  plan_2_amount: '£60',
+  plan_2_amount: 'Â£60',
   plan_2_period: 'Full 60-minute consultation',
-  plan_3_name: '4 × 60-minute Sessions',
-  plan_3_amount: '£220',
-  plan_3_period: '4 × 60-minute consultations',
-  plan_4_name: '8 × 60-minute Sessions',
-  plan_4_amount: '£400',
-  plan_4_period: '8 × 60-minute consultations',
+  plan_3_name: '4 Ã— 60-minute Sessions',
+  plan_3_amount: 'Â£220',
+  plan_3_period: '4 Ã— 60-minute consultations',
+  plan_4_name: '8 Ã— 60-minute Sessions',
+  plan_4_amount: 'Â£400',
+  plan_4_period: '8 Ã— 60-minute consultations',
   cta_eyebrow: 'Start with a Conversation',
   cta_heading: 'If you would like to explore how I can support you',
   cta_body: 'You are welcome to get in touch. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.',
@@ -321,7 +321,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -335,7 +336,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">Home</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -343,7 +344,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -558,3 +559,4 @@ async function save() {
   border: none;
 }
 </style>
+

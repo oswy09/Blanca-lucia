@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -108,17 +108,17 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
     fields: [
       { key: 'ab_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'ab_hero_title', label: 'Título principal', type: 'text' },
-      { key: 'ab_hero_subtitle', label: 'Subtítulo', type: 'textarea' },
+      { key: 'ab_hero_title', label: 'TÃ­tulo principal', type: 'text' },
+      { key: 'ab_hero_subtitle', label: 'SubtÃ­tulo', type: 'textarea' },
     ],
   },
   {
     id: 'intro',
-    label: 'Introducción',
+    label: 'IntroducciÃ³n',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="6" x2="3" y2="6"/><line x1="15" y1="12" x2="3" y2="12"/><line x1="17" y1="18" x2="3" y2="18"/></svg>',
     fields: [
-      { key: 'ab_intro_eyebrow', label: 'Badge sección', type: 'text' },
-      { key: 'ab_intro_h2', label: 'Título sección', type: 'text' },
+      { key: 'ab_intro_eyebrow', label: 'Badge secciÃ³n', type: 'text' },
+      { key: 'ab_intro_h2', label: 'TÃ­tulo secciÃ³n', type: 'text' },
       { key: 'ab_intro_lead', label: 'Texto destacado', type: 'textarea' },
       { key: 'ab_intro_block_1', label: 'Bloque 1', type: 'textarea' },
       { key: 'ab_intro_block_2', label: 'Bloque 2', type: 'textarea' },
@@ -139,13 +139,13 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
     fields: [
       { key: 'ab_values_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'ab_values_h2', label: 'Título', type: 'text' },
-      { key: 'ab_val_1_title', label: 'Valor 1 — Título', type: 'text' },
-      { key: 'ab_val_1_desc', label: 'Valor 1 — Descripción', type: 'textarea' },
-      { key: 'ab_val_2_title', label: 'Valor 2 — Título', type: 'text' },
-      { key: 'ab_val_2_desc', label: 'Valor 2 — Descripción', type: 'textarea' },
-      { key: 'ab_val_3_title', label: 'Valor 3 — Título', type: 'text' },
-      { key: 'ab_val_3_desc', label: 'Valor 3 — Descripción', type: 'textarea' },
+      { key: 'ab_values_h2', label: 'TÃ­tulo', type: 'text' },
+      { key: 'ab_val_1_title', label: 'Valor 1 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_val_1_desc', label: 'Valor 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'ab_val_2_title', label: 'Valor 2 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_val_2_desc', label: 'Valor 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'ab_val_3_title', label: 'Valor 3 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_val_3_desc', label: 'Valor 3 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
@@ -154,13 +154,13 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
     fields: [
       { key: 'ab_journey_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'ab_journey_h2', label: 'Título', type: 'text' },
-      { key: 'ab_step_1_title', label: 'Paso 1 — Título', type: 'text' },
-      { key: 'ab_step_1_desc', label: 'Paso 1 — Descripción', type: 'textarea' },
-      { key: 'ab_step_2_title', label: 'Paso 2 — Título', type: 'text' },
-      { key: 'ab_step_2_desc', label: 'Paso 2 — Descripción', type: 'textarea' },
-      { key: 'ab_step_3_title', label: 'Paso 3 — Título', type: 'text' },
-      { key: 'ab_step_3_desc', label: 'Paso 3 — Descripción', type: 'textarea' },
+      { key: 'ab_journey_h2', label: 'TÃ­tulo', type: 'text' },
+      { key: 'ab_step_1_title', label: 'Paso 1 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_step_1_desc', label: 'Paso 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'ab_step_2_title', label: 'Paso 2 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_step_2_desc', label: 'Paso 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'ab_step_3_title', label: 'Paso 3 â€” TÃ­tulo', type: 'text' },
+      { key: 'ab_step_3_desc', label: 'Paso 3 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
@@ -169,10 +169,10 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="6" x2="3" y2="6"/><line x1="15" y1="12" x2="3" y2="12"/><line x1="17" y1="18" x2="3" y2="18"/></svg>',
     fields: [
       { key: 'ab_diff_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'ab_diff_h2', label: 'Título', type: 'text' },
-      { key: 'ab_diff_p1', label: 'Párrafo 1', type: 'textarea' },
-      { key: 'ab_diff_p2', label: 'Párrafo 2', type: 'textarea' },
-      { key: 'ab_diff_p3', label: 'Párrafo 3', type: 'textarea' },
+      { key: 'ab_diff_h2', label: 'TÃ­tulo', type: 'text' },
+      { key: 'ab_diff_p1', label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'ab_diff_p2', label: 'PÃ¡rrafo 2', type: 'textarea' },
+      { key: 'ab_diff_p3', label: 'PÃ¡rrafo 3', type: 'textarea' },
       { key: 'ab_diff_note', label: 'Nota al pie', type: 'textarea' },
     ],
   },
@@ -182,8 +182,8 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 16 16 12 12 8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
     fields: [
       { key: 'ab_cta_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'ab_cta_title', label: 'Título', type: 'text' },
-      { key: 'ab_cta_sub', label: 'Subtítulo', type: 'textarea' },
+      { key: 'ab_cta_title', label: 'TÃ­tulo', type: 'text' },
+      { key: 'ab_cta_sub', label: 'SubtÃ­tulo', type: 'textarea' },
     ],
   },
 ]
@@ -196,13 +196,13 @@ const defaults = {
   ab_intro_h2: 'A more focused, individual approach',
   ab_intro_lead: 'I support Spanish-speaking professionals in developing clear, confident communication in English.',
   ab_intro_block_1: 'My approach is shaped by over 30 years of experience in language teaching, translation, and personalised guidance, now refined into a consultancy model that prioritises the individual.',
-  ab_intro_block_2: 'Rather than following a standard structure, each engagement is carefully tailored — allowing us to focus on what will make a meaningful difference to you.',
+  ab_intro_block_2: 'Rather than following a standard structure, each engagement is carefully tailored â€” allowing us to focus on what will make a meaningful difference to you.',
   ab_intro_block_3: 'My services for evaluating their prospective employees. To this end I provide a detailed assessment for each individual candidate, enabling my clients to make a more informed decision during their hiring process.',
   ab_callout_text: 'There is no standard programme here. We focus on what you need, how you communicate and what will make the greatest difference to you.',
   ab_values_eyebrow: 'How I work',
   ab_values_h2: 'Built on Three Core Values',
   ab_val_1_title: 'Careful understanding',
-  ab_val_1_desc: 'Each engagement begins with listening — understanding your background, needs, and goals.',
+  ab_val_1_desc: 'Each engagement begins with listening â€” understanding your background, needs, and goals.',
   ab_val_2_title: 'Focused guidance',
   ab_val_2_desc: 'Work is directed towards what matters most, avoiding unnecessary complexity.',
   ab_val_3_title: 'Meaningful progress',
@@ -214,10 +214,10 @@ const defaults = {
   ab_step_2_title: 'The Insight',
   ab_step_2_desc: 'This experience allows me to quickly recognise patterns, identify challenges, and provide clear, practical guidance tailored to each individual.',
   ab_step_3_title: 'The Evolution',
-  ab_step_3_desc: 'Over time, my work has evolved from traditional teaching into a more focused consultancy approach — one that values depth, precision, and personal attention.',
+  ab_step_3_desc: 'Over time, my work has evolved from traditional teaching into a more focused consultancy approach â€” one that values depth, precision, and personal attention.',
   ab_diff_eyebrow: 'What Makes This Different',
   ab_diff_h2: 'Personal. Not a Platform.',
-  ab_diff_p1: 'This is a personal consultancy — not a platform or standardised service.',
+  ab_diff_p1: 'This is a personal consultancy â€” not a platform or standardised service.',
   ab_diff_p2: 'I work with a limited number of clients to ensure each person receives thoughtful, individual attention.',
   ab_diff_p3: 'If you are looking for a calm, focused, and personal approach, I would be pleased to work with you.',
   ab_diff_note: 'A limited number of clients are accepted to ensure a high level of personal attention.',
@@ -250,7 +250,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -263,7 +264,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">About</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -271,7 +272,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -473,3 +474,4 @@ async function save() {
   border: none;
 }
 </style>
+

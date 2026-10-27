@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -108,7 +108,7 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
     fields: [
       { key: 'hero_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'hero_title',   label: 'Título principal', type: 'text' },
+      { key: 'hero_title',   label: 'TÃ­tulo principal', type: 'text' },
     ],
   },
   {
@@ -117,8 +117,8 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
     fields: [
       { key: 'book_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'book_title',   label: 'Título', type: 'text' },
-      { key: 'book_sub',     label: 'Descripción', type: 'textarea' },
+      { key: 'book_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'book_sub',     label: 'DescripciÃ³n', type: 'textarea' },
       { key: 'book_or',      label: 'Texto separador', type: 'text' },
     ],
   },
@@ -127,20 +127,20 @@ const sections = [
     label: 'Formulario',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>',
     fields: [
-      { key: 'form_title',    label: 'Título', type: 'text' },
-      { key: 'form_subtitle', label: 'Descripción', type: 'textarea' },
+      { key: 'form_title',    label: 'TÃ­tulo', type: 'text' },
+      { key: 'form_subtitle', label: 'DescripciÃ³n', type: 'textarea' },
       { key: 'form_reply',    label: 'Mensaje de respuesta', type: 'text' },
     ],
   },
   {
     id: 'pricing_header',
-    label: 'Precios — Encabezado',
+    label: 'Precios â€” Encabezado',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
     fields: [
       { key: 'pricing_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'pricing_title',   label: 'Título', type: 'text' },
-      { key: 'pricing_desc_1',  label: 'Párrafo 1', type: 'textarea' },
-      { key: 'pricing_desc_2',  label: 'Párrafo 2', type: 'textarea' },
+      { key: 'pricing_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'pricing_desc_1',  label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'pricing_desc_2',  label: 'PÃ¡rrafo 2', type: 'textarea' },
     ],
   },
   {
@@ -148,9 +148,9 @@ const sections = [
     label: 'Llamada de descubrimiento',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 7.36 7.36l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
     fields: [
-      { key: 'disc_title',       label: 'Título', type: 'text' },
-      { key: 'disc_duration',    label: 'Duración / Formato', type: 'text' },
-      { key: 'disc_text',        label: 'Descripción', type: 'textarea' },
+      { key: 'disc_title',       label: 'TÃ­tulo', type: 'text' },
+      { key: 'disc_duration',    label: 'DuraciÃ³n / Formato', type: 'text' },
+      { key: 'disc_text',        label: 'DescripciÃ³n', type: 'textarea' },
       { key: 'disc_check_1',     label: 'Punto 1', type: 'text' },
       { key: 'disc_check_2',     label: 'Punto 2', type: 'text' },
       { key: 'disc_check_3',     label: 'Punto 3', type: 'text' },
@@ -164,7 +164,7 @@ const sections = [
     fields: [
       { key: 'plan_1_name',   label: 'Nombre', type: 'text' },
       { key: 'plan_1_amount', label: 'Precio', type: 'text' },
-      { key: 'plan_1_period', label: 'Descripción', type: 'text' },
+      { key: 'plan_1_period', label: 'DescripciÃ³n', type: 'text' },
     ],
   },
   {
@@ -174,7 +174,7 @@ const sections = [
     fields: [
       { key: 'plan_2_name',   label: 'Nombre', type: 'text' },
       { key: 'plan_2_amount', label: 'Precio', type: 'text' },
-      { key: 'plan_2_period', label: 'Descripción', type: 'text' },
+      { key: 'plan_2_period', label: 'DescripciÃ³n', type: 'text' },
     ],
   },
   {
@@ -184,7 +184,7 @@ const sections = [
     fields: [
       { key: 'plan_3_name',   label: 'Nombre', type: 'text' },
       { key: 'plan_3_amount', label: 'Precio', type: 'text' },
-      { key: 'plan_3_period', label: 'Descripción', type: 'text' },
+      { key: 'plan_3_period', label: 'DescripciÃ³n', type: 'text' },
     ],
   },
   {
@@ -194,7 +194,7 @@ const sections = [
     fields: [
       { key: 'plan_4_name',   label: 'Nombre', type: 'text' },
       { key: 'plan_4_amount', label: 'Precio', type: 'text' },
-      { key: 'plan_4_period', label: 'Descripción', type: 'text' },
+      { key: 'plan_4_period', label: 'DescripciÃ³n', type: 'text' },
     ],
   },
   {
@@ -212,34 +212,34 @@ const defaults = {
   hero_title:   "Let's start a conversation",
   book_eyebrow: 'Free Consultation',
   book_title:   'Book a time that works for you',
-  book_sub:     'Choose a slot directly in my calendar — no back and forth, no commitment.',
-  book_or:      '— or send a message below —',
+  book_sub:     'Choose a slot directly in my calendar â€” no back and forth, no commitment.',
+  book_or:      'â€” or send a message below â€”',
   form_title:    "I'd love to hear from you",
   form_subtitle: 'If you feel this approach is right for you, I would be pleased to hear from you. Before we begin, I offer a brief initial consultation to understand your needs and answer any questions you may have.',
-  form_reply:    'I aim to respond within 24–48 hours.',
+  form_reply:    'I aim to respond within 24â€“48 hours.',
   pricing_eyebrow: 'Investment',
   pricing_title:   'A simple, transparent approach to fees',
   pricing_desc_1:  'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.',
   pricing_desc_2:  'A limited number of clients are accepted at any one time to ensure the highest level of personal attention.',
   disc_title:       'Free Discovery Call',
-  disc_duration:    'Duration: 20–30 minutes · Conducted online via video call',
+  disc_duration:    'Duration: 20â€“30 minutes Â· Conducted online via video call',
   disc_text:        'Every engagement begins with a brief, informal conversation. It is an opportunity to talk about your background, what you want to achieve, and to make sure we are a good fit before deciding to work together.',
   disc_check_1:     'Discuss your background and objectives',
   disc_check_2:     'Identify what may have held you back until now',
   disc_check_3:     'Answer any questions about the sessions',
   disc_action_text: 'Ready to get started?',
   plan_1_name:   '30-minute Focus Session',
-  plan_1_amount: '£35',
+  plan_1_amount: 'Â£35',
   plan_1_period: 'Single 30-minute consultation',
   plan_2_name:   '60-minute Individual Session',
-  plan_2_amount: '£60',
+  plan_2_amount: 'Â£60',
   plan_2_period: 'Full 60-minute consultation',
-  plan_3_name:   '4 × 60-minute Sessions',
-  plan_3_amount: '£220',
-  plan_3_period: 'Block of 4 consultations (Save £20)',
-  plan_4_name:   '8 × 60-minute Sessions',
-  plan_4_amount: '£400',
-  plan_4_period: 'Block of 8 consultations (Save £80)',
+  plan_3_name:   '4 Ã— 60-minute Sessions',
+  plan_3_amount: 'Â£220',
+  plan_3_period: 'Block of 4 consultations (Save Â£20)',
+  plan_4_name:   '8 Ã— 60-minute Sessions',
+  plan_4_amount: 'Â£400',
+  plan_4_period: 'Block of 8 consultations (Save Â£80)',
   pricing_note:  'All sessions are conducted online. Fees are reviewed periodically and confirmed before any commitment is made.',
 }
 
@@ -266,7 +266,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -279,7 +280,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">Contact</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -287,7 +288,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -481,3 +482,4 @@ async function save() {
 .preview-wrap { flex: 1; overflow: hidden; }
 .preview-iframe { width: 100%; height: 100%; border: none; display: block; }
 </style>
+

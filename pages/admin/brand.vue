@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const fonts = [
@@ -24,8 +24,8 @@ const palette = [
   { hex: '#2C5F8A', label: 'Azul acero' },
   { hex: '#1B4F72', label: 'Azul profundo' },
   { hex: '#D9603A', label: 'Coral' },
-  { hex: '#F0B450', label: 'Ámbar' },
-  { hex: '#332E2A', label: 'Oscuro cálido' },
+  { hex: '#F0B450', label: 'Ãmbar' },
+  { hex: '#332E2A', label: 'Oscuro cÃ¡lido' },
   { hex: '#1a2035', label: 'Navy' },
   { hex: '#FEFAF5', label: 'Crema' },
   { hex: '#FFFFFF', label: 'Blanco' },
@@ -88,7 +88,7 @@ useHead({
   ],
 })
 
-// Swoosh SVG dimensions — mark viewBox is 108.19×36.1 (MARK_AR ≈ 3:1 wide)
+// Swoosh SVG dimensions â€” mark viewBox is 108.19Ã—36.1 (MARK_AR â‰ˆ 3:1 wide)
 const MARK_AR = 108.19 / 36.1
 const swooshH = computed(() => Math.round(cfg.value.fontSize * (cfg.value.twoLines ? 2 : 1) * 1.1))
 const swooshW = computed(() => Math.round(swooshH.value * MARK_AR))
@@ -145,16 +145,19 @@ async function save() {
     await $fetch('/api/content/brand', { method: 'POST', body: { ...cfg.value } })
     saved.value = true
     setTimeout(() => { saved.value = false }, 3000)
-  } catch(e) { console.error(e) }
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
+    console.error(e)
+  }
   saving.value = false
 }
 
 function reset() {
-  if (!confirm('¿Restablecer todos los ajustes al diseño por defecto?')) return
+  if (!confirm('Â¿Restablecer todos los ajustes al diseÃ±o por defecto?')) return
   cfg.value = { ...DEFAULTS }
 }
 
-// ── SVG export ─────────────────────────────────────
+// â”€â”€ SVG export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function buildLogoSvg(opts = {}) {
   const c = cfg.value
   const isDark = opts.dark
@@ -172,7 +175,7 @@ function buildLogoSvg(opts = {}) {
   const lines   = c.twoLines ? [t(c.line1), t(c.line2)] : [t(`${c.line1} ${c.line2}`)]
   const fontId  = encodeURIComponent(c.font).replace(/%20/g, '+')
 
-  // Swoosh scale — mark viewBox is 108.19 × 36.1 (MARK_AR ≈ 2.996)
+  // Swoosh scale â€” mark viewBox is 108.19 Ã— 36.1 (MARK_AR â‰ˆ 2.996)
   const sh    = Math.round(fs * (c.twoLines ? 2 : 1) * 1.1)
   const sw    = Math.round(sh * (108.19 / 36.1))
 
@@ -199,7 +202,7 @@ function buildLogoSvg(opts = {}) {
     ? `<text x="${tx}" y="${tagY}" font-family="'${c.font}', Georgia, serif" font-style="${fSty}" font-size="${tfs}" letter-spacing="${tfs * 0.05}" fill="${tagClr}">${c.tagline}</text>`
     : ''
 
-  // Swoosh — scale the actual logo mark paths (viewBox 108.19×36.1 → target sh×sw)
+  // Swoosh â€” scale the actual logo mark paths (viewBox 108.19Ã—36.1 â†’ target shÃ—sw)
   const markScaleX = sw / 108.19
   const markScaleY = sh / 36.1
   const swooshPath = `M${(.07*markScaleX).toFixed(2)},${(20.1*markScaleY).toFixed(2)}c${(-.51*markScaleX).toFixed(2)},${(-1.56*markScaleY).toFixed(2)},${(2.08*markScaleX).toFixed(2)},${(-9.88*markScaleY).toFixed(2)},${(2.32*markScaleX).toFixed(2)},${(-4.54*markScaleY).toFixed(2)},${(17.11*markScaleX).toFixed(2)},${(30.04*markScaleY).toFixed(2)},${(77.43*markScaleX).toFixed(2)},${(2.51*markScaleY).toFixed(2)},${(105.23*markScaleX).toFixed(2)},${(6.1*markScaleY).toFixed(2)},${(-20.09*markScaleX).toFixed(2)},${(1.04*markScaleY).toFixed(2)},${(-39.51*markScaleX).toFixed(2)},${(7.23*markScaleY).toFixed(2)},${(-59.1*markScaleX).toFixed(2)},${(11.53*markScaleY).toFixed(2)}C${(34.03*markScaleX).toFixed(2)},${(35.81*markScaleY).toFixed(2)},${(1.79*markScaleX).toFixed(2)},${(41.27*markScaleY).toFixed(2)},${(.08*markScaleX).toFixed(2)},${(20.1*markScaleY).toFixed(2)}Z`
@@ -241,7 +244,7 @@ function downloadSvg(opts = {}) {
 
 <template>
   <div class="bp">
-    <!-- ── Header ── -->
+    <!-- â”€â”€ Header â”€â”€ -->
     <header class="bp-hdr">
       <div class="bp-hdr-title">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -249,7 +252,7 @@ function downloadSvg(opts = {}) {
         </svg>
         <div>
           <h1 class="bp-hdr-h">Marca / Logo</h1>
-          <p class="bp-hdr-sub">Diseña el logotipo con vista previa en tiempo real</p>
+          <p class="bp-hdr-sub">DiseÃ±a el logotipo con vista previa en tiempo real</p>
         </div>
       </div>
       <div class="bp-hdr-actions">
@@ -266,15 +269,15 @@ function downloadSvg(opts = {}) {
         </div>
         <button class="bpbtn bpbtn--primary" :class="{ 'bpbtn--saved': saved }" :disabled="saving" @click="save">
           <svg v-if="saved" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          {{ saving ? 'Guardando…' : saved ? 'Guardado' : 'Guardar' }}
+          {{ saving ? 'Guardandoâ€¦' : saved ? 'Guardado' : 'Guardar' }}
         </button>
       </div>
     </header>
 
-    <!-- ── Body: 50/50 split ── -->
+    <!-- â”€â”€ Body: 50/50 split â”€â”€ -->
     <div class="bp-body">
 
-      <!-- LEFT — preview panel -->
+      <!-- LEFT â€” preview panel -->
       <div class="pv-panel">
         <p class="pv-panel-label">Vista previa del logo</p>
 
@@ -361,10 +364,10 @@ function downloadSvg(opts = {}) {
         </div>
       </div><!-- /pv-panel -->
 
-      <!-- RIGHT — controls panel (scrollable) -->
+      <!-- RIGHT â€” controls panel (scrollable) -->
       <div class="ctrl-panel">
 
-        <!-- ── TEXTO PRINCIPAL ── -->
+        <!-- â”€â”€ TEXTO PRINCIPAL â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
           Texto principal
@@ -372,21 +375,21 @@ function downloadSvg(opts = {}) {
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">Nombre en dos líneas</label>
+            <label class="field-label">Nombre en dos lÃ­neas</label>
             <label class="cs-toggle field-toggle">
               <input type="checkbox" v-model="cfg.twoLines" />
-              Separar en dos líneas
+              Separar en dos lÃ­neas
             </label>
           </div>
         </div>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">{{ cfg.twoLines ? 'Línea 1' : 'Nombre completo' }}</label>
+            <label class="field-label">{{ cfg.twoLines ? 'LÃ­nea 1' : 'Nombre completo' }}</label>
             <input class="field-input" v-model="cfg.line1" />
           </div>
           <div v-if="cfg.twoLines" class="field">
-            <label class="field-label">Línea 2</label>
+            <label class="field-label">LÃ­nea 2</label>
             <input class="field-input" v-model="cfg.line2" />
           </div>
         </div>
@@ -425,7 +428,7 @@ function downloadSvg(opts = {}) {
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">Tamaño <span class="field-val">{{ cfg.fontSize }}px</span></label>
+            <label class="field-label">TamaÃ±o <span class="field-val">{{ cfg.fontSize }}px</span></label>
             <input type="range" min="24" max="90" step="1" v-model.number="cfg.fontSize" class="cs-slider" />
           </div>
           <div class="field">
@@ -453,7 +456,7 @@ function downloadSvg(opts = {}) {
           </div>
         </div>
 
-        <!-- ── SWOOSH ── -->
+        <!-- â”€â”€ SWOOSH â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9"/><path d="M3 12c2 3 5 5 9 5s7-2 9-5"/></svg>
           Swoosh / Estela
@@ -506,7 +509,7 @@ function downloadSvg(opts = {}) {
           </div>
         </div>
 
-        <!-- ── ESLOGAN ── -->
+        <!-- â”€â”€ ESLOGAN â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           Eslogan
@@ -527,21 +530,21 @@ function downloadSvg(opts = {}) {
           </div>
           <div class="field">
             <label class="field-label">
-              ← Posición horizontal →
+              â† PosiciÃ³n horizontal â†’
               <span class="field-val">{{ cfg.taglineX }}%</span>
             </label>
             <input type="range" min="0" max="100" step="1" v-model.number="cfg.taglineX" class="cs-slider" />
           </div>
           <div class="field">
             <label class="field-label">
-              ↕ Posición vertical
+              â†• PosiciÃ³n vertical
               <span class="field-val">{{ cfg.taglineY }}%</span>
             </label>
             <input type="range" min="90" max="200" step="1" v-model.number="cfg.taglineY" class="cs-slider" />
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field-label">Tamaño <span class="field-val">{{ cfg.taglineSize }}px</span></label>
+              <label class="field-label">TamaÃ±o <span class="field-val">{{ cfg.taglineSize }}px</span></label>
               <input type="range" min="9" max="24" step="1" v-model.number="cfg.taglineSize" class="cs-slider" />
             </div>
             <div class="field">
@@ -573,7 +576,7 @@ function downloadSvg(opts = {}) {
 </template>
 
 <style scoped>
-/* ── Shell ──────────────────────────────────────── */
+/* â”€â”€ Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .bp {
   height: 100%;
   display: flex;
@@ -582,7 +585,7 @@ function downloadSvg(opts = {}) {
   font-family: 'Karla', -apple-system, sans-serif;
 }
 
-/* ── Body: 50/50 split ── */
+/* â”€â”€ Body: 50/50 split â”€â”€ */
 .bp-body {
   flex: 1;
   display: flex;
@@ -590,7 +593,7 @@ function downloadSvg(opts = {}) {
   min-height: 0;
 }
 
-/* LEFT — preview panel */
+/* LEFT â€” preview panel */
 .pv-panel {
   width: 50%;
   flex-shrink: 0;
@@ -610,7 +613,7 @@ function downloadSvg(opts = {}) {
   text-transform: uppercase;
 }
 
-/* RIGHT — controls panel */
+/* RIGHT â€” controls panel */
 .ctrl-panel {
   width: 50%;
   flex-shrink: 0;
@@ -645,7 +648,7 @@ function downloadSvg(opts = {}) {
   background: #e2e8f0;
 }
 
-/* field row — two columns for paired fields */
+/* field row â€” two columns for paired fields */
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -696,7 +699,7 @@ function downloadSvg(opts = {}) {
 .field-toggle input { accent-color: #2e8a93; cursor: pointer; width: 15px; height: 15px; }
 .color-inline { display: flex; align-items: center; gap: 8px; }
 
-/* ── Header ─────────────────────────────────────── */
+/* â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .bp-hdr {
   display: flex;
   align-items: center;
@@ -732,7 +735,7 @@ function downloadSvg(opts = {}) {
 .bpbtn--primary:disabled { opacity: .6; cursor: default; }
 .bpbtn--saved   { background: #4caf7d !important; border-color: #4caf7d !important; }
 
-/* ── Preview area (inside the flat form) ─────────── */
+/* â”€â”€ Preview area (inside the flat form) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .pv-label    { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: #888; text-transform: uppercase; }
 .pv-label--sm { font-size: 9px; }
 
@@ -750,7 +753,7 @@ function downloadSvg(opts = {}) {
 .pv-mini-row { display: flex; gap: 14px; }
 .pv-mini-wrap { flex: 1; display: flex; flex-direction: column; gap: 6px; }
 
-/* ── Logo composition stacked ───────────────────── */
+/* â”€â”€ Logo composition stacked â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .logo-comp {
   display: inline-flex;
   flex-direction: column;
@@ -859,3 +862,4 @@ function downloadSvg(opts = {}) {
 }
 .chip--on { border-color: #2e8a93; background: #f0fafb; color: #2e8a93; }
 </style>
+

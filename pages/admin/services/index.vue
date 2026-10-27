@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -108,64 +108,64 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
     fields: [
       { key: 'si_eyebrow',  label: 'Badge', type: 'text' },
-      { key: 'si_title',    label: 'Título principal', type: 'text' },
-      { key: 'si_subtitle', label: 'Subtítulo', type: 'textarea' },
+      { key: 'si_title',    label: 'TÃ­tulo principal', type: 'text' },
+      { key: 'si_subtitle', label: 'SubtÃ­tulo', type: 'textarea' },
     ],
   },
   {
     id: 'svc0',
-    label: 'Servicio 1 — Comunicación',
+    label: 'Servicio 1 â€” ComunicaciÃ³n',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
     fields: [
       { key: 'si_svc_0_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'si_svc_0_title',   label: 'Título', type: 'text' },
-      { key: 'si_svc_0_desc_0',  label: 'Párrafo 1', type: 'textarea' },
-      { key: 'si_svc_0_desc_1',  label: 'Párrafo 2', type: 'textarea' },
-      { key: 'si_svc_0_feat_0',  label: 'Característica 1', type: 'text' },
-      { key: 'si_svc_0_feat_1',  label: 'Característica 2', type: 'text' },
-      { key: 'si_svc_0_feat_2',  label: 'Característica 3', type: 'text' },
-      { key: 'si_svc_0_feat_3',  label: 'Característica 4', type: 'text' },
+      { key: 'si_svc_0_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'si_svc_0_desc_0',  label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'si_svc_0_desc_1',  label: 'PÃ¡rrafo 2', type: 'textarea' },
+      { key: 'si_svc_0_feat_0',  label: 'CaracterÃ­stica 1', type: 'text' },
+      { key: 'si_svc_0_feat_1',  label: 'CaracterÃ­stica 2', type: 'text' },
+      { key: 'si_svc_0_feat_2',  label: 'CaracterÃ­stica 3', type: 'text' },
+      { key: 'si_svc_0_feat_3',  label: 'CaracterÃ­stica 4', type: 'text' },
     ],
   },
   {
     id: 'svc1',
-    label: 'Servicio 2 — Entrevista',
+    label: 'Servicio 2 â€” Entrevista',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
     fields: [
       { key: 'si_svc_1_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'si_svc_1_title',   label: 'Título', type: 'text' },
-      { key: 'si_svc_1_desc_0',  label: 'Párrafo 1', type: 'textarea' },
-      { key: 'si_svc_1_desc_1',  label: 'Párrafo 2', type: 'textarea' },
-      { key: 'si_svc_1_feat_0',  label: 'Característica 1', type: 'text' },
-      { key: 'si_svc_1_feat_1',  label: 'Característica 2', type: 'text' },
-      { key: 'si_svc_1_feat_2',  label: 'Característica 3', type: 'text' },
-      { key: 'si_svc_1_feat_3',  label: 'Característica 4', type: 'text' },
-      { key: 'si_svc_1_feat_4',  label: 'Característica 5', type: 'text' },
+      { key: 'si_svc_1_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'si_svc_1_desc_0',  label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'si_svc_1_desc_1',  label: 'PÃ¡rrafo 2', type: 'textarea' },
+      { key: 'si_svc_1_feat_0',  label: 'CaracterÃ­stica 1', type: 'text' },
+      { key: 'si_svc_1_feat_1',  label: 'CaracterÃ­stica 2', type: 'text' },
+      { key: 'si_svc_1_feat_2',  label: 'CaracterÃ­stica 3', type: 'text' },
+      { key: 'si_svc_1_feat_3',  label: 'CaracterÃ­stica 4', type: 'text' },
+      { key: 'si_svc_1_feat_4',  label: 'CaracterÃ­stica 5', type: 'text' },
     ],
   },
   {
     id: 'svc2',
-    label: 'Servicio 3 — Escritura',
+    label: 'Servicio 3 â€” Escritura',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
     fields: [
       { key: 'si_svc_2_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'si_svc_2_title',   label: 'Título', type: 'text' },
-      { key: 'si_svc_2_desc_0',  label: 'Párrafo 1', type: 'textarea' },
-      { key: 'si_svc_2_desc_1',  label: 'Párrafo 2', type: 'textarea' },
-      { key: 'si_svc_2_feat_0',  label: 'Característica 1', type: 'text' },
-      { key: 'si_svc_2_feat_1',  label: 'Característica 2', type: 'text' },
-      { key: 'si_svc_2_feat_2',  label: 'Característica 3', type: 'text' },
-      { key: 'si_svc_2_feat_3',  label: 'Característica 4', type: 'text' },
-      { key: 'si_svc_2_feat_4',  label: 'Característica 5', type: 'text' },
+      { key: 'si_svc_2_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'si_svc_2_desc_0',  label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'si_svc_2_desc_1',  label: 'PÃ¡rrafo 2', type: 'textarea' },
+      { key: 'si_svc_2_feat_0',  label: 'CaracterÃ­stica 1', type: 'text' },
+      { key: 'si_svc_2_feat_1',  label: 'CaracterÃ­stica 2', type: 'text' },
+      { key: 'si_svc_2_feat_2',  label: 'CaracterÃ­stica 3', type: 'text' },
+      { key: 'si_svc_2_feat_3',  label: 'CaracterÃ­stica 4', type: 'text' },
+      { key: 'si_svc_2_feat_4',  label: 'CaracterÃ­stica 5', type: 'text' },
     ],
   },
   {
     id: 'steps_header',
-    label: 'Cómo trabajo — Encabezado',
+    label: 'CÃ³mo trabajo â€” Encabezado',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
     fields: [
       { key: 'si_steps_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'si_steps_title',   label: 'Título', type: 'text' },
+      { key: 'si_steps_title',   label: 'TÃ­tulo', type: 'text' },
     ],
   },
   {
@@ -173,14 +173,14 @@ const sections = [
     label: 'Pasos',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
     fields: [
-      { key: 'si_step_0_title', label: 'Paso 1 — Título', type: 'text' },
-      { key: 'si_step_0_desc',  label: 'Paso 1 — Descripción', type: 'textarea' },
-      { key: 'si_step_1_title', label: 'Paso 2 — Título', type: 'text' },
-      { key: 'si_step_1_desc',  label: 'Paso 2 — Descripción', type: 'textarea' },
-      { key: 'si_step_2_title', label: 'Paso 3 — Título', type: 'text' },
-      { key: 'si_step_2_desc',  label: 'Paso 3 — Descripción', type: 'textarea' },
-      { key: 'si_step_3_title', label: 'Paso 4 — Título', type: 'text' },
-      { key: 'si_step_3_desc',  label: 'Paso 4 — Descripción', type: 'textarea' },
+      { key: 'si_step_0_title', label: 'Paso 1 â€” TÃ­tulo', type: 'text' },
+      { key: 'si_step_0_desc',  label: 'Paso 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'si_step_1_title', label: 'Paso 2 â€” TÃ­tulo', type: 'text' },
+      { key: 'si_step_1_desc',  label: 'Paso 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'si_step_2_title', label: 'Paso 3 â€” TÃ­tulo', type: 'text' },
+      { key: 'si_step_2_desc',  label: 'Paso 3 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'si_step_3_title', label: 'Paso 4 â€” TÃ­tulo', type: 'text' },
+      { key: 'si_step_3_desc',  label: 'Paso 4 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
@@ -189,8 +189,8 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 16 16 12 12 8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
     fields: [
       { key: 'si_cta_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'si_cta_title',   label: 'Título', type: 'text' },
-      { key: 'si_cta_sub',     label: 'Subtítulo', type: 'textarea' },
+      { key: 'si_cta_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'si_cta_sub',     label: 'SubtÃ­tulo', type: 'textarea' },
     ],
   },
 ]
@@ -202,7 +202,7 @@ const defaults = {
   si_svc_0_eyebrow: 'Professional Communication',
   si_svc_0_title:   'Personal language consultancy, tailored to you',
   si_svc_0_desc_0:  'Focused support for professionals who want to communicate clearly and confidently in meetings, presentations, and everyday interactions.',
-  si_svc_0_desc_1:  'We work on clarity, structure, tone, and natural expression — ensuring you can communicate with precision and ease.',
+  si_svc_0_desc_1:  'We work on clarity, structure, tone, and natural expression â€” ensuring you can communicate with precision and ease.',
   si_svc_0_feat_0:  'Fluency-building through real professional scenarios',
   si_svc_0_feat_1:  'Presentation skills and confident delivery in English',
   si_svc_0_feat_2:  'Reducing hesitation and improving natural flow',
@@ -219,7 +219,7 @@ const defaults = {
   si_svc_2_eyebrow: 'Written Communication',
   si_svc_2_title:   'English Editing for Emails & Documents',
   si_svc_2_desc_0:  'Careful review and refinement of emails, documents, and professional writing.',
-  si_svc_2_desc_1:  'The focus is on clarity, tone, and accuracy — ensuring your written communication reflects your level of expertise.',
+  si_svc_2_desc_1:  'The focus is on clarity, tone, and accuracy â€” ensuring your written communication reflects your level of expertise.',
   si_svc_2_feat_0:  'Review and refinement of professional emails',
   si_svc_2_feat_1:  'Editing reports, proposals, and formal documents',
   si_svc_2_feat_2:  'Improving tone, register, and clarity',
@@ -264,7 +264,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -277,7 +278,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">Services (Index)</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -285,7 +286,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -487,3 +488,4 @@ async function save() {
   border: none;
 }
 </style>
+

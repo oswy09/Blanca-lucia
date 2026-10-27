@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -113,13 +113,13 @@ const sections = [
     label: 'Contacto',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 7.36 7.36l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
     fields: [
-      { key: 'whatsapp_number', label: 'Número WhatsApp (sin + ni espacios)', type: 'text' },
+      { key: 'whatsapp_number', label: 'NÃºmero WhatsApp (sin + ni espacios)', type: 'text' },
       { key: 'contact_email',   label: 'Email de contacto', type: 'text' },
     ],
   },
   {
     id: 'nav',
-    label: 'Menú — Nombres',
+    label: 'MenÃº â€” Nombres',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>',
     fields: [
       { key: 'nav_home',    label: 'Home', type: 'text' },
@@ -127,17 +127,17 @@ const sections = [
       { key: 'nav_services', label: 'Services', type: 'text' },
       { key: 'nav_blog',    label: 'Blog', type: 'text' },
       { key: 'nav_contact', label: 'Contact me', type: 'text' },
-      { key: 'nav_cta_label', label: 'Botón CTA', type: 'text' },
+      { key: 'nav_cta_label', label: 'BotÃ³n CTA', type: 'text' },
     ],
   },
   {
     id: 'nav_services',
-    label: 'Menú — Servicios',
+    label: 'MenÃº â€” Servicios',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
     fields: [
-      { key: 'nav_svc_pc',  label: 'Comunicación profesional', type: 'text' },
-      { key: 'nav_svc_ip',  label: 'Preparación de entrevista', type: 'text' },
-      { key: 'nav_svc_pwe', label: 'Escritura y edición', type: 'text' },
+      { key: 'nav_svc_pc',  label: 'ComunicaciÃ³n profesional', type: 'text' },
+      { key: 'nav_svc_ip',  label: 'PreparaciÃ³n de entrevista', type: 'text' },
+      { key: 'nav_svc_pwe', label: 'Escritura y ediciÃ³n', type: 'text' },
     ],
   },
   {
@@ -145,8 +145,8 @@ const sections = [
     label: 'Footer',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/><line x1="3" y1="12" x2="15" y2="12"/></svg>',
     fields: [
-      { key: 'footer_tagline',   label: 'Descripción', type: 'textarea' },
-      { key: 'footer_copyright', label: 'Copyright (puedes usar salto de línea)', type: 'textarea' },
+      { key: 'footer_tagline',   label: 'DescripciÃ³n', type: 'textarea' },
+      { key: 'footer_copyright', label: 'Copyright (puedes usar salto de lÃ­nea)', type: 'textarea' },
     ],
   },
 ]
@@ -164,7 +164,7 @@ const defaults = {
   nav_svc_ip:      'Interview Preparation',
   nav_svc_pwe:     'Professional Writing & Editing',
   footer_tagline:   'Personal English language consultancy for Spanish-speaking professionals. Over 30 years helping people communicate as the professionals they truly are.',
-  footer_copyright: '© 2026 Fluent Future · Blanca Derby\nfluentfuture.co.uk',
+  footer_copyright: 'Â© 2026 Fluent Future Â· Blanca Derby\nfluentfuture.co.uk',
 }
 
 const { data: kvData } = await useAsyncData('admin-settings', () =>
@@ -212,7 +212,7 @@ async function addUser() {
 }
 
 async function deleteUser(email) {
-  if (!confirm(`¿Eliminar al usuario ${email}?`)) return
+  if (!confirm(`Â¿Eliminar al usuario ${email}?`)) return
   try {
     await $fetch('/api/admin/users', { method: 'DELETE', body: { email } })
     await loadUsers()
@@ -229,7 +229,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -242,7 +243,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">Ajustes globales</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -250,7 +251,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -307,7 +308,7 @@ async function save() {
           <span class="sec-divider-label">Usuarios del CMS</span>
         </div>
 
-        <p class="users-note">Los usuarios agregados aquí pueden iniciar sesión en el CMS.</p>
+        <p class="users-note">Los usuarios agregados aquÃ­ pueden iniciar sesiÃ³n en el CMS.</p>
 
         <div class="users-list" v-if="kvUsers.length > 0">
           <div v-for="u in kvUsers" :key="u.email" class="user-row">
@@ -328,14 +329,14 @@ async function save() {
             <input v-model="newEmail" class="field-input" type="email" placeholder="correo@ejemplo.com" />
           </div>
           <div class="field">
-            <label class="field-label">Contraseña</label>
-            <input v-model="newPassword" class="field-input" type="password" placeholder="••••••••" />
+            <label class="field-label">ContraseÃ±a</label>
+            <input v-model="newPassword" class="field-input" type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
           </div>
           <div class="add-user-actions">
             <button class="btn-add-user" @click="addUser" :disabled="addingUser || !newEmail || !newPassword">
-              {{ addingUser ? 'Agregando…' : 'Agregar usuario' }}
+              {{ addingUser ? 'Agregandoâ€¦' : 'Agregar usuario' }}
             </button>
-            <span v-if="userStatus === 'added'" class="badge-saved" style="font-size:12px;">✓ Usuario agregado</span>
+            <span v-if="userStatus === 'added'" class="badge-saved" style="font-size:12px;">âœ“ Usuario agregado</span>
             <span v-if="userStatus === 'error'" class="badge-error" style="font-size:12px;">Error al agregar</span>
           </div>
         </div>
@@ -448,3 +449,4 @@ async function save() {
 .preview-wrap { flex: 1; overflow: hidden; }
 .preview-iframe { width: 100%; height: 100%; border: none; display: block; }
 </style>
+

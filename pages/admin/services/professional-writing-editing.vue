@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const previewIframe = ref(null)
@@ -108,15 +108,15 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
     fields: [
       { key: 'hero_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'hero_title',   label: 'Título principal', type: 'text' },
+      { key: 'hero_title',   label: 'TÃ­tulo principal', type: 'text' },
     ],
   },
   {
     id: 'intro',
-    label: 'Introducción',
+    label: 'IntroducciÃ³n',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="6" x2="3" y2="6"/><line x1="15" y1="12" x2="3" y2="12"/><line x1="17" y1="18" x2="3" y2="18"/></svg>',
     fields: [
-      { key: 'intro_title',     label: 'Título', type: 'text' },
+      { key: 'intro_title',     label: 'TÃ­tulo', type: 'text' },
       { key: 'intro_lead',      label: 'Texto lead', type: 'textarea' },
       { key: 'intro_body',      label: 'Texto cuerpo', type: 'textarea' },
       { key: 'intro_highlight', label: 'Texto destacado', type: 'textarea' },
@@ -127,28 +127,28 @@ const sections = [
     label: 'Tarjeta lateral',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
     fields: [
-      { key: 'card_title',  label: 'Título tarjeta', type: 'text' },
-      { key: 'card_text_1', label: 'Párrafo 1', type: 'textarea' },
-      { key: 'card_text_2', label: 'Párrafo 2', type: 'textarea' },
-      { key: 'card_text_3', label: 'Párrafo 3', type: 'textarea' },
+      { key: 'card_title',  label: 'TÃ­tulo tarjeta', type: 'text' },
+      { key: 'card_text_1', label: 'PÃ¡rrafo 1', type: 'textarea' },
+      { key: 'card_text_2', label: 'PÃ¡rrafo 2', type: 'textarea' },
+      { key: 'card_text_3', label: 'PÃ¡rrafo 3', type: 'textarea' },
       { key: 'card_footer', label: 'Nota al pie', type: 'textarea' },
     ],
   },
   {
     id: 'when',
-    label: 'Cuándo puedo ayudar',
+    label: 'CuÃ¡ndo puedo ayudar',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
     fields: [
-      { key: 'when_subtitle', label: 'Subtítulo', type: 'text' },
-      { key: 'when_intro',    label: 'Introducción', type: 'textarea' },
+      { key: 'when_subtitle', label: 'SubtÃ­tulo', type: 'text' },
+      { key: 'when_intro',    label: 'IntroducciÃ³n', type: 'textarea' },
       { key: 'when_heading',  label: 'Encabezado lista', type: 'text' },
-      { key: 'when_1', label: 'Ítem 1', type: 'text' },
-      { key: 'when_2', label: 'Ítem 2', type: 'text' },
-      { key: 'when_3', label: 'Ítem 3', type: 'text' },
-      { key: 'when_4', label: 'Ítem 4', type: 'text' },
-      { key: 'when_5', label: 'Ítem 5', type: 'text' },
-      { key: 'when_6', label: 'Ítem 6', type: 'text' },
-      { key: 'when_7', label: 'Ítem 7', type: 'text' },
+      { key: 'when_1', label: 'Ãtem 1', type: 'text' },
+      { key: 'when_2', label: 'Ãtem 2', type: 'text' },
+      { key: 'when_3', label: 'Ãtem 3', type: 'text' },
+      { key: 'when_4', label: 'Ãtem 4', type: 'text' },
+      { key: 'when_5', label: 'Ãtem 5', type: 'text' },
+      { key: 'when_6', label: 'Ãtem 6', type: 'text' },
+      { key: 'when_7', label: 'Ãtem 7', type: 'text' },
     ],
   },
   {
@@ -157,27 +157,27 @@ const sections = [
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
     fields: [
       { key: 'session_eyebrow', label: 'Badge', type: 'text' },
-      { key: 'session_title',   label: 'Título', type: 'text' },
-      { key: 'session_desc',    label: 'Descripción', type: 'textarea' },
+      { key: 'session_title',   label: 'TÃ­tulo', type: 'text' },
+      { key: 'session_desc',    label: 'DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
     id: 'expect',
-    label: 'Qué puedes esperar',
+    label: 'QuÃ© puedes esperar',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
     fields: [
-      { key: 'expect_subtitle', label: 'Subtítulo', type: 'text' },
-      { key: 'expect_intro',    label: 'Introducción', type: 'textarea' },
-      { key: 'expect_1_label', label: 'Tarjeta 1 — Etiqueta', type: 'text' },
-      { key: 'expect_1_desc',  label: 'Tarjeta 1 — Descripción', type: 'textarea' },
-      { key: 'expect_2_label', label: 'Tarjeta 2 — Etiqueta', type: 'text' },
-      { key: 'expect_2_desc',  label: 'Tarjeta 2 — Descripción', type: 'textarea' },
-      { key: 'expect_3_label', label: 'Tarjeta 3 — Etiqueta', type: 'text' },
-      { key: 'expect_3_desc',  label: 'Tarjeta 3 — Descripción', type: 'textarea' },
-      { key: 'expect_4_label', label: 'Tarjeta 4 — Etiqueta', type: 'text' },
-      { key: 'expect_4_desc',  label: 'Tarjeta 4 — Descripción', type: 'textarea' },
-      { key: 'expect_5_label', label: 'Tarjeta 5 — Etiqueta', type: 'text' },
-      { key: 'expect_5_desc',  label: 'Tarjeta 5 — Descripción', type: 'textarea' },
+      { key: 'expect_subtitle', label: 'SubtÃ­tulo', type: 'text' },
+      { key: 'expect_intro',    label: 'IntroducciÃ³n', type: 'textarea' },
+      { key: 'expect_1_label', label: 'Tarjeta 1 â€” Etiqueta', type: 'text' },
+      { key: 'expect_1_desc',  label: 'Tarjeta 1 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'expect_2_label', label: 'Tarjeta 2 â€” Etiqueta', type: 'text' },
+      { key: 'expect_2_desc',  label: 'Tarjeta 2 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'expect_3_label', label: 'Tarjeta 3 â€” Etiqueta', type: 'text' },
+      { key: 'expect_3_desc',  label: 'Tarjeta 3 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'expect_4_label', label: 'Tarjeta 4 â€” Etiqueta', type: 'text' },
+      { key: 'expect_4_desc',  label: 'Tarjeta 4 â€” DescripciÃ³n', type: 'textarea' },
+      { key: 'expect_5_label', label: 'Tarjeta 5 â€” Etiqueta', type: 'text' },
+      { key: 'expect_5_desc',  label: 'Tarjeta 5 â€” DescripciÃ³n', type: 'textarea' },
     ],
   },
   {
@@ -185,8 +185,8 @@ const sections = [
     label: 'CTA Final',
     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 16 16 12 12 8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
     fields: [
-      { key: 'cta_title', label: 'Título', type: 'text' },
-      { key: 'cta_desc',  label: 'Descripción', type: 'textarea' },
+      { key: 'cta_title', label: 'TÃ­tulo', type: 'text' },
+      { key: 'cta_desc',  label: 'DescripciÃ³n', type: 'textarea' },
     ],
   },
 ]
@@ -197,7 +197,7 @@ const defaults = {
   intro_title:     'Make your English say exactly what you mean.',
   intro_lead:      'You may know exactly what you want to say, but expressing it naturally and professionally in English can sometimes be difficult.',
   intro_body:      'I can help you turn your ideas into clear, polished English while preserving your meaning, your personality and your voice.',
-  intro_highlight: 'This is more than correcting grammar or spelling. I look at the whole message — the wording, tone, clarity and structure — so that your writing communicates exactly what you intend.',
+  intro_highlight: 'This is more than correcting grammar or spelling. I look at the whole message â€” the wording, tone, clarity and structure â€” so that your writing communicates exactly what you intend.',
   card_title:  'More than proofreading',
   card_text_1: 'Good communication is not simply about having correct English.',
   card_text_2: 'The same message can sound confident, uncertain, too direct, too informal or unnecessarily complicated depending on the words you choose.',
@@ -256,7 +256,8 @@ async function save() {
     if (previewIframe.value) {
       setTimeout(() => previewIframe.value.contentWindow.location.reload(), 300)
     }
-  } catch {
+  } catch (e) {
+    if ((e?.statusCode || e?.response?.status) === 401) { navigateTo('/admin'); return }
     saveStatus.value = 'error'
   } finally {
     saving.value = false
@@ -269,7 +270,7 @@ async function save() {
     <div class="editor-header">
       <div class="editor-header-left">
         <h1 class="editor-title">Writing & Editing</h1>
-        <span v-if="saveStatus === 'saved'" class="badge-saved">✓ Guardado</span>
+        <span v-if="saveStatus === 'saved'" class="badge-saved">âœ“ Guardado</span>
         <span v-if="saveStatus === 'error'" class="badge-error">Error al guardar</span>
       </div>
       <div class="editor-header-right">
@@ -277,7 +278,7 @@ async function save() {
           {{ showPreview ? 'Ocultar preview' : 'Ver preview' }}
         </button>
         <button class="btn-save" @click="save" :disabled="saving">
-          {{ saving ? 'Guardando…' : 'Guardar cambios' }}
+          {{ saving ? 'Guardandoâ€¦' : 'Guardar cambios' }}
         </button>
       </div>
     </div>
@@ -479,3 +480,4 @@ async function save() {
   border: none;
 }
 </style>
+
