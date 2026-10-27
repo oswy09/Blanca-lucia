@@ -181,7 +181,7 @@ onUnmounted(() => {
 /* ── Card flotando a -110px ───────────────────── */
 .proof-card {
   position: relative;
-  margin-top: -110px;
+  margin-top: -60px;
   width: 100%;
   background: #fff;
   border: 1px solid var(--border);
@@ -315,7 +315,7 @@ onUnmounted(() => {
 .proof-item:hover { color: var(--teal); }
 
 @media (max-width: 640px) {
-  .proof-card { margin-top: -70px; padding-inline: 28px; }
+  .proof-card { margin-top: -40px; padding-inline: 28px; }
   .proof-deco { opacity: 0.42; }
   .proof-deco--open  { top: -18px; left: 6px; }
   .proof-deco--close { bottom: -48px; right: 6px; }
