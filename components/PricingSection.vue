@@ -26,7 +26,7 @@ const plans = computed(() => [
     name: sb.value.plan_1_name || '30-minute Focus Session',
     amount: sb.value.plan_1_amount || '£35',
     period: sb.value.plan_1_period || 'Single 30-minute consultation',
-    featured: false,
+    featured: true,
     perks: [
       'Focused one-to-one consultation',
       'Ideal for addressing a specific question',
@@ -40,7 +40,7 @@ const plans = computed(() => [
     name: sb.value.plan_2_name || '60-minute Individual Session',
     amount: sb.value.plan_2_amount || '£60',
     period: sb.value.plan_2_period || 'Full 60-minute consultation',
-    featured: true,
+    featured: false,
     perks: [
       'Full-length individual consultation',
       'Tailored to your specific professional goals',
@@ -96,7 +96,7 @@ const plans = computed(() => [
       <div class="discovery-session-card reveal">
         <div class="discovery-main">
           <div class="discovery-header-inline">
-            <span class="discovery-badge">First Step</span>
+            <span class="discovery-badge">Recommended</span>
             <h3 class="discovery-title" data-cms-key="disc_title">{{ discTitle }}</h3>
           </div>
           <p class="discovery-duration" data-cms-key="disc_duration">{{ discDuration }}</p>

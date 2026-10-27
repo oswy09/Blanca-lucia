@@ -15,20 +15,20 @@ const fonts = [
 
 const palette = [
   { hex: '#2E8A93', label: 'Teal' },
-  { hex: '#1E6E76', label: 'Teal oscuro' },
-  { hex: '#0F5562', label: 'Teal profundo' },
-  { hex: '#3AADA0', label: 'Teal vivo' },
-  { hex: '#4EC9C0', label: 'Turquesa' },
-  { hex: '#8FC7CC', label: 'Teal suave' },
-  { hex: '#1B6B9E', label: 'Azul teal' },
-  { hex: '#2C5F8A', label: 'Azul acero' },
-  { hex: '#1B4F72', label: 'Azul profundo' },
+  { hex: '#1E6E76', label: 'Dark teal' },
+  { hex: '#0F5562', label: 'Deep teal' },
+  { hex: '#3AADA0', label: 'Vivid teal' },
+  { hex: '#4EC9C0', label: 'Turquoise' },
+  { hex: '#8FC7CC', label: 'Soft teal' },
+  { hex: '#1B6B9E', label: 'Teal blue' },
+  { hex: '#2C5F8A', label: 'Steel blue' },
+  { hex: '#1B4F72', label: 'Deep blue' },
   { hex: '#D9603A', label: 'Coral' },
-  { hex: '#F0B450', label: 'Ãmbar' },
-  { hex: '#332E2A', label: 'Oscuro cÃ¡lido' },
+  { hex: '#F0B450', label: 'Amber' },
+  { hex: '#332E2A', label: 'Warm dark' },
   { hex: '#1a2035', label: 'Navy' },
-  { hex: '#FEFAF5', label: 'Crema' },
-  { hex: '#FFFFFF', label: 'Blanco' },
+  { hex: '#FEFAF5', label: 'Cream' },
+  { hex: '#FFFFFF', label: 'White' },
 ]
 
 const weights = [
@@ -153,7 +153,7 @@ async function save() {
 }
 
 function reset() {
-  if (!confirm('Â¿Restablecer todos los ajustes al diseÃ±o por defecto?')) return
+  if (!confirm('Reset all settings to default?')) return
   cfg.value = { ...DEFAULTS }
 }
 
@@ -251,25 +251,25 @@ function downloadSvg(opts = {}) {
           <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
         </svg>
         <div>
-          <h1 class="bp-hdr-h">Marca / Logo</h1>
-          <p class="bp-hdr-sub">DiseÃ±a el logotipo con vista previa en tiempo real</p>
+          <h1 class="bp-hdr-h">Brand / Logo</h1>
+          <p class="bp-hdr-sub">Design the logo with live preview</p>
         </div>
       </div>
       <div class="bp-hdr-actions">
-        <button class="bpbtn bpbtn--ghost" @click="reset">Restablecer</button>
+        <button class="bpbtn bpbtn--ghost" @click="reset">Reset</button>
         <div class="dl-split">
           <button class="bpbtn bpbtn--outline" @click="downloadSvg({})">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            SVG claro
+            SVG light
           </button>
           <button class="bpbtn bpbtn--outline" @click="downloadSvg({ dark: true })" style="padding: 7px 10px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            SVG oscuro
+            SVG dark
           </button>
         </div>
         <button class="bpbtn bpbtn--primary" :class="{ 'bpbtn--saved': saved }" :disabled="saving" @click="save">
           <svg v-if="saved" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          {{ saving ? 'Guardandoâ€¦' : saved ? 'Guardado' : 'Guardar' }}
+          {{ saving ? 'Saving\u2026' : saved ? 'Saved' : 'Save' }}
         </button>
       </div>
     </header>
@@ -279,7 +279,7 @@ function downloadSvg(opts = {}) {
 
       <!-- LEFT â€” preview panel -->
       <div class="pv-panel">
-        <p class="pv-panel-label">Vista previa del logo</p>
+        <p class="pv-panel-label">Logo preview</p>
 
         <!-- Main preview stage -->
         <div class="pv-stage pv-stage--main" :style="{ background: cfg.bgColor }">
@@ -309,7 +309,7 @@ function downloadSvg(opts = {}) {
         <!-- Mini previews -->
         <div class="pv-mini-row">
           <div class="pv-mini-wrap">
-            <div class="pv-label pv-label--sm">Fondo oscuro</div>
+            <div class="pv-label pv-label--sm">Dark background</div>
             <div class="pv-stage pv-stage--mini" style="background:#1a2035">
               <div class="logo-comp">
                 <div class="logo-name-group" :style="{ paddingLeft: `${Math.round(cresIndent * 0.52)}px` }">
@@ -336,7 +336,7 @@ function downloadSvg(opts = {}) {
           </div>
 
           <div class="pv-mini-wrap">
-            <div class="pv-label pv-label--sm">Fondo teal</div>
+            <div class="pv-label pv-label--sm">Teal background</div>
             <div class="pv-stage pv-stage--mini" style="background:#2E8A93">
               <div class="logo-comp">
                 <div class="logo-name-group" :style="{ paddingLeft: `${Math.round(cresIndent * 0.52)}px` }">
@@ -370,32 +370,32 @@ function downloadSvg(opts = {}) {
         <!-- â”€â”€ TEXTO PRINCIPAL â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-          Texto principal
+          Main text
         </div>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">Nombre en dos lÃ­neas</label>
+            <label class="field-label">Name on two lines</label>
             <label class="cs-toggle field-toggle">
               <input type="checkbox" v-model="cfg.twoLines" />
-              Separar en dos lÃ­neas
+              Split into two lines
             </label>
           </div>
         </div>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">{{ cfg.twoLines ? 'LÃ­nea 1' : 'Nombre completo' }}</label>
+            <label class="field-label">{{ cfg.twoLines ? 'Line 1' : 'Full name' }}</label>
             <input class="field-input" v-model="cfg.line1" />
           </div>
           <div v-if="cfg.twoLines" class="field">
-            <label class="field-label">LÃ­nea 2</label>
+            <Line 2</label>
             <input class="field-input" v-model="cfg.line2" />
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Fuente</label>
+          <label class="field-label">Font</label>
           <div class="font-grid">
             <button v-for="f in fonts" :key="f.family"
                     class="font-chip" :class="{ 'font-chip--active': cfg.font === f.family }"
@@ -409,7 +409,7 @@ function downloadSvg(opts = {}) {
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">Peso</label>
+            <label class="field-label">Weight</label>
             <div class="weight-chips">
               <button v-for="w in weights" :key="w.value"
                       class="weight-chip" :class="{ 'weight-chip--active': cfg.fontWeight === w.value }"
@@ -418,7 +418,7 @@ function downloadSvg(opts = {}) {
             </div>
           </div>
           <div class="field">
-            <label class="field-label">Estilo</label>
+            <label class="field-label">Style</label>
             <div class="style-toggles">
               <button class="style-toggle" :class="{ 'style-toggle--on': cfg.uppercase }" @click="cfg.uppercase = !cfg.uppercase">ABC</button>
               <button class="style-toggle" :class="{ 'style-toggle--on': cfg.italic }" @click="cfg.italic = !cfg.italic" style="font-style:italic">Italic</button>
@@ -428,17 +428,17 @@ function downloadSvg(opts = {}) {
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">TamaÃ±o <span class="field-val">{{ cfg.fontSize }}px</span></label>
+            <label class="field-label">Size <span class="field-val">{{ cfg.fontSize }}px</span></label>
             <input type="range" min="24" max="90" step="1" v-model.number="cfg.fontSize" class="cs-slider" />
           </div>
           <div class="field">
-            <label class="field-label">Espaciado <span class="field-val">{{ cfg.letterSpacing }}em</span></label>
+            <label class="field-label">Spacing <span class="field-val">{{ cfg.letterSpacing }}em</span></label>
             <input type="range" min="0" max="0.3" step="0.01" v-model.number="cfg.letterSpacing" class="cs-slider" />
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Color del nombre</label>
+          <label class="field-label">Name color</label>
           <div class="color-inline">
             <button class="color-swatch"
                     :style="{ background: cfg.mainColor, border: ['#FFFFFF','#FEFAF5'].includes(cfg.mainColor) ? '1.5px solid #d0d3d8' : 'none' }"
@@ -459,11 +459,11 @@ function downloadSvg(opts = {}) {
         <!-- â”€â”€ SWOOSH â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9"/><path d="M3 12c2 3 5 5 9 5s7-2 9-5"/></svg>
-          Swoosh / Estela
+          Swoosh / Mark
         </div>
 
         <div class="field">
-          <label class="field-label">Mostrar swoosh</label>
+          <label class="field-label">Show swoosh</label>
           <label class="cs-toggle field-toggle">
             <input type="checkbox" v-model="cfg.showSwoosh" />
             Visible
@@ -472,7 +472,7 @@ function downloadSvg(opts = {}) {
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label">Color del swoosh</label>
+            <label class="field-label">Swoosh color</label>
             <div class="color-inline">
               <button class="color-swatch"
                       :style="{ background: cfg.accentColor, border: ['#FFFFFF','#FEFAF5'].includes(cfg.accentColor) ? '1.5px solid #d0d3d8' : 'none' }"
@@ -490,7 +490,7 @@ function downloadSvg(opts = {}) {
             </div>
           </div>
           <div class="field">
-            <label class="field-label">Fondo del logo</label>
+            <label class="field-label">Logo background</label>
             <div class="color-inline">
               <button class="color-swatch"
                       :style="{ background: cfg.bgColor, border: ['#FFFFFF','#FEFAF5'].includes(cfg.bgColor) ? '1.5px solid #d0d3d8' : 'none' }"
@@ -512,11 +512,11 @@ function downloadSvg(opts = {}) {
         <!-- â”€â”€ ESLOGAN â”€â”€ -->
         <div class="sec-divider">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Eslogan
+          Tagline
         </div>
 
         <div class="field">
-          <label class="field-label">Mostrar eslogan</label>
+          <label class="field-label">Show tagline</label>
           <label class="cs-toggle field-toggle">
             <input type="checkbox" v-model="cfg.showTagline" />
             Visible
@@ -525,26 +525,26 @@ function downloadSvg(opts = {}) {
 
         <div v-if="cfg.showTagline">
           <div class="field">
-            <label class="field-label">Texto del eslogan</label>
+            <label class="field-label">Tagline text</label>
             <input class="field-input" v-model="cfg.tagline" />
           </div>
           <div class="field">
             <label class="field-label">
-              â† PosiciÃ³n horizontal â†’
+              ← Horizontal position →
               <span class="field-val">{{ cfg.taglineX }}%</span>
             </label>
             <input type="range" min="0" max="100" step="1" v-model.number="cfg.taglineX" class="cs-slider" />
           </div>
           <div class="field">
             <label class="field-label">
-              â†• PosiciÃ³n vertical
+              ↕ Vertical position
               <span class="field-val">{{ cfg.taglineY }}%</span>
             </label>
             <input type="range" min="90" max="200" step="1" v-model.number="cfg.taglineY" class="cs-slider" />
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field-label">TamaÃ±o <span class="field-val">{{ cfg.taglineSize }}px</span></label>
+              <label class="field-label">Size <span class="field-val">{{ cfg.taglineSize }}px</span></label>
               <input type="range" min="9" max="24" step="1" v-model.number="cfg.taglineSize" class="cs-slider" />
             </div>
             <div class="field">
