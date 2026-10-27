@@ -22,136 +22,143 @@ export default defineEventHandler((event) => {
   <title>Coming Soon — Fluent Future</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100svh;
-      background: #FEFAF5;
-      color: #332E2A;
-      font-family: 'Karla', -apple-system, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 24px;
+      background: #f7fafa;
+      padding: 32px 20px;
+      font-family: 'Karla', system-ui, sans-serif;
+    }
+    .gate-card {
+      background: #ffffff;
+      border: 1px solid rgba(46,138,147,0.18);
+      border-radius: 28px;
+      padding: clamp(40px, 6vw, 64px) clamp(28px, 5vw, 56px);
+      max-width: 520px;
+      width: 100%;
       text-align: center;
+      box-shadow: 0 12px 40px rgba(46,138,147,0.10);
     }
-    .logo-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 48px;
+    .gate-illo {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 32px;
     }
-    .logo-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(36px, 6vw, 54px);
-      font-weight: 600;
-      color: #2E8A93;
-      letter-spacing: 0.04em;
-      line-height: 1;
-    }
-    .logo-tagline {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 13px;
-      font-style: italic;
-      color: #2E8A93;
-      letter-spacing: 0.08em;
-      opacity: 0.75;
-    }
-    .swoosh {
-      width: clamp(120px, 18vw, 180px);
-      height: auto;
-      margin-bottom: 4px;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(46,138,147,0.10);
-      color: #2E8A93;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 999px;
-      margin-bottom: 28px;
-    }
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #2E8A93;
-      animation: pulse 2s ease-in-out infinite;
-    }
+    .gate-illo svg { width: 100%; height: 100%; overflow: visible; }
+    .spin-slow { animation: spinSlow 18s linear infinite; transform-origin: 100px 100px; }
+    .spin-rev  { animation: spinSlow 12s linear infinite reverse; transform-origin: 100px 100px; }
+    .pulse     { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.75); }
+      0%, 100% { opacity: 0.15; r: 14; }
+      50%       { opacity: 0.32; r: 18; }
     }
-    h1 {
+    .gate-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #2e8a93;
+      margin-bottom: 12px;
+    }
+    .gate-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(22px, 3vw, 30px);
       font-weight: 600;
-      color: #1a2035;
-      line-height: 1.2;
+      color: #1a2e30;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .gate-title span { color: #2e8a93; }
+    .gate-desc {
+      font-size: 15px;
+      color: #5a7275;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .gate-progress {
+      height: 4px;
+      background: rgba(46,138,147,0.12);
+      border-radius: 999px;
+      overflow: hidden;
       margin-bottom: 20px;
-      max-width: 540px;
     }
-    p {
-      font-size: clamp(15px, 1.8vw, 17px);
-      line-height: 1.75;
-      color: #6b7280;
-      max-width: 480px;
-      margin-bottom: 40px;
+    .gate-progress-bar {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, #2e8a93, #56bfc8);
+      border-radius: 999px;
+      animation: progressPulse 3s ease-in-out infinite;
     }
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(90deg, #2E8A93, #4EC9C0);
-      border-radius: 2px;
-      margin: 0 auto 40px;
+    @keyframes progressPulse {
+      0%   { width: 45%; opacity: 0.7; }
+      50%  { width: 75%; opacity: 1; }
+      100% { width: 45%; opacity: 0.7; }
     }
-    .contact {
-      font-size: 13.5px;
-      color: #9ca3af;
+    .gate-note {
+      font-size: 13px;
+      color: #8aa6a8;
     }
-    .contact a {
-      color: #2E8A93;
+    .gate-note a {
+      color: #2e8a93;
       text-decoration: none;
       font-weight: 600;
       border-bottom: 1px solid rgba(46,138,147,0.3);
-      transition: border-color 0.2s;
     }
-    .contact a:hover { border-color: #2E8A93; }
+    .gate-note a:hover { border-color: #2e8a93; }
+    .gate-brand {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #aac4c6;
+      letter-spacing: .04em;
+    }
   </style>
 </head>
 <body>
-  <div class="logo-wrap">
-    <svg class="swoosh" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
-      <path d="M.2,33.5c-.8-2.6,3.5-16.5,3.9-7.6,28.6,50.2,129.4,4.2,175.9,10.2-33.6,1.7-66,12.1-98.8,19.3C55.2,59.9,3,68.9.2,33.5Z" fill="#2E8A93"/>
-      <path d="M40.9.3c-12.8,4.5-25.6,18.5-12.2,30.1,16.6,11.7,38,11.7,57.6,12.7-20.5,4.4-46.7,1.8-66.9-7.1C-10.7,19,20,1.1,40.8,0c0,.1.05.22.1.3Z" fill="#2E8A93"/>
-      <text x="118" y="44" font-family="'Cormorant Garamond', Georgia, serif" font-size="42" font-weight="600" fill="#2E8A93" letter-spacing="2">Fluent Future</text>
-    </svg>
-    <span class="logo-tagline">Your Path to Fluent Communication</span>
+  <div class="gate-card">
+    <div class="gate-illo" aria-hidden="true">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="88" stroke="#2e8a93" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.35" class="spin-slow"/>
+        <circle cx="100" cy="100" r="68" stroke="#2e8a93" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.2" class="spin-rev"/>
+        <circle cx="100" cy="100" r="50" fill="#2e8a93" opacity="0.1" stroke="#2e8a93" stroke-width="2"/>
+        <ellipse cx="100" cy="100" rx="50" ry="20" stroke="#2e8a93" stroke-width="1.5" opacity="0.4"/>
+        <line x1="50" y1="100" x2="150" y2="100" stroke="#2e8a93" stroke-width="1.5" opacity="0.4"/>
+        <line x1="100" y1="50" x2="100" y2="150" stroke="#2e8a93" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="100" cy="100" r="14" fill="#2e8a93" opacity="0.15" class="pulse"/>
+        <circle cx="100" cy="100" r="8" fill="#2e8a93"/>
+        <path d="M96 100 L99 103 L105 97" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="150" cy="60" r="6" fill="#f0b450"/>
+        <circle cx="52" cy="142" r="4" fill="#f0b450" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <p class="gate-eyebrow">Coming soon</p>
+    <h1 class="gate-title">
+      We're putting the finishing touches on<br>
+      <span>fluentfuture.co.uk</span>
+    </h1>
+    <p class="gate-desc">
+      Something thoughtful is on its way.<br>
+      Check back very soon.
+    </p>
+
+    <div class="gate-progress">
+      <div class="gate-progress-bar"></div>
+    </div>
+
+    <p class="gate-note">
+      Questions? Write to
+      <a href="mailto:blanca.lucia.cardona@gmail.com">blanca.lucia.cardona@gmail.com</a>
+    </p>
   </div>
 
-  <div class="badge">
-    <span class="badge-dot"></span>
-    Almost there
-  </div>
-
-  <h1>We're putting the finishing touches</h1>
-
-  <div class="divider"></div>
-
-  <p>The Fluent Future website is being carefully prepared.<br>
-  We'll be ready to welcome you very soon.</p>
-
-  <p class="contact">
-    In the meantime, feel free to reach out at<br>
-    <a href="mailto:blanca.lucia.cardona@gmail.com">blanca.lucia.cardona@gmail.com</a>
-  </p>
+  <p class="gate-brand">Fluent Future &nbsp;·&nbsp; Personal Language Consultancy</p>
 </body>
 </html>`
 })
