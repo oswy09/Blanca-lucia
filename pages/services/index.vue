@@ -3,6 +3,25 @@ import { onMounted, onUnmounted } from 'vue'
 
 const { siteUrl, locale, whatsappUrl } = useSiteConfig()
 
+const { data: sbData } = await useAsyncData('services-index', () =>
+  $fetch('/api/content/services-index').catch(() => ({}))
+)
+const sb = useState('sb-services-index', () => sbData.value || {})
+
+// Hero
+const heroEyebrow  = computed(() => sb.value.si_eyebrow  || 'My Services')
+const heroTitle    = computed(() => sb.value.si_title    || 'Tailored Language Consultancy')
+const heroSubtitle = computed(() => sb.value.si_subtitle || 'Each engagement is shaped around your individual needs, with a focus on clear, confident, and natural communication. With over 30 years of experience, I work with adults seeking a more focused and individual approach.')
+
+// Steps header
+const stepsEyebrow = computed(() => sb.value.si_steps_eyebrow || 'How I work with you')
+const stepsTitle   = computed(() => sb.value.si_steps_title   || 'Simple Steps to Begin')
+
+// CTA
+const ctaEyebrow = computed(() => sb.value.si_cta_eyebrow || 'Ready to Begin?')
+const ctaTitle   = computed(() => sb.value.si_cta_title   || 'Start with a Conversation')
+const ctaSub     = computed(() => sb.value.si_cta_sub     || 'You are welcome to contact me. We can begin with an initial conversation to understand your needs and consider the most appropriate way forward.')
+
 useSeoMeta({
   title: 'Services — Fluent Future · Personalised English Communication Support',
   description: 'Personalised English communication support for Native Spanish-Speaking Adults, including professional emails, meetings, interviews and confidence-building.',
@@ -92,68 +111,68 @@ onUnmounted(() => {
   gsapCtx?.revert()
 })
 
-const services = [
+const services = computed(() => [
   {
-    eyebrow: 'Professional Communication',
-    title: 'Personal language consultancy, tailored to you',
+    eyebrow: sb.value.si_svc_0_eyebrow || 'Professional Communication',
+    title:   sb.value.si_svc_0_title   || 'Personal language consultancy, tailored to you',
     desc: [
-      'Focused support for professionals who want to communicate clearly and confidently in meetings, presentations, and everyday interactions.',
-      'We work on clarity, structure, tone, and natural expression — ensuring you can communicate with precision and ease.',
+      sb.value.si_svc_0_desc_0 || 'Focused support for professionals who want to communicate clearly and confidently in meetings, presentations, and everyday interactions.',
+      sb.value.si_svc_0_desc_1 || 'We work on clarity, structure, tone, and natural expression — ensuring you can communicate with precision and ease.',
     ],
     features: [
-      'Fluency-building through real professional scenarios',
-      'Presentation skills and confident delivery in English',
-      'Reducing hesitation and improving natural flow',
-      'Video call and telephone communication strategies',
+      sb.value.si_svc_0_feat_0 || 'Fluency-building through real professional scenarios',
+      sb.value.si_svc_0_feat_1 || 'Presentation skills and confident delivery in English',
+      sb.value.si_svc_0_feat_2 || 'Reducing hesitation and improving natural flow',
+      sb.value.si_svc_0_feat_3 || 'Video call and telephone communication strategies',
     ],
     accent: 'teal',
     dark: true,
     illustration: 'communication',
   },
   {
-    eyebrow: 'Interview & Career Communication',
-    title: 'English Interview Preparation',
+    eyebrow: sb.value.si_svc_1_eyebrow || 'Interview & Career Communication',
+    title:   sb.value.si_svc_1_title   || 'English Interview Preparation',
     desc: [
-      'Preparation for interviews and professional conversations, with a focus on expressing your experience clearly and confidently.',
-      'This includes structuring responses, refining language, and developing confidence in real situations.',
+      sb.value.si_svc_1_desc_0 || 'Preparation for interviews and professional conversations, with a focus on expressing your experience clearly and confidently.',
+      sb.value.si_svc_1_desc_1 || 'This includes structuring responses, refining language, and developing confidence in real situations.',
     ],
     features: [
-      'Realistic practice with questions specific to your field',
-      'Vocabulary tailored to your industry and role',
-      'Structuring clear, confident answers',
-      'Pronunciation, pacing, and natural delivery',
-      'Strategies for managing nerves and thinking in English',
+      sb.value.si_svc_1_feat_0 || 'Realistic practice with questions specific to your field',
+      sb.value.si_svc_1_feat_1 || 'Vocabulary tailored to your industry and role',
+      sb.value.si_svc_1_feat_2 || 'Structuring clear, confident answers',
+      sb.value.si_svc_1_feat_3 || 'Pronunciation, pacing, and natural delivery',
+      sb.value.si_svc_1_feat_4 || 'Strategies for managing nerves and thinking in English',
     ],
     accent: 'teal',
     dark: true,
     illustration: 'interview',
   },
   {
-    eyebrow: 'Written Communication',
-    title: 'English Editing for Emails & Documents',
+    eyebrow: sb.value.si_svc_2_eyebrow || 'Written Communication',
+    title:   sb.value.si_svc_2_title   || 'English Editing for Emails & Documents',
     desc: [
-      'Careful review and refinement of emails, documents, and professional writing.',
-      'The focus is on clarity, tone, and accuracy — ensuring your written communication reflects your level of expertise.',
+      sb.value.si_svc_2_desc_0 || 'Careful review and refinement of emails, documents, and professional writing.',
+      sb.value.si_svc_2_desc_1 || 'The focus is on clarity, tone, and accuracy — ensuring your written communication reflects your level of expertise.',
     ],
     features: [
-      'Review and refinement of professional emails',
-      'Editing reports, proposals, and formal documents',
-      'Improving tone, register, and clarity',
-      'Guidance on professional written conventions in English',
-      'Personalised feedback and recommendations',
+      sb.value.si_svc_2_feat_0 || 'Review and refinement of professional emails',
+      sb.value.si_svc_2_feat_1 || 'Editing reports, proposals, and formal documents',
+      sb.value.si_svc_2_feat_2 || 'Improving tone, register, and clarity',
+      sb.value.si_svc_2_feat_3 || 'Guidance on professional written conventions in English',
+      sb.value.si_svc_2_feat_4 || 'Personalised feedback and recommendations',
     ],
     accent: 'teal',
     dark: true,
     illustration: 'editing',
   },
-]
+])
 
-const steps = [
-  { num: '1', title: 'Initial Contact', desc: 'A first conversation to understand your needs and goals.' },
-  { num: '2', title: 'Initial Consultation', desc: 'A more detailed discussion to explore your current level and challenges.' },
-  { num: '3', title: 'Personalised Approach', desc: 'A tailored plan based on your specific requirements.' },
-  { num: '4', title: 'Ongoing Sessions', desc: 'Continued work focused on meaningful and lasting progress.' },
-]
+const steps = computed(() => [
+  { num: '1', title: sb.value.si_step_0_title || 'Initial Contact',       desc: sb.value.si_step_0_desc || 'A first conversation to understand your needs and goals.' },
+  { num: '2', title: sb.value.si_step_1_title || 'Initial Consultation',  desc: sb.value.si_step_1_desc || 'A more detailed discussion to explore your current level and challenges.' },
+  { num: '3', title: sb.value.si_step_2_title || 'Personalised Approach', desc: sb.value.si_step_2_desc || 'A tailored plan based on your specific requirements.' },
+  { num: '4', title: sb.value.si_step_3_title || 'Ongoing Sessions',      desc: sb.value.si_step_3_desc || 'Continued work focused on meaningful and lasting progress.' },
+])
 </script>
 
 <template>
@@ -162,13 +181,9 @@ const steps = [
     <!-- ── 1. HERO ─────────────────────────────────────────────── -->
     <section class="sv-hero">
       <div class="wrap sv-hero-inner reveal">
-        <span class="eyebrow sv-eyebrow">My Services</span>
-        <h1 class="sv-title">Tailored Language Consultancy</h1>
-        <p class="sv-subtitle">
-          Each engagement is shaped around your individual needs, with a focus on clear, confident,
-          and natural communication. With over 30 years of experience, I work with adults seeking
-          a more focused and individual approach.
-        </p>
+        <span class="eyebrow sv-eyebrow" data-cms-key="si_eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="sv-title" data-cms-key="si_title">{{ heroTitle }}</h1>
+        <p class="sv-subtitle" data-cms-key="si_subtitle">{{ heroSubtitle }}</p>
       </div>
     </section>
 
@@ -188,9 +203,9 @@ const steps = [
             <!-- Dark teal card with SVG illustration -->
             <div class="sv-dark-banner reveal">
               <div class="sv-dark-content">
-                <span class="eyebrow sv-dark-eyebrow">{{ svc.eyebrow }}</span>
-                <h2 class="sv-dark-title">{{ svc.title }}</h2>
-                <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-dark-desc">{{ p }}</p>
+                <span class="eyebrow sv-dark-eyebrow" :data-cms-key="'si_svc_' + i + '_eyebrow'">{{ svc.eyebrow }}</span>
+                <h2 class="sv-dark-title" :data-cms-key="'si_svc_' + i + '_title'">{{ svc.title }}</h2>
+                <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-dark-desc" :data-cms-key="'si_svc_' + i + '_desc_' + pi">{{ p }}</p>
                 <a :href="whatsappUrl" class="btn sv-enquire-btn sv-enquire--white" target="_blank" rel="noopener">
                   Enquire About This Service
                 </a>
@@ -299,13 +314,13 @@ const steps = [
             <!-- Features list below the card -->
             <div class="sv-dark-features reveal" style="transition-delay:120ms">
               <ul class="sv-dark-feat-list">
-                <li v-for="feat in svc.features" :key="feat" class="sv-dark-feat-item">
+                <li v-for="(feat, fIdx) in svc.features" :key="feat" class="sv-dark-feat-item">
                   <div class="sv-feat-icon sv-feat-icon--teal" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
-                  <span>{{ feat }}</span>
+                  <span :data-cms-key="'si_svc_' + i + '_feat_' + fIdx">{{ feat }}</span>
                 </li>
               </ul>
             </div>
@@ -318,9 +333,9 @@ const steps = [
           <div class="wrap sv-svc-grid">
 
             <div class="sv-svc-text reveal">
-              <span class="eyebrow" :class="`sv-ey--${svc.accent}`">{{ svc.eyebrow }}</span>
-              <h2 class="sv-svc-title">{{ svc.title }}</h2>
-              <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-svc-desc">{{ p }}</p>
+              <span class="eyebrow" :class="`sv-ey--${svc.accent}`" :data-cms-key="'si_svc_' + i + '_eyebrow'">{{ svc.eyebrow }}</span>
+              <h2 class="sv-svc-title" :data-cms-key="'si_svc_' + i + '_title'">{{ svc.title }}</h2>
+              <p v-for="(p, pi) in svc.desc" :key="pi" class="sv-svc-desc" :data-cms-key="'si_svc_' + i + '_desc_' + pi">{{ p }}</p>
               <a :href="whatsappUrl" class="btn sv-enquire-btn" :class="`sv-enquire--${svc.accent}`" target="_blank" rel="noopener">
                 Enquire About This Service
               </a>
@@ -328,13 +343,13 @@ const steps = [
 
             <div class="sv-svc-features reveal" style="transition-delay:100ms">
               <ul class="sv-feat-list">
-                <li v-for="feat in svc.features" :key="feat" class="sv-feat-item">
+                <li v-for="(feat, fIdx) in svc.features" :key="feat" class="sv-feat-item">
                   <div class="sv-feat-icon" :class="`sv-feat-icon--${svc.accent}`" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
-                  <span>{{ feat }}</span>
+                  <span :data-cms-key="'si_svc_' + i + '_feat_' + fIdx">{{ feat }}</span>
                 </li>
               </ul>
             </div>
@@ -349,8 +364,8 @@ const steps = [
     <section class="sv-steps">
       <div class="wrap">
         <div class="sv-steps-head reveal">
-          <span class="eyebrow sv-steps-eyebrow">How I work with you</span>
-          <h2 class="sv-steps-title">Simple Steps to Begin</h2>
+          <span class="eyebrow sv-steps-eyebrow" data-cms-key="si_steps_eyebrow">{{ stepsEyebrow }}</span>
+          <h2 class="sv-steps-title" data-cms-key="si_steps_title">{{ stepsTitle }}</h2>
         </div>
         <div class="sv-steps-grid-container">
           <!-- Horizontal Animated SVG Connecting Line -->
@@ -363,16 +378,16 @@ const steps = [
 
           <div class="sv-steps-grid">
             <div
-              v-for="(step, i) in steps"
-              :key="i"
+              v-for="(step, sIdx) in steps"
+              :key="sIdx"
               class="sv-step reveal"
-              :style="`transition-delay:${i * 80}ms`"
+              :style="`transition-delay:${sIdx * 80}ms`"
             >
               <div class="sv-step-num-wrap">
                 <div class="sv-step-num">{{ step.num }}</div>
               </div>
-              <h3 class="sv-step-name">{{ step.title }}</h3>
-              <p class="sv-step-desc">{{ step.desc }}</p>
+              <h3 class="sv-step-name" :data-cms-key="'si_step_' + sIdx + '_title'">{{ step.title }}</h3>
+              <p class="sv-step-desc" :data-cms-key="'si_step_' + sIdx + '_desc'">{{ step.desc }}</p>
             </div>
           </div>
         </div>
@@ -382,12 +397,9 @@ const steps = [
     <!-- ── 4. CTA ───────────────────────────────────────────────── -->
     <section class="sv-cta">
       <div class="wrap sv-cta-inner reveal">
-        <span class="eyebrow sv-cta-eyebrow">Ready to Begin?</span>
-        <h2 class="sv-cta-title">Start with a Conversation</h2>
-        <p class="sv-cta-sub">
-          You are welcome to contact me. We can begin with an initial conversation
-          to understand your needs and consider the most appropriate way forward.
-        </p>
+        <span class="eyebrow sv-cta-eyebrow" data-cms-key="si_cta_eyebrow">{{ ctaEyebrow }}</span>
+        <h2 class="sv-cta-title" data-cms-key="si_cta_title">{{ ctaTitle }}</h2>
+        <p class="sv-cta-sub" data-cms-key="si_cta_sub">{{ ctaSub }}</p>
         <NuxtLink to="/contact" class="btn sv-cta-btn">Get in Touch</NuxtLink>
       </div>
     </section>

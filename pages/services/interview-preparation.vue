@@ -1,15 +1,10 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbData } = await useAsyncData('interview-preparation', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/service-interview', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
-const sb = computed(() => sbData.value || {})
+const { data: sbData } = await useAsyncData('services-ip', () =>
+  $fetch('/api/content/services-ip').catch(() => ({}))
+)
+const sb = useState('sb-services-ip', () => sbData.value || {})
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
@@ -94,8 +89,8 @@ useRevealOnScroll()
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="ip-hero">
       <div class="wrap ip-hero-inner reveal">
-        <span class="eyebrow ip-hero-eyebrow">{{ heroEyebrow }}</span>
-        <h1 class="ip-hero-title">{{ heroTitle }}</h1>
+        <span class="eyebrow ip-hero-eyebrow" data-cms-key="hero_eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="ip-hero-title" data-cms-key="hero_title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -114,25 +109,25 @@ useRevealOnScroll()
       <div class="ip-grid">
         <!-- Left: Intro & Highlight -->
         <div class="ip-intro-section reveal">
-          <h2 class="ip-section-title">{{ introTitle }}</h2>
-          <p class="ip-lead-text">{{ introLead }}</p>
-          <p class="ip-body-text">{{ introBody }}</p>
+          <h2 class="ip-section-title" data-cms-key="intro_title">{{ introTitle }}</h2>
+          <p class="ip-lead-text" data-cms-key="intro_lead">{{ introLead }}</p>
+          <p class="ip-body-text" data-cms-key="intro_body">{{ introBody }}</p>
           <div class="ip-highlight-box">
             <div class="ip-highlight-border"></div>
-            <p class="ip-highlight-text"><strong>{{ introHighlight }}</strong></p>
+            <p class="ip-highlight-text"><strong data-cms-key="intro_highlight">{{ introHighlight }}</strong></p>
           </div>
         </div>
 
         <!-- Right: Your experience deserves to be heard card -->
         <div class="ip-sidebar-section reveal">
           <div class="ip-experience-card">
-            <h3 class=”ip-card-title”>{{ cardTitle }}</h3>
-            <p class=”ip-card-text”>{{ cardText1 }}</p>
-            <p class=”ip-card-text”>{{ cardText2 }}</p>
-            <p class=”ip-card-text”>{{ cardText3 }}</p>
+            <h3 class=”ip-card-title” data-cms-key=”card_title”>{{ cardTitle }}</h3>
+            <p class=”ip-card-text” data-cms-key=”card_text_1”>{{ cardText1 }}</p>
+            <p class=”ip-card-text” data-cms-key=”card_text_2”>{{ cardText2 }}</p>
+            <p class=”ip-card-text” data-cms-key=”card_text_3”>{{ cardText3 }}</p>
             <div class=”ip-card-footer”>
               <span class=”ip-footer-icon” aria-hidden=”true”>🎯</span>
-              <p class=”ip-footer-text”>{{ cardFooter }}</p>
+              <p class=”ip-footer-text” data-cms-key=”card_footer”>{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -143,23 +138,23 @@ useRevealOnScroll()
     <section class="ip-prep wrap reveal">
       <div class="ip-prep-grid">
         <div class="ip-prep-content">
-          <h3 class="ip-subtitle">{{ prepSubtitle }}</h3>
-          <p class="ip-prep-text">{{ prepText1 }}</p>
-          <p class="ip-prep-text">{{ prepText2 }}</p>
-          <p class="ip-prep-text">{{ prepText3 }}</p>
+          <h3 class="ip-subtitle" data-cms-key="prep_subtitle">{{ prepSubtitle }}</h3>
+          <p class="ip-prep-text" data-cms-key="prep_text_1">{{ prepText1 }}</p>
+          <p class="ip-prep-text" data-cms-key="prep_text_2">{{ prepText2 }}</p>
+          <p class="ip-prep-text" data-cms-key="prep_text_3">{{ prepText3 }}</p>
         </div>
 
         <div class="ip-work-card">
-          <h4 class="ip-work-heading">{{ workHeading }}</h4>
-          <p class="ip-work-sub">{{ workSub }}</p>
+          <h4 class="ip-work-heading" data-cms-key="work_heading">{{ workHeading }}</h4>
+          <p class="ip-work-sub" data-cms-key="work_sub">{{ workSub }}</p>
           <ul class="ip-help-list">
-            <li v-for="item in workItems" :key="item">
+            <li v-for="(item, idx) in workItems" :key="item">
               <div class="ip-bullet-check">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span>{{ item }}</span>
+              <span :data-cms-key="'work_' + (idx + 1)">{{ item }}</span>
             </li>
           </ul>
         </div>
@@ -170,9 +165,9 @@ useRevealOnScroll()
     <section class="ip-session-wrap wrap">
       <div class="ip-session-banner reveal">
         <div class="ip-session-content">
-          <span class="eyebrow ip-session-eyebrow">{{ sessionEyebrow }}</span>
-          <h3 class="ip-session-title">{{ sessionTitle }}</h3>
-          <p class="ip-session-desc">{{ sessionDesc }}</p>
+          <span class="eyebrow ip-session-eyebrow" data-cms-key="session_eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="ip-session-title" data-cms-key="session_title">{{ sessionTitle }}</h3>
+          <p class="ip-session-desc" data-cms-key="session_desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn ip-session-btn">Let's Talk</NuxtLink>
         </div>
       </div>
@@ -181,14 +176,14 @@ useRevealOnScroll()
     <!-- ── 5. WHAT YOU CAN EXPECT ───────────────────────────────── -->
     <section class="ip-expect wrap reveal">
       <div class="ip-expect-header">
-        <h3 class="ip-subtitle text-center">{{ expectSubtitle }}</h3>
-        <p class="ip-expect-intro text-center">{{ expectIntro }}</p>
+        <h3 class="ip-subtitle text-center" data-cms-key="expect_subtitle">{{ expectSubtitle }}</h3>
+        <p class="ip-expect-intro text-center" data-cms-key="expect_intro">{{ expectIntro }}</p>
       </div>
 
       <div class="ip-expect-grid">
-        <div v-for="exp in expects" :key="exp.label" class="ip-expect-card">
-          <div class="ip-expect-tag" :class="`expect-tag--${exp.color}`">{{ exp.label }}</div>
-          <p class="ip-expect-desc">{{ exp.desc }}</p>
+        <div v-for="(exp, eIdx) in expects" :key="exp.label" class="ip-expect-card">
+          <div class="ip-expect-tag" :class="`expect-tag--${exp.color}`" :data-cms-key="'expect_' + (eIdx + 1) + '_label'">{{ exp.label }}</div>
+          <p class="ip-expect-desc" :data-cms-key="'expect_' + (eIdx + 1) + '_desc'">{{ exp.desc }}</p>
         </div>
       </div>
     </section>
@@ -196,8 +191,8 @@ useRevealOnScroll()
     <!-- ── 6. CTA SECTION ───────────────────────────────────────── -->
     <section class="ip-cta">
       <div class="wrap ip-cta-inner reveal">
-        <h2 class="ip-cta-title">{{ ctaTitle }}</h2>
-        <p class="ip-cta-desc">{{ ctaDesc }}</p>
+        <h2 class="ip-cta-title" data-cms-key="cta_title">{{ ctaTitle }}</h2>
+        <p class="ip-cta-desc" data-cms-key="cta_desc">{{ ctaDesc }}</p>
         <div class="ip-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">

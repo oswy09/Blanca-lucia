@@ -3,18 +3,18 @@ import { computed, ref } from 'vue'
 
 const { siteUrl, locale } = useSiteConfig()
 
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbData } = await useAsyncData('contact-page', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/contact-page', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
-const sb = computed(() => sbData.value || {})
+const { data: sbData } = await useAsyncData('contact-page', () =>
+  $fetch('/api/content/contact').catch(() => ({}))
+)
+const sb = useState('sb-contact', () => sbData.value || {})
 
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Get in Touch')
 const heroTitle   = computed(() => sb.value.hero_title   || 'Let\'s start a conversation')
+
+const bookEyebrow = computed(() => sb.value.book_eyebrow || 'Free Consultation')
+const bookTitle   = computed(() => sb.value.book_title   || 'Book a time that works for you')
+const bookSub     = computed(() => sb.value.book_sub     || 'Choose a slot directly in my calendar — no back and forth, no commitment.')
+const bookOr      = computed(() => sb.value.book_or      || '— or send a message below —')
 
 const consultBadge    = computed(() => sb.value.consult_badge    || 'Service Option')
 const consultTitle    = computed(() => sb.value.consult_title    || 'Initial Consultation')
@@ -115,8 +115,8 @@ const submitForm = () => {
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="cn-hero">
       <div class="wrap cn-hero-inner reveal">
-        <span class="eyebrow cn-hero-eyebrow">{{ heroEyebrow }}</span>
-        <h1 class="cn-hero-title">{{ heroTitle }}</h1>
+        <span class="eyebrow cn-hero-eyebrow" data-cms-key="hero_eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="cn-hero-title" data-cms-key="hero_title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -183,9 +183,9 @@ const submitForm = () => {
     <!-- ── 3. BOOK A CONSULTATION ───────────────────────────────── -->
     <section class="cn-book wrap reveal">
       <div class="cn-book-inner">
-        <span class="eyebrow">Free Consultation</span>
-        <h2 class="cn-book-title">Book a time that works for you</h2>
-        <p class="cn-book-sub">Choose a slot directly in my calendar — no back and forth, no commitment.</p>
+        <span class="eyebrow" data-cms-key="book_eyebrow">{{ bookEyebrow }}</span>
+        <h2 class="cn-book-title" data-cms-key="book_title">{{ bookTitle }}</h2>
+        <p class="cn-book-sub" data-cms-key="book_sub">{{ bookSub }}</p>
         <button
           class="btn btn-primary cn-book-btn"
           data-cal-link="fluent-future/consultation"
@@ -197,7 +197,7 @@ const submitForm = () => {
           </svg>
           Book a free consultation
         </button>
-        <p class="cn-book-or">— or send a message below —</p>
+        <p class="cn-book-or" data-cms-key="book_or">{{ bookOr }}</p>
       </div>
     </section>
 
@@ -209,9 +209,9 @@ const submitForm = () => {
         <div class="cn-form-wrap reveal">
           <div class="cn-form-card-v2">
             <div class="cn-form-header-v2">
-              <h2 class="cn-form-title-v2">{{ formTitle }}</h2>
-              <p class="cn-form-subtitle-v2">{{ formSubtitle }}</p>
-              <p class="cn-form-subtitle-v2 reply-tag">{{ formReply }}</p>
+              <h2 class="cn-form-title-v2" data-cms-key="form_title">{{ formTitle }}</h2>
+              <p class="cn-form-subtitle-v2" data-cms-key="form_subtitle">{{ formSubtitle }}</p>
+              <p class="cn-form-subtitle-v2 reply-tag" data-cms-key="form_reply">{{ formReply }}</p>
             </div>
 
             <!-- Form -->

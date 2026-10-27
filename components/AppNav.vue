@@ -4,21 +4,21 @@ const isOpen = ref(false)
 const sb = useStoryblokGlobal()
 const navCta = computed(() => sb.value?.nav_cta_label || 'Get in touch')
 
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
+const navLinks = computed(() => [
+  { to: '/', label: sb.value?.nav_home || 'Home' },
+  { to: '/about', label: sb.value?.nav_about || 'About' },
   {
     to: '/services',
-    label: 'Services',
+    label: sb.value?.nav_services || 'Services',
     children: [
-      { to: '/services/professional-communication', label: 'Personal Consultancy', icon: 'chat', color: 'var(--coral)', bgColor: 'var(--coral-t1)' },
-      { to: '/services/interview-preparation', label: 'Interview Preparation', icon: 'calendar', color: 'var(--teal)', bgColor: 'var(--teal-t1)' },
-      { to: '/services/professional-writing-editing', label: 'Professional Writing & Editing', icon: 'doc', color: 'var(--amber-sh)', bgColor: 'var(--amber-t1)' },
+      { to: '/services/professional-communication', label: sb.value?.nav_svc_pc  || 'Personal Consultancy',              icon: 'chat',     color: 'var(--coral)',      bgColor: 'var(--coral-t1)' },
+      { to: '/services/interview-preparation',      label: sb.value?.nav_svc_ip  || 'Interview Preparation',             icon: 'calendar', color: 'var(--teal)',       bgColor: 'var(--teal-t1)' },
+      { to: '/services/professional-writing-editing', label: sb.value?.nav_svc_pwe || 'Professional Writing & Editing', icon: 'doc',      color: 'var(--amber-sh)',   bgColor: 'var(--amber-t1)' },
     ]
   },
-  { to: '/blog', label: 'Blog' },
-  { to: '/contact', label: 'Contact me' },
-]
+  { to: '/blog', label: sb.value?.nav_blog || 'Blog' },
+  { to: '/contact', label: sb.value?.nav_contact || 'Contact me' },
+])
 
 const isActive = (link) => {
   if (link.anchor) return false

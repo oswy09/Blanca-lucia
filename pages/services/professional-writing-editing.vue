@@ -1,15 +1,10 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
 
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbData } = await useAsyncData('professional-writing-editing', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/professional-writing-editing', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
-const sb = computed(() => sbData.value || {})
+const { data: sbData } = await useAsyncData('services-pwe', () =>
+  $fetch('/api/content/services-pwe').catch(() => ({}))
+)
+const sb = useState('sb-services-pwe', () => sbData.value || {})
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
@@ -90,8 +85,8 @@ useRevealOnScroll()
     <!-- ── 1. HERO BANNER ───────────────────────────────────────── -->
     <section class="pwe-hero">
       <div class="wrap pwe-hero-inner reveal">
-        <span class="eyebrow pwe-hero-eyebrow">{{ heroEyebrow }}</span>
-        <h1 class="pwe-hero-title">{{ heroTitle }}</h1>
+        <span class="eyebrow pwe-hero-eyebrow" data-cms-key="hero_eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="pwe-hero-title" data-cms-key="hero_title">{{ heroTitle }}</h1>
       </div>
     </section>
 
@@ -110,25 +105,25 @@ useRevealOnScroll()
       <div class="pwe-grid">
         <!-- Left: Intro & Highlight -->
         <div class="pwe-intro-section reveal">
-          <h2 class="pwe-section-title">{{ introTitle }}</h2>
-          <p class="pwe-lead-text">{{ introLead }}</p>
-          <p class="pwe-body-text">{{ introBody }}</p>
+          <h2 class="pwe-section-title" data-cms-key="intro_title">{{ introTitle }}</h2>
+          <p class="pwe-lead-text" data-cms-key="intro_lead">{{ introLead }}</p>
+          <p class="pwe-body-text" data-cms-key="intro_body">{{ introBody }}</p>
           <div class="pwe-highlight-box">
             <div class="pwe-highlight-border"></div>
-            <p class="pwe-highlight-text">{{ introHighlight }}</p>
+            <p class="pwe-highlight-text" data-cms-key="intro_highlight">{{ introHighlight }}</p>
           </div>
         </div>
 
         <!-- Right: More than proofreading callout card -->
         <div class="pwe-sidebar-section reveal">
           <div class="pwe-proof-card">
-            <h3 class="pwe-card-title">{{ cardTitle }}</h3>
-            <p class="pwe-card-text">{{ cardText1 }}</p>
-            <p class="pwe-card-text">{{ cardText2 }}</p>
-            <p class="pwe-card-text">{{ cardText3 }}</p>
+            <h3 class="pwe-card-title" data-cms-key="card_title">{{ cardTitle }}</h3>
+            <p class="pwe-card-text" data-cms-key="card_text_1">{{ cardText1 }}</p>
+            <p class="pwe-card-text" data-cms-key="card_text_2">{{ cardText2 }}</p>
+            <p class="pwe-card-text" data-cms-key="card_text_3">{{ cardText3 }}</p>
             <div class="pwe-card-footer">
               <span class="pwe-footer-icon" aria-hidden="true">💡</span>
-              <p class="pwe-footer-text">{{ cardFooter }}</p>
+              <p class="pwe-footer-text" data-cms-key="card_footer">{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -138,21 +133,21 @@ useRevealOnScroll()
     <!-- ── 4. WHEN I CAN HELP ───────────────────────────────────── -->
     <section class="pwe-when wrap reveal">
       <div class="pwe-when-header">
-        <h3 class="pwe-subtitle">{{ whenSubtitle }}</h3>
-        <p class="pwe-when-intro">{{ whenIntro }}</p>
+        <h3 class="pwe-subtitle" data-cms-key="when_subtitle">{{ whenSubtitle }}</h3>
+        <p class="pwe-when-intro" data-cms-key="when_intro">{{ whenIntro }}</p>
       </div>
 
       <div class="pwe-when-grid">
         <div class="pwe-when-card">
-          <h4 class="pwe-when-heading">{{ whenHeading }}</h4>
+          <h4 class="pwe-when-heading" data-cms-key="when_heading">{{ whenHeading }}</h4>
           <ul class="pwe-help-list">
-            <li v-for="item in whenItems" :key="item">
+            <li v-for="(item, wIdx) in whenItems" :key="item">
               <div class="pwe-bullet-check">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span>{{ item }}</span>
+              <span :data-cms-key="'when_' + (wIdx + 1)">{{ item }}</span>
             </li>
           </ul>
         </div>
@@ -163,9 +158,9 @@ useRevealOnScroll()
     <section class="pwe-session-wrap wrap">
       <div class="pwe-session-banner reveal">
         <div class="pwe-session-content">
-          <span class="eyebrow pwe-session-eyebrow">{{ sessionEyebrow }}</span>
-          <h3 class="pwe-session-title">{{ sessionTitle }}</h3>
-          <p class="pwe-session-desc">{{ sessionDesc }}</p>
+          <span class="eyebrow pwe-session-eyebrow" data-cms-key="session_eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="pwe-session-title" data-cms-key="session_title">{{ sessionTitle }}</h3>
+          <p class="pwe-session-desc" data-cms-key="session_desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn pwe-session-btn">Let's Talk</NuxtLink>
         </div>
       </div>
@@ -174,14 +169,14 @@ useRevealOnScroll()
     <!-- ── 5. WHAT YOU CAN EXPECT ───────────────────────────────── -->
     <section class="pwe-expect wrap reveal">
       <div class="pwe-expect-header">
-        <h3 class="pwe-subtitle text-center">{{ expectSubtitle }}</h3>
-        <p class="pwe-expect-intro text-center">{{ expectIntro }}</p>
+        <h3 class="pwe-subtitle text-center" data-cms-key="expect_subtitle">{{ expectSubtitle }}</h3>
+        <p class="pwe-expect-intro text-center" data-cms-key="expect_intro">{{ expectIntro }}</p>
       </div>
 
       <div class="pwe-expect-grid">
-        <div v-for="exp in expects" :key="exp.label" class="pwe-expect-card">
-          <div class="pwe-expect-tag" :class="`expect-tag--${exp.color}`">{{ exp.label }}</div>
-          <p class="pwe-expect-desc">{{ exp.desc }}</p>
+        <div v-for="(exp, eIdx) in expects" :key="exp.label" class="pwe-expect-card">
+          <div class="pwe-expect-tag" :class="`expect-tag--${exp.color}`" :data-cms-key="'expect_' + (eIdx + 1) + '_label'">{{ exp.label }}</div>
+          <p class="pwe-expect-desc" :data-cms-key="'expect_' + (eIdx + 1) + '_desc'">{{ exp.desc }}</p>
         </div>
       </div>
     </section>
@@ -189,8 +184,8 @@ useRevealOnScroll()
     <!-- ── 6. CTA SECTION ───────────────────────────────────────── -->
     <section class="pwe-cta">
       <div class="wrap pwe-cta-inner reveal">
-        <h2 class="pwe-cta-title">{{ ctaTitle }}</h2>
-        <p class="pwe-cta-desc">{{ ctaDesc }}</p>
+        <h2 class="pwe-cta-title" data-cms-key="cta_title">{{ ctaTitle }}</h2>
+        <p class="pwe-cta-desc" data-cms-key="cta_desc">{{ ctaDesc }}</p>
         <div class="pwe-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">

@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     adminEmail: process.env.ADMIN_EMAIL || '',
     adminPassword: process.env.ADMIN_PASSWORD || '',
+    adminEmail2: process.env.ADMIN_EMAIL_2 || '',
+    adminPassword2: process.env.ADMIN_PASSWORD_2 || '',
     jwtSecret: process.env.JWT_SECRET || 'dev-fallback-secret',
   },
 

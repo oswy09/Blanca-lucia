@@ -1,15 +1,10 @@
 <script setup>
 const { siteUrl, whatsappUrl } = useSiteConfig()
 
-const sbVersion = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-const { data: sbData } = await useAsyncData('professional-communication', async () => {
-  try {
-    const api = useStoryblokApi()
-    const { data } = await api.get('cdn/stories/professional-communication', { version: sbVersion })
-    return data?.story?.content || {}
-  } catch { return {} }
-})
-const sb = computed(() => sbData.value || {})
+const { data: sbData } = await useAsyncData('services-pc', () =>
+  $fetch('/api/content/services-pc').catch(() => ({}))
+)
+const sb = useState('sb-services-pc', () => sbData.value || {})
 
 // Hero
 const heroEyebrow = computed(() => sb.value.hero_eyebrow || 'Service')
@@ -93,9 +88,9 @@ useRevealOnScroll()
     <!-- ── 1. HERO ─────────────────────────────────────────────── -->
     <section class="pc-hero">
       <div class="wrap pc-hero-inner reveal">
-        <span class="eyebrow pc-hero-eyebrow">{{ heroEyebrow }}</span>
-        <h1 class="pc-hero-title">{{ heroTitle }}</h1>
-        <p class="pc-hero-sub">{{ heroSub }}</p>
+        <span class="eyebrow pc-hero-eyebrow" data-cms-key="hero_eyebrow">{{ heroEyebrow }}</span>
+        <h1 class="pc-hero-title" data-cms-key="hero_title">{{ heroTitle }}</h1>
+        <p class="pc-hero-sub" data-cms-key="hero_sub">{{ heroSub }}</p>
       </div>
     </section>
 
@@ -113,23 +108,23 @@ useRevealOnScroll()
     <section class="pc-main-content wrap">
       <div class="pc-grid">
         <div class="pc-intro-section reveal">
-          <h2 class="pc-section-title">{{ introTitle }}</h2>
-          <p class="pc-lead-text">{{ introLead }}</p>
+          <h2 class="pc-section-title" data-cms-key="intro_title">{{ introTitle }}</h2>
+          <p class="pc-lead-text" data-cms-key="intro_lead">{{ introLead }}</p>
           <div class="pc-highlight-box">
             <div class="pc-highlight-border"></div>
-            <p class="pc-highlight-text"><strong>{{ introHighlight }}</strong></p>
+            <p class="pc-highlight-text"><strong data-cms-key="intro_highlight">{{ introHighlight }}</strong></p>
           </div>
         </div>
 
         <div class="pc-sidebar-section reveal">
           <div class="pc-card">
-            <h3 class="pc-card-title">{{ cardTitle }}</h3>
-            <p class="pc-card-text">{{ cardText1 }}</p>
-            <p class="pc-card-text">{{ cardText2 }}</p>
-            <p class="pc-card-text">{{ cardText3 }}</p>
+            <h3 class="pc-card-title" data-cms-key="card_title">{{ cardTitle }}</h3>
+            <p class="pc-card-text" data-cms-key="card_text_1">{{ cardText1 }}</p>
+            <p class="pc-card-text" data-cms-key="card_text_2">{{ cardText2 }}</p>
+            <p class="pc-card-text" data-cms-key="card_text_3">{{ cardText3 }}</p>
             <div class="pc-card-footer">
               <span class="pc-footer-icon" aria-hidden="true">💬</span>
-              <p class="pc-footer-text">{{ cardFooter }}</p>
+              <p class="pc-footer-text" data-cms-key="card_footer">{{ cardFooter }}</p>
             </div>
           </div>
         </div>
@@ -140,18 +135,18 @@ useRevealOnScroll()
     <section class="pc-work wrap reveal">
       <div class="pc-work-grid">
         <div class="pc-work-content">
-          <h3 class="pc-subtitle">{{ workSubtitle }}</h3>
-          <p class="pc-work-intro">{{ workIntro }}</p>
+          <h3 class="pc-subtitle" data-cms-key="work_subtitle">{{ workSubtitle }}</h3>
+          <p class="pc-work-intro" data-cms-key="work_intro">{{ workIntro }}</p>
         </div>
         <div class="pc-work-card">
           <ul class="pc-help-list">
-            <li v-for="item in workItems" :key="item">
+            <li v-for="(item, idx) in workItems" :key="item">
               <div class="pc-bullet-check">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span>{{ item }}</span>
+              <span :data-cms-key="'work_' + (idx + 1)">{{ item }}</span>
             </li>
           </ul>
         </div>
@@ -162,9 +157,9 @@ useRevealOnScroll()
     <section class="pc-session-wrap wrap">
       <div class="pc-session-banner reveal">
         <div class="pc-session-content">
-          <span class="eyebrow pc-session-eyebrow">{{ sessionEyebrow }}</span>
-          <h3 class="pc-session-title">{{ sessionTitle }}</h3>
-          <p class="pc-session-desc">{{ sessionDesc }}</p>
+          <span class="eyebrow pc-session-eyebrow" data-cms-key="session_eyebrow">{{ sessionEyebrow }}</span>
+          <h3 class="pc-session-title" data-cms-key="session_title">{{ sessionTitle }}</h3>
+          <p class="pc-session-desc" data-cms-key="session_desc">{{ sessionDesc }}</p>
           <NuxtLink to="/contact" class="btn pc-session-btn">Let's Talk</NuxtLink>
         </div>
       </div>
@@ -172,16 +167,16 @@ useRevealOnScroll()
 
     <!-- ── 6. BRIDGE THAT GAP ─────────────────────────────────────── -->
     <section class="pc-bridge wrap reveal">
-      <h3 class="pc-subtitle">{{ bridgeSubtitle }}</h3>
+      <h3 class="pc-subtitle" data-cms-key="bridge_subtitle">{{ bridgeSubtitle }}</h3>
       <div class="pc-bridge-grid">
         <div>
-          <p class="pc-bridge-text">{{ bridge1 }}</p>
-          <p class="pc-bridge-text">{{ bridge2 }}</p>
-          <p class="pc-bridge-text">{{ bridge3 }}</p>
+          <p class="pc-bridge-text" data-cms-key="bridge_1">{{ bridge1 }}</p>
+          <p class="pc-bridge-text" data-cms-key="bridge_2">{{ bridge2 }}</p>
+          <p class="pc-bridge-text" data-cms-key="bridge_3">{{ bridge3 }}</p>
         </div>
         <div>
-          <p class="pc-bridge-text">{{ bridge4 }}</p>
-          <p class="pc-bridge-text pc-bridge-text--em">{{ bridge5 }}</p>
+          <p class="pc-bridge-text" data-cms-key="bridge_4">{{ bridge4 }}</p>
+          <p class="pc-bridge-text pc-bridge-text--em" data-cms-key="bridge_5">{{ bridge5 }}</p>
         </div>
       </div>
     </section>
@@ -189,13 +184,13 @@ useRevealOnScroll()
     <!-- ── 7. WHAT YOU CAN EXPECT ─────────────────────────────────── -->
     <section class="pc-expect wrap reveal">
       <div class="pc-expect-header">
-        <h3 class="pc-subtitle text-center">{{ expectSubtitle }}</h3>
-        <p class="pc-expect-intro text-center">{{ expectIntro }}</p>
+        <h3 class="pc-subtitle text-center" data-cms-key="expect_subtitle">{{ expectSubtitle }}</h3>
+        <p class="pc-expect-intro text-center" data-cms-key="expect_intro">{{ expectIntro }}</p>
       </div>
       <div class="pc-expect-grid">
-        <div v-for="exp in expects" :key="exp.label" class="pc-expect-card">
-          <div class="pc-expect-tag" :class="`expect-tag--${exp.color}`">{{ exp.label }}</div>
-          <p class="pc-expect-desc">{{ exp.desc }}</p>
+        <div v-for="(exp, eIdx) in expects" :key="exp.label" class="pc-expect-card">
+          <div class="pc-expect-tag" :class="`expect-tag--${exp.color}`" :data-cms-key="'expect_' + (eIdx + 1) + '_label'">{{ exp.label }}</div>
+          <p class="pc-expect-desc" :data-cms-key="'expect_' + (eIdx + 1) + '_desc'">{{ exp.desc }}</p>
         </div>
       </div>
     </section>
@@ -203,8 +198,8 @@ useRevealOnScroll()
     <!-- ── 8. CTA ──────────────────────────────────────────────────── -->
     <section class="pc-cta">
       <div class="wrap pc-cta-inner reveal">
-        <h2 class="pc-cta-title">{{ ctaTitle }}</h2>
-        <p class="pc-cta-desc">{{ ctaDesc }}</p>
+        <h2 class="pc-cta-title" data-cms-key="cta_title">{{ ctaTitle }}</h2>
+        <p class="pc-cta-desc" data-cms-key="cta_desc">{{ ctaDesc }}</p>
         <div class="pc-cta-actions">
           <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
           <a :href="whatsappUrl" class="btn btn-secondary" target="_blank" rel="noopener">Contact on WhatsApp</a>

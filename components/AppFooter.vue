@@ -1,6 +1,7 @@
 <script setup>
 const sb = useStoryblokGlobal()
-const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal English language consultancy for Spanish-speaking professionals. Over 30 years helping people communicate as the professionals they truly are.')
+const footerTagline   = computed(() => sb.value?.footer_tagline   || 'Personal English language consultancy for Spanish-speaking professionals. Over 30 years helping people communicate as the professionals they truly are.')
+const footerCopyright = computed(() => sb.value?.footer_copyright || '© 2026 Fluent Future · Blanca Derby\nfluentfuture.co.uk')
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const footerTagline = computed(() => sb.value?.footer_tagline || 'Personal Engli
         </ul>
       </div>
       <div class="footer-right">
-        <p class="footer-copy">© 2026 Fluent Future · Blanca Derby<br>fluentfuture.co.uk</p>
+        <p class="footer-copy" style="white-space: pre-line;">{{ footerCopyright }}</p>
         <p class="footer-credit">Designed by <a href="https://oswalstudio.com/" target="_blank" rel="noopener" class="footer-credit-link">Oswal</a></p>
       </div>
     </div>

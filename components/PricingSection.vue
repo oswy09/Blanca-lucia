@@ -1,11 +1,22 @@
 <script setup>
 const { whatsappUrl } = useSiteConfig()
-const sb = useState('sb-home', () => ({}))
+const sbHome    = useState('sb-home',    () => ({}))
+const sbContact = useState('sb-contact', () => ({}))
+const sb        = computed(() => ({ ...sbHome.value, ...sbContact.value }))
 
 const headerEyebrow = computed(() => sb.value.pricing_eyebrow || 'Investment')
 const headerTitle = computed(() => sb.value.pricing_title || 'A simple, transparent approach to fees')
 const headerDesc1 = computed(() => sb.value.pricing_desc_1 || 'Fees are straightforward and reflect the personal, focused nature of the work. There are no hidden costs, no packages to choose between, and no pressure to commit before we have spoken.')
 const headerDesc2 = computed(() => sb.value.pricing_desc_2 || 'A limited number of clients are accepted at any one time to ensure the highest level of personal attention.')
+
+const discTitle      = computed(() => sb.value.disc_title       || 'Free Discovery Call')
+const discDuration   = computed(() => sb.value.disc_duration    || 'Duration: 20–30 minutes · Conducted online via video call')
+const discText       = computed(() => sb.value.disc_text        || 'Every engagement begins with a brief, informal conversation. It is an opportunity to talk about your background, what you want to achieve, and to make sure we are a good fit before deciding to work together.')
+const discCheck1     = computed(() => sb.value.disc_check_1     || 'Discuss your background and objectives')
+const discCheck2     = computed(() => sb.value.disc_check_2     || 'Identify what may have held you back until now')
+const discCheck3     = computed(() => sb.value.disc_check_3     || 'Answer any questions about the sessions')
+const discActionText = computed(() => sb.value.disc_action_text || 'Ready to get started?')
+const pricingNote    = computed(() => sb.value.pricing_note     || 'All sessions are conducted online. Fees are reviewed periodically and confirmed before any commitment is made.')
 
 const plans = computed(() => [
   {
@@ -86,29 +97,27 @@ const plans = computed(() => [
         <div class="discovery-main">
           <div class="discovery-header-inline">
             <span class="discovery-badge">First Step</span>
-            <h3 class="discovery-title">Free Discovery Call</h3>
+            <h3 class="discovery-title" data-cms-key="disc_title">{{ discTitle }}</h3>
           </div>
-          <p class="discovery-duration">Duration: 20–30 minutes · Conducted online via video call</p>
-          <p class="discovery-text">
-            Every engagement begins with a brief, informal conversation. It is an opportunity to talk about your background, what you want to achieve, and to make sure we are a good fit before deciding to work together.
-          </p>
+          <p class="discovery-duration" data-cms-key="disc_duration">{{ discDuration }}</p>
+          <p class="discovery-text" data-cms-key="disc_text">{{ discText }}</p>
           <ul class="discovery-checklist">
             <li>
               <span class="disc-check">✓</span>
-              <span>Discuss your background and objectives</span>
+              <span data-cms-key="disc_check_1">{{ discCheck1 }}</span>
             </li>
             <li>
               <span class="disc-check">✓</span>
-              <span>Identify what may have held you back until now</span>
+              <span data-cms-key="disc_check_2">{{ discCheck2 }}</span>
             </li>
             <li>
               <span class="disc-check">✓</span>
-              <span>Answer any questions about the sessions</span>
+              <span data-cms-key="disc_check_3">{{ discCheck3 }}</span>
             </li>
           </ul>
         </div>
         <div class="discovery-action-box">
-          <p class="discovery-action-text">Ready to get started?</p>
+          <p class="discovery-action-text" data-cms-key="disc_action_text">{{ discActionText }}</p>
           <a :href="whatsappUrl" class="btn discovery-action-btn" target="_blank" rel="noopener">
             Book a Discovery Call
           </a>
@@ -150,9 +159,7 @@ const plans = computed(() => [
         </div>
       </div>
 
-      <p class="pricing-note">
-        All sessions are conducted online. Fees are reviewed periodically and confirmed before any commitment is made.
-      </p>
+      <p class="pricing-note" data-cms-key="pricing_note">{{ pricingNote }}</p>
     </div>
   </section>
 </template>

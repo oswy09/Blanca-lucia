@@ -167,9 +167,9 @@ onUnmounted(() => {
     <!-- ── 1. HERO ─────────────────────────────────────────────── -->
     <section class="ab-hero">
       <div class="wrap ab-hero-text">
-        <span class="eyebrow ab-eyebrow">{{ abEyebrow }}</span>
-        <h1 class="ab-title">{{ abHeroTitle }}</h1>
-        <p class="ab-subtitle">{{ abHeroSubtitle }}</p>
+        <span class="eyebrow ab-eyebrow" data-cms-key="ab_eyebrow">{{ abEyebrow }}</span>
+        <h1 class="ab-title" data-cms-key="ab_hero_title">{{ abHeroTitle }}</h1>
+        <p class="ab-subtitle" data-cms-key="ab_hero_subtitle">{{ abHeroSubtitle }}</p>
         <a :href="whatsappUrl" class="btn btn-primary ab-hero-btn" target="_blank" rel="noopener">
           Get in touch
         </a>
@@ -182,24 +182,24 @@ onUnmounted(() => {
 
         <!-- Left Column: Main Message -->
         <div class="ab-intro-main reveal">
-          <span class="eyebrow">{{ abIntroEyebrow }}</span>
-          <h2 class="section-title ab-intro-h2">{{ abIntroH2 }}</h2>
-          <p class="ab-lead-p">{{ abIntroLead }}</p>
+          <span class="eyebrow" data-cms-key="ab_intro_eyebrow">{{ abIntroEyebrow }}</span>
+          <h2 class="section-title ab-intro-h2" data-cms-key="ab_intro_h2">{{ abIntroH2 }}</h2>
+          <p class="ab-lead-p" data-cms-key="ab_intro_lead">{{ abIntroLead }}</p>
         </div>
 
         <!-- Right Column: Supporting Details -->
         <div class="ab-intro-details">
           <div class="ab-intro-block reveal" style="transition-delay: 80ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">{{ abIntroBlock1 }}</p>
+            <p class="block-body" data-cms-key="ab_intro_block_1">{{ abIntroBlock1 }}</p>
           </div>
           <div class="ab-intro-block reveal" style="transition-delay: 160ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">{{ abIntroBlock2 }}</p>
+            <p class="block-body" data-cms-key="ab_intro_block_2">{{ abIntroBlock2 }}</p>
           </div>
           <div class="ab-intro-block reveal" style="transition-delay: 240ms">
             <div class="block-indicator" style="background: var(--amber)"></div>
-            <p class="block-body">{{ abIntroBlock3 }}</p>
+            <p class="block-body" data-cms-key="ab_intro_block_3">{{ abIntroBlock3 }}</p>
           </div>
         </div>
       </div>
@@ -209,7 +209,7 @@ onUnmounted(() => {
     <section class="ab-callout">
       <div class="wrap">
         <div class="ab-callout-box">
-          <p class="ab-callout-text">{{ abCalloutText }}</p>
+          <p class="ab-callout-text" data-cms-key="ab_callout_text">{{ abCalloutText }}</p>
         </div>
       </div>
     </section>
@@ -218,8 +218,8 @@ onUnmounted(() => {
     <section class="ab-values">
       <div class="wrap">
         <div class="ab-values-head reveal">
-          <span class="eyebrow">{{ abValuesEyebrow }}</span>
-          <h2 class="section-title" style="margin-top:10px">{{ abValuesH2 }}</h2>
+          <span class="eyebrow" data-cms-key="ab_values_eyebrow">{{ abValuesEyebrow }}</span>
+          <h2 class="section-title" style="margin-top:10px" data-cms-key="ab_values_h2">{{ abValuesH2 }}</h2>
         </div>
         <div class="ab-values-grid">
 
@@ -230,8 +230,8 @@ onUnmounted(() => {
                 <path d="M15 3H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v4l4-4h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">{{ abVal1Title }}</h3>
-            <p class="ab-card-desc">{{ abVal1Desc }}</p>
+            <h3 class="ab-card-title" data-cms-key="ab_val_1_title">{{ abVal1Title }}</h3>
+            <p class="ab-card-desc" data-cms-key="ab_val_1_desc">{{ abVal1Desc }}</p>
           </article>
 
           <article class="ab-card reveal" style="transition-delay:120ms">
@@ -241,8 +241,8 @@ onUnmounted(() => {
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">{{ abVal2Title }}</h3>
-            <p class="ab-card-desc">{{ abVal2Desc }}</p>
+            <h3 class="ab-card-title" data-cms-key="ab_val_2_title">{{ abVal2Title }}</h3>
+            <p class="ab-card-desc" data-cms-key="ab_val_2_desc">{{ abVal2Desc }}</p>
           </article>
 
           <article class="ab-card reveal" style="transition-delay:180ms">
@@ -252,8 +252,8 @@ onUnmounted(() => {
                 <polyline points="17 6 23 6 23 12"/>
               </svg>
             </div>
-            <h3 class="ab-card-title">{{ abVal3Title }}</h3>
-            <p class="ab-card-desc">{{ abVal3Desc }}</p>
+            <h3 class="ab-card-title" data-cms-key="ab_val_3_title">{{ abVal3Title }}</h3>
+            <p class="ab-card-desc" data-cms-key="ab_val_3_desc">{{ abVal3Desc }}</p>
           </article>
 
         </div>
@@ -266,8 +266,8 @@ onUnmounted(() => {
 
         <!-- Left: My Background (Journey Timeline) -->
         <div class="ab-split-left">
-          <span class="eyebrow reveal">{{ abJourneyEyebrow }}</span>
-          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms">{{ abJourneyH2 }}</h2>
+          <span class="eyebrow reveal" data-cms-key="ab_journey_eyebrow">{{ abJourneyEyebrow }}</span>
+          <h2 class="ab-split-h2 reveal" style="transition-delay:60ms" data-cms-key="ab_journey_h2">{{ abJourneyH2 }}</h2>
 
           <div class="journey-timeline">
             <div class="journey-line" aria-hidden="true"></div>
@@ -276,24 +276,24 @@ onUnmounted(() => {
             <div class="journey-step">
               <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">{{ abStep1Title }}</h3>
-                <p class="ab-p">{{ abStep1Desc }}</p>
+                <h3 class="journey-step-title" data-cms-key="ab_step_1_title">{{ abStep1Title }}</h3>
+                <p class="ab-p" data-cms-key="ab_step_1_desc">{{ abStep1Desc }}</p>
               </div>
             </div>
 
             <div class="journey-step">
               <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">{{ abStep2Title }}</h3>
-                <p class="ab-p">{{ abStep2Desc }}</p>
+                <h3 class="journey-step-title" data-cms-key="ab_step_2_title">{{ abStep2Title }}</h3>
+                <p class="ab-p" data-cms-key="ab_step_2_desc">{{ abStep2Desc }}</p>
               </div>
             </div>
 
             <div class="journey-step">
               <div class="journey-node"><span class="node-dot"></span></div>
               <div class="journey-content">
-                <h3 class="journey-step-title">{{ abStep3Title }}</h3>
-                <p class="ab-p">{{ abStep3Desc }}</p>
+                <h3 class="journey-step-title" data-cms-key="ab_step_3_title">{{ abStep3Title }}</h3>
+                <p class="ab-p" data-cms-key="ab_step_3_desc">{{ abStep3Desc }}</p>
               </div>
             </div>
           </div>
@@ -302,14 +302,14 @@ onUnmounted(() => {
         <!-- Right: What Makes This Different -->
         <div class="ab-split-right reveal" style="transition-delay:120ms">
           <div class="ab-diff-panel">
-            <span class="eyebrow ab-diff-eyebrow">{{ abDiffEyebrow }}</span>
-            <h2 class="ab-diff-h2">{{ abDiffH2 }}</h2>
-            <p class="ab-diff-p">{{ abDiffP1 }}</p>
-            <p class="ab-diff-p">{{ abDiffP2 }}</p>
-            <p class="ab-diff-p">{{ abDiffP3 }}</p>
+            <span class="eyebrow ab-diff-eyebrow" data-cms-key="ab_diff_eyebrow">{{ abDiffEyebrow }}</span>
+            <h2 class="ab-diff-h2" data-cms-key="ab_diff_h2">{{ abDiffH2 }}</h2>
+            <p class="ab-diff-p" data-cms-key="ab_diff_p1">{{ abDiffP1 }}</p>
+            <p class="ab-diff-p" data-cms-key="ab_diff_p2">{{ abDiffP2 }}</p>
+            <p class="ab-diff-p" data-cms-key="ab_diff_p3">{{ abDiffP3 }}</p>
             <p class="ab-diff-note">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              {{ abDiffNote }}
+              <span data-cms-key="ab_diff_note">{{ abDiffNote }}</span>
             </p>
             <NuxtLink to="/contact" class="btn ab-diff-btn">Get in Touch</NuxtLink>
           </div>
@@ -323,9 +323,9 @@ onUnmounted(() => {
       <div class="wrap">
         <div class="ab-cta reveal">
           <div class="ab-cta-inner">
-            <span class="eyebrow ab-cta-eyebrow">{{ abCtaEyebrow }}</span>
-            <h2 class="ab-cta-title">{{ abCtaTitle }}</h2>
-            <p class="ab-cta-sub">{{ abCtaSub }}</p>
+            <span class="eyebrow ab-cta-eyebrow" data-cms-key="ab_cta_eyebrow">{{ abCtaEyebrow }}</span>
+            <h2 class="ab-cta-title" data-cms-key="ab_cta_title">{{ abCtaTitle }}</h2>
+            <p class="ab-cta-sub" data-cms-key="ab_cta_sub">{{ abCtaSub }}</p>
             <NuxtLink to="/contact" class="btn ab-cta-btn">Get in Touch</NuxtLink>
           </div>
         </div>
