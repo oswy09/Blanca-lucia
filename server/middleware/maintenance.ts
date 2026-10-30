@@ -2,6 +2,7 @@ const MAINTENANCE_ACTIVE = true   // ← cambiar a false cuando el sitio esté l
 
 export default defineEventHandler((event) => {
   if (!MAINTENANCE_ACTIVE) return
+  if (process.env.NODE_ENV !== 'production') return  // local dev ve el sitio normal
 
   const path = getRequestPath(event)
 
