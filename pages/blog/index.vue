@@ -1,34 +1,8 @@
 ﻿<script setup>
-// ── Storyblok integration ──────────────────────────────────
-// Fetches blog posts from Storyblok when token is set in .env
-// Content type in Storyblok: "blog-post" with fields:
-//   title (text), excerpt (text), category (text), read_time (text),
-//   date (text, ISO), image (asset), slug (auto from story slug)
-const storyblokApi = useStoryblokApi()
-let sbPosts = []
-try {
-  const { data } = await storyblokApi.get('cdn/stories', {
-    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
-    starts_with: 'blog/',
-    sort_by: 'first_published_at:desc',
-    per_page: 20,
-  })
-  sbPosts = (data?.stories || []).map(s => ({
-    slug: s.full_slug?.split('/').pop() || s.slug,
-    title: s.content.title,
-    excerpt: s.content.excerpt,
-    category: s.content.category,
-    readTime: s.content.read_time,
-    date: s.content.date || s.first_published_at,
-    image: s.content.image?.filename
-      || (typeof s.content.image === 'string' ? s.content.image : null)
-      || '/imagens/live-session.webp',
-    featured: s.content.featured === true,
-  }))
-  if (import.meta.dev) console.log('[blog] SB slugs:', sbPosts.map(s => s.slug))
-} catch {
-  // Token not set or API unavailable — falls back to mock data below
-}
+const { data: activePosts } = await useFetch('/api/blog', {
+  key: 'blog-index',
+  default: () => [],
+})
 
 const { siteUrl, locale } = useSiteConfig()
 
@@ -51,68 +25,8 @@ useHead({
   link: [{ rel: 'canonical', href: `${siteUrl}/blog` }],
 })
 
-// Mock posts — mirrors Storyblok Story shape for easy swap
-const posts = [
-  {
-    slug: 'why-fluency-is-not-just-about-vocabulary',
-    title: 'Why fluency is not just about vocabulary',
-    excerpt: 'Many learners focus on building vocabulary, yet still feel something is missing when they speak. The gap is almost never about words.',
-    category: 'Language & Communication',
-    readTime: '4 min read',
-    date: '2026-08-18',
-    image: '/imagens/personalized advice.JPG',
-    featured: true,
-  },
-  {
-    slug: 'how-to-sound-confident-in-english-meetings',
-    title: 'How to sound confident in English meetings',
-    excerpt: 'Confidence in a meeting is not just about what you say — it is about pacing, phrasing, and knowing when to hold space.',
-    category: 'Professional English',
-    readTime: '5 min read',
-    date: '2026-07-30',
-    image: '/imagens/video call learning.JPG',
-    featured: false,
-  },
-  {
-    slug: 'the-difference-between-correct-and-natural-english',
-    title: 'The difference between correct and natural English',
-    excerpt: 'Grammar rules will get you to correct. But natural expression — the kind that earns trust — comes from something deeper.',
-    category: 'Language & Communication',
-    readTime: '3 min read',
-    date: '2026-07-14',
-    image: '/imagens/adult learning English.jpg',
-    featured: false,
-  },
-  {
-    slug: 'writing-professional-emails-in-english',
-    title: 'Writing professional emails in English: what most guides miss',
-    excerpt: 'Most advice focuses on grammar and template phrases. What actually makes an email professional is something subtler.',
-    category: 'Professional Writing',
-    readTime: '6 min read',
-    date: '2026-06-22',
-    image: '/imagens/woman speechless.JPG',
-    featured: false,
-  },
-  {
-    slug: 'preparing-for-english-job-interviews-as-a-native-spanish-speaker',
-    title: 'Preparing for English job interviews as a native Spanish speaker',
-    excerpt: 'An interview is not a test of your English level. It is a conversation — and preparation changes everything about how you show up.',
-    category: 'Interview Preparation',
-    readTime: '7 min read',
-    date: '2026-06-05',
-    image: '/imagens/live-session.webp',
-    featured: false,
-  },
-]
-
-// Merge: Storyblok posts first, then mock posts not already in Storyblok; sorted by date desc
-const activePosts = (sbPosts.length > 0
-  ? [...sbPosts, ...posts.filter(m => !sbPosts.some(s => s.slug === m.slug))]
-  : posts
-).sort((a, b) => new Date(b.date) - new Date(a.date))
-
-const featured = activePosts.find(p => p.featured)
-const rest = activePosts.filter(p => !p.featured)
+const featured = computed(() => activePosts.value.find(p => p.featured))
+const rest = computed(() => activePosts.value.filter(p => !p.featured))
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
