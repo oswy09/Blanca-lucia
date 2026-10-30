@@ -44,13 +44,13 @@ const DEFAULTS = {
   line2:         'Future',
   twoLines:      false,
   tagline:       'Your Path to Fluent Communication',
-  font:          'Cormorant Garamond',
+  font:          'Libre Baskerville',
   fontWeight:    '400',
   letterSpacing: 0.06,
   fontSize:      44,
   taglineSize:   13,
-  mainColor:     '#2E8A93',
-  taglineColor:  '#2E8A93',
+  mainColor:     '#0F5562',
+  taglineColor:  '#0F5562',
   accentColor:   '#2E8A93',
   bgColor:       '#FEFAF5',
   layout:        'left',
@@ -60,6 +60,8 @@ const DEFAULTS = {
   taglineY:      130,
   uppercase:     false,
   italic:        false,
+  swooshExtend:  1.65,
+  swooshOffset:  0,
 }
 
 const cfg       = ref({ ...DEFAULTS })
@@ -91,11 +93,13 @@ useHead({
 // Swoosh SVG dimensions â€” mark viewBox is 108.19Ã—36.1 (MARK_AR â‰ˆ 3:1 wide)
 const MARK_AR = 108.19 / 36.1
 const swooshH = computed(() => Math.round(cfg.value.fontSize * (cfg.value.twoLines ? 2 : 1) * 1.1))
-const swooshW = computed(() => Math.round(swooshH.value * MARK_AR))
+const swooshW    = computed(() => Math.round(swooshH.value * MARK_AR))
+const swooshWExt   = computed(() => Math.round(swooshW.value * (cfg.value.swooshExtend ?? 1.65)))
+const swooshLeftPx = computed(() => Math.round(swooshW.value * (cfg.value.swooshOffset  ?? 0.45)))
 // Negative margin to pull swoosh up behind the bottom of the text
 const swooshOverlap = computed(() => Math.round(swooshH.value * 0.5))
 // Left indent on text so C-crescent appears to the LEFT of the first letter
-const cresIndent = computed(() => Math.round(swooshW.value * 0.28))
+const cresIndent = computed(() => Math.round(swooshW.value * 0.36))
 // Tagline x-indent: start past the C-crescent end (~48% of mark width)
 const taglineIndent = computed(() => Math.round(swooshW.value * (cfg.value.taglineX / 100)))
 const taglineTop    = computed(() => Math.round(cfg.value.fontSize * (cfg.value.taglineY / 100)))
@@ -164,7 +168,7 @@ function buildLogoSvg(opts = {}) {
   const isTeal = opts.teal
   const mainClr  = isDark || isTeal ? '#FEFAF5' : c.mainColor
   const tagClr   = isDark ? 'rgba(255,255,255,0.55)' : isTeal ? 'rgba(255,255,255,0.7)' : c.taglineColor
-  const swashClr = isDark ? '#F0B450' : isTeal ? '#F0B450' : c.accentColor
+  const swashClr = isDark ? '#FEFAF5' : isTeal ? '#F0B450' : c.accentColor
   const bgClr    = isDark ? '#1a2035' : isTeal ? '#2E8A93' : c.bgColor
 
   const fs      = c.fontSize
@@ -288,9 +292,11 @@ function downloadSvg(opts = {}) {
               <span v-for="(line, i) in mainText()" :key="i"
                     class="logo-name-line" :style="mainStyle">{{ line }}</span>
             </div>
-            <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap" :style="{ marginTop: `-${swooshOverlap}px` }">
+            <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap"
+                 :style="{ marginTop: `-${swooshOverlap}px`, marginLeft: `${swooshLeftPx}px` }">
               <svg viewBox="0 0 108.19 36.1"
-                   :width="swooshW" :height="swooshH"
+                   :width="swooshWExt" :height="swooshH"
+                   preserveAspectRatio="none"
                    overflow="hidden" xmlns="http://www.w3.org/2000/svg">
                 <defs><clipPath id="lm-main"><rect x=".19" y=".1" width="108" height="36"/></clipPath></defs>
                 <g clip-path="url(#lm-main)">
@@ -300,7 +306,7 @@ function downloadSvg(opts = {}) {
               </svg>
             </div>
             <div v-if="cfg.showTagline" class="logo-tagline-row"
-                 :style="{ position: 'absolute', top: `${taglineTop}px`, left: `${taglineIndent}px`, zIndex: 3 }">
+                 :style="{ paddingLeft: `${cresIndent}px`, marginTop: '6px' }">
               <span class="logo-tagline-text" :style="taglineStyle">{{ cfg.tagline }}</span>
             </div>
           </div>
@@ -316,19 +322,21 @@ function downloadSvg(opts = {}) {
                   <span v-for="(line, i) in mainText()" :key="i" class="logo-name-line"
                         :style="{ ...mainStyle, fontSize: `${cfg.fontSize * 0.52}px`, color: '#FEFAF5' }">{{ line }}</span>
                 </div>
-                <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap" :style="{ marginTop: `-${Math.round(swooshOverlap * 0.52)}px` }">
+                <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap"
+                     :style="{ marginTop: `-${Math.round(swooshOverlap * 0.52)}px`, marginLeft: `${Math.round(swooshLeftPx * 0.52)}px` }">
                   <svg viewBox="0 0 108.19 36.1"
-                       :width="swooshW * 0.52" :height="swooshH * 0.52"
+                       :width="swooshWExt * 0.52" :height="swooshH * 0.52"
+                       preserveAspectRatio="none"
                        overflow="hidden" xmlns="http://www.w3.org/2000/svg">
                     <defs><clipPath id="lm-dark"><rect x=".19" y=".1" width="108" height="36"/></clipPath></defs>
                     <g clip-path="url(#lm-dark)">
-                      <path d="M.07,20.1c-.51-1.56,2.08-9.88,2.32-4.54,17.11,30.04,77.43,2.51,105.23,6.1-20.09,1.04-39.51,7.23-59.1,11.53C34.03,35.81,1.79,41.27.08,20.1h0Z" fill="#F0B450"/>
-                      <path d="M24.47.2c-7.64,2.71-15.33,11.05-7.33,18.03,9.95,7.02,22.72,7,34.43,7.58-12.26,2.63-27.92,1.08-39.99-4.26C-6.4,11.38,11.94.64,24.43,0c0,.06.03.13.04.2Z" fill="#F0B450"/>
+                      <path d="M.07,20.1c-.51-1.56,2.08-9.88,2.32-4.54,17.11,30.04,77.43,2.51,105.23,6.1-20.09,1.04-39.51,7.23-59.1,11.53C34.03,35.81,1.79,41.27.08,20.1h0Z" fill="#FEFAF5"/>
+                      <path d="M24.47.2c-7.64,2.71-15.33,11.05-7.33,18.03,9.95,7.02,22.72,7,34.43,7.58-12.26,2.63-27.92,1.08-39.99-4.26C-6.4,11.38,11.94.64,24.43,0c0,.06.03.13.04.2Z" fill="#FEFAF5"/>
                     </g>
                   </svg>
                 </div>
                 <div v-if="cfg.showTagline" class="logo-tagline-row"
-                     :style="{ position: 'absolute', top: `${Math.round(taglineTop * 0.52)}px`, left: `${Math.round(taglineIndent * 0.52)}px`, zIndex: 3 }">
+                     :style="{ paddingLeft: `${Math.round(cresIndent * 0.52)}px`, marginTop: '3px' }">
                   <span :style="{ ...taglineStyle, fontSize: `${cfg.taglineSize * 0.52}px`, color: 'rgba(255,255,255,.55)' }">{{ cfg.tagline }}</span>
                 </div>
               </div>
@@ -343,9 +351,11 @@ function downloadSvg(opts = {}) {
                   <span v-for="(line, i) in mainText()" :key="i" class="logo-name-line"
                         :style="{ ...mainStyle, fontSize: `${cfg.fontSize * 0.52}px`, color: '#FEFAF5' }">{{ line }}</span>
                 </div>
-                <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap" :style="{ marginTop: `-${Math.round(swooshOverlap * 0.52)}px` }">
+                <div v-if="cfg.showSwoosh !== false" class="logo-swoosh-wrap"
+                     :style="{ marginTop: `-${Math.round(swooshOverlap * 0.52)}px`, marginLeft: `${Math.round(swooshLeftPx * 0.52)}px` }">
                   <svg viewBox="0 0 108.19 36.1"
-                       :width="swooshW * 0.52" :height="swooshH * 0.52"
+                       :width="swooshWExt * 0.52" :height="swooshH * 0.52"
+                       preserveAspectRatio="none"
                        overflow="hidden" xmlns="http://www.w3.org/2000/svg">
                     <defs><clipPath id="lm-teal"><rect x=".19" y=".1" width="108" height="36"/></clipPath></defs>
                     <g clip-path="url(#lm-teal)">
@@ -355,7 +365,7 @@ function downloadSvg(opts = {}) {
                   </svg>
                 </div>
                 <div v-if="cfg.showTagline" class="logo-tagline-row"
-                     :style="{ position: 'absolute', top: `${Math.round(taglineTop * 0.52)}px`, left: `${Math.round(taglineIndent * 0.52)}px`, zIndex: 3 }">
+                     :style="{ paddingLeft: `${Math.round(cresIndent * 0.52)}px`, marginTop: '3px' }">
                   <span :style="{ ...taglineStyle, fontSize: `${cfg.taglineSize * 0.52}px`, color: 'rgba(255,255,255,.7)' }">{{ cfg.tagline }}</span>
                 </div>
               </div>
@@ -487,6 +497,24 @@ function downloadSvg(opts = {}) {
                         :title="c.label" @click="applyColor('accentColor', c.hex)"></button>
               </div>
               <input type="color" class="native-clr" v-model="cfg.accentColor" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">← Swoosh length →</label>
+            <div class="slider-row">
+              <input type="range" min="1.0" max="3.0" step="0.05"
+                     :value="cfg.swooshExtend ?? 1.65"
+                     @input="cfg.swooshExtend = parseFloat($event.target.value)" />
+              <span class="slider-val">{{ (cfg.swooshExtend ?? 1.65).toFixed(2) }}×</span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">← Swoosh position →</label>
+            <div class="slider-row">
+              <input type="range" min="0" max="1.5" step="0.05"
+                     :value="cfg.swooshOffset ?? 0.45"
+                     @input="cfg.swooshOffset = parseFloat($event.target.value)" />
+              <span class="slider-val">{{ (cfg.swooshOffset ?? 0.45).toFixed(2) }}×</span>
             </div>
           </div>
           <div class="field">
