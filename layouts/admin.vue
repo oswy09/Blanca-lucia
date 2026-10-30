@@ -177,7 +177,7 @@ const navLinks = [
 .adm-main {
   margin-left: 220px;
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
