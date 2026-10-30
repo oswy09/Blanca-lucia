@@ -32,8 +32,8 @@ watch(() => route.path, () => { isOpen.value = false })
 <template>
   <nav class="nav" aria-label="Main navigation">
     <div class="wrap nav-inner">
-      <NuxtLink to="/" class="nav-logo">
-        <img src="/logo-blue.png" alt="Fluent Future" class="nav-logo-img" />
+      <NuxtLink to="/" class="nav-logo" aria-label="Fluent Future — home">
+        <SiteLogo />
       </NuxtLink>
 
       <ul class="nav-links" :class="{ open: isOpen }" role="list">
